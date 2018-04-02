@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/sh_election_btn"
+            android:background="@drawable/btn_info"
             android:text="@string/live_results"
             android:textColor="@color/white" />
 
@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/sh_election_btn"
+            android:background="@drawable/btn_info"
             android:text="@string/live_votes"
             android:textColor="@color/white" />
     </LinearLayout>
@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/sh_election_btn"
+            android:background="@drawable/btn_info"
             android:text="@string/live_reviews"
             android:textColor="@color/white" />
 
@@ -91,7 +91,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/sh_election_btn"
+            android:background="@drawable/btn_info"
             android:text="@string/statistics"
             android:textColor="@color/white" />
     </LinearLayout>

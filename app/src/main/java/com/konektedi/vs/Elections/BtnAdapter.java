@@ -59,7 +59,7 @@ public class BtnAdapter extends BaseAdapter {
         btn.setText(btnModelList.get(position).getTitle());
         // filenames is an array of strings
         btn.setTextColor(Color.parseColor("#FFFFFF"));
-        btn.setBackgroundResource(R.drawable.sh_election_btn);
+        btn.setBackgroundResource(R.drawable.btn_info);
         btn.setId(position);
 
         btn.setOnClickListener(new BtnOnClickListener(mContext,position));

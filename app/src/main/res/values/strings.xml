@@ -24,4 +24,9 @@
 
     <!--RESULTS VIEW-->
     <string name="choose_category_texts">Choose category</string>
+    <string name="title_activity_petition_view">PetitionView</string>
+
+    <!--PETITIONS-->
+    <string name="participate">Participate</string>
+
 </resources>

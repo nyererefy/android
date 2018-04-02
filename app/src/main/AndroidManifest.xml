@@ -31,6 +31,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.konektedi.vs.Elections.ElectionView" />
         </activity>
+        <activity
+            android:name=".Petitions.PetitionView"
+            android:label="@string/title_activity_petition_view"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.konektedi.vs.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

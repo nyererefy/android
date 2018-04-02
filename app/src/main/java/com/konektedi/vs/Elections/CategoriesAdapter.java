@@ -58,7 +58,7 @@ public class CategoriesAdapter extends BaseAdapter {
         btn.setText(categoriesModelList.get(position).getCategory());
         // filenames is an array of strings
         btn.setTextColor(Color.parseColor("#FFFFFF"));
-        btn.setBackgroundResource(R.drawable.sh_category_btn);
+        btn.setBackgroundResource(R.drawable.btn_primary);
         btn.setId(position);
 
         btn.setOnClickListener(new CategoryOnClickListener(mContext,position));
