@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">VS</string>
+    <string name="title_elections">Elections</string>
+    <string name="title_petitions">Petitions</string>
+    <string name="title_news">News</string>
+
+    <!--Elections Buttons-->
+    <string name="live_results">Live Results</string>
+    <string name="live_votes">Live Votes</string>
+    <string name="live_reviews">Live Reviews</string>
+    <string name="statistics">Statistics</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_test">Test</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!--TEST -->
+    <string name="test_title">CUHAS ORGANIZATIONS GENERAL ELECTION 2020</string>
+    <string name="title_activity_election_view">ElectionView</string>
+    <string name="title_activity_results_view">ResultsView</string>
+
+    <!--RESULTS VIEW-->
+    <string name="choose_category_texts">Choose category</string>
+</resources>
