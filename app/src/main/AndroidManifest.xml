@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.konektedi.vs">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,27 +22,37 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Elections.ElectionView"
+            android:name=".Home.Elections.ElectionView"
             android:label="@string/title_activity_election_view"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Elections.Results.ResultsView"
+            android:name=".Home.Results.ResultsView"
             android:label="@string/title_activity_results_view"
-            android:parentActivityName=".Elections.ElectionView"
+            android:parentActivityName=".Home.Elections.ElectionView"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.konektedi.vs.Elections.ElectionView" />
+                android:value="com.konektedi.vs.Home.Elections.ElectionView" />
         </activity>
         <activity
-            android:name=".Petitions.PetitionView"
-            android:label="@string/title_activity_petition_view"
+            android:name=".Motions.MotionsView"
+            android:label="@string/title_activity_motion_view"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.konektedi.vs.MainActivity" />
         </activity>
+        <activity
+            android:name=".Home.Candidates.Candidates"
+            android:label="@string/title_activity_candidates"
+            android:parentActivityName=".Home.Elections.ElectionView"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.konektedi.vs.Home.Elections.ElectionView" />
+        </activity>
+        <activity android:name=".Home.Candidates.Profile"></activity>
     </application>
 
 </manifest>

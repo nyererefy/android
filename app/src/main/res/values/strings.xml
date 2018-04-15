@@ -1,10 +1,19 @@
 <resources>
     <string name="app_name">VS</string>
     <string name="title_elections">Elections</string>
-    <string name="title_petitions">Petitions</string>
+    <string name="title_motions">Motions</string>
     <string name="title_news">News</string>
 
-    <!--Elections Buttons-->
+    <!--Test Strings-->
+    <string name="test_name">Avemaria I Ngowi</string>
+    <string name="test_school">BAED</string>
+    <string name="test_time">2 h</string>
+
+    <!--Buttons-->
+    <string name="vote">Vote</string>
+
+
+    Homeions Buttons-->
     <string name="live_results">Live Results</string>
     <string name="live_votes">Live Votes</string>
     <string name="live_reviews">Live Reviews</string>
@@ -24,9 +33,17 @@
 
     <!--RESULTS VIEW-->
     <string name="choose_category_texts">Choose category</string>
-    <string name="title_activity_petition_view">PetitionView</string>
+    <string name="title_activity_motion_view">MotionView</string>
 
     <!--PETITIONS-->
     <string name="participate">Participate</string>
+    <string name="noCount">No Counts</string>
+    <string name="yesCount">Yes Counts</string>
+    <string name="opinionsCount">Opinions Counts</string>
+    <string name="title_activity_candidates">Candidates</string>
+
+    <string name="title_activity_candidate_profile">CandidateProfile</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
 </resources>

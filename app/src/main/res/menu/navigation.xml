@@ -7,9 +7,9 @@
         android:title="@string/title_elections" />
 
     <item
-        android:id="@+id/title_petitions"
+        android:id="@+id/title_motions"
         android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_petitions" />
+        android:title="@string/title_motions" />
 
     <item
         android:id="@+id/title_news"

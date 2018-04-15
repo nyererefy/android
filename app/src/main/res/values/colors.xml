@@ -4,6 +4,16 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
 
+
+    <color name="bootstrapPrimary">#337ab7</color>
+    <color name="bootstrapSecondary">#5bc0de</color>
+    <color name="backgroundGrey">#EEEEEE</color>
+
     <color name="separatorBackground">#9E9E9E</color>
     <color name="white">#FFFFFF</color>
+    <color name="cardBackground">#EEEEEE</color>
+
+    <color name="black_overlay">#66000000</color>
+
+    <color name="normalTextColor">#000000</color>
 </resources>

@@ -7,9 +7,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import com.konektedi.vs.Elections.Elections;
+import com.konektedi.vs.Home.Elections.Elections;
 import com.konektedi.vs.News.News;
-import com.konektedi.vs.Petitions.Petitions;
+import com.konektedi.vs.Motions.Motions;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -44,8 +44,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             case R.id.title_elections:
                 fragment = new Elections();
                 break;
-            case R.id.title_petitions:
-                fragment = new Petitions();
+            case R.id.title_motions:
+                fragment = new Motions();
                 break;
             case R.id.title_news:
                 fragment = new News();
