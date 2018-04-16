@@ -56,12 +56,16 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
         holder.nameView.setText(candidatesList.get(position).getName());
         holder.schoolView.setText(candidatesList.get(position).getClassName());
 
-        holder.voteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                submitVote(position);
-            }
-        });
+        if (candidatesList.get(position).getParticipated().equals("yes")) {
+            holder.voteBtn.setVisibility(View.GONE);
+        } else {
+            holder.voteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    submitVote(position);
+                }
+            });
+        }
 
         holder.nameView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,10 +141,6 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
             voteBtn = itemView.findViewById(R.id.voteBtn);
             cover = itemView.findViewById(R.id.cover);
 
-        }
-
-        public void hideBtn() {
-            voteBtn.setVisibility(View.GONE);
         }
     }
 }

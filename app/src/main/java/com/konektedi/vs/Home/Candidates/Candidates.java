@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.konektedi.vs.R;
@@ -20,7 +19,6 @@ import retrofit2.Response;
 public class Candidates extends AppCompatActivity {
     RecyclerView recyclerView;
     CandidatesAdapter adapter;
-    CandidatesAdapter.ViewHolder holder;
 
 
     @Override
@@ -34,54 +32,22 @@ public class Candidates extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        hideVotingButtons();
         getCandidates();
-    }
-
-
-    protected void hideVotingButtons() {
-        Bundle data = getIntent().getExtras();
-
-        String category_id = data.getString("category_id");
-        String election_id = data.getString("election_id");
-
-        Call<NuxModel> call = ApiUtilities.checkIfYouHaveVoted().checkIfYouHaveVoted(election_id, category_id);
-        call.enqueue(new Callback<NuxModel>() {
-            @Override
-            public void onResponse(Call<NuxModel> call, Response<NuxModel> response) {
-
-                getCandidates();
-
-                Toast.makeText(getApplication(), response.toString(), Toast.LENGTH_LONG).show();
-
-                NuxModel nuxModel = response.body();
-                String kateile = nuxModel != null ? nuxModel.getKateile() : null;
-
-
-
-            }
-
-            @Override
-            public void onFailure(Call<NuxModel> call, Throwable t) {
-
-                Log.i("error", t.toString());
-                Toast.makeText(getApplication(), t.toString(), Toast.LENGTH_LONG).show();
-            }
-        });
     }
 
 
     protected void getCandidates() {
         Bundle data = getIntent().getExtras();
 
-        String category_id = data.getString("category_id");
-        String election_id = data.getString("election_id");
-        String category = data.getString("category");
-        String kateile = data.getString("kateile");  //au tumia method ya hap juu
+        String category_id = data != null ? data.getString("category_id") : null;
+        String election_id = data != null ? data.getString("election_id") : null;
+        String category;
+        if (data != null) {
+            category = data.getString("category");
+            setTitle(category);
+        }
 
-        setTitle(category);
-
-        Call<List<CandidatesModel>> call = ApiUtilities.getCandidates().getCandidates(category_id);
+        Call<List<CandidatesModel>> call = ApiUtilities.getCandidates().getCandidates(election_id, category_id);
         call.enqueue(new Callback<List<CandidatesModel>>() {
             @Override
             public void onResponse(Call<List<CandidatesModel>> call, Response<List<CandidatesModel>> response) {

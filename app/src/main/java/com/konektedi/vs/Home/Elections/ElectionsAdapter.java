@@ -34,10 +34,10 @@ public class ElectionsAdapter extends RecyclerView.Adapter<ElectionsAdapter.View
 
     @Override
     public void onBindViewHolder(ElectionsAdapter.ViewHolder holder, final int position) {
-        holder.electionTitle.setText(electionList.get(position).getElection_title());
+        holder.title.setText(electionList.get(position).getElection_title());
 
 
-        holder.electionTitle.setOnClickListener(new View.OnClickListener() {
+        holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, ElectionView.class);
@@ -57,12 +57,12 @@ public class ElectionsAdapter extends RecyclerView.Adapter<ElectionsAdapter.View
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView electionTitle;
+        private TextView title;
 
         ViewHolder(View itemView) {
             super(itemView);
 
-            electionTitle = itemView.findViewById(R.id.electionTitle);
+            title = itemView.findViewById(R.id.title);
 
         }
     }

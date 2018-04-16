@@ -8,10 +8,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 
-import com.konektedi.vs.Home.Candidates.Profile;
 import com.konektedi.vs.Home.Categories.CategoriesAdapter;
 import com.konektedi.vs.Home.Categories.CategoriesModel;
 import com.konektedi.vs.Home.Results.ResultsView;
+import com.konektedi.vs.Login.LoginActivity;
 import com.konektedi.vs.R;
 import com.konektedi.vs.Utilities.Api.ApiUtilities;
 
@@ -51,7 +51,7 @@ public class ElectionView extends AppCompatActivity {
         reviewsViewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ElectionView.this, Profile.class);
+                Intent intent = new Intent(ElectionView.this, LoginActivity.class);
                 startActivity(intent);
             }
         });

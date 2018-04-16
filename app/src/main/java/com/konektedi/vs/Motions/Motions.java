@@ -1,5 +1,7 @@
 package com.konektedi.vs.Motions;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,10 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.konektedi.vs.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,44 +22,37 @@ import java.util.List;
 
 public class Motions extends Fragment {
     MotionsAdapter motionsAdapter;
-    List<MotionsModel> motionsModelList;
     RecyclerView recyclerView;
-
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.motions_fragment, null);
-    }
+    ProgressBar progressBar;
+    MotionsViewModel motionsViewModel;
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-        recyclerView = view.findViewById(R.id.recyclerView);
+        motionsViewModel = ViewModelProviders.of(getActivity()).get(MotionsViewModel.class);
+        motionsViewModel.getAllMotions().observe(this, new Observer<List<MotionsModel>>() {
+            @Override
+            public void onChanged(@Nullable List<MotionsModel> motionsModels) {
 
+                motionsAdapter = new MotionsAdapter(getActivity(), motionsModels);
 
-        getCategories();
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                recyclerView.setAdapter(motionsAdapter);
+            }
+        });
     }
 
-    private void getCategories() {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        motionsModelList = new ArrayList<>();
+        View rootView = inflater.inflate(R.layout.motions_fragment, container, false);
 
-        for (int i = 0; i < 6; i++) {
+        recyclerView = rootView.findViewById(R.id.recyclerView);
+        progressBar = rootView.findViewById(R.id.progressBar);
 
-            MotionsModel p = new MotionsModel();
-
-            p.setMotion_id(i);
-            p.setTitle("Tuongeze boom au? mara " + i);
-
-            motionsModelList.add(p);
-        }
-
-        motionsAdapter = new MotionsAdapter(getActivity(), motionsModelList);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(motionsAdapter);
-
+        return rootView;
     }
+
 
 }

@@ -23,6 +23,14 @@ public class ApiUtilities {
         return ApiClient.getClient(BASE_URL).create(Api.class);
     }
 
+    public static Api getMotions() {
+        return ApiClient.getClient(BASE_URL).create(Api.class);
+    }
+
+    public static Api getOpinions() {
+        return ApiClient.getClient(BASE_URL).create(Api.class);
+    }
+
     public static Api checkIfYouHaveVoted() {
         return ApiClient.getClient(BASE_URL).create(Api.class);
     }

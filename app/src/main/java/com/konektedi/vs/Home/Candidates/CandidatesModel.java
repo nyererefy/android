@@ -6,9 +6,17 @@ package com.konektedi.vs.Home.Candidates;
 
 public class CandidatesModel {
 
-    private String candidate_id, name, discription, cover, school, year;
+    private String candidate_id, name, discription, cover, school, year,participated;
 
     private String category_id, election_id;
+
+    public String getParticipated() {
+        return participated;
+    }
+
+    public void setParticipated(String participated) {
+        this.participated = participated;
+    }
 
     public String getCategory_id() {
         return category_id;

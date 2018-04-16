@@ -5,15 +5,7 @@ package com.konektedi.vs.Home.Categories;
  */
 
 public class CategoriesModel {
-    private String category_id, category, election_id,kateile;
-
-    public String getKateile() {
-        return kateile;
-    }
-
-    public void setKateile(String kateile) {
-        this.kateile = kateile;
-    }
+    private String category_id, category, election_id;
 
     public String getCategory_id() {
         return category_id;

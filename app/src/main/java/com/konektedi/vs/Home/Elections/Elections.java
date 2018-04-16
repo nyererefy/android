@@ -24,11 +24,8 @@ public class Elections extends Fragment {
     ElectionsViewModel electionsViewModel;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View rootView = inflater.inflate(R.layout.elections_fragment, container, false);
-        recyclerView = rootView.findViewById(R.id.recyclerView);
-        progressBar = rootView.findViewById(R.id.progressBar);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         electionsViewModel = ViewModelProviders.of(getActivity()).get(ElectionsViewModel.class);
 
@@ -42,40 +39,18 @@ public class Elections extends Fragment {
                 recyclerView.setAdapter(electionsAdapter);
             }
         });
+    }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-//        progressBar.setVisibility(View.VISIBLE);
+        View rootView = inflater.inflate(R.layout.elections_fragment, container, false);
+
+        recyclerView = rootView.findViewById(R.id.recyclerView);
+        progressBar = rootView.findViewById(R.id.progressBar);
 
         return rootView;
     }
 
-
-//    private void getElections() {
-//
-//        Call<List<ElectionsModel>> call = ApiUtilities.getElections().getElections();
-//
-//        call.enqueue(new Callback<List<ElectionsModel>>() {
-//            @Override
-//            public void onResponse(Call<List<ElectionsModel>> call, Response<List<ElectionsModel>> response) {
-//                List<ElectionsModel> electionsModelList = response.body();
-//
-//                progressBar.setVisibility(View.GONE);
-//
-//                electionsAdapter = new ElectionsAdapter(getActivity(), electionsModelList);
-//
-//                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-//                recyclerView.setAdapter(electionsAdapter);
-//
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<ElectionsModel>> call, Throwable t) {
-//                progressBar.setVisibility(View.GONE);
-//                Toast.makeText(getContext(), "Retro failed", Toast.LENGTH_LONG).show();
-//            }
-//        });
-//
-//
-//    }
 
 }

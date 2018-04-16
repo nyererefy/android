@@ -60,6 +60,7 @@ public class CategoriesAdapter extends BaseAdapter {
         }
 
         btn.setText(categoriesModelList.get(position).getCategory());
+
         // filenames is an array of strings
         btn.setTextColor(Color.parseColor("#FFFFFF"));
         btn.setBackgroundResource(R.drawable.btn_primary);
@@ -72,7 +73,6 @@ public class CategoriesAdapter extends BaseAdapter {
                 intent.putExtra("election_id", categoriesModelList.get(position).getElection_id());
                 intent.putExtra("category_id", categoriesModelList.get(position).getCategory_id());
                 intent.putExtra("category", categoriesModelList.get(position).getCategory());
-                intent.putExtra("kateile", categoriesModelList.get(position).getKateile());
                 mContext.startActivity(intent);
             }
         });

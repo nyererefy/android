@@ -1,73 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/title"
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:gravity="center"
-        android:text="@string/test_title"
-        android:textColor="@color/colorPrimary"
-        android:textSize="26sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/participateBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:background="@drawable/btn_primary"
-        android:text="@string/participate"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/test_title"
+            android:textColor="@color/colorPrimary"
+            android:textSize="26sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginEnd="8dp"-->
-    <!--android:layout_marginStart="8dp"-->
-    <!--android:layout_marginTop="8dp"-->
-    <!--android:orientation="horizontal"-->
-    <!--app:layout_constraintEnd_toEndOf="parent"-->
-    <!--app:layout_constraintStart_toStartOf="parent"-->
-    <!--app:layout_constraintTop_toBottomOf="@+id/participateBtn">-->
+        <Button
+            android:id="@+id/participateBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/btn_primary"
+            android:text="@string/participate"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title" />
 
-    <!--<ImageButton-->
-    <!--android:id="@+id/yesCount"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="1"-->
-    <!--android:background="@drawable/btn_success"-->
-    <!--android:contentDescription="@string/yesCount"-->
-    <!--app:srcCompat="@drawable/ic_notifications_black_24dp" />-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/participateBtn">
 
-    <!--<ImageButton-->
-    <!--android:id="@+id/opinionsCount"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="1"-->
-    <!--android:background="@drawable/btn_primary"-->
-    <!--android:contentDescription="@string/opinionsCount"-->
-    <!--app:srcCompat="@drawable/ic_notifications_black_24dp" />-->
+            <Button
+                android:id="@+id/yesCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_success"
+                android:contentDescription="@string/yesCount"
+                android:text="3 yes"
+                app:srcCompat="@drawable/ic_notifications_black_24dp" />
 
-    <!--<ImageButton-->
-    <!--android:id="@+id/noCount"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_weight="1"-->
-    <!--android:background="@drawable/btn_danger"-->
-    <!--android:contentDescription="@string/noCount"-->
-    <!--app:srcCompat="@drawable/ic_notifications_black_24dp" />-->
-    <!--</LinearLayout>-->
+            <Button
+                android:id="@+id/opinionsCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/btn_primary"
+                android:contentDescription="@string/opinionsCount"
+                android:text="24 Opinions"
+                app:srcCompat="@drawable/ic_notifications_black_24dp" />
 
-</android.support.constraint.ConstraintLayout>
+            <Button
+                android:id="@+id/noCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_danger"
+                android:contentDescription="@string/noCount"
+                android:text="5 no"
+                app:srcCompat="@drawable/ic_notifications_black_24dp" />
+        </LinearLayout>
 
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.v7.widget.CardView>
