@@ -26,7 +26,7 @@ public interface Api {
     @GET("categories/categories/{election_id}")
     Call<List<CategoriesModel>> getCategories(@Path("election_id") String election_id);
 
-    @GET("candidates/candidates/{category_id}")
+    @GET("candidates/candidates/{election_id}/{category_id}")
     Call<List<CandidatesModel>> getCandidates(
             @Path("election_id") String election_id,
             @Path("category_id") String category_id);

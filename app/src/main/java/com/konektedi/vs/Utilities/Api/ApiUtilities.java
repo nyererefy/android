@@ -31,12 +31,8 @@ public class ApiUtilities {
         return ApiClient.getClient(BASE_URL).create(Api.class);
     }
 
-    public static Api checkIfYouHaveVoted() {
-        return ApiClient.getClient(BASE_URL).create(Api.class);
-    }
-
     public static Api vote() {
-        return ApiClient.postClient(BASE_URL).create(Api.class);
+        return ApiClient.getClient(BASE_URL).create(Api.class);
     }
 
 }

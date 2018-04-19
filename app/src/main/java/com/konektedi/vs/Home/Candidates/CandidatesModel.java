@@ -6,7 +6,7 @@ package com.konektedi.vs.Home.Candidates;
 
 public class CandidatesModel {
 
-    private String candidate_id, name, discription, cover, school, year,participated;
+    private String candidate_id, name, discription, cover, school, year, participated;
 
     private String category_id, election_id;
 

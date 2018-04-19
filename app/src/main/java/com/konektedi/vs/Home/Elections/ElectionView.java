@@ -1,7 +1,10 @@
 package com.konektedi.vs.Home.Elections;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -10,20 +13,17 @@ import android.widget.GridView;
 
 import com.konektedi.vs.Home.Categories.CategoriesAdapter;
 import com.konektedi.vs.Home.Categories.CategoriesModel;
+import com.konektedi.vs.Home.Categories.CategoriesViewModel;
 import com.konektedi.vs.Home.Results.ResultsView;
 import com.konektedi.vs.Login.LoginActivity;
 import com.konektedi.vs.R;
-import com.konektedi.vs.Utilities.Api.ApiUtilities;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ElectionView extends AppCompatActivity {
     GridView categoriesGridView;
     Button resultsViewBtn, reviewsViewBtn;
+    CategoriesViewModel model;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,22 +72,14 @@ public class ElectionView extends AppCompatActivity {
 
         setTitle(election_title);
 
-        Call<List<CategoriesModel>> call = ApiUtilities.getCategories().getCategories(election_id);
-
-        call.enqueue(new Callback<List<CategoriesModel>>() {
+        model = ViewModelProviders.of(this).get(CategoriesViewModel.class);
+        model.getAllCategories(election_id).observe(this, new Observer<List<CategoriesModel>>() {
             @Override
-            public void onResponse(Call<List<CategoriesModel>> call, Response<List<CategoriesModel>> response) {
-
-                List<CategoriesModel> categoriesModelList = response.body();
-                categoriesGridView.setAdapter(new CategoriesAdapter(getApplication(), categoriesModelList));
-            }
-
-            @Override
-            public void onFailure(Call<List<CategoriesModel>> call, Throwable t) {
+            public void onChanged(@Nullable List<CategoriesModel> categoriesModels) {
+                categoriesGridView.setAdapter(new CategoriesAdapter(getApplication(), categoriesModels));
 
             }
         });
-
 
     }
 

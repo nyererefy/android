@@ -1,22 +1,18 @@
 package com.konektedi.vs.Motions.Opinions;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.konektedi.vs.R;
-import com.konektedi.vs.Utilities.Api.ApiUtilities;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class Opinions extends AppCompatActivity {
 
@@ -47,29 +43,17 @@ public class Opinions extends AppCompatActivity {
 
         setTitle("Opinions: " + title);
 
-        Call<List<OpinionsModel>> call = ApiUtilities.getOpinions().getOpinions(motion_id);
-        call.enqueue(new Callback<List<OpinionsModel>>() {
+        modelView = ViewModelProviders.of(this).get(OpinionsModelView.class);
+        modelView.getAllOpinions(motion_id).observe(this, new Observer<List<OpinionsModel>>() {
             @Override
-            public void onResponse(Call<List<OpinionsModel>> call, Response<List<OpinionsModel>> response) {
-
-                progressBar.setVisibility(View.GONE);
-
-                List<OpinionsModel> opinionsModelList = response.body();
-                adapter = new OpinionsAdapter(getApplicationContext(), opinionsModelList);
+            public void onChanged(@Nullable List<OpinionsModel> opinionsModels) {
+                adapter = new OpinionsAdapter(getApplicationContext(), opinionsModels);
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                 recyclerView.setAdapter(adapter);
             }
-
-            @Override
-            public void onFailure(Call<List<OpinionsModel>> call, Throwable t) {
-                progressBar.setVisibility(View.GONE);
-
-                Toast.makeText(Opinions.this, "Error occurred", Toast.LENGTH_SHORT).show();
-
-            }
         });
-    }
 
+    }
 
 }

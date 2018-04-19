@@ -2,8 +2,10 @@ package com.konektedi.vs.Home.Candidates;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.konektedi.vs.R;
 import com.konektedi.vs.Utilities.Api.ApiUtilities;
 
@@ -31,7 +35,6 @@ import retrofit2.Response;
  */
 
 public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.ViewHolder> {
-    private Intent intent;
 
     private Context mContext;
     private List<CandidatesModel> candidatesList;
@@ -39,6 +42,23 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
     CandidatesAdapter(Context mContext, List<CandidatesModel> candidatesList) {
         this.mContext = mContext;
         this.candidatesList = candidatesList;
+    }
+
+    class ViewHolder extends RecyclerView.ViewHolder {
+
+        TextView nameView, schoolView;
+        Button voteBtn;
+        ImageView cover;
+
+        ViewHolder(View itemView) {
+            super(itemView);
+
+            nameView = itemView.findViewById(R.id.nameView);
+            schoolView = itemView.findViewById(R.id.schoolView);
+            voteBtn = itemView.findViewById(R.id.voteBtn);
+            cover = itemView.findViewById(R.id.cover);
+
+        }
     }
 
     @NonNull
@@ -51,7 +71,8 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CandidatesAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+    public void onBindViewHolder(@NonNull CandidatesAdapter.ViewHolder holder,
+                                 @SuppressLint("RecyclerView") final int position) {
 
         holder.nameView.setText(candidatesList.get(position).getName());
         holder.schoolView.setText(candidatesList.get(position).getClassName());
@@ -62,7 +83,7 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
             holder.voteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    submitVote(position);
+                    confirm(position);
                 }
             });
         }
@@ -81,6 +102,15 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
             }
         });
 
+        String coverURL = candidatesList.get(position).getCover();
+
+        Glide.with(mContext)
+                .load(coverURL)
+                .apply(new RequestOptions()
+                        .dontAnimate()
+                        .placeholder(R.drawable.holder)
+                        .error(R.drawable.holder))
+                .into(holder.cover);
     }
 
     @Override
@@ -91,11 +121,40 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
     }
 
     private void showProfile(int position) {
-        intent = new Intent(mContext, Profile.class);
+        Intent intent = new Intent(mContext, Profile.class);
+
+        intent.putExtra("cover", candidatesList.get(position).getCover());
         intent.putExtra("name", candidatesList.get(position).getName());
         intent.putExtra("school", candidatesList.get(position).getClassName());
         intent.putExtra("discription", candidatesList.get(position).getDiscription());
+
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(intent);
+    }
+
+    private void confirm(final int position) {
+
+        String name = candidatesList.get(position).getName();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle("Confirm action!");
+        builder.setMessage("You are about to vote for " + name + ". Do you really want to proceed?");
+        builder.setCancelable(false);
+        builder.setPositiveButton("Yes! Vote now", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                submitVote(position);
+            }
+        });
+
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(mContext, "Action cancelled", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        builder.show();
     }
 
     private void submitVote(int position) {
@@ -116,7 +175,6 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Log.i("mapddd", response.toString());
                 Toast.makeText(mContext, response.toString(), Toast.LENGTH_LONG).show();
             }
 
@@ -127,20 +185,5 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
         });
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView nameView, schoolView;
-        Button voteBtn;
-        ImageView cover;
-
-        ViewHolder(View itemView) {
-            super(itemView);
-
-            nameView = itemView.findViewById(R.id.nameView);
-            schoolView = itemView.findViewById(R.id.schoolView);
-            voteBtn = itemView.findViewById(R.id.voteBtn);
-            cover = itemView.findViewById(R.id.cover);
-
-        }
-    }
 }

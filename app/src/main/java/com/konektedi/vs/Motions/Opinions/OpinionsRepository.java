@@ -12,13 +12,7 @@ import retrofit2.Response;
 
 public class OpinionsRepository {
 
-    private String motion_id;
-
-    OpinionsRepository(String motion_id) {
-        this.motion_id = motion_id;
-    }
-
-    public MutableLiveData<List<OpinionsModel>> getMotions() {
+    public MutableLiveData<List<OpinionsModel>> getOpinions(String motion_id) {
 
         final MutableLiveData<List<OpinionsModel>> listMutableLiveData = new MutableLiveData<>();
 

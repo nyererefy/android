@@ -10,27 +10,15 @@ import java.util.List;
 public class OpinionsModelView extends AndroidViewModel {
 
     private LiveData<List<OpinionsModel>> opinions;
-    private String motion_id;
+    private OpinionsRepository opinionsRepository = new OpinionsRepository();
 
-
-    public OpinionsModelView(@NonNull Application application, String motion_id) {
+    public OpinionsModelView(@NonNull Application application) {
         super(application);
-
-        OpinionsRepository opinionsRepository = new OpinionsRepository(motion_id);
-        opinions = opinionsRepository.getMotions();
     }
 
     LiveData<List<OpinionsModel>> getAllOpinions(String motion_id) {
-        setMotion_id(motion_id);
+        opinions = opinionsRepository.getOpinions(motion_id);
         return opinions;
     }
 
-
-    public String getMotion_id() {
-        return motion_id;
-    }
-
-    public void setMotion_id(String motion_id) {
-        this.motion_id = motion_id;
-    }
 }

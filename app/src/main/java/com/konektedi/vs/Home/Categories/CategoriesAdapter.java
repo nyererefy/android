@@ -69,10 +69,13 @@ public class CategoriesAdapter extends BaseAdapter {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 Intent intent = new Intent(mContext, Candidates.class);
                 intent.putExtra("election_id", categoriesModelList.get(position).getElection_id());
                 intent.putExtra("category_id", categoriesModelList.get(position).getCategory_id());
                 intent.putExtra("category", categoriesModelList.get(position).getCategory());
+
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
             }
         });
