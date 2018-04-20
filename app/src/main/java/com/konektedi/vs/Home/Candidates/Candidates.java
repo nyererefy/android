@@ -5,10 +5,13 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.konektedi.vs.R;
 
@@ -18,6 +21,9 @@ public class Candidates extends AppCompatActivity {
     RecyclerView recyclerView;
     CandidatesAdapter adapter;
     CandidatesViewModel candidatesViewModel;
+    ProgressBar progressBar;
+    CardView cardView;
+    TextView alertTextView;
 
 
     @Override
@@ -28,6 +34,9 @@ public class Candidates extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         recyclerView = findViewById(R.id.recyclerView);
+        progressBar = findViewById(R.id.progressBar);
+        cardView = findViewById(R.id.cardView);
+        alertTextView = findViewById(R.id.alertTextView);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -41,41 +50,37 @@ public class Candidates extends AppCompatActivity {
             setTitle(category);
         }
 
-//        Call<List<CandidatesModel>> call = ApiUtilities.getCandidates().getCandidates(election_id, category_id);
-//        call.enqueue(new Callback<List<CandidatesModel>>() {
-//            @Override
-//            public void onResponse(Call<List<CandidatesModel>> call, Response<List<CandidatesModel>> response) {
-//                List<CandidatesModel> candidatesModelList = response.body();
-//
-//                int numberOfColumns = 2;
-//                recyclerView.setLayoutManager(new GridLayoutManager(getApplication(), numberOfColumns));
-//                adapter = new CandidatesAdapter(Candidates.this, candidatesModelList);
-//                recyclerView.setAdapter(adapter);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<List<CandidatesModel>> call, Throwable t) {
-//                Toast.makeText(getApplication(), "Error", Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-        //Better way
         candidatesViewModel = ViewModelProviders.of(this).get(CandidatesViewModel.class);
         candidatesViewModel.getAllCandidates(election_id, category_id).observe(this,
                 new Observer<List<CandidatesModel>>() {
                     @Override
                     public void onChanged(@Nullable List<CandidatesModel> candidatesModels) {
-                        if (candidatesModels != null) {
+                        if (candidatesModels != null && !candidatesModels.isEmpty()) {
+
+                            hideProgressBar();
+
                             int numberOfColumns = 2;
                             recyclerView.setLayoutManager(new GridLayoutManager(getApplication(), numberOfColumns));
                             adapter = new CandidatesAdapter(Candidates.this, candidatesModels);
                             recyclerView.setAdapter(adapter);
+
                         } else {
-                            Toast.makeText(Candidates.this, "Posts not retrieved", Toast.LENGTH_SHORT).show();
+                            hideProgressBar();
+                            showAlert(R.string.no_candidates);
                         }
 
                     }
                 });
+    }
+
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
+    }
+
+    public void showAlert(int alertText) {
+
+        cardView.setVisibility(View.VISIBLE);
+        alertTextView.setText(alertText);
     }
 
 }

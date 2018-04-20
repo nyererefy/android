@@ -6,7 +6,7 @@ package com.konektedi.vs.Home.Candidates;
 
 public class CandidatesModel {
 
-    private String candidate_id, name, discription, cover, school, year, participated;
+    private String candidate_id, name, discription, cover, school, year, participated,voting_state;
 
     private String category_id, election_id;
 
@@ -84,5 +84,13 @@ public class CandidatesModel {
 
     public String getClassName() {
         return school + " " + year;
+    }
+
+    public String getVoting_state() {
+        return voting_state;
+    }
+
+    public void setVoting_state(String voting_state) {
+        this.voting_state = voting_state;
     }
 }

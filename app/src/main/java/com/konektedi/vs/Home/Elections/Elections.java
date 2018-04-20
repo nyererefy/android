@@ -33,6 +33,8 @@ public class Elections extends Fragment {
             @Override
             public void onChanged(@Nullable List<ElectionsModel> electionsModels) {
 
+                hideProgressBar();
+
                 electionsAdapter = new ElectionsAdapter(getActivity(), electionsModels);
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -51,6 +53,12 @@ public class Elections extends Fragment {
 
         return rootView;
     }
+
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
+    }
+
+
 
 
 }

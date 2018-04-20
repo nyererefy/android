@@ -1,6 +1,7 @@
 package com.konektedi.vs.Utilities.Api;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -20,9 +21,14 @@ public class ApiClient {
 
     static Retrofit getClient(String base_url) {
 
-        OkHttpClient.Builder okHttpBuilder = new OkHttpClient.Builder();
+        OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
 
-        okHttpBuilder.addInterceptor(new Interceptor() {
+        okHttpClient.connectTimeout(60, TimeUnit.SECONDS);
+        okHttpClient.readTimeout(60, TimeUnit.SECONDS);
+        okHttpClient.writeTimeout(60, TimeUnit.SECONDS);
+        okHttpClient.retryOnConnectionFailure(true);
+
+        okHttpClient.addInterceptor(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
                 Request request = chain.request();
@@ -33,7 +39,7 @@ public class ApiClient {
                         .addHeader("id", "1")
                         .addHeader("university_id", "1")
                         .addHeader("branch_id", "1")
-                        .addHeader("school_id", "1")
+                        .addHeader("school_id", "5")
                         .addHeader("year", "1")
                         .addHeader("residence_id", "1")
                         .addHeader("sex", "M")
@@ -46,7 +52,7 @@ public class ApiClient {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(base_url)
-                    .client(okHttpBuilder.build())
+                    .client(okHttpClient.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }

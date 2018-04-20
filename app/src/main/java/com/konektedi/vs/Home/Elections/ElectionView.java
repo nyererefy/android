@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.ProgressBar;
 
 import com.konektedi.vs.Home.Categories.CategoriesAdapter;
 import com.konektedi.vs.Home.Categories.CategoriesModel;
@@ -24,6 +25,8 @@ public class ElectionView extends AppCompatActivity {
     GridView categoriesGridView;
     Button resultsViewBtn, reviewsViewBtn;
     CategoriesViewModel model;
+    ProgressBar progressBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ public class ElectionView extends AppCompatActivity {
         categoriesGridView = findViewById(R.id.categoriesGridView);
         resultsViewBtn = findViewById(R.id.resultsViewBtn);
         reviewsViewBtn = findViewById(R.id.reviewsViewBtn);
+        progressBar = findViewById(R.id.progressBar);
 
         getCategories();
 
@@ -76,11 +80,16 @@ public class ElectionView extends AppCompatActivity {
         model.getAllCategories(election_id).observe(this, new Observer<List<CategoriesModel>>() {
             @Override
             public void onChanged(@Nullable List<CategoriesModel> categoriesModels) {
+                hideProgressBar();
                 categoriesGridView.setAdapter(new CategoriesAdapter(getApplication(), categoriesModels));
 
             }
         });
 
+    }
+
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
     }
 
 

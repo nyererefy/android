@@ -4,10 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +21,11 @@ import com.bumptech.glide.request.RequestOptions;
 import com.konektedi.vs.R;
 import com.konektedi.vs.Utilities.Api.ApiUtilities;
 
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,6 +64,8 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
             cover = itemView.findViewById(R.id.cover);
 
         }
+
+
     }
 
     @NonNull
@@ -86,6 +93,11 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
                     confirm(position);
                 }
             });
+        }
+
+        if (candidatesList.get(position).getVoting_state().equals("disabled")) {
+            holder.voteBtn.setVisibility(View.GONE);
+            ((Candidates) mContext).showAlert(R.string.voting_disabled);
         }
 
         holder.nameView.setOnClickListener(new View.OnClickListener() {
@@ -167,22 +179,66 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
         map.put("election_id", candidatesList.get(position).getElection_id());
         map.put("category_id", candidatesList.get(position).getCategory_id());
         map.put("candidate_id", candidatesList.get(position).getCandidate_id());
-
-        Log.i("mapddd", map.toString());
+        map.put("ip", getLocalIpAddress());
+        map.put("from", "VS Android App");
+        map.put("device", getDeviceName());
 
         Call<ResponseBody> call = ApiUtilities.vote().vote(map);
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                Toast.makeText(mContext, response.toString(), Toast.LENGTH_LONG).show();
+                if (response.code() == 201) {
+                    onSuccessVote();
+                } else if (response.code() == 405) {
+                    cantVoteTwice();
+                } else {
+                    onFailureVote();
+                }
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                Toast.makeText(mContext, "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Error in connection", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+    private static String getLocalIpAddress() {
+        try {
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
+                NetworkInterface intf = en.nextElement();
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
+                    InetAddress inetAddress = enumIpAddr.nextElement();
+                    if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
+                        return inetAddress.getHostAddress();
+                    }
+                }
+            }
+        } catch (SocketException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    private String getDeviceName() {
+        return Build.MANUFACTURER
+                + " " + Build.MODEL + " " + Build.VERSION.RELEASE
+                + " " + Build.VERSION_CODES.class.getFields()[Build.VERSION.SDK_INT].getName();
+    }
+
+    private void onSuccessVote() {
+        ((Candidates) mContext).showAlert(R.string.on_success_vote);
+    }
+
+    private void onFailureVote() {
+        ((Candidates) mContext).showAlert(R.string.on_failure_vote);
+    }
+
+    private void cantVoteTwice() {
+        ((Candidates) mContext).showAlert(R.string.cant_vote_twice);
+
     }
 
 

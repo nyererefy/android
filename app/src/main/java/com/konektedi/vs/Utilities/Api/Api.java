@@ -32,7 +32,7 @@ public interface Api {
             @Path("category_id") String category_id);
 
     @FormUrlEncoded
-    @POST("candidates/vote")
+    @POST("votes/vote")
     Call<ResponseBody> vote(@FieldMap Map<String, String> map);
 
 

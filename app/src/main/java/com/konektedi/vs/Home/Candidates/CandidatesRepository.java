@@ -23,6 +23,7 @@ public class CandidatesRepository {
         call.enqueue(new Callback<List<CandidatesModel>>() {
             @Override
             public void onResponse(Call<List<CandidatesModel>> call, Response<List<CandidatesModel>> response) {
+
                 if (response.isSuccessful()) {
 
                     List<CandidatesModel> categoriesModelList = response.body();

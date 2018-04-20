@@ -9,6 +9,14 @@
     <string name="test_school">BAED</string>
     <string name="test_time">2 h</string>
 
+    <!--Alerts-->
+    <string name="voting_disabled">Voting is disabled right now!</string>
+    <string name="no_candidates">No candidates found in this category!</string>
+    <string name="on_success_vote">Thanks for your vote!</string>
+    <string name="cant_vote_twice">You can not vote twice!</string>
+    <string name="on_failure_vote">Some error occurred. Try again later!</string>
+
+
     <!--Buttons-->
     <string name="vote">Vote</string>
 
