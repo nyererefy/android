@@ -28,6 +28,14 @@
     <string name="profile_activity">Profile</string>
 
     <!--Settings-->
+    <string name="myAlphaNumeric">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-.</string>
+    <string name="username_changed">Username successfully changed.</string>
+    <string name="username_taken">Username is taken.Choose another one</string>
+    <string name="same_username">Username must be different from previous.</string>
+    <string name="invalid_username">Username must have 3 to 16 characters.</string>
+    <string name="invalid_characters">Only - , . and _ characters are allowed.</string>
+    <string name="new_username">New Username</string>
+    <string name="password_should_not_match">New Password must not match with previous.</string>
     <string name="password_not_match">Passwords do not match</string>
     <string name="wrong_password">Wrong Password</string>
     <string name="change_password">Change Password</string>

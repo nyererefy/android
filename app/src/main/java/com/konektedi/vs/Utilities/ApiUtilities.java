@@ -43,5 +43,9 @@ public class ApiUtilities {
         return ApiClient.getClient(BASE_URL).create(Api.class);
     }
 
+    public static Api changeUsername() {
+        return ApiClient.getClient(BASE_URL).create(Api.class);
+    }
+
 
 }

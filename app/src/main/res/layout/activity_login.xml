@@ -78,8 +78,6 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/rounded_login_input"
-                android:drawableLeft="@drawable/ic_reg_no"
-                android:drawableStart="@drawable/ic_reg_no"
                 android:hint="@string/prompt_reg_no"
                 android:inputType="text"
                 android:maxLines="1"
@@ -92,8 +90,6 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/rounded_login_input"
-                android:drawableLeft="@drawable/ic_password"
-                android:drawableStart="@drawable/ic_password"
                 android:hint="@string/prompt_password"
                 android:inputType="textPassword" />
 

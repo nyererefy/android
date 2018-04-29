@@ -1,6 +1,5 @@
 package com.konektedi.vs.Student;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -23,6 +22,8 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.konektedi.vs.Utilities.Constants.USERNAME;
 
 public class Settings extends AppCompatActivity {
     Button changeUsernameBtn, changePasswordBtn;
@@ -56,27 +57,81 @@ public class Settings extends AppCompatActivity {
     }
 
     private void changeUsername() {
-        final EditText edtText = new EditText(this);
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Change Username");
-        builder.setMessage("Type new username");
-        builder.setCancelable(false);
-        builder.setView(edtText);
-        builder.setPositiveButton("Change", new DialogInterface.OnClickListener() {
+
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.v_change_username, null);
+        builder.setView(dialogView);
+
+        final EditText newUsername;
+        final ProgressBar progressBar;
+        Button changeBtn;
+
+        progressBar = dialogView.findViewById(R.id.progressBar);
+        changeBtn = dialogView.findViewById(R.id.changeBtn);
+        newUsername = dialogView.findViewById(R.id.newUsername);
+
+        newUsername.setText(StudentPreferences.getPreference(Settings.this, USERNAME));
+
+        final AlertDialog dialog = builder.create();
+
+        changeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getApplicationContext(), "Hello " + edtText.getText() + " ! how are you?", Toast.LENGTH_LONG).show();
+            public void onClick(View view) {
+                final String new_username = newUsername.getText().toString().trim();
+                View focusView = null;
+                boolean cancel = false;
+
+                if (TextUtils.isEmpty(new_username)) {
+                    newUsername.setError(getString(R.string.error_field_required));
+                    focusView = newUsername;
+                    cancel = true;
+                } else if (new_username.length() < 3 || new_username.length() > 16) {
+                    newUsername.setError(getString(R.string.invalid_username));
+                    focusView = newUsername;
+                    cancel = true;
+                } else if (new_username.equals(StudentPreferences.getPreference(Settings.this, USERNAME))) {
+                    newUsername.setError(getString(R.string.same_username));
+                    focusView = newUsername;
+                    cancel = true;
+                }
+                if (cancel) {
+                    focusView.requestFocus();
+                } else {
+                    progressBar.setVisibility(View.VISIBLE);
+                    Map<String, String> map = new HashMap<>();
+
+                    map.put("username", new_username);
+
+                    Call<ResponseBody> call = ApiUtilities.changeUsername().changeUsername(map);
+
+                    call.enqueue(new Callback<ResponseBody>() {
+                        @Override
+                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                            progressBar.setVisibility(View.INVISIBLE);
+                            if (response.isSuccessful()) {
+                                dialog.cancel();
+                                Toast.makeText(Settings.this, R.string.username_changed, Toast.LENGTH_LONG).show();
+                                StudentPreferences.savePreference(Settings.this, USERNAME, new_username);
+                            } else if (response.code() == 404) {
+                                newUsername.setError(getString(R.string.username_taken));
+                                newUsername.requestFocus();
+                            } else {
+                                Toast.makeText(Settings.this, R.string.error_occurred, Toast.LENGTH_LONG).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+                            progressBar.setVisibility(View.INVISIBLE);
+                            dialog.cancel();
+                            Toast.makeText(Settings.this, R.string.error_occurred, Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
             }
         });
-
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-            }
-        });
-        builder.show();
+        dialog.show();
     }
 
     private void changePassword() {
@@ -85,7 +140,6 @@ public class Settings extends AppCompatActivity {
 
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.v_change_password, null);
-//        builder.setTitle("Change Password");
         builder.setView(dialogView);
         //ids
         final EditText currentPassword, newPassword, confirmPassword;
@@ -125,6 +179,10 @@ public class Settings extends AppCompatActivity {
                     newPassword.setError(getString(R.string.error_invalid_password));
                     focusView = newPassword;
                     cancel = true;
+                } else if (new_password.equals(current_password)) {
+                    newPassword.setError(getString(R.string.password_should_not_match));
+                    focusView = newPassword;
+                    cancel = true;
                 } else if (!new_password.equals(confirm_password)) {
                     confirmPassword.setError(getString(R.string.password_not_match));
                     focusView = confirmPassword;
@@ -146,8 +204,8 @@ public class Settings extends AppCompatActivity {
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                             progressBar.setVisibility(View.INVISIBLE);
                             if (response.isSuccessful()) {
-                                Toast.makeText(Settings.this, R.string.password_changed, Toast.LENGTH_LONG).show();
                                 dialog.cancel();
+                                Toast.makeText(Settings.this, R.string.password_changed, Toast.LENGTH_LONG).show();
                             } else {
                                 Toast.makeText(Settings.this, R.string.wrong_password, Toast.LENGTH_LONG).show();
                             }
@@ -156,16 +214,14 @@ public class Settings extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<ResponseBody> call, Throwable t) {
                             progressBar.setVisibility(View.INVISIBLE);
-                            Toast.makeText(Settings.this, R.string.error_occurred, Toast.LENGTH_LONG).show();
                             dialog.cancel();
+                            Toast.makeText(Settings.this, R.string.error_occurred, Toast.LENGTH_LONG).show();
                         }
                     });
                 }
             }
         });
-
         dialog.show();
     }
-
 
 }

@@ -61,4 +61,8 @@ public interface Api {
     @POST("settings/password")
     Call<ResponseBody> changePassword(@FieldMap Map<String, String> map);
 
+    @FormUrlEncoded
+    @POST("settings/username")
+    Call<ResponseBody> changeUsername(@FieldMap Map<String, String> map);
+
 }
