@@ -19,7 +19,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.konektedi.vs.R;
-import com.konektedi.vs.Utilities.Api.ApiUtilities;
+import com.konektedi.vs.Utilities.ApiUtilities;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -136,8 +136,8 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
         Intent intent = new Intent(mContext, Profile.class);
 
         intent.putExtra("cover", candidatesList.get(position).getCover());
-        intent.putExtra("name", candidatesList.get(position).getName());
-        intent.putExtra("school", candidatesList.get(position).getClassName());
+        intent.putExtra("NAME", candidatesList.get(position).getName());
+        intent.putExtra("SCHOOL", candidatesList.get(position).getClassName());
         intent.putExtra("discription", candidatesList.get(position).getDiscription());
 
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

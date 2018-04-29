@@ -1,4 +1,4 @@
-package com.konektedi.vs.Utilities.Api;
+package com.konektedi.vs.Utilities;
 
 /**
  * Created by Sy on b/9/2018.
@@ -9,7 +9,7 @@ public class ApiUtilities {
     private ApiUtilities() {
     }
 
-    private static final String BASE_URL = "http://192.168.43.188/konektedi_vs/api/v1/";
+    public static final String BASE_URL = "http://192.168.43.188/konektedi_vs/api/v1/";
 
     public static Api getElections() {
         return ApiClient.getClient(BASE_URL).create(Api.class);
@@ -31,8 +31,17 @@ public class ApiUtilities {
         return ApiClient.getClient(BASE_URL).create(Api.class);
     }
 
+    public static Api getNews() {
+        return ApiClient.getClient(BASE_URL).create(Api.class);
+    }
+
     public static Api vote() {
         return ApiClient.getClient(BASE_URL).create(Api.class);
     }
+
+    public static Api changePassword() {
+        return ApiClient.getClient(BASE_URL).create(Api.class);
+    }
+
 
 }

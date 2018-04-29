@@ -16,7 +16,7 @@ import com.konektedi.vs.Home.Categories.CategoriesAdapter;
 import com.konektedi.vs.Home.Categories.CategoriesModel;
 import com.konektedi.vs.Home.Categories.CategoriesViewModel;
 import com.konektedi.vs.Home.Results.ResultsView;
-import com.konektedi.vs.Login.LoginActivity;
+import com.konektedi.vs.Student.Login;
 import com.konektedi.vs.R;
 
 import java.util.List;
@@ -55,7 +55,7 @@ public class ElectionView extends AppCompatActivity {
         reviewsViewBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ElectionView.this, LoginActivity.class);
+                Intent intent = new Intent(ElectionView.this, Login.class);
                 startActivity(intent);
             }
         });

@@ -27,8 +27,8 @@ public class Profile extends AppCompatActivity {
     protected void showDetails(){
         Bundle data = getIntent().getExtras();
 
-        String name = data.getString("name");
-        String school = data.getString("school");
+        String name = data.getString("NAME");
+        String school = data.getString("SCHOOL");
         String discription = data.getString("discription");
 
         nameView.setText(name);

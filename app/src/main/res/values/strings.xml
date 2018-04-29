@@ -1,4 +1,5 @@
 <resources>
+    <string name="vs_motto">"Beyond Transparency"</string>
     <string name="app_name">VS</string>
     <string name="title_elections">Elections</string>
     <string name="title_motions">Motions</string>
@@ -15,24 +16,35 @@
     <string name="on_success_vote">Thanks for your vote!</string>
     <string name="cant_vote_twice">You can not vote twice!</string>
     <string name="on_failure_vote">Some error occurred. Try again later!</string>
+    <string name="alert_account_disabled">Your account is disabled. Contact Election Committee!</string>
+    <string name="alert_account_not_activated">Your account is not activated. Visit konektedi.com to activate it.</string>
+    <string name="alert_account_not_verified">Your account is not verified. Visit konektedi.com to verify it.</string>
+    <string name="wrong_password_or_reg">Incorrect Registration number or Password.</string>
+
+    <!--Top Menu-->
+    <string name="settings_activity">Settings</string>
+    <string name="logout_activity">Logout</string>
+    <string name="about_activity">About</string>
+    <string name="profile_activity">Profile</string>
+
+    <!--Settings-->
+    <string name="password_not_match">Passwords do not match</string>
+    <string name="wrong_password">Wrong Password</string>
+    <string name="change_password">Change Password</string>
+    <string name="change_username">Change Username</string>
+    <string name="password_changed">Password changed successfully.</string>
+    <string name="error_occurred">Error occurred. Try again later.</string>
 
 
     <!--Buttons-->
     <string name="vote">Vote</string>
 
 
-    Homeions Buttons-->
+    Home Buttons-->
     <string name="live_results">Live Results</string>
     <string name="live_votes">Live Votes</string>
     <string name="live_reviews">Live Reviews</string>
     <string name="statistics">Statistics</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_test">Test</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
 
     <!--TEST -->
     <string name="test_title">CUHAS ORGANIZATIONS GENERAL ELECTION 2020</string>
@@ -58,16 +70,18 @@
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password (optional)</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
+    <string name="prompt_reg_no"> Registration number</string>
+    <string name="prompt_password"> Password</string>
+    <string name="new_password">New Password</string>
+    <string name="current_password">Current Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="save_changes">Save changes</string>
+    <string name="action_sign_in">LOGIN</string>
+    <string name="error_invalid_reg_no">This Registration number is invalid</string>
+    <string name="error_invalid_password">Password must contain 6 to 10 characters.</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+    <string name="title_activity_profile">Profile</string>
+    <string name="title_activity_settings">Settings</string>
 
 </resources>

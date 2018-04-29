@@ -3,6 +3,7 @@ package com.konektedi.vs.Home.Elections;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -44,7 +45,7 @@ public class Elections extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.elections_fragment, container, false);
 
@@ -57,8 +58,6 @@ public class Elections extends Fragment {
     public void hideProgressBar() {
         progressBar.setVisibility(View.GONE);
     }
-
-
 
 
 }
