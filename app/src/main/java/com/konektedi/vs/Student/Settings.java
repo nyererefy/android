@@ -103,7 +103,7 @@ public class Settings extends AppCompatActivity {
 
                     map.put("username", new_username);
 
-                    Call<ResponseBody> call = ApiUtilities.changeUsername().changeUsername(map);
+                    Call<ResponseBody> call = ApiUtilities.getClient().changeUsername(map);
 
                     call.enqueue(new Callback<ResponseBody>() {
                         @Override
@@ -198,7 +198,7 @@ public class Settings extends AppCompatActivity {
                     map.put("password", current_password);
                     map.put("new_password", new_password);
 
-                    Call<ResponseBody> call = ApiUtilities.changePassword().changePassword(map);
+                    Call<ResponseBody> call = ApiUtilities.getClient().changePassword(map);
                     call.enqueue(new Callback<ResponseBody>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

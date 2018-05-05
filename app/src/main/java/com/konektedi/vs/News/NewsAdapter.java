@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.konektedi.vs.Motions.MotionsView;
 import com.konektedi.vs.R;
 
 import java.util.List;
@@ -36,14 +35,14 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(NewsAdapter.ViewHolder holder, final int position) {
-        holder.titleView.setText(newsList.get(position).getTitle());
+        holder.titleView.setText(newsList.get(position).getTitle().toUpperCase());
         holder.timeView.setText(newsList.get(position).getTime());
         holder.nameView.setText(newsList.get(position).getName());
 
         holder.titleView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, MotionsView.class);
+                Intent intent = new Intent(mContext, NewsView.class);
                 intent.putExtra("post_id", newsList.get(position).getPost_id());
                 intent.putExtra("post", newsList.get(position).getPost());
                 intent.putExtra("title", newsList.get(position).getTitle());

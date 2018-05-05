@@ -16,7 +16,7 @@ public class CategoriesRepository {
 
         final MutableLiveData<List<CategoriesModel>> listMutableLiveData = new MutableLiveData<>();
 
-        Call<List<CategoriesModel>> call = ApiUtilities.getCategories().getCategories(election_id);
+        Call<List<CategoriesModel>> call = ApiUtilities.getClient().getCategories(election_id);
 
         call.enqueue(new Callback<List<CategoriesModel>>() {
             @Override

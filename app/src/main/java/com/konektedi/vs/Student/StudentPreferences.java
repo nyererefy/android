@@ -7,7 +7,6 @@ import static com.konektedi.vs.Utilities.Constants.VSPreferences;
 import static com.konektedi.vs.Utilities.Constants.IS_LOGGED_IN;
 
 public class StudentPreferences {
-
     public static void savePreference(Context context, String key, String value) {
         SharedPreferences sharedPref = context.getSharedPreferences(VSPreferences, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
@@ -30,5 +29,4 @@ public class StudentPreferences {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear().apply();
     }
-
 }

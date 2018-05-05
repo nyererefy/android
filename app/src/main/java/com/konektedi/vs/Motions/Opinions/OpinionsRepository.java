@@ -16,7 +16,7 @@ public class OpinionsRepository {
 
         final MutableLiveData<List<OpinionsModel>> listMutableLiveData = new MutableLiveData<>();
 
-        Call<List<OpinionsModel>> call = ApiUtilities.getOpinions().getOpinions(motion_id);
+        Call<List<OpinionsModel>> call = ApiUtilities.getClient().getOpinions(motion_id);
 
         call.enqueue(new Callback<List<OpinionsModel>>() {
             @Override

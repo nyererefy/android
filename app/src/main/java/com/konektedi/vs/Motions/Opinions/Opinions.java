@@ -16,7 +16,7 @@ import java.util.List;
 
 public class Opinions extends AppCompatActivity {
 
-    OpinionsModelView modelView;
+    OpinionsViewModel modelView;
     OpinionsAdapter adapter;
     RecyclerView recyclerView;
     ProgressBar progressBar;
@@ -43,7 +43,7 @@ public class Opinions extends AppCompatActivity {
 
         setTitle("Opinions: " + title);
 
-        modelView = ViewModelProviders.of(this).get(OpinionsModelView.class);
+        modelView = ViewModelProviders.of(this).get(OpinionsViewModel.class);
         modelView.getAllOpinions(motion_id).observe(this, new Observer<List<OpinionsModel>>() {
             @Override
             public void onChanged(@Nullable List<OpinionsModel> opinionsModels) {

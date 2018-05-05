@@ -9,6 +9,7 @@
     <string name="test_name">Avemaria I Ngowi</string>
     <string name="test_school">BAED</string>
     <string name="test_time">2 h</string>
+    <string name="add_comment">Add comment</string>
 
     <!--Alerts-->
     <string name="voting_disabled">Voting is disabled right now!</string>
@@ -19,12 +20,14 @@
     <string name="alert_account_disabled">Your account is disabled. Contact Election Committee!</string>
     <string name="alert_account_not_activated">Your account is not activated. Visit konektedi.com to activate it.</string>
     <string name="alert_account_not_verified">Your account is not verified. Visit konektedi.com to verify it.</string>
+    <string name="alert_account_not_approved">Your account has not been approved.</string>
     <string name="wrong_password_or_reg">Incorrect Registration number or Password.</string>
 
     <!--Top Menu-->
     <string name="settings_activity">Settings</string>
     <string name="logout_activity">Logout</string>
     <string name="about_activity">About</string>
+    <string name="support_activity">Support</string>
     <string name="profile_activity">Profile</string>
 
     <!--Settings-->
@@ -91,5 +94,29 @@
     <string name="error_field_required">This field is required</string>
     <string name="title_activity_profile">Profile</string>
     <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_news_view">NewsView</string>
+
+    <!--About strings-->
+    <string name="vs_about_title">VS for Android</string>
+    <string name="vs_about_version">Version: 2018.1</string>
+    <string name="vs_about_build">Build: 2</string>
+    <string name="vs_property_of">Property of Konektedi.</string>
+
+    <!--Support Strings-->
+    <string name="support_title">Support</string>
+    <string name="support_feedback">Submit feedback.</string>
+    <string name="support_rate_us">Rate this App.</string>
+    <string name="support_bug">Report bug.</string>
+
+    <!--Participate Strings-->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="submit">Submit</string>
+    <string name="add_opinion">Type your opinion here</string>
+
+    <!--Action bar titles-->
+    <string name="motion">Motion</string>
+    <string name="news">News</string>
+    <string name="opinions">Opinions</string>
 
 </resources>

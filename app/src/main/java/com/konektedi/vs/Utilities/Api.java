@@ -6,6 +6,7 @@ import com.konektedi.vs.Home.Categories.CategoriesModel;
 import com.konektedi.vs.Home.Elections.ElectionsModel;
 import com.konektedi.vs.Motions.MotionsModel;
 import com.konektedi.vs.Motions.Opinions.OpinionsModel;
+import com.konektedi.vs.News.Comments.CommentsModel;
 import com.konektedi.vs.News.NewsModel;
 import com.konektedi.vs.Student.StudentModel;
 
@@ -17,14 +18,10 @@ import retrofit2.Call;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface Api {
-
-    @GET("authentication/authentication/{reg_no}/{password}")
-    Call<StudentModel> authenticateB(@Header("Authorization") String authHeader);
 
     @GET("authentication/authentication/{reg_no}/{password}")
     Call<StudentModel> authenticate(
@@ -56,6 +53,18 @@ public interface Api {
     @GET("motions/opinions/{motion_id}")
     Call<List<OpinionsModel>> getOpinions(
             @Path("motion_id") String motion_id);
+
+    @FormUrlEncoded
+    @POST("motions/opinion")
+    Call<ResponseBody> postOpinion(@FieldMap Map<String, String> map);
+
+    @GET("news/comments/{post_id}")
+    Call<List<CommentsModel>> getComments(
+            @Path("post_id") String post_id);
+
+    @FormUrlEncoded
+    @POST("news/comment")
+    Call<ResponseBody> postComment(@FieldMap Map<String, String> map);
 
     @FormUrlEncoded
     @POST("settings/password")

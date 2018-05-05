@@ -2,10 +2,19 @@ package com.konektedi.vs.Home.Candidates;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.konektedi.vs.R;
+
+import static com.konektedi.vs.Utilities.Constants.CLASS_NAME;
+import static com.konektedi.vs.Utilities.Constants.COVER;
+import static com.konektedi.vs.Utilities.Constants.DESCRIPTION;
+import static com.konektedi.vs.Utilities.Constants.NAME;
 
 public class Profile extends AppCompatActivity {
     ImageView cover;
@@ -16,24 +25,49 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.candidate_profile_activity);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         nameView = findViewById(R.id.nameView);
         schoolView = findViewById(R.id.schoolView);
         discriptionView = findViewById(R.id.discriptionView);
         cover = findViewById(R.id.cover);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         showDetails();
     }
 
-    protected void showDetails(){
+    protected void showDetails() {
         Bundle data = getIntent().getExtras();
 
-        String name = data.getString("NAME");
-        String school = data.getString("SCHOOL");
-        String discription = data.getString("discription");
+        String coverURL = data.getString(COVER);
+        String name = data.getString(NAME);
+        String class_name = data.getString(CLASS_NAME);
+        String description = data.getString(DESCRIPTION);
 
+        setTitle(name);
         nameView.setText(name);
-        schoolView.setText(school);
-        discriptionView.setText(discription);
+        schoolView.setText(class_name);
+        discriptionView.setText(description);
 
+        Glide.with(this)
+                .load(coverURL)
+                .apply(new RequestOptions()
+                        .dontAnimate()
+                        .placeholder(R.drawable.holder)
+                        .error(R.drawable.holder))
+                .into(cover);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                break;
+        }
+        return true;
     }
 }

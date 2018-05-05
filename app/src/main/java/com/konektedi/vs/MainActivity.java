@@ -6,9 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 
 import com.konektedi.vs.Home.Elections.Elections;
 import com.konektedi.vs.Motions.Motions;
@@ -21,6 +26,8 @@ import com.konektedi.vs.Student.StudentProfile;
 public class MainActivity extends AppCompatActivity
         implements BottomNavigationView.OnNavigationItemSelectedListener {
 
+    ProgressBar progressBar;
+    LinearLayout linearLayoutOfProgressBar;
     Intent intent;
     public static Context contextOfApplication;
 
@@ -33,6 +40,9 @@ public class MainActivity extends AppCompatActivity
         navigation.setOnNavigationItemSelectedListener(this);
 
         contextOfApplication = getApplicationContext();
+        progressBar = findViewById(R.id.progressBar);
+        linearLayoutOfProgressBar = findViewById(R.id.linearLayoutOfProgressBar);
+
 
         showFragment(new Elections());
     }
@@ -96,23 +106,52 @@ public class MainActivity extends AppCompatActivity
                 intent = new Intent(MainActivity.this, Settings.class);
                 startActivity(intent);
                 break;
+            case R.id.about:
+                showAbout();
+                break;
+            case R.id.support:
+                showSupport();
+                break;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    private void checkLogin() {
-        Boolean is_logged_in = StudentPreferences.getLoginPreference(this);
-
-        if (!is_logged_in) {
-            Intent intent = new Intent(MainActivity.this, Login.class);
-            startActivity(intent);
-        }
     }
 
     @Override
     public void onBackPressed() {
         finishAffinity();
         System.exit(0);
+    }
+
+    private void showAbout() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.v_about, null);
+        builder.setCancelable(true);
+        builder.setView(dialogView);
+
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void showSupport() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+
+        LayoutInflater inflater = getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.v_support, null);
+        builder.setCancelable(true);
+        builder.setView(dialogView);
+
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    public void showProgressBar() {
+        linearLayoutOfProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    public void hideProgressBar() {
+        linearLayoutOfProgressBar.setVisibility(View.GONE);
     }
 
 }

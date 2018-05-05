@@ -40,7 +40,7 @@ public class MotionsAdapter extends RecyclerView.Adapter<MotionsAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(MotionsAdapter.ViewHolder holder, final int position) {
-        holder.title.setText(motionsList.get(position).getTitle());
+        holder.title.setText(motionsList.get(position).getTitle().toUpperCase());
 
         holder.title.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,6 +82,8 @@ public class MotionsAdapter extends RecyclerView.Adapter<MotionsAdapter.ViewHold
                     Intent intent = new Intent(mContext, Participate.class);
                     intent.putExtra("motion_id", motionsList.get(position).getMotion_id());
                     intent.putExtra("motion", motionsList.get(position).getMotion());
+                    intent.putExtra("title", motionsList.get(position).getTitle());
+
                     mContext.startActivity(intent);
                 }
             });

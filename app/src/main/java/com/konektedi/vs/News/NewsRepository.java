@@ -12,11 +12,14 @@ import retrofit2.Response;
 
 public class NewsRepository {
 
+    public NewsRepository() {
+    }
+
     public MutableLiveData<List<NewsModel>> getNews() {
 
         final MutableLiveData<List<NewsModel>> listMutableLiveData = new MutableLiveData<>();
 
-        Call<List<NewsModel>> call = ApiUtilities.getNews().getNews();
+        Call<List<NewsModel>> call = ApiUtilities.getClient().getNews();
 
         call.enqueue(new Callback<List<NewsModel>>() {
             @Override

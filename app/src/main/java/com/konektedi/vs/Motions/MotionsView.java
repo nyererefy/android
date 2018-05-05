@@ -33,7 +33,7 @@ public class MotionsView extends AppCompatActivity {
         String motionTexts = data.getString("motion");
         String titleTexts = data.getString("title");
 
-        setTitle(titleTexts);
+        setTitle(R.string.motion);
         title.setText(titleTexts);
         motion.setText(motionTexts);
 

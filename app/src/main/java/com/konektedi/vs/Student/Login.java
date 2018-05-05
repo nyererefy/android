@@ -243,6 +243,8 @@ public class Login extends AppCompatActivity {
                     alertWarning(name, R.string.alert_account_disabled);
                 } else if (studentModel.getVerified().equals("0")) {
                     alertWarning(name, R.string.alert_account_not_verified);
+                } else if (studentModel.getApproved().equals("0")) {
+                    alertWarning(name, R.string.alert_account_not_approved);
                 } else {
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.clear();
@@ -298,7 +300,8 @@ public class Login extends AppCompatActivity {
         builder.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                finish();
+                finishAffinity();
+                System.exit(0);
             }
         });
         builder.show();

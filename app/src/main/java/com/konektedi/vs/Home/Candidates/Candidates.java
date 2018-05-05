@@ -9,6 +9,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -77,10 +78,27 @@ public class Candidates extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
     }
 
-    public void showAlert(int alertText) {
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
 
+    public void showAlert(int alertText) {
         cardView.setVisibility(View.VISIBLE);
         alertTextView.setText(alertText);
+    }
+
+    public void finishVote() {
+        super.onBackPressed();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                break;
+        }
+        return true;
     }
 
 }

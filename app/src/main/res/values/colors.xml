@@ -9,6 +9,7 @@
     <color name="bootstrapSecondary">#5bc0de</color>
     <color name="bootstrapDanger">#d43f3a</color>
     <color name="backgroundGrey">#EEEEEE</color>
+    <color name="inputBackgroundColor">#FFFFFF</color>
 
     <color name="separatorBackground">#9E9E9E</color>
     <color name="white">#FFFFFF</color>

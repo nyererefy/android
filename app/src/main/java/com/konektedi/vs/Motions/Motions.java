@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import com.konektedi.vs.R;
 
@@ -23,13 +22,25 @@ import java.util.List;
 public class Motions extends Fragment {
     MotionsAdapter motionsAdapter;
     RecyclerView recyclerView;
-    ProgressBar progressBar;
     MotionsViewModel motionsViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getMotions();
+    }
 
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        View rootView = inflater.inflate(R.layout.motions_fragment, container, false);
+
+        recyclerView = rootView.findViewById(R.id.recyclerView);
+
+        return rootView;
+    }
+
+    private void getMotions() {
         motionsViewModel = ViewModelProviders.of(getActivity()).get(MotionsViewModel.class);
         motionsViewModel.getAllMotions().observe(this, new Observer<List<MotionsModel>>() {
             @Override
@@ -41,17 +52,6 @@ public class Motions extends Fragment {
                 recyclerView.setAdapter(motionsAdapter);
             }
         });
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View rootView = inflater.inflate(R.layout.motions_fragment, container, false);
-
-        recyclerView = rootView.findViewById(R.id.recyclerView);
-        progressBar = rootView.findViewById(R.id.progressBar);
-
-        return rootView;
     }
 
 

@@ -34,7 +34,7 @@ public class ElectionsAdapter extends RecyclerView.Adapter<ElectionsAdapter.View
 
     @Override
     public void onBindViewHolder(ElectionsAdapter.ViewHolder holder, final int position) {
-        holder.title.setText(electionList.get(position).getElection_title());
+        holder.title.setText(electionList.get(position).getElection_title().toUpperCase());
 
 
         holder.title.setOnClickListener(new View.OnClickListener() {

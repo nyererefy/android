@@ -16,7 +16,7 @@ public class MotionsRepository {
 
         final MutableLiveData<List<MotionsModel>> listMutableLiveData = new MutableLiveData<>();
 
-        Call<List<MotionsModel>> call = ApiUtilities.getMotions().getMotions();
+        Call<List<MotionsModel>> call = ApiUtilities.getClient().getMotions();
 
         call.enqueue(new Callback<List<MotionsModel>>() {
             @Override

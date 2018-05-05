@@ -18,7 +18,7 @@ public class CandidatesRepository {
 
         final MutableLiveData<List<CandidatesModel>> listMutableLiveData = new MutableLiveData<>();
 
-        Call<List<CandidatesModel>> call = ApiUtilities.getCandidates().getCandidates(election_id, category_id);
+        Call<List<CandidatesModel>> call = ApiUtilities.getClient().getCandidates(election_id, category_id);
 
         call.enqueue(new Callback<List<CandidatesModel>>() {
             @Override

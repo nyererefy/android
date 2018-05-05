@@ -49,8 +49,6 @@ public class ApiClient {
 
                 Request.Builder session = request.newBuilder()
                         //No underscores.....
-                        .addHeader("key", "BHH")
-
                         .addHeader(ID, StudentPreferences.getPreference(applicationContext, ID))
                         .addHeader(UNIVERSITY, StudentPreferences.getPreference(applicationContext, UNIVERSITY))
                         .addHeader(BRANCH, StudentPreferences.getPreference(applicationContext, BRANCH))

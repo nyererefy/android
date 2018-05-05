@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
@@ -16,8 +17,8 @@ import com.konektedi.vs.Home.Categories.CategoriesAdapter;
 import com.konektedi.vs.Home.Categories.CategoriesModel;
 import com.konektedi.vs.Home.Categories.CategoriesViewModel;
 import com.konektedi.vs.Home.Results.ResultsView;
-import com.konektedi.vs.Student.Login;
 import com.konektedi.vs.R;
+import com.konektedi.vs.Student.Login;
 
 import java.util.List;
 
@@ -92,5 +93,13 @@ public class ElectionView extends AppCompatActivity {
         progressBar.setVisibility(View.GONE);
     }
 
-
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                break;
+        }
+        return true;
+    }
 }

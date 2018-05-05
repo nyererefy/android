@@ -3,8 +3,17 @@ package com.konektedi.vs.Student;
 public class StudentModel {
 
     private String id, reg_no, username, name, university_id, branch_id, school_id, year, residence_id, sex;
-    private String state, activated, verified;
+    private String state, activated, verified,approved;
     private String school_name;
+
+
+    public String getApproved() {
+        return approved;
+    }
+
+    public void setApproved(String approved) {
+        this.approved = approved;
+    }
 
     public String getSchool_name() {
         return school_name;

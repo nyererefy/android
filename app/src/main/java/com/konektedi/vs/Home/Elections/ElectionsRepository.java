@@ -16,7 +16,7 @@ public class ElectionsRepository {
 
         final MutableLiveData<List<ElectionsModel>> listMutableLiveData = new MutableLiveData<>();
 
-        Call<List<ElectionsModel>> call = ApiUtilities.getElections().getElections();
+        Call<List<ElectionsModel>> call = ApiUtilities.getClient().getElections();
 
         call.enqueue(new Callback<List<ElectionsModel>>() {
             @Override
@@ -25,19 +25,15 @@ public class ElectionsRepository {
                     List<ElectionsModel> electionsModelList = response.body();
 
                     listMutableLiveData.setValue(electionsModelList);
-
                 }
-
             }
 
             @Override
             public void onFailure(Call<List<ElectionsModel>> call, Throwable t) {
-
             }
 
         });
 
         return listMutableLiveData;
-
     }
 }

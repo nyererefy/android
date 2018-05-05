@@ -6,46 +6,10 @@ package com.konektedi.vs.Utilities;
 
 public class ApiUtilities {
 
-    private ApiUtilities() {
-    }
-
     public static final String BASE_URL = "http://192.168.43.188/konektedi_vs/api/v1/";
 
-    public static Api getElections() {
+    public static Api getClient() {
         return ApiClient.getClient(BASE_URL).create(Api.class);
     }
-
-    public static Api getCategories() {
-        return ApiClient.getClient(BASE_URL).create(Api.class);
-    }
-
-    public static Api getCandidates() {
-        return ApiClient.getClient(BASE_URL).create(Api.class);
-    }
-
-    public static Api getMotions() {
-        return ApiClient.getClient(BASE_URL).create(Api.class);
-    }
-
-    public static Api getOpinions() {
-        return ApiClient.getClient(BASE_URL).create(Api.class);
-    }
-
-    public static Api getNews() {
-        return ApiClient.getClient(BASE_URL).create(Api.class);
-    }
-
-    public static Api vote() {
-        return ApiClient.getClient(BASE_URL).create(Api.class);
-    }
-
-    public static Api changePassword() {
-        return ApiClient.getClient(BASE_URL).create(Api.class);
-    }
-
-    public static Api changeUsername() {
-        return ApiClient.getClient(BASE_URL).create(Api.class);
-    }
-
 
 }

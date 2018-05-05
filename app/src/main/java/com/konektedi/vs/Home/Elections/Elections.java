@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import com.konektedi.vs.R;
 
@@ -21,7 +20,6 @@ public class Elections extends Fragment {
 
     RecyclerView recyclerView;
     ElectionsAdapter electionsAdapter;
-    ProgressBar progressBar;
     ElectionsViewModel electionsViewModel;
 
     @Override
@@ -33,11 +31,7 @@ public class Elections extends Fragment {
         electionsViewModel.getAllElections().observe(this, new Observer<List<ElectionsModel>>() {
             @Override
             public void onChanged(@Nullable List<ElectionsModel> electionsModels) {
-
-                hideProgressBar();
-
                 electionsAdapter = new ElectionsAdapter(getActivity(), electionsModels);
-
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 recyclerView.setAdapter(electionsAdapter);
             }
@@ -50,14 +44,8 @@ public class Elections extends Fragment {
         View rootView = inflater.inflate(R.layout.elections_fragment, container, false);
 
         recyclerView = rootView.findViewById(R.id.recyclerView);
-        progressBar = rootView.findViewById(R.id.progressBar);
 
         return rootView;
     }
-
-    public void hideProgressBar() {
-        progressBar.setVisibility(View.GONE);
-    }
-
 
 }

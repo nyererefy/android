@@ -7,12 +7,12 @@ import android.support.annotation.NonNull;
 
 import java.util.List;
 
-public class OpinionsModelView extends AndroidViewModel {
+public class OpinionsViewModel extends AndroidViewModel {
 
     private LiveData<List<OpinionsModel>> opinions;
     private OpinionsRepository opinionsRepository = new OpinionsRepository();
 
-    public OpinionsModelView(@NonNull Application application) {
+    public OpinionsViewModel(@NonNull Application application) {
         super(application);
     }
 

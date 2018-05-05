@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.konektedi.vs.R;
+import com.konektedi.vs.Student.StudentPreferences;
 import com.konektedi.vs.Utilities.ApiUtilities;
 
 import java.net.Inet4Address;
@@ -34,6 +35,14 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.konektedi.vs.Utilities.Constants.CLASS_NAME;
+import static com.konektedi.vs.Utilities.Constants.COVER;
+import static com.konektedi.vs.Utilities.Constants.DESCRIPTION;
+import static com.konektedi.vs.Utilities.Constants.ID;
+import static com.konektedi.vs.Utilities.Constants.NAME;
+import static com.konektedi.vs.Utilities.Constants.UNIVERSITY;
+import static com.konektedi.vs.Utilities.Constants.USERNAME;
 
 /**
  * Created by Sy on b/14/2018.
@@ -64,8 +73,6 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
             cover = itemView.findViewById(R.id.cover);
 
         }
-
-
     }
 
     @NonNull
@@ -135,10 +142,10 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
     private void showProfile(int position) {
         Intent intent = new Intent(mContext, Profile.class);
 
-        intent.putExtra("cover", candidatesList.get(position).getCover());
-        intent.putExtra("NAME", candidatesList.get(position).getName());
-        intent.putExtra("SCHOOL", candidatesList.get(position).getClassName());
-        intent.putExtra("discription", candidatesList.get(position).getDiscription());
+        intent.putExtra(COVER, candidatesList.get(position).getCover());
+        intent.putExtra(NAME, candidatesList.get(position).getName());
+        intent.putExtra(CLASS_NAME, candidatesList.get(position).getClassName());
+        intent.putExtra(DESCRIPTION, candidatesList.get(position).getDiscription());
 
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         mContext.startActivity(intent);
@@ -169,13 +176,14 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
         builder.show();
     }
 
-    private void submitVote(int position) {
+    private void submitVote(final int position) {
+
+        ((Candidates) mContext).showProgressBar();
 
         Map<String, String> map = new HashMap<>();
 
-        map.put("id", "1");
-        map.put("username", "app");
-        map.put("university_id", "1"); //BADO IP HAPA
+        map.put("id", StudentPreferences.getPreference(mContext, ID));
+        map.put("university_id", StudentPreferences.getPreference(mContext, UNIVERSITY));
         map.put("election_id", candidatesList.get(position).getElection_id());
         map.put("category_id", candidatesList.get(position).getCategory_id());
         map.put("candidate_id", candidatesList.get(position).getCandidate_id());
@@ -183,13 +191,15 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
         map.put("from", "VS Android App");
         map.put("device", getDeviceName());
 
-        Call<ResponseBody> call = ApiUtilities.vote().vote(map);
+        Call<ResponseBody> call = ApiUtilities.getClient().vote(map);
 
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                ((Candidates) mContext).hideProgressBar();
+
                 if (response.code() == 201) {
-                    onSuccessVote();
+                    voteFor(position);
                 } else if (response.code() == 405) {
                     cantVoteTwice();
                 } else {
@@ -199,6 +209,7 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                ((Candidates) mContext).hideProgressBar();
                 Toast.makeText(mContext, "Error in connection", Toast.LENGTH_SHORT).show();
             }
         });
@@ -228,17 +239,32 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
                 + " " + Build.VERSION_CODES.class.getFields()[Build.VERSION.SDK_INT].getName();
     }
 
-    private void onSuccessVote() {
-        ((Candidates) mContext).showAlert(R.string.on_success_vote);
-    }
-
     private void onFailureVote() {
         ((Candidates) mContext).showAlert(R.string.on_failure_vote);
     }
 
     private void cantVoteTwice() {
         ((Candidates) mContext).showAlert(R.string.cant_vote_twice);
+    }
 
+    private void voteFor(final int position) {
+
+        String candidate_name = candidatesList.get(position).getName();
+        String username = StudentPreferences.getPreference(mContext, USERNAME);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle("Thanks " + username + "!");
+        builder.setMessage("You have successfully voted for " + candidate_name + ".");
+        builder.setCancelable(false);
+
+        builder.setNeutralButton("Close", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ((Candidates) mContext).finishVote();
+            }
+        });
+
+        builder.show();
     }
 
 

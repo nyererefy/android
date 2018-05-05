@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import com.konektedi.vs.R;
 
@@ -24,7 +23,6 @@ import java.util.List;
 public class News extends Fragment {
 
     RecyclerView recyclerView;
-    ProgressBar progressBar;
     NewsViewModel viewModel;
     NewsAdapter adapter;
 
@@ -37,7 +35,6 @@ public class News extends Fragment {
         viewModel.getAllNews().observe(this, new Observer<List<NewsModel>>() {
             @Override
             public void onChanged(@Nullable List<NewsModel> newsModels) {
-                hideProgressBar();
 
                 adapter = new NewsAdapter(getActivity(), newsModels);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -53,13 +50,8 @@ public class News extends Fragment {
         View rootView = inflater.inflate(R.layout.news_fragment, container, false);
 
         recyclerView = rootView.findViewById(R.id.recyclerView);
-        progressBar = rootView.findViewById(R.id.progressBar);
 
         return rootView;
-    }
-
-    public void hideProgressBar() {
-        progressBar.setVisibility(View.GONE);
     }
 
 }
