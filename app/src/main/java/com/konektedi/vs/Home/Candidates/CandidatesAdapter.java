@@ -102,7 +102,7 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
             });
         }
 
-        if (candidatesList.get(position).getVoting_state().equals("disabled")) {
+        if (candidatesList.get(position).getOpened().equals("0")) {
             holder.voteBtn.setVisibility(View.GONE);
             ((Candidates) mContext).showAlert(R.string.voting_disabled);
         }

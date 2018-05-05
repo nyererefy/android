@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -59,15 +61,12 @@ public class NewsView extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         commentSubmitBtn = findViewById(R.id.commentSubmitBtn);
         commentInput = findViewById(R.id.commentInput);
-
+        commentInput.addTextChangedListener(textWatcher);
 
         setSupportActionBar(toolbar);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         getPost();
-
-
     }
 
     private void getPost() {
@@ -162,5 +161,27 @@ public class NewsView extends AppCompatActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
+
+    private TextWatcher textWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            final String comment = commentInput.getText().toString();
+            if (!comment.isEmpty()) {
+                commentSubmitBtn.setVisibility(View.VISIBLE);
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            final String comment = commentInput.getText().toString();
+            if (comment.isEmpty()) {
+                commentSubmitBtn.setVisibility(View.GONE);
+            }
+        }
+    };
 
 }

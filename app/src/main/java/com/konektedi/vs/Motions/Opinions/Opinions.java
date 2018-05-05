@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ProgressBar;
 
 import com.konektedi.vs.R;
@@ -35,6 +36,7 @@ public class Opinions extends AppCompatActivity {
     }
 
     protected void getOpinions() {
+        showProgressBar();
         Bundle data = getIntent().getExtras();
 
         assert data != null;
@@ -47,6 +49,7 @@ public class Opinions extends AppCompatActivity {
         modelView.getAllOpinions(motion_id).observe(this, new Observer<List<OpinionsModel>>() {
             @Override
             public void onChanged(@Nullable List<OpinionsModel> opinionsModels) {
+                hideProgressBar();
                 adapter = new OpinionsAdapter(getApplicationContext(), opinionsModels);
 
                 recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
@@ -54,6 +57,14 @@ public class Opinions extends AppCompatActivity {
             }
         });
 
+    }
+
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
     }
 
 }

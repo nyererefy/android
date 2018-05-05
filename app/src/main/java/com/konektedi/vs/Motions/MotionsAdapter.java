@@ -56,9 +56,13 @@ public class MotionsAdapter extends RecyclerView.Adapter<MotionsAdapter.ViewHold
         if (motionsList.get(position).getParticipated().equals("yes")) {
             holder.participateBtn.setVisibility(View.GONE);
 
-            holder.yesCount.setText(motionsList.get(position).getYes_counts());
-            holder.noCount.setText(motionsList.get(position).getNo_counts());
-            holder.opinionsCount.setText(motionsList.get(position).getOpinions_counts());
+            String yes = motionsList.get(position).getYes_counts() + " " + "Yes";
+            String no = motionsList.get(position).getNo_counts() + " " + "No";
+            String opinions = motionsList.get(position).getOpinions_counts() + " " + "Opinions";
+
+            holder.yesCount.setText(yes);
+            holder.noCount.setText(no);
+            holder.opinionsCount.setText(opinions);
 
             holder.opinionsCount.setOnClickListener(new View.OnClickListener() {
                 @Override
