@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity
     LinearLayout linearLayoutOfProgressBar;
     Intent intent;
     public static Context contextOfApplication;
+    public static Context contextOfMainActivity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +42,8 @@ public class MainActivity extends AppCompatActivity
         navigation.setOnNavigationItemSelectedListener(this);
 
         contextOfApplication = getApplicationContext();
+        contextOfMainActivity = this;
+
         progressBar = findViewById(R.id.progressBar);
         linearLayoutOfProgressBar = findViewById(R.id.linearLayoutOfProgressBar);
 
@@ -51,6 +55,10 @@ public class MainActivity extends AppCompatActivity
         return contextOfApplication;
         //TO UNDERSTAND WHAT IS DONE HERE
         //https://stackoverflow.com/questions/7491287/android-how-to-use-sharedpreferences-in-non-activity-class
+    }
+
+    public static Context getContextOfMainActivity() {
+        return contextOfMainActivity;
     }
 
     private boolean showFragment(Fragment fragment) {

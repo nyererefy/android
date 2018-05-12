@@ -93,6 +93,8 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
 
         if (candidatesList.get(position).getParticipated().equals("yes")) {
             holder.voteBtn.setVisibility(View.GONE);
+            ((Candidates) mContext).showAlert(R.string.voted);
+
         } else {
             holder.voteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override

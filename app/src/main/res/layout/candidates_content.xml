@@ -35,6 +35,7 @@
             android:id="@+id/alertTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="@string/test_title"
             android:textSize="18sp"
             android:layout_margin="8dp" />

@@ -6,7 +6,7 @@ package com.konektedi.vs.Home.Elections;
 
 public class ElectionsModel {
 
-    private String election_id, election_title, voting;
+    private String election_id, election_title, opened;
 
     public String getElection_id() {
         return election_id;
@@ -24,11 +24,11 @@ public class ElectionsModel {
         this.election_title = election_title;
     }
 
-    public String getVoting() {
-        return voting;
+    public String getOpened() {
+        return opened;
     }
 
-    public void setVoting(String voting) {
-        this.voting = voting;
+    public void setOpened(String opened) {
+        this.opened = opened;
     }
 }

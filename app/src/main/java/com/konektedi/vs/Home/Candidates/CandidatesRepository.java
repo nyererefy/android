@@ -2,8 +2,8 @@ package com.konektedi.vs.Home.Candidates;
 
 
 import android.arch.lifecycle.MutableLiveData;
-import android.util.Log;
 
+import com.konektedi.vs.R;
 import com.konektedi.vs.Utilities.ApiUtilities;
 
 import java.util.List;
@@ -12,9 +12,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.konektedi.vs.Home.Candidates.Candidates.getContextOfCandidates;
+
 public class CandidatesRepository {
 
     public MutableLiveData<List<CandidatesModel>> getCandidates(String election_id, String category_id) {
+
+        ((Candidates) getContextOfCandidates()).showProgressBar();
 
         final MutableLiveData<List<CandidatesModel>> listMutableLiveData = new MutableLiveData<>();
 
@@ -23,28 +27,25 @@ public class CandidatesRepository {
         call.enqueue(new Callback<List<CandidatesModel>>() {
             @Override
             public void onResponse(Call<List<CandidatesModel>> call, Response<List<CandidatesModel>> response) {
+                ((Candidates) getContextOfCandidates()).hideProgressBar();
 
                 if (response.isSuccessful()) {
-
                     List<CandidatesModel> categoriesModelList = response.body();
-
-                    Log.d("cand res", response.toString());
                     listMutableLiveData.setValue(categoriesModelList);
 
+                } else if (response.code() == 404) {
+                    ((Candidates) getContextOfCandidates()).showAlert(R.string.no_candidates);
                 }
-
             }
 
             @Override
             public void onFailure(Call<List<CandidatesModel>> call, Throwable t) {
-                Log.d("cand err", t.toString());
-
+                ((Candidates) getContextOfCandidates()).hideProgressBar();
+                ((Candidates) getContextOfCandidates()).showAlert(R.string.error);
             }
-
         });
 
         return listMutableLiveData;
-
     }
 }
 

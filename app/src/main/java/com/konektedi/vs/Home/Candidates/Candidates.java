@@ -2,6 +2,7 @@ package com.konektedi.vs.Home.Candidates;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +27,7 @@ public class Candidates extends AppCompatActivity {
     CardView cardView;
     TextView alertTextView;
 
+    private static Context contextOfCandidates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,8 @@ public class Candidates extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
         cardView = findViewById(R.id.cardView);
         alertTextView = findViewById(R.id.alertTextView);
+
+        contextOfCandidates = Candidates.this;
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -58,16 +62,11 @@ public class Candidates extends AppCompatActivity {
                     public void onChanged(@Nullable List<CandidatesModel> candidatesModels) {
                         if (candidatesModels != null && !candidatesModels.isEmpty()) {
 
-                            hideProgressBar();
-
                             int numberOfColumns = 2;
                             recyclerView.setLayoutManager(new GridLayoutManager(getApplication(), numberOfColumns));
                             adapter = new CandidatesAdapter(Candidates.this, candidatesModels);
                             recyclerView.setAdapter(adapter);
 
-                        } else {
-                            hideProgressBar();
-                            showAlert(R.string.no_candidates);
                         }
 
                     }
@@ -100,5 +99,10 @@ public class Candidates extends AppCompatActivity {
         }
         return true;
     }
+
+    public static Context getContextOfCandidates() {
+        return contextOfCandidates;
+    }
+
 
 }

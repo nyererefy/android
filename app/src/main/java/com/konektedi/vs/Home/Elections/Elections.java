@@ -23,19 +23,14 @@ public class Elections extends Fragment {
     ElectionsViewModel electionsViewModel;
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        electionsViewModel = ViewModelProviders.of(getActivity()).get(ElectionsViewModel.class);
-
-        electionsViewModel.getAllElections().observe(this, new Observer<List<ElectionsModel>>() {
-            @Override
-            public void onChanged(@Nullable List<ElectionsModel> electionsModels) {
-                electionsAdapter = new ElectionsAdapter(getActivity(), electionsModels);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-                recyclerView.setAdapter(electionsAdapter);
-            }
-        });
+        getElections();
     }
 
     @Override
@@ -46,6 +41,21 @@ public class Elections extends Fragment {
         recyclerView = rootView.findViewById(R.id.recyclerView);
 
         return rootView;
+    }
+
+    private void getElections() {
+
+        electionsViewModel = ViewModelProviders.of(getActivity()).get(ElectionsViewModel.class);
+
+        electionsViewModel.getAllElections().observe(this, new Observer<List<ElectionsModel>>() {
+            @Override
+            public void onChanged(@Nullable List<ElectionsModel> electionsModels) {
+
+                electionsAdapter = new ElectionsAdapter(getActivity(), electionsModels);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+                recyclerView.setAdapter(electionsAdapter);
+            }
+        });
     }
 
 }
