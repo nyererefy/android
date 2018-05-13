@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         contextOfApplication = getApplicationContext();
         contextOfMainActivity = this;
 
-//        progressBar = findViewById(R.id.progressBar);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
