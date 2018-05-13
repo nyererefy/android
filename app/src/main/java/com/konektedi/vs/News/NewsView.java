@@ -100,8 +100,8 @@ public class NewsView extends AppCompatActivity {
         viewModel.getAllComments(post_id).observe(this, new Observer<List<CommentsModel>>() {
             @Override
             public void onChanged(@Nullable List<CommentsModel> commentsModels) {
-                adapter = new CommentsAdapter(getApplicationContext(), commentsModels);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                adapter = new CommentsAdapter(NewsView.this, commentsModels);
+                recyclerView.setLayoutManager(new LinearLayoutManager(NewsView.this));
                 recyclerView.setAdapter(adapter);
                 hideProgressBar();
             }

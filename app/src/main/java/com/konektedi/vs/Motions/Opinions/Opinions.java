@@ -50,9 +50,9 @@ public class Opinions extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable List<OpinionsModel> opinionsModels) {
                 hideProgressBar();
-                adapter = new OpinionsAdapter(getApplicationContext(), opinionsModels);
+                adapter = new OpinionsAdapter(Opinions.this, opinionsModels);
 
-                recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                recyclerView.setLayoutManager(new LinearLayoutManager(Opinions.this));
                 recyclerView.setAdapter(adapter);
             }
         });

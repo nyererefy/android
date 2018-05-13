@@ -22,14 +22,14 @@ import java.util.List;
 
 public class News extends Fragment {
 
+    public News() {
+    }
+
     RecyclerView recyclerView;
     NewsViewModel viewModel;
     NewsAdapter adapter;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    private void getNews() {
         viewModel = ViewModelProviders.of(getActivity()).get(NewsViewModel.class);
 
         viewModel.getAllNews().observe(this, new Observer<List<NewsModel>>() {
@@ -48,10 +48,13 @@ public class News extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.news_fragment, container, false);
-
         recyclerView = rootView.findViewById(R.id.recyclerView);
-
         return rootView;
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getNews();
+    }
 }

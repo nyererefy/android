@@ -3,16 +3,18 @@ package com.konektedi.vs;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.konektedi.vs.Home.Elections.Elections;
@@ -23,11 +25,12 @@ import com.konektedi.vs.Student.Settings;
 import com.konektedi.vs.Student.StudentPreferences;
 import com.konektedi.vs.Student.StudentProfile;
 
-public class MainActivity extends AppCompatActivity
-        implements BottomNavigationView.OnNavigationItemSelectedListener {
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainActivity extends AppCompatActivity {
 
     ProgressBar progressBar;
-    LinearLayout linearLayoutOfProgressBar;
     Intent intent;
     public static Context contextOfApplication;
     public static Context contextOfMainActivity;
@@ -38,17 +41,25 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(this);
-
         contextOfApplication = getApplicationContext();
         contextOfMainActivity = this;
 
-        progressBar = findViewById(R.id.progressBar);
-        linearLayoutOfProgressBar = findViewById(R.id.linearLayoutOfProgressBar);
+//        progressBar = findViewById(R.id.progressBar);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        TabLayout tabLayout = findViewById(R.id.tabs);
+        ViewPager viewPager = findViewById(R.id.container);
+        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
+
+        adapter.AddFragment(new Elections(), "Elections");
+        adapter.AddFragment(new Motions(), "Motions");
+        adapter.AddFragment(new News(), "News");
 
 
-        showFragment(new Elections());
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     public static Context getContextOfApplication() {
@@ -61,39 +72,9 @@ public class MainActivity extends AppCompatActivity
         return contextOfMainActivity;
     }
 
-    private boolean showFragment(Fragment fragment) {
-        if (fragment != null) {
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.messenger_container, fragment)
-                    .commit();
-            return true;
-        }
-        return false;
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
-        Fragment fragment = null;
-
-        switch (item.getItemId()) {
-            case R.id.title_elections:
-                fragment = new Elections();
-                break;
-            case R.id.title_motions:
-                fragment = new Motions();
-                break;
-            case R.id.title_news:
-                fragment = new News();
-                break;
-        }
-        return showFragment(fragment);
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.top_menu, menu);
         return true;
     }
@@ -155,11 +136,38 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void showProgressBar() {
-        linearLayoutOfProgressBar.setVisibility(View.VISIBLE);
     }
 
     public void hideProgressBar() {
-        linearLayoutOfProgressBar.setVisibility(View.GONE);
     }
 
+    private class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        private final List<Fragment> fragmentList = new ArrayList<>();
+        private final List<String> fragmentTitles = new ArrayList<>();
+
+        SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return fragmentTitles.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return fragmentTitles.get(position);
+        }
+
+        void AddFragment(Fragment fragment, String title) {
+            fragmentList.add(fragment);
+            fragmentTitles.add(title);
+        }
+    }
 }

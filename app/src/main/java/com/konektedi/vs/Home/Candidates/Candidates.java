@@ -63,7 +63,7 @@ public class Candidates extends AppCompatActivity {
                         if (candidatesModels != null && !candidatesModels.isEmpty()) {
 
                             int numberOfColumns = 2;
-                            recyclerView.setLayoutManager(new GridLayoutManager(getApplication(), numberOfColumns));
+                            recyclerView.setLayoutManager(new GridLayoutManager(Candidates.this, numberOfColumns));
                             adapter = new CandidatesAdapter(Candidates.this, candidatesModels);
                             recyclerView.setAdapter(adapter);
 

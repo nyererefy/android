@@ -82,8 +82,7 @@ public class ElectionView extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable List<CategoriesModel> categoriesModels) {
                 hideProgressBar();
-                categoriesGridView.setAdapter(new CategoriesAdapter(getApplication(), categoriesModels));
-
+                categoriesGridView.setAdapter(new CategoriesAdapter(ElectionView.this, categoriesModels));
             }
         });
 

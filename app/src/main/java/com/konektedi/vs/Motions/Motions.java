@@ -20,14 +20,19 @@ import java.util.List;
  */
 
 public class Motions extends Fragment {
+
     MotionsAdapter motionsAdapter;
     RecyclerView recyclerView;
     MotionsViewModel motionsViewModel;
 
+    public Motions() {
+    }
+
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         getMotions();
+
     }
 
     @Override

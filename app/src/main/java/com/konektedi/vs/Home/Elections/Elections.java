@@ -22,15 +22,14 @@ public class Elections extends Fragment {
     ElectionsAdapter electionsAdapter;
     ElectionsViewModel electionsViewModel;
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    public Elections() {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         getElections();
+
     }
 
     @Override
