@@ -20,7 +20,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.konektedi.vs.R;
 import com.konektedi.vs.Student.StudentPreferences;
-import com.konektedi.vs.Utilities.ApiUtilities;
+import com.konektedi.vs.Utilities.Api.ApiUtilities;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;

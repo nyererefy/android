@@ -1,4 +1,4 @@
-package com.konektedi.vs.Utilities;
+package com.konektedi.vs.Utilities.Api;
 
 /**
  * Created by Sy on b/9/2018.

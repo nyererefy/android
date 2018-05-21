@@ -1,24 +1,47 @@
 package com.konektedi.vs.Motions.Opinions;
 
-import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
-import android.support.annotation.NonNull;
+import android.arch.lifecycle.Transformations;
+import android.arch.lifecycle.ViewModel;
+import android.arch.paging.LivePagedListBuilder;
+import android.arch.paging.PagedList;
 
-import java.util.List;
+import com.konektedi.vs.Utilities.NetworkState;
 
-public class OpinionsViewModel extends AndroidViewModel {
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
-    private LiveData<List<OpinionsModel>> opinions;
-    private OpinionsRepository opinionsRepository = new OpinionsRepository();
+public class OpinionsViewModel extends ViewModel {
 
-    public OpinionsViewModel(@NonNull Application application) {
-        super(application);
+    public LiveData<PagedList<Opinions>> postList;
+    public LiveData<NetworkState> networkState;
+    Executor executor;
+    LiveData<OpinionsDataSource> tDataSource;
+
+    public OpinionsViewModel() {
     }
 
-    LiveData<List<OpinionsModel>> getAllOpinions(String motion_id) {
-        opinions = opinionsRepository.getOpinions(motion_id);
-        return opinions;
+    public LiveData<PagedList<Opinions>> getPostList(int motion_id) {
+
+        executor = Executors.newFixedThreadPool(5);
+        OpinionsDataFactory dataFactory = new OpinionsDataFactory(executor, motion_id);
+
+        tDataSource = dataFactory.getMutableLiveData();
+
+        networkState = Transformations.switchMap(dataFactory.getMutableLiveData(), dataSource
+                -> dataSource.getNetworkState());
+
+        PagedList.Config pagedListConfig =
+                (new PagedList.Config.Builder())
+                        .setEnablePlaceholders(false)
+                        .setInitialLoadSizeHint(10)
+                        .setPageSize(20).build();
+
+        postList = (new LivePagedListBuilder(dataFactory, pagedListConfig))
+                .setFetchExecutor(executor)
+                .build();
+
+        return postList;
     }
 
 }

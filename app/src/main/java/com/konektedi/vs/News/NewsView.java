@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +23,7 @@ import com.konektedi.vs.News.Comments.CommentsAdapter;
 import com.konektedi.vs.News.Comments.CommentsViewModel;
 import com.konektedi.vs.R;
 import com.konektedi.vs.Student.StudentPreferences;
-import com.konektedi.vs.Utilities.ApiUtilities;
+import com.konektedi.vs.Utilities.Api.ApiUtilities;
 import com.konektedi.vs.Utilities.ListItemClickListener;
 
 import java.util.HashMap;
@@ -44,6 +45,7 @@ public class NewsView extends AppCompatActivity implements ListItemClickListener
     CommentsViewModel viewModel;
     EditText commentInput;
     ImageButton commentSubmitBtn;
+    ProgressBar progressBar;
 
 
     @Override
@@ -54,6 +56,7 @@ public class NewsView extends AppCompatActivity implements ListItemClickListener
 
         titleView = findViewById(R.id.title);
         postView = findViewById(R.id.post);
+        progressBar = findViewById(R.id.progressBar);
         recyclerView = findViewById(R.id.recyclerView);
         commentSubmitBtn = findViewById(R.id.commentSubmitBtn);
         commentInput = findViewById(R.id.commentInput);
@@ -85,6 +88,7 @@ public class NewsView extends AppCompatActivity implements ListItemClickListener
     }
 
     private void getComments(int post_id) {
+        showProgressBar();
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -96,6 +100,7 @@ public class NewsView extends AppCompatActivity implements ListItemClickListener
 
         viewModel.networkState.observe(this, networkState -> {
             adapter.setNetworkState(networkState);
+            hideProgressBar();
             Log.d(TAG, "Network State Change");
         });
         recyclerView.addItemDecoration(new DividerItemDecoration((this),
@@ -104,7 +109,7 @@ public class NewsView extends AppCompatActivity implements ListItemClickListener
     }
 
     private void addComment(final int post_id) {
-
+        showProgressBar();
         final String comment = commentInput.getText().toString();
 
         Map<String, String> map = new HashMap<>();
@@ -121,6 +126,8 @@ public class NewsView extends AppCompatActivity implements ListItemClickListener
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                hideProgressBar();
+
                 if (response.isSuccessful()) {
                     hideKeyboard();
                     Toast.makeText(NewsView.this, "success", Toast.LENGTH_SHORT).show();
@@ -131,10 +138,12 @@ public class NewsView extends AppCompatActivity implements ListItemClickListener
                     commentInput.setText(comment);
                     Toast.makeText(NewsView.this, R.string.error_occurred, Toast.LENGTH_SHORT).show();
                 }
+
             }
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
+                hideProgressBar();
                 Toast.makeText(NewsView.this, R.string.error_occurred, Toast.LENGTH_SHORT).show();
             }
         });
@@ -174,6 +183,14 @@ public class NewsView extends AppCompatActivity implements ListItemClickListener
     @Override
     public void onRetryClick(View view, int position) {
         Log.d(TAG, "Position " + position);
+    }
+
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
     }
 
 }

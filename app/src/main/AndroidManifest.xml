@@ -70,7 +70,7 @@
                 android:value="com.konektedi.vs.MainActivity" />
         </activity>
         <activity
-            android:name=".Motions.Opinions.Opinions"
+            android:name=".Motions.Opinions.OpinionsActivity"
             android:label="@string/title_activity_opinions"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

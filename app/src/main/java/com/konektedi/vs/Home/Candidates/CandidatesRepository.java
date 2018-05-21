@@ -4,7 +4,7 @@ package com.konektedi.vs.Home.Candidates;
 import android.arch.lifecycle.MutableLiveData;
 
 import com.konektedi.vs.R;
-import com.konektedi.vs.Utilities.ApiUtilities;
+import com.konektedi.vs.Utilities.Api.ApiUtilities;
 
 import java.util.List;
 

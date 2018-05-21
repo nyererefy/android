@@ -2,7 +2,7 @@ package com.konektedi.vs.Home.Categories;
 
 import android.arch.lifecycle.MutableLiveData;
 
-import com.konektedi.vs.Utilities.ApiUtilities;
+import com.konektedi.vs.Utilities.Api.ApiUtilities;
 
 import java.util.List;
 

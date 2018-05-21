@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.konektedi.vs.Motions.Opinions.Opinions;
+import com.konektedi.vs.Motions.Opinions.OpinionsActivity;
 import com.konektedi.vs.R;
 
 import java.util.List;
@@ -42,15 +42,12 @@ public class MotionsAdapter extends RecyclerView.Adapter<MotionsAdapter.ViewHold
     public void onBindViewHolder(MotionsAdapter.ViewHolder holder, final int position) {
         holder.title.setText(motionsList.get(position).getTitle().toUpperCase());
 
-        holder.title.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, MotionsView.class);
-                intent.putExtra("motion_id", motionsList.get(position).getMotion_id());
-                intent.putExtra("motion", motionsList.get(position).getMotion());
-                intent.putExtra("title", motionsList.get(position).getTitle());
-                mContext.startActivity(intent);
-            }
+        holder.title.setOnClickListener(view -> {
+            Intent intent = new Intent(mContext, MotionsView.class);
+            intent.putExtra("motion_id", motionsList.get(position).getMotion_id());
+            intent.putExtra("motion", motionsList.get(position).getMotion());
+            intent.putExtra("title", motionsList.get(position).getTitle());
+            mContext.startActivity(intent);
         });
 
         if (motionsList.get(position).getParticipated().equals("yes")) {
@@ -64,14 +61,11 @@ public class MotionsAdapter extends RecyclerView.Adapter<MotionsAdapter.ViewHold
             holder.noCount.setText(no);
             holder.opinionsCount.setText(opinions);
 
-            holder.opinionsCount.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(mContext, Opinions.class);
-                    intent.putExtra("motion_id", motionsList.get(position).getMotion_id());
-                    intent.putExtra("title", motionsList.get(position).getTitle());
-                    mContext.startActivity(intent);
-                }
+            holder.opinionsCount.setOnClickListener(view -> {
+                Intent intent = new Intent(mContext, OpinionsActivity.class);
+                intent.putExtra("motion_id", motionsList.get(position).getMotion_id());
+                intent.putExtra("title", motionsList.get(position).getTitle());
+                mContext.startActivity(intent);
             });
 
         } else {
@@ -80,16 +74,13 @@ public class MotionsAdapter extends RecyclerView.Adapter<MotionsAdapter.ViewHold
             holder.noCount.setVisibility(View.GONE);
             holder.yesCount.setVisibility(View.GONE);
 
-            holder.participateBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(mContext, Participate.class);
-                    intent.putExtra("motion_id", motionsList.get(position).getMotion_id());
-                    intent.putExtra("motion", motionsList.get(position).getMotion());
-                    intent.putExtra("title", motionsList.get(position).getTitle());
+            holder.participateBtn.setOnClickListener(view -> {
+                Intent intent = new Intent(mContext, Participate.class);
+                intent.putExtra("motion_id", motionsList.get(position).getMotion_id());
+                intent.putExtra("motion", motionsList.get(position).getMotion());
+                intent.putExtra("title", motionsList.get(position).getTitle());
 
-                    mContext.startActivity(intent);
-                }
+                mContext.startActivity(intent);
             });
         }
     }

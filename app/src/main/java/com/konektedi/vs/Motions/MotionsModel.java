@@ -5,7 +5,8 @@ package com.konektedi.vs.Motions;
  */
 
 public class MotionsModel {
-    private String title, time, name, participated, motion_id, motion,no_counts,yes_counts,opinions_counts;
+    private String title, time, name, participated, motion,no_counts,yes_counts,opinions_counts;
+    int motion_id;
 
     public String getTitle() {
         return title;
@@ -39,11 +40,11 @@ public class MotionsModel {
         this.participated = participated;
     }
 
-    public String getMotion_id() {
+    public int getMotion_id() {
         return motion_id;
     }
 
-    public void setMotion_id(String motion_id) {
+    public void setMotion_id(int motion_id) {
         this.motion_id = motion_id;
     }
 

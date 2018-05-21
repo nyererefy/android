@@ -1,70 +1,68 @@
 package com.konektedi.vs.Motions.Opinions;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.ProgressBar;
+import android.support.annotation.NonNull;
+import android.support.v7.util.DiffUtil;
 
-import com.konektedi.vs.R;
+public class Opinions {
 
-import java.util.List;
+    private String  opinion, vote, time, name;
+    int opinion_id;
 
-public class Opinions extends AppCompatActivity {
-
-    OpinionsViewModel modelView;
-    OpinionsAdapter adapter;
-    RecyclerView recyclerView;
-    ProgressBar progressBar;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.opinions_activity);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        recyclerView = findViewById(R.id.recyclerView);
-        progressBar = findViewById(R.id.progressBar);
-
-        getOpinions();
+    public int getOpinion_id() {
+        return opinion_id;
     }
 
-    protected void getOpinions() {
-        showProgressBar();
-        Bundle data = getIntent().getExtras();
-
-        assert data != null;
-        String motion_id = data.getString("motion_id");
-        String title = data.getString("title");
-
-        setTitle("Opinions: " + title);
-
-        modelView = ViewModelProviders.of(this).get(OpinionsViewModel.class);
-        modelView.getAllOpinions(motion_id).observe(this, new Observer<List<OpinionsModel>>() {
-            @Override
-            public void onChanged(@Nullable List<OpinionsModel> opinionsModels) {
-                hideProgressBar();
-                adapter = new OpinionsAdapter(Opinions.this, opinionsModels);
-
-                recyclerView.setLayoutManager(new LinearLayoutManager(Opinions.this));
-                recyclerView.setAdapter(adapter);
-            }
-        });
-
+    public void setOpinion_id(int opinion_id) {
+        this.opinion_id = opinion_id;
     }
 
-    public void showProgressBar() {
-        progressBar.setVisibility(View.VISIBLE);
+    public String getOpinion() {
+        return opinion;
     }
 
-    public void hideProgressBar() {
-        progressBar.setVisibility(View.GONE);
+    public void setOpinion(String opinion) {
+        this.opinion = opinion;
     }
 
+    public String getVote() {
+        return vote;
+    }
+
+    public void setVote(String vote) {
+        this.vote = vote;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public static final DiffUtil.ItemCallback<Opinions> DIFF_CALLBACK =
+            new DiffUtil.ItemCallback<Opinions>() {
+                @Override
+                public boolean areItemsTheSame(
+                        @NonNull Opinions opinion, @NonNull Opinions newFeed) {
+                    // Opinions properties may have changed if reloaded from the DB, but ID is fixed
+                    return opinion.getOpinion_id() == newFeed.getOpinion_id();
+                }
+
+                @Override
+                public boolean areContentsTheSame(
+                        @NonNull Opinions opinion, @NonNull Opinions newFeed) {
+                    // NOTE: if you use equals, your object must properly override Object#equals()
+                    // Incorrectly returning false here will result in too many animations.
+                    return opinion.equals(newFeed);
+                }
+            };
 }

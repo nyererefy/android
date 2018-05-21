@@ -1,11 +1,11 @@
-package com.konektedi.vs.Utilities;
+package com.konektedi.vs.Utilities.Api;
 
 
 import com.konektedi.vs.Home.Candidates.CandidatesModel;
 import com.konektedi.vs.Home.Categories.CategoriesModel;
 import com.konektedi.vs.Home.Elections.ElectionsModel;
 import com.konektedi.vs.Motions.MotionsModel;
-import com.konektedi.vs.Motions.Opinions.OpinionsModel;
+import com.konektedi.vs.Motions.Opinions.Opinions;
 import com.konektedi.vs.News.Comments.Comments;
 import com.konektedi.vs.News.NewsModel;
 import com.konektedi.vs.Student.StudentModel;
@@ -50,9 +50,9 @@ public interface Api {
     @GET("motions/motions")
     Call<List<MotionsModel>> getMotions();
 
-    @GET("motions/opinions/{motion_id}")
-    Call<List<OpinionsModel>> getOpinions(
-            @Path("motion_id") String motion_id);
+    @GET("motions/opinions/{motion_id}/{offset}")
+    Call<List<Opinions>> getOpinions(
+            @Path("motion_id") int motion_id, @Path("offset") int offset);
 
     @FormUrlEncoded
     @POST("motions/opinion")

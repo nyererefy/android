@@ -15,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ProgressBar;
 
 import com.konektedi.vs.Home.Elections.Elections;
 import com.konektedi.vs.Motions.Motions;
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
         adapter.AddFragment(new Elections(), "Elections");
         adapter.AddFragment(new Motions(), "Motions");
-        adapter.AddFragment(new NewsFragment(), "NewsFragment");
+        adapter.AddFragment(new NewsFragment(), "News");
 
 
         viewPager.setAdapter(adapter);
