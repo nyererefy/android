@@ -20,9 +20,9 @@ import java.util.List;
  * Created by Sy on 3/28/2018.
  */
 
-public class News extends Fragment {
+public class NewsFragment extends Fragment {
 
-    public News() {
+    public NewsFragment() {
     }
 
     RecyclerView recyclerView;

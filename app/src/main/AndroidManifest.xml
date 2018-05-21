@@ -59,9 +59,7 @@
         <activity
             android:name=".Home.Candidates.Profile"
             android:label="@string/title_activity_candidate_profile"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".Motions.Participate"
             android:label="@string/title_activity_participate"

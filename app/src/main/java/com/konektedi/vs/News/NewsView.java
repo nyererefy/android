@@ -1,33 +1,31 @@
 package com.konektedi.vs.News;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.konektedi.vs.News.Comments.CommentsAdapter;
-import com.konektedi.vs.News.Comments.CommentsModel;
 import com.konektedi.vs.News.Comments.CommentsViewModel;
 import com.konektedi.vs.R;
 import com.konektedi.vs.Student.StudentPreferences;
 import com.konektedi.vs.Utilities.ApiUtilities;
+import com.konektedi.vs.Utilities.ListItemClickListener;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import okhttp3.ResponseBody;
@@ -38,13 +36,12 @@ import retrofit2.Response;
 import static com.konektedi.vs.Utilities.Constants.ID;
 import static com.konektedi.vs.Utilities.Constants.UNIVERSITY;
 
-public class NewsView extends AppCompatActivity {
+public class NewsView extends AppCompatActivity implements ListItemClickListener {
+    private String TAG = "NewsView";
 
     TextView titleView, postView;
     RecyclerView recyclerView;
     CommentsViewModel viewModel;
-    CommentsAdapter adapter;
-    ProgressBar progressBar;
     EditText commentInput;
     ImageButton commentSubmitBtn;
 
@@ -58,7 +55,6 @@ public class NewsView extends AppCompatActivity {
         titleView = findViewById(R.id.title);
         postView = findViewById(R.id.post);
         recyclerView = findViewById(R.id.recyclerView);
-        progressBar = findViewById(R.id.progressBar);
         commentSubmitBtn = findViewById(R.id.commentSubmitBtn);
         commentInput = findViewById(R.id.commentInput);
         commentInput.addTextChangedListener(textWatcher);
@@ -75,7 +71,7 @@ public class NewsView extends AppCompatActivity {
         assert data != null;
         String post = data.getString("post");
         String title = data.getString("title");
-        final String post_id = data.getString("post_id");
+        final int post_id = data.getInt("post_id");
 
 
         setTitle(R.string.news);
@@ -84,31 +80,30 @@ public class NewsView extends AppCompatActivity {
 
         getComments(post_id);
 
-        commentSubmitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addComment(post_id);
-            }
-        });
+        commentSubmitBtn.setOnClickListener(view -> addComment(post_id));
 
     }
 
-    private void getComments(String post_id) {
-        showProgressBar();
+    private void getComments(int post_id) {
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         viewModel = ViewModelProviders.of(this).get(CommentsViewModel.class);
-        viewModel.getAllComments(post_id).observe(this, new Observer<List<CommentsModel>>() {
-            @Override
-            public void onChanged(@Nullable List<CommentsModel> commentsModels) {
-                adapter = new CommentsAdapter(NewsView.this, commentsModels);
-                recyclerView.setLayoutManager(new LinearLayoutManager(NewsView.this));
-                recyclerView.setAdapter(adapter);
-                hideProgressBar();
-            }
+
+        final CommentsAdapter adapter = new CommentsAdapter(this);
+
+        viewModel.getPostList(post_id).observe(this, adapter::submitList);
+
+        viewModel.networkState.observe(this, networkState -> {
+            adapter.setNetworkState(networkState);
+            Log.d(TAG, "Network State Change");
         });
+        recyclerView.addItemDecoration(new DividerItemDecoration((this),
+                DividerItemDecoration.VERTICAL));
+        recyclerView.setAdapter(adapter);
     }
 
-    private void addComment(final String post_id) {
+    private void addComment(final int post_id) {
 
         final String comment = commentInput.getText().toString();
 
@@ -116,12 +111,11 @@ public class NewsView extends AppCompatActivity {
 
         map.put("id", StudentPreferences.getPreference(this, ID));
         map.put("comment", comment);
-        map.put("post_id", post_id);
+        map.put("post_id", String.valueOf(post_id));
         map.put("university_id", StudentPreferences.getPreference(this, UNIVERSITY));
 
         hideKeyboard();
         commentInput.setText("");
-        showProgressBar();
 
         Call<ResponseBody> call = ApiUtilities.getClient().postComment(map);
         call.enqueue(new Callback<ResponseBody>() {
@@ -146,13 +140,6 @@ public class NewsView extends AppCompatActivity {
         });
     }
 
-    public void hideProgressBar() {
-        progressBar.setVisibility(View.GONE);
-    }
-
-    public void showProgressBar() {
-        progressBar.setVisibility(View.VISIBLE);
-    }
 
     public void hideKeyboard() {
         View view = this.getCurrentFocus();
@@ -183,5 +170,10 @@ public class NewsView extends AppCompatActivity {
             }
         }
     };
+
+    @Override
+    public void onRetryClick(View view, int position) {
+        Log.d(TAG, "Position " + position);
+    }
 
 }

@@ -6,7 +6,7 @@ import com.konektedi.vs.Home.Categories.CategoriesModel;
 import com.konektedi.vs.Home.Elections.ElectionsModel;
 import com.konektedi.vs.Motions.MotionsModel;
 import com.konektedi.vs.Motions.Opinions.OpinionsModel;
-import com.konektedi.vs.News.Comments.CommentsModel;
+import com.konektedi.vs.News.Comments.Comments;
 import com.konektedi.vs.News.NewsModel;
 import com.konektedi.vs.Student.StudentModel;
 
@@ -58,9 +58,8 @@ public interface Api {
     @POST("motions/opinion")
     Call<ResponseBody> postOpinion(@FieldMap Map<String, String> map);
 
-    @GET("news/comments/{post_id}")
-    Call<List<CommentsModel>> getComments(
-            @Path("post_id") String post_id);
+    @GET("news/comments/{post_id}/{offset}")
+    Call<List<Comments>> getComments(@Path("post_id") int post_id, @Path("offset") int offset);
 
     @FormUrlEncoded
     @POST("news/comment")

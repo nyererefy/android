@@ -19,7 +19,7 @@ import android.widget.ProgressBar;
 
 import com.konektedi.vs.Home.Elections.Elections;
 import com.konektedi.vs.Motions.Motions;
-import com.konektedi.vs.News.News;
+import com.konektedi.vs.News.NewsFragment;
 import com.konektedi.vs.Student.Login;
 import com.konektedi.vs.Student.Settings;
 import com.konektedi.vs.Student.StudentPreferences;
@@ -30,11 +30,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    ProgressBar progressBar;
     Intent intent;
     public static Context contextOfApplication;
-    public static Context contextOfMainActivity;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         contextOfApplication = getApplicationContext();
-        contextOfMainActivity = this;
-
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -54,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
 
         adapter.AddFragment(new Elections(), "Elections");
         adapter.AddFragment(new Motions(), "Motions");
-        adapter.AddFragment(new News(), "News");
+        adapter.AddFragment(new NewsFragment(), "NewsFragment");
 
 
         viewPager.setAdapter(adapter);
@@ -66,11 +61,6 @@ public class MainActivity extends AppCompatActivity {
         //TO UNDERSTAND WHAT IS DONE HERE
         //https://stackoverflow.com/questions/7491287/android-how-to-use-sharedpreferences-in-non-activity-class
     }
-
-    public static Context getContextOfMainActivity() {
-        return contextOfMainActivity;
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -104,11 +94,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onBackPressed() {
-        finishAffinity();
-        System.exit(0);
-    }
 
     private void showAbout() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -132,12 +117,6 @@ public class MainActivity extends AppCompatActivity {
 
         final AlertDialog dialog = builder.create();
         dialog.show();
-    }
-
-    public void showProgressBar() {
-    }
-
-    public void hideProgressBar() {
     }
 
     private class SectionsPagerAdapter extends FragmentPagerAdapter {
@@ -168,5 +147,11 @@ public class MainActivity extends AppCompatActivity {
             fragmentList.add(fragment);
             fragmentTitles.add(title);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        finishAffinity();
+        System.exit(0);
     }
 }

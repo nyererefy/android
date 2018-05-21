@@ -2,6 +2,7 @@ package com.konektedi.vs.Home.Elections;
 
 import android.arch.lifecycle.MutableLiveData;
 
+import com.konektedi.vs.MainActivity;
 import com.konektedi.vs.Utilities.ApiUtilities;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class ElectionsRepository {
+public class ElectionsRepository implements MainActivity.MainActivityInterface {
 
     public MutableLiveData<List<ElectionsModel>> getElections() {
 
