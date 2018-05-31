@@ -24,7 +24,4 @@ public class NetworkState {
     public String getMsg() {
         return msg;
     }
-
-
-
 }

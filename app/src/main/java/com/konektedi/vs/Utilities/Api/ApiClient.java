@@ -5,13 +5,10 @@ import android.content.Context;
 import com.konektedi.vs.MainActivity;
 import com.konektedi.vs.Student.StudentPreferences;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -21,6 +18,8 @@ import static com.konektedi.vs.Utilities.Constants.RESIDENCE;
 import static com.konektedi.vs.Utilities.Constants.SCHOOL;
 import static com.konektedi.vs.Utilities.Constants.SEX;
 import static com.konektedi.vs.Utilities.Constants.UNIVERSITY;
+import static com.konektedi.vs.Utilities.Constants.X_API_KEY;
+import static com.konektedi.vs.Utilities.Constants.X_API_KEY_VALUE;
 import static com.konektedi.vs.Utilities.Constants.YEAR;
 
 /**
@@ -40,25 +39,23 @@ public class ApiClient {
         okHttpClient.writeTimeout(60, TimeUnit.SECONDS);
         okHttpClient.retryOnConnectionFailure(true);
 
-        okHttpClient.addInterceptor(new Interceptor() {
-            @Override
-            public Response intercept(Chain chain) throws IOException {
-                Request request = chain.request();
-                Context applicationContext = MainActivity.getContextOfApplication();
+        okHttpClient.addInterceptor(chain -> {
+            Request request = chain.request();
+            Context applicationContext = MainActivity.getContextOfApplication();
 
 
-                Request.Builder session = request.newBuilder()
-                        //No underscores.....
-                        .addHeader(ID, StudentPreferences.getPreference(applicationContext, ID))
-                        .addHeader(UNIVERSITY, StudentPreferences.getPreference(applicationContext, UNIVERSITY))
-                        .addHeader(BRANCH, StudentPreferences.getPreference(applicationContext, BRANCH))
-                        .addHeader(SCHOOL, StudentPreferences.getPreference(applicationContext, SCHOOL))
-                        .addHeader(YEAR, StudentPreferences.getPreference(applicationContext, YEAR))
-                        .addHeader(RESIDENCE, StudentPreferences.getPreference(applicationContext, RESIDENCE))
-                        .addHeader(SEX, StudentPreferences.getPreference(applicationContext, SEX));
+            Request.Builder session = request.newBuilder()
+                    //No underscores.....
+                    .addHeader(ID, StudentPreferences.getPreference(applicationContext, ID))
+                    .addHeader(UNIVERSITY, StudentPreferences.getPreference(applicationContext, UNIVERSITY))
+                    .addHeader(BRANCH, StudentPreferences.getPreference(applicationContext, BRANCH))
+                    .addHeader(SCHOOL, StudentPreferences.getPreference(applicationContext, SCHOOL))
+                    .addHeader(YEAR, StudentPreferences.getPreference(applicationContext, YEAR))
+                    .addHeader(RESIDENCE, StudentPreferences.getPreference(applicationContext, RESIDENCE))
+                    .addHeader(SEX, StudentPreferences.getPreference(applicationContext, SEX))
+                    .addHeader(X_API_KEY, X_API_KEY_VALUE);
 
-                return chain.proceed(session.build());
-            }
+            return chain.proceed(session.build());
         });
 
         if (retrofit == null) {

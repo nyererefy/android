@@ -20,5 +20,7 @@ public class Constants {
     public static final String SEX = "sex";
     public static final String IS_LOGGED_IN = "is_logged_in";
     public static final String SCHOOL_NAME = "school_name";
+    public static final String X_API_KEY = "X-API-KEY";
+    public static final String X_API_KEY_VALUE = "oNQ6r&mv#j|m]u";
 
 }

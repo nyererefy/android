@@ -35,19 +35,16 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(NewsAdapter.ViewHolder holder, final int position) {
-        holder.titleView.setText(newsList.get(position).getTitle().toUpperCase());
+        holder.titleView.setText(newsList.get(position).getTitle());
         holder.timeView.setText(newsList.get(position).getTime());
         holder.nameView.setText(newsList.get(position).getName());
 
-        holder.titleView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(mContext, NewsView.class);
-                intent.putExtra("post_id", newsList.get(position).getPost_id());
-                intent.putExtra("post", newsList.get(position).getPost());
-                intent.putExtra("title", newsList.get(position).getTitle());
-                mContext.startActivity(intent);
-            }
+        holder.titleView.setOnClickListener(view -> {
+            Intent intent = new Intent(mContext, NewsView.class);
+            intent.putExtra("post_id", newsList.get(position).getPost_id());
+            intent.putExtra("post", newsList.get(position).getPost());
+            intent.putExtra("title", newsList.get(position).getTitle());
+            mContext.startActivity(intent);
         });
 
     }

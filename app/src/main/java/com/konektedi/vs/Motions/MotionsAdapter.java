@@ -40,7 +40,7 @@ public class MotionsAdapter extends RecyclerView.Adapter<MotionsAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(MotionsAdapter.ViewHolder holder, final int position) {
-        holder.title.setText(motionsList.get(position).getTitle().toUpperCase());
+        holder.title.setText(motionsList.get(position).getTitle());
 
         holder.title.setOnClickListener(view -> {
             Intent intent = new Intent(mContext, MotionsView.class);

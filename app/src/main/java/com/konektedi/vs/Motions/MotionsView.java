@@ -3,6 +3,7 @@ package com.konektedi.vs.Motions;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.konektedi.vs.R;
@@ -37,6 +38,16 @@ public class MotionsView extends AppCompatActivity {
         title.setText(titleTexts);
         motion.setText(motionTexts);
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                super.onBackPressed();
+                break;
+        }
+        return true;
     }
 
 }
