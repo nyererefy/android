@@ -17,8 +17,8 @@ import com.konektedi.vs.Home.Categories.CategoriesAdapter;
 import com.konektedi.vs.Home.Categories.CategoriesModel;
 import com.konektedi.vs.Home.Categories.CategoriesViewModel;
 import com.konektedi.vs.Home.Results.ResultsView;
+import com.konektedi.vs.Home.Reviews.ReviewsActivity;
 import com.konektedi.vs.R;
-import com.konektedi.vs.Student.Login;
 
 import java.util.List;
 
@@ -27,7 +27,6 @@ public class ElectionView extends AppCompatActivity {
     Button resultsViewBtn, reviewsViewBtn;
     CategoriesViewModel model;
     ProgressBar progressBar;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,20 +44,14 @@ public class ElectionView extends AppCompatActivity {
 
         getCategories();
 
-        resultsViewBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ElectionView.this, ResultsView.class);
-                startActivity(intent);
-            }
+        resultsViewBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(ElectionView.this, ResultsView.class);
+            startActivity(intent);
         });
 
-        reviewsViewBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(ElectionView.this, Login.class);
-                startActivity(intent);
-            }
+        reviewsViewBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(ElectionView.this, ReviewsActivity.class);
+            startActivity(intent);
         });
 
     }

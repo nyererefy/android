@@ -5,19 +5,17 @@
         android:id="@+id/profile"
         android:title="@string/profile_activity"
         app:showAsAction="never" />
-
     <item
         android:id="@+id/settings"
         android:title="@string/settings_activity"
         app:showAsAction="never" />
-
-    <item
-        android:id="@+id/about"
-        android:title="@string/about_activity"
-        app:showAsAction="never" />
     <item
         android:id="@+id/support"
         android:title="@string/support_activity"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/about"
+        android:title="@string/about_activity"
         app:showAsAction="never" />
 
     <item

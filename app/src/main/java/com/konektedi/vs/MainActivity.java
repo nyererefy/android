@@ -19,6 +19,7 @@ import android.view.View;
 import com.konektedi.vs.Home.Elections.Elections;
 import com.konektedi.vs.Motions.Motions;
 import com.konektedi.vs.News.NewsFragment;
+import com.konektedi.vs.Other.SupportActivityMain;
 import com.konektedi.vs.Student.Login;
 import com.konektedi.vs.Student.Settings;
 import com.konektedi.vs.Student.StudentPreferences;
@@ -87,7 +88,8 @@ public class MainActivity extends AppCompatActivity {
                 showAbout();
                 break;
             case R.id.support:
-                showSupport();
+                intent = new Intent(MainActivity.this, SupportActivityMain.class);
+                startActivity(intent);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -99,18 +101,6 @@ public class MainActivity extends AppCompatActivity {
 
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.v_about, null);
-        builder.setCancelable(true);
-        builder.setView(dialogView);
-
-        final AlertDialog dialog = builder.create();
-        dialog.show();
-    }
-
-    private void showSupport() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        LayoutInflater inflater = getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.v_support, null);
         builder.setCancelable(true);
         builder.setView(dialogView);
 

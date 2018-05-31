@@ -25,4 +25,10 @@
     <color name="nameColor">#337ab7</color>
     <color name="timeColor">#747373</color>
     <color name="titleColor">#337ab7</color>
+
+    <!--support colors-->
+    <color name="emailColor">#D84315</color>
+    <color name="whatsAppColor">#1B5E20</color>
+    <color name="rateAppColor">#311B92</color>
+
 </resources>
