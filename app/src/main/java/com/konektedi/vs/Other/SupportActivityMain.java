@@ -21,7 +21,7 @@ import com.konektedi.vs.R;
 public class SupportActivityMain extends AppCompatActivity {
 
     Button emailUsBtn, whatsAppUsBtn, rateAppBtn;
-    ImageButton kInstagramBtn, sInstagramBtn;
+    ImageButton kInstagramBtn, sInstagramBtn, sBlogBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,7 @@ public class SupportActivityMain extends AppCompatActivity {
         emailUsBtn = findViewById(R.id.emailUsBtn);
         whatsAppUsBtn = findViewById(R.id.whatsAppUsBtn);
         rateAppBtn = findViewById(R.id.rateAppBtn);
+        sBlogBtn = findViewById(R.id.sBlogBtn);
         kInstagramBtn = findViewById(R.id.kInstagramBtn);
         sInstagramBtn = findViewById(R.id.sInstagramBtn);
 
@@ -41,6 +42,7 @@ public class SupportActivityMain extends AppCompatActivity {
         rateAppBtn.setOnClickListener(view -> rateThisApp());
         kInstagramBtn.setOnClickListener(view -> openInstagram("konektedi"));
         sInstagramBtn.setOnClickListener(view -> openInstagram("sylvanuskateile"));
+        sBlogBtn.setOnClickListener(view -> openBrowser("https://kateile.blogspot.com"));
     }
 
     @Override
@@ -51,6 +53,11 @@ public class SupportActivityMain extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    private void openBrowser(String url) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(browserIntent);
     }
 
     private void openWhatsApp(View view) {

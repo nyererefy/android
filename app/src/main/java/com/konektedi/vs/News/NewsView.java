@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -102,7 +101,6 @@ public class NewsView extends AppCompatActivity implements ListItemClickListener
         viewModel.networkState.observe(this, networkState -> {
             adapter.setNetworkState(networkState);
             hideProgressBar();
-            Log.d(TAG, "Network State Change");
         });
         recyclerView.addItemDecoration(new DividerItemDecoration((this),
                 DividerItemDecoration.VERTICAL));
@@ -183,7 +181,7 @@ public class NewsView extends AppCompatActivity implements ListItemClickListener
 
     @Override
     public void onRetryClick(View view, int position) {
-        Log.d(TAG, "Position " + position);
+
     }
 
     public void showProgressBar() {

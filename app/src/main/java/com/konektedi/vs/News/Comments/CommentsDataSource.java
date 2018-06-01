@@ -3,7 +3,7 @@ package com.konektedi.vs.News.Comments;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.paging.PageKeyedDataSource;
 import android.support.annotation.NonNull;
-import android.util.Log;
+
 import com.konektedi.vs.Utilities.Api.Api;
 import com.konektedi.vs.Utilities.Api.ApiUtilities;
 import com.konektedi.vs.Utilities.NetworkState;
@@ -57,10 +57,8 @@ public class CommentsDataSource extends PageKeyedDataSource<Integer, Comments> {
                     callback.onResult(response.body(), 0, 10);
                     initialLoading.postValue(NetworkState.LOADED);
                     networkState.postValue(NetworkState.LOADED);
-                    Log.d("loadInitial", response.toString());
 
                 } else {
-                    Log.e("loadInitial failed", response.message());
                     initialLoading.postValue(new NetworkState(NetworkStatus.FAILED, response.message()));
                     networkState.postValue(new NetworkState(NetworkStatus.FAILED, response.message()));
                 }
@@ -97,10 +95,10 @@ public class CommentsDataSource extends PageKeyedDataSource<Integer, Comments> {
                 if (response.isSuccessful()) {
                     callback.onResult(response.body(), params.key + 10);
                     networkState.postValue(NetworkState.LOADED);
-                    Log.d("loadAfter", response.toString());
+
                 } else {
                     networkState.postValue(new NetworkState(NetworkStatus.FAILED, response.message()));
-                    Log.e("loadAfter failed", response.message());
+
                 }
             }
 

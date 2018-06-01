@@ -58,10 +58,10 @@ public class OpinionsDataSource extends PageKeyedDataSource<Integer, Opinions> {
                     callback.onResult(response.body(), 0, 10);
                     initialLoading.postValue(NetworkState.LOADED);
                     networkState.postValue(NetworkState.LOADED);
-                    Log.d("loadInitial", response.toString());
+
 
                 } else {
-                    Log.e("loadInitial failed", response.message());
+
                     initialLoading.postValue(new NetworkState(NetworkStatus.FAILED, response.message()));
                     networkState.postValue(new NetworkState(NetworkStatus.FAILED, response.message()));
                 }
@@ -98,10 +98,10 @@ public class OpinionsDataSource extends PageKeyedDataSource<Integer, Opinions> {
                 if (response.isSuccessful()) {
                     callback.onResult(response.body(), params.key + 10);
                     networkState.postValue(NetworkState.LOADED);
-                    Log.d("loadAfter", response.toString());
+
                 } else {
                     networkState.postValue(new NetworkState(NetworkStatus.FAILED, response.message()));
-                    Log.e("loadAfter failed", response.message());
+
                 }
             }
 

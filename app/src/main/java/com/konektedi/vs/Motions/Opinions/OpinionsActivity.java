@@ -7,7 +7,6 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
@@ -55,7 +54,6 @@ public class OpinionsActivity extends AppCompatActivity implements ListItemClick
         viewModel.networkState.observe(this, networkState -> {
             adapter.setNetworkState(networkState);
             hideProgressBar();
-            Log.d(TAG, "Network State Change");
         });
         recyclerView.addItemDecoration(new DividerItemDecoration((this),
                 DividerItemDecoration.VERTICAL));
@@ -72,7 +70,7 @@ public class OpinionsActivity extends AppCompatActivity implements ListItemClick
 
     @Override
     public void onRetryClick(View view, int position) {
-        Log.d(TAG, "Position " + position);
+
     }
 
 }
