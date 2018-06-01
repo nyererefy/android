@@ -95,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
     private void showAbout() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
