@@ -31,6 +31,9 @@ public class SupportActivityMain extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         emailUsBtn = findViewById(R.id.emailUsBtn);
         whatsAppUsBtn = findViewById(R.id.whatsAppUsBtn);
         rateAppBtn = findViewById(R.id.rateAppBtn);
@@ -182,5 +185,6 @@ public class SupportActivityMain extends AppCompatActivity {
             return false;
         }
     }
+
 
 }
