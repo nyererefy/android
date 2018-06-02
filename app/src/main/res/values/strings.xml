@@ -90,6 +90,8 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="save_changes">Save changes</string>
     <string name="action_sign_in">LOGIN</string>
+    <string name="forget_password">Forget Password?</string>
+    <string name="help">Need Help?</string>
     <string name="error_invalid_reg_no">This Registration number is invalid</string>
     <string name="error_invalid_password">Password must contain 6 to 10 characters.</string>
     <string name="error_incorrect_password">This password is incorrect</string>
@@ -132,7 +134,7 @@
     <string name="title_activity_connections">Connections</string>
     <string name="title_activity_support">Support</string>
 
-    <!--Motions-->
+    <!--motions-->
 
 
 </resources>

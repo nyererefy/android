@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Student.Login"
+            android:name=".student.Login"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -26,20 +26,20 @@
             android:name=".MainActivity"
             android:label="@string/app_name" />
         <activity
-            android:name=".Home.Elections.ElectionView"
+            android:name=".home.elections.ElectionView"
             android:label="@string/title_activity_election_view"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Home.Results.ResultsView"
+            android:name=".home.results.ResultsView"
             android:label="@string/title_activity_results_view"
-            android:parentActivityName=".Home.Elections.ElectionView"
+            android:parentActivityName=".home.elections.ElectionView"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.konektedi.vs.Home.Elections.ElectionView" />
+                android:value="com.konektedi.vs.home.elections.ElectionView" />
         </activity>
         <activity
-            android:name=".Motions.MotionsView"
+            android:name=".motions.MotionsView"
             android:label="@string/title_activity_motion_view"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -48,20 +48,20 @@
                 android:value="com.konektedi.vs.MainActivity" />
         </activity>
         <activity
-            android:name=".Home.Candidates.Candidates"
+            android:name=".home.candidates.Candidates"
             android:label="@string/title_activity_candidates"
-            android:parentActivityName=".Home.Elections.ElectionView"
+            android:parentActivityName=".home.elections.ElectionView"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.konektedi.vs.Home.Elections.ElectionView" />
+                android:value="com.konektedi.vs.home.elections.ElectionView" />
         </activity>
         <activity
-            android:name=".Home.Candidates.Profile"
+            android:name=".home.candidates.Profile"
             android:label="@string/title_activity_candidate_profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Motions.Participate"
+            android:name=".motions.Participate"
             android:label="@string/title_activity_participate"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -70,11 +70,11 @@
                 android:value="com.konektedi.vs.MainActivity" />
         </activity>
         <activity
-            android:name=".Motions.Opinions.OpinionsActivity"
+            android:name=".motions.opinions.OpinionsActivity"
             android:label="@string/title_activity_opinions"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Student.StudentProfile"
+            android:name=".student.StudentProfile"
             android:label="@string/title_activity_profile"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -83,7 +83,7 @@
                 android:value="com.konektedi.vs.MainActivity" />
         </activity>
         <activity
-            android:name=".Student.Settings"
+            android:name=".student.Settings"
             android:label="@string/title_activity_settings"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -92,7 +92,7 @@
                 android:value="com.konektedi.vs.MainActivity" />
         </activity>
         <activity
-            android:name=".News.NewsView"
+            android:name=".news.NewsView"
             android:label="@string/title_activity_news_view"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -101,16 +101,16 @@
                 android:value="com.konektedi.vs.MainActivity" />
         </activity>
         <activity
-            android:name=".Home.Reviews.ReviewsActivity"
+            android:name=".home.reviews.ReviewsActivity"
             android:label="@string/title_activity_reviews"
-            android:parentActivityName=".Home.Elections.ElectionView"
+            android:parentActivityName=".home.elections.ElectionView"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.konektedi.vs.Home.Elections.ElectionView" />
+                android:value="com.konektedi.vs.home.elections.ElectionView" />
         </activity>
         <activity
-            android:name=".Other.SupportActivityMain"
+            android:name=".other.SupportActivityMain"
             android:label="@string/title_activity_support"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme">

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.konektedi.vs.Motions.MotionsView"
+    tools:context="com.konektedi.vs.motions.MotionsView"
     tools:showIn="@layout/motion_view_activity">
 
     <android.support.constraint.ConstraintLayout

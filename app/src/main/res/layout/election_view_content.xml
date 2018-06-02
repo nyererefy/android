@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.konektedi.vs.Home.Elections.ElectionView"
+    tools:context="com.konektedi.vs.home.elections.ElectionView"
     tools:showIn="@layout/election_view_activity">
 
     <TextView

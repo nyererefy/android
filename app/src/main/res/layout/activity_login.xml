@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:paddingLeft="30dp"
     android:paddingRight="30dp"
-    tools:context=".Student.Login">
+    tools:context=".student.Login">
 
     <!-- Login progress -->
     <ProgressBar
@@ -106,6 +106,33 @@
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingEnd="8dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:paddingStart="8dp">
+
+                <TextView
+                    android:id="@+id/forgetPassword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:text="@string/forget_password"
+                    android:textColor="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/supportBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="end"
+                    android:text="@string/help"
+                    android:textColor="@color/colorPrimary" />
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

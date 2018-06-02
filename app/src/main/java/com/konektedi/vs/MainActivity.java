@@ -16,14 +16,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.konektedi.vs.Home.Elections.Elections;
-import com.konektedi.vs.Motions.Motions;
-import com.konektedi.vs.News.NewsFragment;
-import com.konektedi.vs.Other.SupportActivityMain;
-import com.konektedi.vs.Student.Login;
-import com.konektedi.vs.Student.Settings;
-import com.konektedi.vs.Student.StudentPreferences;
-import com.konektedi.vs.Student.StudentProfile;
+import com.konektedi.vs.home.elections.Elections;
+import com.konektedi.vs.motions.Motions;
+import com.konektedi.vs.news.NewsFragment;
+import com.konektedi.vs.other.SupportActivityMain;
+import com.konektedi.vs.student.Login;
+import com.konektedi.vs.student.Settings;
+import com.konektedi.vs.student.StudentPreferences;
+import com.konektedi.vs.student.StudentProfile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.container);
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        adapter.AddFragment(new Elections(), "Elections");
-        adapter.AddFragment(new Motions(), "Motions");
+        adapter.AddFragment(new Elections(), "elections");
+        adapter.AddFragment(new Motions(), "motions");
         adapter.AddFragment(new NewsFragment(), "News");
 
 
