@@ -264,7 +264,7 @@ public class Login extends AppCompatActivity {
 
             } else {
                 wrongPasswordOrRegView.setVisibility(View.VISIBLE);
-                wrongPasswordOrRegView.setText(errors);
+                wrongPasswordOrRegView.setText(R.string.wrong_password_or_reg);
             }
         }
 

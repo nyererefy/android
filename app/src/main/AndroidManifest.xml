@@ -119,5 +119,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.konektedi.vs.MainActivity" />
         </activity>
+        <activity
+            android:name=".other.HelpActivity"
+            android:label="@string/title_activity_help"
+            android:theme="@style/AppTheme"></activity>
     </application>
+
 </manifest>

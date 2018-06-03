@@ -133,6 +133,7 @@
     <string name="title_activity_reviews">Reviews</string>
     <string name="title_activity_connections">Connections</string>
     <string name="title_activity_support">Support</string>
+    <string name="title_activity_help">HelpActivity</string>
 
     <!--motions-->
 
