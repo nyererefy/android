@@ -25,10 +25,9 @@ import retrofit2.http.Path;
 public interface Api {
 
     @Headers("X-API-KEY: oNQ6r&mv#j|m]u")
-    @GET("authentication/authentication/{reg_no}/{password}")
-    Call<StudentModel> authenticate(
-            @Path("reg_no") String reg_no,
-            @Path("password") String password);
+    @FormUrlEncoded
+    @POST("authentication/authentication")
+    Call<StudentModel> authenticate(@FieldMap Map<String, String> map);
 
     @GET("elections/elections")
     Call<List<ElectionsModel>> getElections();

@@ -2,6 +2,8 @@ package com.konektedi.vs;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -15,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.konektedi.vs.home.elections.Elections;
 import com.konektedi.vs.motions.Motions;
@@ -96,10 +99,30 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void showAbout() {
+        String version = "";
+        int verCode = 0;
+
+        try {
+            PackageInfo pInfo = this.getPackageManager().getPackageInfo(getPackageName(), 0);
+            version = pInfo.versionName;
+            verCode = pInfo.versionCode;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
 
         LayoutInflater inflater = getLayoutInflater();
         View dialogView = inflater.inflate(R.layout.v_about, null);
+        TextView versionView = dialogView.findViewById(R.id.versionView);
+        TextView verCodeView = dialogView.findViewById(R.id.verCodeView);
+
+        String versionTitle = "Version: " + version;
+        String versionCodeTitle = "Build: " + verCode;
+
+        versionView.setText(versionTitle);
+        verCodeView.setText(versionCodeTitle);
+
         builder.setCancelable(true);
         builder.setView(dialogView);
 

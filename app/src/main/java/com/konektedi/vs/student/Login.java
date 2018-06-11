@@ -17,11 +17,13 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.konektedi.vs.MainActivity;
-import com.konektedi.vs.other.SupportActivityMain;
 import com.konektedi.vs.R;
+import com.konektedi.vs.other.SupportActivityMain;
 import com.konektedi.vs.utilities.Api.Api;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Response;
@@ -141,7 +143,7 @@ public class Login extends AppCompatActivity {
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() >= 6;
     }
 
     /**
@@ -204,13 +206,18 @@ public class Login extends AppCompatActivity {
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
+            Map<String, String> map = new HashMap<>();
+
+            map.put("reg_no", mReg_no);
+            map.put("password", mPassword);
+
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
             Api api = retrofit.create(Api.class);
 
-            Call<StudentModel> call = api.authenticate(mReg_no, mPassword);
+            Call<StudentModel> call = api.authenticate(map);
 
             try {
                 Response<StudentModel> response = call.execute();

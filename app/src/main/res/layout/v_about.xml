@@ -15,6 +15,7 @@
         android:textStyle="bold" />
 
     <TextView
+        android:id="@+id/versionView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -22,6 +23,7 @@
         android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/verCodeView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
