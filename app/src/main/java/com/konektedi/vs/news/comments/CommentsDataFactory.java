@@ -1,4 +1,4 @@
-package com.konektedi.vs.news.Comments;
+package com.konektedi.vs.news.comments;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.paging.DataSource;

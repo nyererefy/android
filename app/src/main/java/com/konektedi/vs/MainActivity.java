@@ -19,7 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.konektedi.vs.home.elections.Elections;
+import com.konektedi.vs.home.elections.ElectionsFragment;
 import com.konektedi.vs.motions.Motions;
 import com.konektedi.vs.news.NewsFragment;
 import com.konektedi.vs.other.SupportActivityMain;
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPager viewPager = findViewById(R.id.container);
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        adapter.AddFragment(new Elections(), "elections");
+        adapter.AddFragment(new ElectionsFragment(), "elections");
         adapter.AddFragment(new Motions(), "motions");
         adapter.AddFragment(new NewsFragment(), "News");
 

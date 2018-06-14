@@ -19,7 +19,7 @@ import android.widget.TextView;
 import com.konektedi.vs.MainActivity;
 import com.konektedi.vs.R;
 import com.konektedi.vs.other.SupportActivityMain;
-import com.konektedi.vs.utilities.Api.Api;
+import com.konektedi.vs.utilities.api.Api;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -30,7 +30,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.konektedi.vs.utilities.Api.ApiUtilities.BASE_URL;
+import static com.konektedi.vs.utilities.api.ApiUtilities.BASE_URL;
 import static com.konektedi.vs.utilities.Constants.ID;
 import static com.konektedi.vs.utilities.Constants.IS_LOGGED_IN;
 import static com.konektedi.vs.utilities.Constants.NAME;

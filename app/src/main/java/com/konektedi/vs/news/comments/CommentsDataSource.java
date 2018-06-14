@@ -1,11 +1,11 @@
-package com.konektedi.vs.news.Comments;
+package com.konektedi.vs.news.comments;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.paging.PageKeyedDataSource;
 import android.support.annotation.NonNull;
 
-import com.konektedi.vs.utilities.Api.Api;
-import com.konektedi.vs.utilities.Api.ApiUtilities;
+import com.konektedi.vs.utilities.api.Api;
+import com.konektedi.vs.utilities.api.ApiUtilities;
 import com.konektedi.vs.utilities.NetworkState;
 import com.konektedi.vs.utilities.NetworkStatus;
 

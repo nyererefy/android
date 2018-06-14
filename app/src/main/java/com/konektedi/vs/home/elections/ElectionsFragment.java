@@ -19,7 +19,7 @@ import com.konektedi.vs.utilities.NetworkStatus;
 
 import java.util.List;
 
-public class Elections extends Fragment {
+public class ElectionsFragment extends Fragment {
 
     RecyclerView recyclerView;
     ElectionsAdapter electionsAdapter;
@@ -27,7 +27,7 @@ public class Elections extends Fragment {
     NetworkState networkState;
     ProgressBar progressBar;
 
-    public Elections() {
+    public ElectionsFragment() {
     }
 
     @Override

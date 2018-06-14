@@ -1,4 +1,4 @@
-package com.konektedi.vs.utilities.Api;
+package com.konektedi.vs.utilities.api;
 
 import android.content.Context;
 

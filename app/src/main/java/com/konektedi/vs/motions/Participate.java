@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import com.konektedi.vs.R;
 import com.konektedi.vs.student.StudentPreferences;
-import com.konektedi.vs.utilities.Api.ApiUtilities;
+import com.konektedi.vs.utilities.api.ApiUtilities;
 
 import java.util.HashMap;
 import java.util.Map;

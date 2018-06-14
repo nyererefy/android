@@ -1,4 +1,4 @@
-package com.konektedi.vs.utilities.Api;
+package com.konektedi.vs.utilities.api;
 
 
 import com.konektedi.vs.home.candidates.CandidatesModel;
@@ -6,7 +6,7 @@ import com.konektedi.vs.home.categories.CategoriesModel;
 import com.konektedi.vs.home.elections.ElectionsModel;
 import com.konektedi.vs.motions.MotionsModel;
 import com.konektedi.vs.motions.opinions.Opinions;
-import com.konektedi.vs.news.Comments.Comments;
+import com.konektedi.vs.news.comments.Comments;
 import com.konektedi.vs.news.NewsModel;
 import com.konektedi.vs.student.StudentModel;
 

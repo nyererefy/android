@@ -13,12 +13,12 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ProgressBar;
 
+import com.konektedi.vs.R;
 import com.konektedi.vs.home.categories.CategoriesAdapter;
 import com.konektedi.vs.home.categories.CategoriesModel;
 import com.konektedi.vs.home.categories.CategoriesViewModel;
 import com.konektedi.vs.home.results.ResultsView;
 import com.konektedi.vs.home.reviews.ReviewsActivity;
-import com.konektedi.vs.R;
 
 import java.util.List;
 
@@ -57,7 +57,6 @@ public class ElectionView extends AppCompatActivity {
     }
 
     private void getCategories() {
-
         Bundle data = getIntent().getExtras();
 
         String election_id = "";
@@ -78,7 +77,6 @@ public class ElectionView extends AppCompatActivity {
                 categoriesGridView.setAdapter(new CategoriesAdapter(ElectionView.this, categoriesModels));
             }
         });
-
     }
 
     public void hideProgressBar() {

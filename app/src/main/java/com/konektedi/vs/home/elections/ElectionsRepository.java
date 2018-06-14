@@ -2,7 +2,7 @@ package com.konektedi.vs.home.elections;
 
 import android.arch.lifecycle.MutableLiveData;
 
-import com.konektedi.vs.utilities.Api.ApiUtilities;
+import com.konektedi.vs.utilities.api.ApiUtilities;
 import com.konektedi.vs.utilities.NetworkState;
 
 import java.util.List;

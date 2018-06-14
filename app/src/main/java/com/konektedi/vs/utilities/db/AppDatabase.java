@@ -1,4 +1,4 @@
-package com.konektedi.vs.utilities.Db;
+package com.konektedi.vs.utilities.db;
 //
 //import android.arch.persistence.room.Database;
 //import android.arch.persistence.room.Room;

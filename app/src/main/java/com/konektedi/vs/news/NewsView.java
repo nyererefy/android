@@ -19,11 +19,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.konektedi.vs.news.Comments.CommentsAdapter;
-import com.konektedi.vs.news.Comments.CommentsViewModel;
+import com.konektedi.vs.news.comments.CommentsAdapter;
+import com.konektedi.vs.news.comments.CommentsViewModel;
 import com.konektedi.vs.R;
 import com.konektedi.vs.student.StudentPreferences;
-import com.konektedi.vs.utilities.Api.ApiUtilities;
+import com.konektedi.vs.utilities.api.ApiUtilities;
 import com.konektedi.vs.utilities.ListItemClickListener;
 
 import java.util.HashMap;
