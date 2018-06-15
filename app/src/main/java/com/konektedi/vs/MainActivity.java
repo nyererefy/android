@@ -4,7 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,9 +22,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.konektedi.vs.home.elections.ElectionsFragment;
-import com.konektedi.vs.motions.Motions;
+import com.konektedi.vs.motions.MotionsFragment;
 import com.konektedi.vs.news.NewsFragment;
 import com.konektedi.vs.other.SupportActivityMain;
 import com.konektedi.vs.student.Login;
@@ -32,6 +37,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
 
     Intent intent;
     public static Context contextOfApplication;
@@ -46,17 +52,32 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        CoordinatorLayout coordinatorLayout = findViewById(R.id.coordinatorLayout);
         TabLayout tabLayout = findViewById(R.id.tabs);
         ViewPager viewPager = findViewById(R.id.container);
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         adapter.AddFragment(new ElectionsFragment(), "elections");
-        adapter.AddFragment(new Motions(), "motions");
+        adapter.AddFragment(new MotionsFragment(), "motions");
         adapter.AddFragment(new NewsFragment(), "News");
 
 
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+
+        if (!isNetworkAvailable()) {
+            Snackbar snackbar = Snackbar
+                    .make(coordinatorLayout, "Internet is not connected", Snackbar.LENGTH_LONG)
+                    .setAction("Connect", view -> Toast.makeText(this, "Okey", Toast.LENGTH_SHORT).show());
+            snackbar.show();
+        }
+    }
+
+    private Boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 
     public static Context getContextOfApplication() {

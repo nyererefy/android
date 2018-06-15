@@ -3,5 +3,8 @@ package com.konektedi.vs.utilities;
 public enum NetworkStatus {
     RUNNING,
     SUCCESS,
-    FAILED
+    FAILED,
+    LOADING,
+    LOADED,
+    ERROR //error response for instance 500;
 }

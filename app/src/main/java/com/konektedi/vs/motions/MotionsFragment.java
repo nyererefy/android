@@ -1,8 +1,7 @@
-package com.konektedi.vs.home.elections;
+package com.konektedi.vs.motions;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -16,41 +15,43 @@ import android.widget.Toast;
 
 import com.konektedi.vs.R;
 
-public class ElectionsFragment extends Fragment {
+/**
+ * Created by Sy on 3/28/2018.
+ */
 
+public class MotionsFragment extends Fragment {
+
+    MotionsAdapter motionsAdapter;
     RecyclerView recyclerView;
-    ElectionsAdapter electionsAdapter;
-    ElectionsViewModel viewModel;
+    MotionsViewModel viewModel;
     ProgressBar progressBar;
     SwipeRefreshLayout swipeToRefresh;
 
-    public ElectionsFragment() {
+
+    public MotionsFragment() {
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getElections();
+        getMotions();
+
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View rootView = inflater.inflate(R.layout.elections_fragment, container, false);
+        View rootView = inflater.inflate(R.layout.motions_fragment, container, false);
 
         recyclerView = rootView.findViewById(R.id.recyclerView);
         progressBar = rootView.findViewById(R.id.progressBar);
         swipeToRefresh = rootView.findViewById(R.id.swipeToRefresh);
 
-        swipeToRefresh.setRefreshing(true);
-        swipeToRefresh.setOnRefreshListener(this::getElections);
-
         return rootView;
     }
 
-    private void getElections() {
-
-        viewModel = ViewModelProviders.of(getActivity()).get(ElectionsViewModel.class);
+    private void getMotions() {
+        viewModel = ViewModelProviders.of(getActivity()).get(MotionsViewModel.class);
 
         viewModel.getNetworkStatus().observe(this, networkStatus -> {
             if (networkStatus != null) {
@@ -71,14 +72,13 @@ public class ElectionsFragment extends Fragment {
             }
         });
 
-        viewModel.getAllElections().observe(this, electionsModels -> {
+        viewModel.getAllMotions().observe(this, motionsModels -> {
 
-            electionsAdapter = new ElectionsAdapter(getActivity(), electionsModels);
+            motionsAdapter = new MotionsAdapter(getActivity(), motionsModels);
+
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-            recyclerView.setAdapter(electionsAdapter);
+            recyclerView.setAdapter(motionsAdapter);
         });
-
-        swipeToRefresh.setRefreshing(false);
     }
 
 }
