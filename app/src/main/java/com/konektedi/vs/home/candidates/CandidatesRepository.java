@@ -3,7 +3,7 @@ package com.konektedi.vs.home.candidates;
 
 import android.arch.lifecycle.MutableLiveData;
 
-import com.konektedi.vs.R;
+import com.konektedi.vs.utilities.NetworkStatus;
 import com.konektedi.vs.utilities.api.ApiUtilities;
 
 import java.util.List;
@@ -12,13 +12,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static com.konektedi.vs.home.candidates.Candidates.getContextOfCandidates;
-
 public class CandidatesRepository {
+    public MutableLiveData<NetworkStatus> networkState = new MutableLiveData<>();
 
     public MutableLiveData<List<CandidatesModel>> getCandidates(String election_id, String category_id) {
-
-        ((Candidates) getContextOfCandidates()).showProgressBar();
+        networkState.postValue(NetworkStatus.LOADING);
 
         final MutableLiveData<List<CandidatesModel>> listMutableLiveData = new MutableLiveData<>();
 
@@ -27,21 +25,21 @@ public class CandidatesRepository {
         call.enqueue(new Callback<List<CandidatesModel>>() {
             @Override
             public void onResponse(Call<List<CandidatesModel>> call, Response<List<CandidatesModel>> response) {
-                ((Candidates) getContextOfCandidates()).hideProgressBar();
+
+                networkState.postValue(NetworkStatus.LOADED);
 
                 if (response.isSuccessful()) {
-                    List<CandidatesModel> categoriesModelList = response.body();
-                    listMutableLiveData.setValue(categoriesModelList);
-
+                    listMutableLiveData.setValue(response.body());
                 } else if (response.code() == 404) {
-                    ((Candidates) getContextOfCandidates()).showAlert(R.string.no_candidates);
+                    networkState.postValue(NetworkStatus.NOTHING);
+                } else {
+                    networkState.postValue(NetworkStatus.ERROR);
                 }
             }
 
             @Override
             public void onFailure(Call<List<CandidatesModel>> call, Throwable t) {
-                ((Candidates) getContextOfCandidates()).hideProgressBar();
-                ((Candidates) getContextOfCandidates()).showAlert(R.string.error);
+                networkState.postValue(NetworkStatus.FAILED);
             }
         });
 

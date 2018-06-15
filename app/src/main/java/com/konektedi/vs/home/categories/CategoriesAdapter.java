@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 
-import com.konektedi.vs.home.candidates.Candidates;
+import com.konektedi.vs.home.candidates.CandidatesActivity;
 import com.konektedi.vs.R;
 
 import java.util.List;
@@ -70,7 +70,7 @@ public class CategoriesAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(mContext, Candidates.class);
+                Intent intent = new Intent(mContext, CandidatesActivity.class);
                 intent.putExtra("election_id", categoriesModelList.get(position).getElection_id());
                 intent.putExtra("category_id", categoriesModelList.get(position).getCategory_id());
                 intent.putExtra("category", categoriesModelList.get(position).getCategory());

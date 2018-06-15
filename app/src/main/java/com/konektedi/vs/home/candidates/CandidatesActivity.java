@@ -1,10 +1,7 @@
 package com.konektedi.vs.home.candidates;
 
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayoutManager;
@@ -17,17 +14,13 @@ import android.widget.TextView;
 
 import com.konektedi.vs.R;
 
-import java.util.List;
-
-public class Candidates extends AppCompatActivity {
+public class CandidatesActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     CandidatesAdapter adapter;
-    CandidatesViewModel candidatesViewModel;
+    CandidatesViewModel viewModel;
     ProgressBar progressBar;
     CardView cardView;
     TextView alertTextView;
-
-    private static Context contextOfCandidates;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +34,6 @@ public class Candidates extends AppCompatActivity {
         cardView = findViewById(R.id.cardView);
         alertTextView = findViewById(R.id.alertTextView);
 
-        contextOfCandidates = Candidates.this;
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -55,21 +47,41 @@ public class Candidates extends AppCompatActivity {
             setTitle(category);
         }
 
-        candidatesViewModel = ViewModelProviders.of(this).get(CandidatesViewModel.class);
-        candidatesViewModel.getAllCandidates(election_id, category_id).observe(this,
-                new Observer<List<CandidatesModel>>() {
-                    @Override
-                    public void onChanged(@Nullable List<CandidatesModel> candidatesModels) {
-                        if (candidatesModels != null && !candidatesModels.isEmpty()) {
+        viewModel = ViewModelProviders.of(this).get(CandidatesViewModel.class);
 
-                            int numberOfColumns = 2;
-                            recyclerView.setLayoutManager(new GridLayoutManager(Candidates.this, numberOfColumns));
-                            adapter = new CandidatesAdapter(Candidates.this, candidatesModels);
-                            recyclerView.setAdapter(adapter);
+        viewModel.getNetworkStatus().observe(this, networkStatus -> {
+            if (networkStatus != null) {
+                switch (networkStatus) {
+                    case LOADING:
+                        showProgressBar();
+                        break;
+                    case LOADED:
+                        hideProgressBar();
+                        break;
+                    case NOTHING:
+                        showAlert(R.string.no_candidates);
+                        break;
+                    case ERROR:
+                        showAlert(R.string.error);
+                        break;
+                    case FAILED:
+                        showAlert(R.string.failed_connect);
+                        break;
+                }
+            }
+        });
 
-                        }
+        viewModel.getAllCandidates(election_id, category_id).observe(this,
+                candidatesModels -> {
+                    if (candidatesModels != null && !candidatesModels.isEmpty()) {
+
+                        int numberOfColumns = 2;
+                        recyclerView.setLayoutManager(new GridLayoutManager(CandidatesActivity.this, numberOfColumns));
+                        adapter = new CandidatesAdapter(CandidatesActivity.this, candidatesModels);
+                        recyclerView.setAdapter(adapter);
 
                     }
+
                 });
     }
 
@@ -99,10 +111,5 @@ public class Candidates extends AppCompatActivity {
         }
         return true;
     }
-
-    public static Context getContextOfCandidates() {
-        return contextOfCandidates;
-    }
-
 
 }

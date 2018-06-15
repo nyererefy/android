@@ -26,9 +26,12 @@ public class NewsRepository {
             @Override
             public void onResponse(Call<List<NewsModel>> call, Response<List<NewsModel>> response) {
 
+                networkState.postValue(NetworkStatus.LOADED);
+
                 if (response.isSuccessful()) {
-                    networkState.postValue(NetworkStatus.LOADED);
                     listMutableLiveData.setValue(response.body());
+                } else if (response.code() == 404) {
+                    networkState.postValue(NetworkStatus.NOTHING);
                 } else {
                     networkState.postValue(NetworkStatus.ERROR);
                 }

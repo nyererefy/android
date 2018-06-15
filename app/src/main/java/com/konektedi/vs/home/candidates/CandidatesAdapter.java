@@ -93,7 +93,7 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
 
         if (candidatesList.get(position).getParticipated().equals("yes")) {
             holder.voteBtn.setVisibility(View.GONE);
-            ((Candidates) mContext).showAlert(R.string.voted);
+            ((CandidatesActivity) mContext).showAlert(R.string.voted);
 
         } else {
             holder.voteBtn.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +106,7 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
 
         if (candidatesList.get(position).getOpened().equals("0")) {
             holder.voteBtn.setVisibility(View.GONE);
-            ((Candidates) mContext).showAlert(R.string.voting_disabled);
+            ((CandidatesActivity) mContext).showAlert(R.string.voting_disabled);
         }
 
         holder.nameView.setOnClickListener(new View.OnClickListener() {
@@ -180,7 +180,7 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
 
     private void submitVote(final int position) {
 
-        ((Candidates) mContext).showProgressBar();
+        ((CandidatesActivity) mContext).showProgressBar();
 
         Map<String, String> map = new HashMap<>();
 
@@ -198,7 +198,7 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                ((Candidates) mContext).hideProgressBar();
+                ((CandidatesActivity) mContext).hideProgressBar();
 
                 if (response.code() == 201) {
                     voteFor(position);
@@ -211,7 +211,7 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
 
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
-                ((Candidates) mContext).hideProgressBar();
+                ((CandidatesActivity) mContext).hideProgressBar();
                 Toast.makeText(mContext, "Error in connection", Toast.LENGTH_SHORT).show();
             }
         });
@@ -242,11 +242,11 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
     }
 
     private void onFailureVote() {
-        ((Candidates) mContext).showAlert(R.string.on_failure_vote);
+        ((CandidatesActivity) mContext).showAlert(R.string.on_failure_vote);
     }
 
     private void cantVoteTwice() {
-        ((Candidates) mContext).showAlert(R.string.cant_vote_twice);
+        ((CandidatesActivity) mContext).showAlert(R.string.cant_vote_twice);
     }
 
     private void voteFor(final int position) {
@@ -262,7 +262,7 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
         builder.setNeutralButton("Close", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ((Candidates) mContext).finishVote();
+                ((CandidatesActivity) mContext).finishVote();
             }
         });
 

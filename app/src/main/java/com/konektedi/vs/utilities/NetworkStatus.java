@@ -6,5 +6,7 @@ public enum NetworkStatus {
     FAILED,
     LOADING,
     LOADED,
-    ERROR //error response for instance 500;
+    ERROR, //error response for instance 500;
+    NOTHING //404
+
 }
