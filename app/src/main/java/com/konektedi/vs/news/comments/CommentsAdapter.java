@@ -62,7 +62,7 @@ public class CommentsAdapter extends PagedListAdapter<Comments, RecyclerView.Vie
 
     @Override
     public int getItemViewType(int position) {
-        if (hasExtraRow() && position == getItemCount() - 1) {
+        if (hasExtraRow() && position == getItemCount()) {
             return R.layout.network_state_item;
         } else {
             return R.layout.z_comment;
@@ -81,7 +81,7 @@ public class CommentsAdapter extends PagedListAdapter<Comments, RecyclerView.Vie
                 notifyItemInserted(getItemCount());
             }
         } else if (newExtraRow && previousState != newNetworkState) {
-            notifyItemChanged(getItemCount() - 1);
+            notifyItemChanged(getItemCount());
         }
     }
 
@@ -89,14 +89,14 @@ public class CommentsAdapter extends PagedListAdapter<Comments, RecyclerView.Vie
         private TextView nameView, commentView, timeView;
 
 
-        public mViewHolder(View itemView) {
+        mViewHolder(View itemView) {
             super(itemView);
             nameView = itemView.findViewById(R.id.nameView);
             commentView = itemView.findViewById(R.id.commentView);
             timeView = itemView.findViewById(R.id.timeView);
         }
 
-        public void bindTo(Comments feed) {
+        void bindTo(Comments feed) {
             nameView.setText(feed.getName());
             commentView.setText(feed.getComment());
             timeView.setText(feed.getTime());

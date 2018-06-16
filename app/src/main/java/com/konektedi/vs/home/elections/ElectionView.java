@@ -71,15 +71,17 @@ public class ElectionView extends AppCompatActivity {
             if (networkStatus != null) {
                 switch (networkStatus) {
                     case LOADING:
-                        progressBar.setVisibility(View.VISIBLE);
+                        showProgressBar();
                         break;
                     case LOADED:
-                        progressBar.setVisibility(View.GONE);
+                        hideProgressBar();
                         break;
                     case ERROR:
+                        hideProgressBar();
                         Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show();
                         break;
                     case FAILED:
+                        hideProgressBar();
                         Toast.makeText(this, R.string.failed_connect, Toast.LENGTH_SHORT).show();
                         break;
                 }
@@ -90,7 +92,7 @@ public class ElectionView extends AppCompatActivity {
             categoriesGridView.setAdapter(new CategoriesAdapter(ElectionView.this, categoriesModels));
         });
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -99,5 +101,13 @@ public class ElectionView extends AppCompatActivity {
                 break;
         }
         return true;
+    }
+
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
+    }
+
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
     }
 }

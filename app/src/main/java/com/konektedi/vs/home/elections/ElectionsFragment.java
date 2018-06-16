@@ -11,7 +11,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.konektedi.vs.R;
@@ -21,7 +20,6 @@ public class ElectionsFragment extends Fragment {
     RecyclerView recyclerView;
     ElectionsAdapter electionsAdapter;
     ElectionsViewModel viewModel;
-    ProgressBar progressBar;
     SwipeRefreshLayout swipeToRefresh;
 
     public ElectionsFragment() {
@@ -37,34 +35,29 @@ public class ElectionsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.elections_fragment, container, false);
-
         recyclerView = rootView.findViewById(R.id.recyclerView);
-        progressBar = rootView.findViewById(R.id.progressBar);
         swipeToRefresh = rootView.findViewById(R.id.swipeToRefresh);
-
-        swipeToRefresh.setRefreshing(true);
-        swipeToRefresh.setOnRefreshListener(this::getElections);
-
         return rootView;
     }
 
     private void getElections() {
-
         viewModel = ViewModelProviders.of(getActivity()).get(ElectionsViewModel.class);
 
         viewModel.getNetworkStatus().observe(this, networkStatus -> {
             if (networkStatus != null) {
                 switch (networkStatus) {
                     case LOADING:
-                        progressBar.setVisibility(View.VISIBLE);
+                        setProgress(true);
                         break;
                     case LOADED:
-                        progressBar.setVisibility(View.GONE);
+                        setProgress(false);
                         break;
                     case ERROR:
+                        setProgress(false);
                         Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
                         break;
                     case FAILED:
+                        setProgress(false);
                         Toast.makeText(getActivity(), R.string.failed_connect, Toast.LENGTH_SHORT).show();
                         break;
                 }
@@ -72,13 +65,18 @@ public class ElectionsFragment extends Fragment {
         });
 
         viewModel.getAllElections().observe(this, electionsModels -> {
-
             electionsAdapter = new ElectionsAdapter(getActivity(), electionsModels);
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(electionsAdapter);
         });
+    }
 
-        swipeToRefresh.setRefreshing(false);
+    private void setProgress(boolean refresh) {
+        if (refresh) {
+            swipeToRefresh.setRefreshing(true);
+        } else {
+            swipeToRefresh.setRefreshing(false);
+        }
     }
 
 }

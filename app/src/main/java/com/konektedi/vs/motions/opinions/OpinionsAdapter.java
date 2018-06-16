@@ -62,7 +62,7 @@ public class OpinionsAdapter extends PagedListAdapter<Opinions, RecyclerView.Vie
 
     @Override
     public int getItemViewType(int position) {
-        if (hasExtraRow() && position == getItemCount() - 1) {
+        if (hasExtraRow() && position == getItemCount() + 1) {
             return R.layout.network_state_item;
         } else {
             return R.layout.z_opinion;
@@ -81,7 +81,7 @@ public class OpinionsAdapter extends PagedListAdapter<Opinions, RecyclerView.Vie
                 notifyItemInserted(getItemCount());
             }
         } else if (newExtraRow && previousState != newNetworkState) {
-            notifyItemChanged(getItemCount() - 1);
+            notifyItemChanged(getItemCount() + 1);
         }
     }
 
@@ -89,14 +89,14 @@ public class OpinionsAdapter extends PagedListAdapter<Opinions, RecyclerView.Vie
         private TextView nameView, opinionView, timeView;
 
 
-        public mViewHolder(View itemView) {
+        mViewHolder(View itemView) {
             super(itemView);
             nameView = itemView.findViewById(R.id.nameView);
             opinionView = itemView.findViewById(R.id.opinionView);
             timeView = itemView.findViewById(R.id.timeView);
         }
 
-        public void bindTo(Opinions feed) {
+        void bindTo(Opinions feed) {
             nameView.setText(feed.getName());
             opinionView.setText(feed.getOpinion());
             timeView.setText(feed.getTime());

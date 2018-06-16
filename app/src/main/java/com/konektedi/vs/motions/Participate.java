@@ -67,21 +67,16 @@ public class Participate extends AppCompatActivity {
         assert data != null;
         String motionTexts = data.getString("motion");
         String titleTexts = data.getString("title");
-        final String motion_id = data.getString("motion_id");
+        final int motion_id = data.getInt("motion_id");
 
         setTitle(R.string.motion);
         title.setText(titleTexts);
         motion.setText(motionTexts);
 
-        submitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                submitOpinion(motion_id);
-            }
-        });
+        submitBtn.setOnClickListener(view -> submitOpinion(motion_id));
     }
 
-    private void submitOpinion(String motion_id) {
+    private void submitOpinion(int motion_id) {
         showProgressBar();
         hideKeyboard();
 
@@ -101,7 +96,7 @@ public class Participate extends AppCompatActivity {
 
         map.put("id", StudentPreferences.getPreference(this, ID));
         map.put("opinion", opinion);
-        map.put("motion_id", motion_id);
+        map.put("motion_id", String.valueOf(motion_id));
         map.put("university_id", StudentPreferences.getPreference(this, UNIVERSITY));
         map.put("rank", RANK);
         map.put("vote", vote);
@@ -125,7 +120,6 @@ public class Participate extends AppCompatActivity {
                 Toast.makeText(Participate.this, R.string.error_occurred, Toast.LENGTH_LONG).show();
             }
         });
-
     }
 
     public void goBack() {

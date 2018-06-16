@@ -6,7 +6,7 @@ package com.konektedi.vs.motions;
 
 public class MotionsModel {
     private String title, time, name, participated, motion,no_counts,yes_counts,opinions_counts;
-    int motion_id;
+    private int motion_id;
 
     public String getTitle() {
         return title;

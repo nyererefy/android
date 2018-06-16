@@ -59,12 +59,15 @@ public class CandidatesActivity extends AppCompatActivity {
                         hideProgressBar();
                         break;
                     case NOTHING:
+                        hideProgressBar();
                         showAlert(R.string.no_candidates);
                         break;
                     case ERROR:
+                        hideProgressBar();
                         showAlert(R.string.error);
                         break;
                     case FAILED:
+                        hideProgressBar();
                         showAlert(R.string.failed_connect);
                         break;
                 }

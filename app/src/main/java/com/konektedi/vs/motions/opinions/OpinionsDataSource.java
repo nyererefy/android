@@ -26,7 +26,7 @@ public class OpinionsDataSource extends PageKeyedDataSource<Integer, Opinions> {
     private Executor retryExecutor;
     private int motion_id;
 
-    public OpinionsDataSource(Executor retryExecutor, int motion_id) {
+    OpinionsDataSource(Executor retryExecutor, int motion_id) {
         apiClient = ApiUtilities.getClient();
         networkState = new MutableLiveData();
         initialLoading = new MutableLiveData();

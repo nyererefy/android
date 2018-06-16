@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.konektedi.vs.R;
@@ -24,7 +23,6 @@ public class MotionsFragment extends Fragment {
     MotionsAdapter motionsAdapter;
     RecyclerView recyclerView;
     MotionsViewModel viewModel;
-    ProgressBar progressBar;
     SwipeRefreshLayout swipeToRefresh;
 
 
@@ -44,7 +42,6 @@ public class MotionsFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.motions_fragment, container, false);
 
         recyclerView = rootView.findViewById(R.id.recyclerView);
-        progressBar = rootView.findViewById(R.id.progressBar);
         swipeToRefresh = rootView.findViewById(R.id.swipeToRefresh);
 
         return rootView;
@@ -57,15 +54,17 @@ public class MotionsFragment extends Fragment {
             if (networkStatus != null) {
                 switch (networkStatus) {
                     case LOADING:
-                        progressBar.setVisibility(View.VISIBLE);
+                        setProgress(true);
                         break;
                     case LOADED:
-                        progressBar.setVisibility(View.GONE);
+                        setProgress(false);
                         break;
                     case ERROR:
+                        setProgress(false);
                         Toast.makeText(getActivity(), R.string.error, Toast.LENGTH_SHORT).show();
                         break;
                     case FAILED:
+                        setProgress(false);
                         Toast.makeText(getActivity(), R.string.failed_connect, Toast.LENGTH_SHORT).show();
                         break;
                 }
@@ -79,6 +78,14 @@ public class MotionsFragment extends Fragment {
             recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
             recyclerView.setAdapter(motionsAdapter);
         });
+    }
+
+    private void setProgress(boolean refresh) {
+        if (refresh) {
+            swipeToRefresh.setRefreshing(true);
+        } else {
+            swipeToRefresh.setRefreshing(false);
+        }
     }
 
 }
