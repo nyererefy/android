@@ -138,7 +138,7 @@ public class Login extends AppCompatActivity {
 
     private boolean isReg_noValid(String reg_no) {
         //TODO: Replace this with your own logic
-        return reg_no.length() > 6;
+        return reg_no.length() >= 6;
     }
 
     private boolean isPasswordValid(String password) {

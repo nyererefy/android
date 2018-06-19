@@ -8,5 +8,4 @@ public enum NetworkStatus {
     LOADED,
     ERROR, //error response for instance 500;
     NOTHING //404
-
 }
