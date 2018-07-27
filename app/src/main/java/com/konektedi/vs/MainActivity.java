@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         CoordinatorLayout coordinatorLayout = findViewById(R.id.coordinatorLayout);
+
         TabLayout tabLayout = findViewById(R.id.tabs);
         ViewPager viewPager = findViewById(R.id.container);
         SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());

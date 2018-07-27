@@ -28,7 +28,6 @@ public class Profile extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        nameView = findViewById(R.id.nameView);
         schoolView = findViewById(R.id.schoolView);
         discriptionView = findViewById(R.id.discriptionView);
         cover = findViewById(R.id.cover);
@@ -47,7 +46,6 @@ public class Profile extends AppCompatActivity {
         String description = data.getString(DESCRIPTION);
 
         setTitle(name);
-        nameView.setText(name);
         schoolView.setText(class_name);
         discriptionView.setText(description);
 

@@ -8,10 +8,6 @@ import android.widget.TextView;
 import com.konektedi.vs.R;
 
 import static com.konektedi.vs.utilities.Constants.NAME;
-import static com.konektedi.vs.utilities.Constants.SCHOOL_NAME;
-import static com.konektedi.vs.utilities.Constants.SEX;
-import static com.konektedi.vs.utilities.Constants.USERNAME;
-import static com.konektedi.vs.utilities.Constants.YEAR;
 
 public class StudentProfile extends AppCompatActivity {
 
@@ -25,30 +21,31 @@ public class StudentProfile extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        setTitle(StudentPreferences.getPreference(this, NAME));
 
-        sexView = findViewById(R.id.sexView);
-        schoolView = findViewById(R.id.schoolView);
-        usernameView = findViewById(R.id.usernameView);
-        usernameView = findViewById(R.id.usernameView);
-        nameView = findViewById(R.id.nameView);
+//        sexView = findViewById(R.id.sexView);
+//        schoolView = findViewById(R.id.schoolView);
+//        usernameView = findViewById(R.id.usernameView);
+//        usernameView = findViewById(R.id.usernameView);
+//        nameView = findViewById(R.id.nameView);
 
-        showDetails();
+//        showDetails();
     }
 
-    protected void showDetails() {
-        nameView.setText(StudentPreferences.getPreference(this, NAME));
-
-        String username = "@" + StudentPreferences.getPreference(this, USERNAME);
-        usernameView.setText(username);
-
-        String classIn = StudentPreferences.getPreference(this, SCHOOL_NAME) + " " + StudentPreferences.getPreference(this, YEAR);
-        schoolView.setText(classIn);
-
-        String sex;
-        if (StudentPreferences.getPreference(this, SEX).equals("M"))
-            sex = "Male";
-        else sex = "Female";
-        sexView.setText(sex);
-    }
+//    protected void showDetails() {
+//        nameView.setText(StudentPreferences.getPreference(this, NAME));
+//
+//        String username = "@" + StudentPreferences.getPreference(this, USERNAME);
+//        usernameView.setText(username);
+//
+//        String classIn = StudentPreferences.getPreference(this, SCHOOL_NAME) + " " + StudentPreferences.getPreference(this, YEAR);
+//        schoolView.setText(classIn);
+//
+//        String sex;
+//        if (StudentPreferences.getPreference(this, SEX).equals("M"))
+//            sex = "Male";
+//        else sex = "Female";
+//        sexView.setText(sex);
+//    }
 
 }

@@ -1,6 +1,7 @@
 package com.konektedi.vs.motions;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +15,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.konektedi.vs.MainActivity;
 import com.konektedi.vs.R;
 import com.konektedi.vs.student.StudentPreferences;
 import com.konektedi.vs.utilities.api.ApiUtilities;
@@ -108,7 +110,7 @@ public class Participate extends AppCompatActivity {
                 hideProgressBar();
                 if (response.isSuccessful()) {
                     Toast.makeText(Participate.this, "success", Toast.LENGTH_LONG).show();
-                    goBack();
+                    startActivity(new Intent(Participate.this, MainActivity.class));
                 } else {
                     Toast.makeText(Participate.this, R.string.error_occurred, Toast.LENGTH_LONG).show();
                 }
