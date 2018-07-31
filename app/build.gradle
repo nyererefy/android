@@ -7,14 +7,15 @@ android {
         applicationId "com.konektedi.vs"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 5
-        versionName "2018.1.05"
+        versionCode 6
+        versionName "2018.1.06"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
