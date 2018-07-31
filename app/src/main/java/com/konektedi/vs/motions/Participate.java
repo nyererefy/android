@@ -89,7 +89,6 @@ public class Participate extends AppCompatActivity {
 
         if (selectedId == yesRadioButton.getId()) {
             vote = "yes";
-
         } else if (selectedId == noRadioButton.getId()) {
             vote = "no";
         }
