@@ -13,10 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
-            android:name=".student.LoginActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".MainActivity"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,8 +24,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name" />
+            android:name=".student.LoginActivity"
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".home.elections.ElectionView"
             android:label="@string/title_activity_election_view"
@@ -33,15 +34,15 @@
         <activity
             android:name=".home.results.ResultsView"
             android:label="@string/title_activity_results_view"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".motions.MotionsView"
             android:label="@string/title_activity_motion_view"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".home.candidates.CandidatesActivity"
             android:label="@string/title_activity_candidates"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".home.candidates.Profile"
             android:label="@string/title_activity_candidate_profile"
@@ -49,7 +50,7 @@
         <activity
             android:name=".motions.Participate"
             android:label="@string/title_activity_participate"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".motions.opinions.OpinionsActivity"
             android:label="@string/title_activity_opinions"

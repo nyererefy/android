@@ -11,7 +11,6 @@ import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
 import android.os.AsyncTask
-import com.konektedi.vs.R
 import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -21,6 +20,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.konektedi.vs.MainActivity
+import com.konektedi.vs.R
 import com.konektedi.vs.utilities.api.ApiN
 import com.konektedi.vs.utilities.api.getError
 import com.konektedi.vs.utilities.common.Constants.EMAIL
@@ -29,7 +29,7 @@ import com.konektedi.vs.utilities.common.Constants.IS_LOGGED_IN
 import com.konektedi.vs.utilities.common.Constants.NAME
 import com.konektedi.vs.utilities.common.Constants.NYEREREFY_PREFERENCES
 import com.konektedi.vs.utilities.common.Constants.PASSWORD
-import com.konektedi.vs.utilities.common.Constants.UNIVERSITY_ID
+import com.konektedi.vs.utilities.common.Constants.UNIVERSITY
 import com.konektedi.vs.utilities.common.Constants.USERNAME
 import com.konektedi.vs.utilities.models.User
 import kotlinx.android.synthetic.main.activity_login.*
@@ -243,7 +243,8 @@ class LoginActivity : Activity(), LoaderCallbacks<Cursor> {
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    inner class UserLoginTask internal constructor(private val mEmail: String, private val mPassword: String) : AsyncTask<Void, Void, Boolean>() {
+    inner class UserLoginTask internal constructor(private val mEmail: String, private val mPassword: String)
+        : AsyncTask<Void, Void, Boolean>() {
 
         private var user: User? = null
         private var error = ""
@@ -283,10 +284,10 @@ class LoginActivity : Activity(), LoaderCallbacks<Cursor> {
                 val editor = preferences.edit()
                 editor.clear()
 
-                editor.putString(ID, user?.id!!)
+                editor.putString(ID, user?.id)
                 editor.putString(NAME, user?.name)
                 editor.putString(USERNAME, user?.username)
-                editor.putString(UNIVERSITY_ID, user?.universityId)
+                editor.putString(UNIVERSITY, user?.universityId)
                 editor.putBoolean(IS_LOGGED_IN, true)
 
                 editor.apply()

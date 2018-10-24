@@ -3,7 +3,6 @@ package com.konektedi.vs.utilities.api
 import android.util.Log
 import com.konektedi.vs.MainActivity
 import com.konektedi.vs.home.candidates.CandidatesModel
-import com.konektedi.vs.home.elections.ElectionsModel
 import com.konektedi.vs.motions.MotionsModel
 import com.konektedi.vs.motions.opinions.Opinions
 import com.konektedi.vs.news.NewsModel
@@ -14,6 +13,7 @@ import com.konektedi.vs.utilities.common.Constants.UNIVERSITY
 import com.konektedi.vs.utilities.common.Constants.X_API_KEY
 import com.konektedi.vs.utilities.common.Constants.X_API_KEY_VALUE
 import com.konektedi.vs.utilities.models.Category
+import com.konektedi.vs.utilities.models.Election
 import com.konektedi.vs.utilities.models.Review
 import com.konektedi.vs.utilities.models.User
 import okhttp3.OkHttpClient
@@ -27,9 +27,9 @@ import java.util.concurrent.TimeUnit
 
 interface ApiN {
     @GET("elections/elections")
-    fun getElections(@Query("offset") offset: Int): Call<List<ElectionsModel>>
+    fun getElections(@Query("offset") offset: Int): Call<List<Election>>
 
-    @GET("categoriesList/categoriesList")
+    @GET("categories/categories")
     fun getCategories(
             @Query("election_id") election_id: Int): Call<List<Category>>
 
@@ -100,12 +100,12 @@ interface ApiN {
 
             okHttpClient.addInterceptor { chain ->
                 val request = chain.request()
-                val applicationContext = MainActivity.getContextOfApplication()
+                val applicationContext = MainActivity.contextOfApplication
 
                 val session = request.newBuilder()
                         .addHeader(Constants.ID, grabPreference(applicationContext, Constants.ID))
-                        .addHeader(UNIVERSITY, grabPreference(applicationContext, UNIVERSITY))
-                        .addHeader(X_API_KEY, X_API_KEY_VALUE)
+                        .addHeader(Constants.UNIVERSITY, grabPreference(applicationContext, UNIVERSITY))
+                        .addHeader(Constants.X_API_KEY, X_API_KEY_VALUE)
 
                 chain.proceed(session.build())
             }

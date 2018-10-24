@@ -41,7 +41,7 @@ public class ApiClient {
 
         okHttpClient.addInterceptor(chain -> {
             Request request = chain.request();
-            Context applicationContext = MainActivity.getContextOfApplication();
+            Context applicationContext = MainActivity.contextOfApplication;
 
 
             Request.Builder session = request.newBuilder()

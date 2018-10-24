@@ -5,13 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.GridView;
 
-import com.konektedi.vs.home.categories.CategoriesModel;
 import com.konektedi.vs.R;
 
-import java.util.List;
-
 public class ResultsView extends AppCompatActivity {
-    List<CategoriesModel> categoriesModelList;
     GridView categoriesGridView;
 
     @Override

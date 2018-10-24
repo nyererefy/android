@@ -138,6 +138,7 @@
     <string name="title_activity_reviews">ReviewsActivity</string>
     <string name="error_invalid_email">Invalid Email</string>
     <string name="unknown_error">Unknown error occured Try again later</string>
+    <string name="no_category">No category found</string>
     <!--motions-->
 
 </resources>

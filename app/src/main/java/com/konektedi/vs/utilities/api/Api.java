@@ -2,7 +2,6 @@ package com.konektedi.vs.utilities.api;
 
 
 import com.konektedi.vs.home.candidates.CandidatesModel;
-import com.konektedi.vs.home.elections.ElectionsModel;
 import com.konektedi.vs.motions.MotionsModel;
 import com.konektedi.vs.motions.opinions.Opinions;
 import com.konektedi.vs.news.NewsModel;
@@ -28,9 +27,6 @@ public interface Api {
     @FormUrlEncoded
     @POST("authentication/authentication")
     Call<StudentModel> authenticate(@FieldMap Map<String, String> map);
-
-    @GET("elections/elections")
-    Call<List<ElectionsModel>> getElections();
 
     @GET("categories/categories/{election_id}")
     Call<List<Category>> getCategories(

@@ -13,6 +13,7 @@ object Constants {
     const val USERNAME = "username"
     const val UNIVERSITY = "university"
     const val ELECTION_ID = "election_id"
+    const val ELECTION_TITLE = "election_title"
     const val CATEGORY_ID = "category_id"
     const val CATEGORY = "category"
     const val IS_LOGGED_IN = "is_logged_in"
@@ -28,9 +29,7 @@ object Constants {
     const val FILE = "file"
     const val AUTHOR = "author"
     const val TIME = "time"
-    const val TARGET = "target"
     const val TYPE = "type"
-    const val UNIVERSITY_ID = "university_id"
 
     //Paging Library
     const val INITIAL_LOAD = 5
