@@ -3,7 +3,6 @@ package com.konektedi.vs.utilities.api;
 import android.content.Context;
 
 import com.konektedi.vs.MainActivity;
-import com.konektedi.vs.student.StudentPreferences;
 
 import java.util.concurrent.TimeUnit;
 
@@ -12,6 +11,7 @@ import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+import static com.konektedi.vs.student.UserPreferencesKt.grabPreference;
 import static com.konektedi.vs.utilities.Constants.BRANCH;
 import static com.konektedi.vs.utilities.Constants.ID;
 import static com.konektedi.vs.utilities.Constants.RESIDENCE;
@@ -46,13 +46,13 @@ public class ApiClient {
 
             Request.Builder session = request.newBuilder()
                     //No underscores.....
-                    .addHeader(ID, StudentPreferences.getPreference(applicationContext, ID))
-                    .addHeader(UNIVERSITY, StudentPreferences.getPreference(applicationContext, UNIVERSITY))
-                    .addHeader(BRANCH, StudentPreferences.getPreference(applicationContext, BRANCH))
-                    .addHeader(SCHOOL, StudentPreferences.getPreference(applicationContext, SCHOOL))
-                    .addHeader(YEAR, StudentPreferences.getPreference(applicationContext, YEAR))
-                    .addHeader(RESIDENCE, StudentPreferences.getPreference(applicationContext, RESIDENCE))
-                    .addHeader(SEX, StudentPreferences.getPreference(applicationContext, SEX))
+                    .addHeader(ID, grabPreference(applicationContext, ID))
+                    .addHeader(UNIVERSITY, grabPreference(applicationContext, UNIVERSITY))
+                    .addHeader(BRANCH, grabPreference(applicationContext, BRANCH))
+                    .addHeader(SCHOOL, grabPreference(applicationContext, SCHOOL))
+                    .addHeader(YEAR, grabPreference(applicationContext, YEAR))
+                    .addHeader(RESIDENCE, grabPreference(applicationContext, RESIDENCE))
+                    .addHeader(SEX, grabPreference(applicationContext, SEX))
                     .addHeader(X_API_KEY, X_API_KEY_VALUE);
 
             return chain.proceed(session.build());

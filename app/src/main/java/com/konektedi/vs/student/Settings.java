@@ -23,6 +23,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.konektedi.vs.student.UserPreferencesKt.grabPreference;
+import static com.konektedi.vs.student.UserPreferencesKt.savePreference;
 import static com.konektedi.vs.utilities.Constants.USERNAME;
 
 public class Settings extends AppCompatActivity {
@@ -71,7 +73,7 @@ public class Settings extends AppCompatActivity {
         changeBtn = dialogView.findViewById(R.id.changeBtn);
         newUsername = dialogView.findViewById(R.id.newUsername);
 
-        newUsername.setText(StudentPreferences.getPreference(Settings.this, USERNAME));
+        newUsername.setText(grabPreference(Settings.this, USERNAME));
 
         final AlertDialog dialog = builder.create();
 
@@ -90,7 +92,7 @@ public class Settings extends AppCompatActivity {
                     newUsername.setError(getString(R.string.invalid_username));
                     focusView = newUsername;
                     cancel = true;
-                } else if (new_username.equals(StudentPreferences.getPreference(Settings.this, USERNAME))) {
+                } else if (new_username.equals(grabPreference(Settings.this, USERNAME))) {
                     newUsername.setError(getString(R.string.same_username));
                     focusView = newUsername;
                     cancel = true;
@@ -112,7 +114,7 @@ public class Settings extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 dialog.cancel();
                                 Toast.makeText(Settings.this, R.string.username_changed, Toast.LENGTH_LONG).show();
-                                StudentPreferences.savePreference(Settings.this, USERNAME, new_username);
+                                savePreference(Settings.this, USERNAME, new_username);
                             } else if (response.code() == 404) {
                                 newUsername.setError(getString(R.string.username_taken));
                                 newUsername.requestFocus();

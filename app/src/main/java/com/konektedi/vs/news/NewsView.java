@@ -22,7 +22,6 @@ import android.widget.Toast;
 import com.konektedi.vs.news.comments.CommentsAdapter;
 import com.konektedi.vs.news.comments.CommentsViewModel;
 import com.konektedi.vs.R;
-import com.konektedi.vs.student.StudentPreferences;
 import com.konektedi.vs.utilities.api.ApiUtilities;
 import com.konektedi.vs.utilities.ListItemClickListener;
 
@@ -34,6 +33,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.konektedi.vs.student.UserPreferencesKt.grabPreference;
 import static com.konektedi.vs.utilities.Constants.ID;
 import static com.konektedi.vs.utilities.Constants.UNIVERSITY;
 
@@ -113,10 +113,10 @@ public class NewsView extends AppCompatActivity implements ListItemClickListener
 
         Map<String, String> map = new HashMap<>();
 
-        map.put("id", StudentPreferences.getPreference(this, ID));
+        map.put("id", grabPreference(this, ID));
         map.put("comment", comment);
         map.put("post_id", String.valueOf(post_id));
-        map.put("university_id", StudentPreferences.getPreference(this, UNIVERSITY));
+        map.put("university_id", grabPreference(this, UNIVERSITY));
 
         hideKeyboard();
         commentInput.setText("");

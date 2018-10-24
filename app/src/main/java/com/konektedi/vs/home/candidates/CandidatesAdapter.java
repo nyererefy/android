@@ -19,7 +19,6 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.konektedi.vs.R;
-import com.konektedi.vs.student.StudentPreferences;
 import com.konektedi.vs.utilities.api.ApiUtilities;
 
 import java.net.Inet4Address;
@@ -36,6 +35,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.konektedi.vs.student.UserPreferencesKt.grabPreference;
 import static com.konektedi.vs.utilities.Constants.CLASS_NAME;
 import static com.konektedi.vs.utilities.Constants.COVER;
 import static com.konektedi.vs.utilities.Constants.DESCRIPTION;
@@ -184,8 +184,8 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
 
         Map<String, String> map = new HashMap<>();
 
-        map.put("id", StudentPreferences.getPreference(mContext, ID));
-        map.put("university_id", StudentPreferences.getPreference(mContext, UNIVERSITY));
+        map.put("id", grabPreference(mContext, ID));
+        map.put("university_id", grabPreference(mContext, UNIVERSITY));
         map.put("election_id", candidatesList.get(position).getElection_id());
         map.put("category_id", candidatesList.get(position).getCategory_id());
         map.put("candidate_id", candidatesList.get(position).getCandidate_id());
@@ -252,7 +252,7 @@ public class CandidatesAdapter extends RecyclerView.Adapter<CandidatesAdapter.Vi
     private void voteFor(final int position) {
 
         String candidate_name = candidatesList.get(position).getName();
-        String username = StudentPreferences.getPreference(mContext, USERNAME);
+        String username = grabPreference(mContext, USERNAME);
 
         AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
         builder.setTitle("Thanks " + username + "!");

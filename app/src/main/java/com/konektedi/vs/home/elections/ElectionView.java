@@ -67,28 +67,28 @@ public class ElectionView extends AppCompatActivity {
 
         viewModel = ViewModelProviders.of(this).get(CategoriesViewModel.class);
 
-        viewModel.getNetworkStatus().observe(this, networkStatus -> {
-            if (networkStatus != null) {
-                switch (networkStatus) {
-                    case LOADING:
-                        showProgressBar();
-                        break;
-                    case LOADED:
-                        hideProgressBar();
-                        break;
-                    case ERROR:
-                        hideProgressBar();
-                        Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show();
-                        break;
-                    case FAILED:
-                        hideProgressBar();
-                        Toast.makeText(this, R.string.failed_connect, Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            }
-        });
+//        viewModel.getNetworkState().observe(this, networkStatus -> {
+//            if (networkStatus != null) {
+//                switch (networkStatus) {
+//                    case networkStatus.:
+//                        showProgressBar();
+//                        break;
+//                    case LOADED:
+//                        hideProgressBar();
+//                        break;
+//                    case ERROR:
+//                        hideProgressBar();
+//                        Toast.makeText(this, R.string.error, Toast.LENGTH_SHORT).show();
+//                        break;
+//                    case FAILED:
+//                        hideProgressBar();
+//                        Toast.makeText(this, R.string.failed_connect, Toast.LENGTH_SHORT).show();
+//                        break;
+//                }
+//            }
+//        });
 
-        viewModel.getAllCategories(election_id).observe(this, categoriesModels -> {
+        viewModel.getCategories(1).observe(this, categoriesModels -> {
             categoriesGridView.setAdapter(new CategoriesAdapter(ElectionView.this, categoriesModels));
         });
     }

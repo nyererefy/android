@@ -28,13 +28,14 @@ import com.konektedi.vs.home.elections.ElectionsFragment;
 import com.konektedi.vs.motions.MotionsFragment;
 import com.konektedi.vs.news.NewsFragment;
 import com.konektedi.vs.other.SupportActivityMain;
-import com.konektedi.vs.student.Login;
+import com.konektedi.vs.student.LoginActivity;
 import com.konektedi.vs.student.Settings;
-import com.konektedi.vs.student.StudentPreferences;
 import com.konektedi.vs.student.StudentProfile;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.konektedi.vs.student.UserPreferencesKt.clearPreferences;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -101,8 +102,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.logout:
-                StudentPreferences.clearPreferences(this);
-                intent = new Intent(MainActivity.this, Login.class);
+                clearPreferences(this);
+                intent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(intent);
                 break;
             case R.id.settings:

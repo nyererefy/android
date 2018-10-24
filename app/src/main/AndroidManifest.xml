@@ -14,11 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".student.Login"
+            android:name=".student.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -32,18 +33,15 @@
         <activity
             android:name=".home.results.ResultsView"
             android:label="@string/title_activity_results_view"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".motions.MotionsView"
             android:label="@string/title_activity_motion_view"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".home.candidates.CandidatesActivity"
             android:label="@string/title_activity_candidates"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".home.candidates.Profile"
             android:label="@string/title_activity_candidate_profile"
@@ -51,8 +49,7 @@
         <activity
             android:name=".motions.Participate"
             android:label="@string/title_activity_participate"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".motions.opinions.OpinionsActivity"
             android:label="@string/title_activity_opinions"
@@ -61,27 +58,32 @@
             android:name=".student.StudentProfile"
             android:label="@string/title_activity_profile"
             android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
         <activity
             android:name=".student.Settings"
             android:label="@string/title_activity_settings"
             android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
         <activity
             android:name=".news.NewsView"
             android:label="@string/title_activity_news_view"
             android:theme="@style/AppTheme.NoActionBar">
+
         </activity>
         <activity
             android:name=".other.SupportActivityMain"
             android:label="@string/title_activity_support"
             android:theme="@style/AppTheme">
-        </activity>
 
+        </activity>
         <activity
             android:name=".home.reviews.ReviewsActivity"
             android:label="@string/title_activity_reviews"
             android:theme="@style/AppTheme">
+
         </activity>
     </application>
+
 </manifest>

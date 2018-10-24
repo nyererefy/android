@@ -2,13 +2,13 @@ package com.konektedi.vs.utilities.api;
 
 
 import com.konektedi.vs.home.candidates.CandidatesModel;
-import com.konektedi.vs.home.categories.CategoriesModel;
 import com.konektedi.vs.home.elections.ElectionsModel;
 import com.konektedi.vs.motions.MotionsModel;
 import com.konektedi.vs.motions.opinions.Opinions;
-import com.konektedi.vs.news.comments.Comments;
 import com.konektedi.vs.news.NewsModel;
+import com.konektedi.vs.news.comments.Comments;
 import com.konektedi.vs.student.StudentModel;
+import com.konektedi.vs.utilities.models.Category;
 
 import java.util.List;
 import java.util.Map;
@@ -33,7 +33,7 @@ public interface Api {
     Call<List<ElectionsModel>> getElections();
 
     @GET("categories/categories/{election_id}")
-    Call<List<CategoriesModel>> getCategories(
+    Call<List<Category>> getCategories(
             @Path("election_id") String election_id);
 
     @GET("candidates/candidates/{election_id}/{category_id}")

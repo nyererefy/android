@@ -136,6 +136,8 @@
     <string name="title_activity_help">HelpActivity</string>
     <string name="made_with">Made with Love, Kotlin and Java.</string>
     <string name="title_activity_reviews">ReviewsActivity</string>
+    <string name="error_invalid_email">Invalid Email</string>
+    <string name="unknown_error">Unknown error occured Try again later</string>
     <!--motions-->
 
 </resources>

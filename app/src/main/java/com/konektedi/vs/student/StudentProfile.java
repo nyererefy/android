@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.konektedi.vs.R;
 
+import static com.konektedi.vs.student.UserPreferencesKt.grabPreference;
 import static com.konektedi.vs.utilities.Constants.NAME;
 
 public class StudentProfile extends AppCompatActivity {
@@ -21,7 +22,7 @@ public class StudentProfile extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle(StudentPreferences.getPreference(this, NAME));
+        setTitle(grabPreference(this, NAME));
 
 //        sexView = findViewById(R.id.sexView);
 //        schoolView = findViewById(R.id.schoolView);
@@ -33,16 +34,16 @@ public class StudentProfile extends AppCompatActivity {
     }
 
 //    protected void showDetails() {
-//        nameView.setText(StudentPreferences.getPreference(this, NAME));
+//        nameView.setText(UserPreferences.getPreference(this, NAME));
 //
-//        String username = "@" + StudentPreferences.getPreference(this, USERNAME);
+//        String username = "@" + UserPreferences.getPreference(this, USERNAME);
 //        usernameView.setText(username);
 //
-//        String classIn = StudentPreferences.getPreference(this, SCHOOL_NAME) + " " + StudentPreferences.getPreference(this, YEAR);
+//        String classIn = UserPreferences.getPreference(this, SCHOOL_NAME) + " " + UserPreferences.getPreference(this, YEAR);
 //        schoolView.setText(classIn);
 //
 //        String sex;
-//        if (StudentPreferences.getPreference(this, SEX).equals("M"))
+//        if (UserPreferences.getPreference(this, SEX).equals("M"))
 //            sex = "Male";
 //        else sex = "Female";
 //        sexView.setText(sex);

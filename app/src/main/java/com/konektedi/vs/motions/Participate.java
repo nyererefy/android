@@ -17,7 +17,6 @@ import android.widget.Toast;
 
 import com.konektedi.vs.MainActivity;
 import com.konektedi.vs.R;
-import com.konektedi.vs.student.StudentPreferences;
 import com.konektedi.vs.utilities.api.ApiUtilities;
 
 import java.util.HashMap;
@@ -28,6 +27,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.konektedi.vs.student.UserPreferencesKt.grabPreference;
 import static com.konektedi.vs.utilities.Constants.ID;
 import static com.konektedi.vs.utilities.Constants.RANK;
 import static com.konektedi.vs.utilities.Constants.UNIVERSITY;
@@ -95,10 +95,10 @@ public class Participate extends AppCompatActivity {
 
         Map<String, String> map = new HashMap<>();
 
-        map.put("id", StudentPreferences.getPreference(this, ID));
+        map.put("id", grabPreference(this, ID));
         map.put("opinion", opinion);
         map.put("motion_id", String.valueOf(motion_id));
-        map.put("university_id", StudentPreferences.getPreference(this, UNIVERSITY));
+        map.put("university_id", grabPreference(this, UNIVERSITY));
         map.put("rank", RANK);
         map.put("vote", vote);
 
