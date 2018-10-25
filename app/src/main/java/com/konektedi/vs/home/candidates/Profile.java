@@ -11,10 +11,10 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.konektedi.vs.R;
 
-import static com.konektedi.vs.utilities.Constants.CLASS_NAME;
 import static com.konektedi.vs.utilities.Constants.COVER;
 import static com.konektedi.vs.utilities.Constants.DESCRIPTION;
 import static com.konektedi.vs.utilities.Constants.NAME;
+import static com.konektedi.vs.utilities.common.Constants.CLASS_NAME;
 
 public class Profile extends AppCompatActivity {
     ImageView cover;

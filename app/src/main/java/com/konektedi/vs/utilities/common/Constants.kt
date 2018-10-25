@@ -18,6 +18,10 @@ object Constants {
     const val CATEGORY = "category"
     const val IS_LOGGED_IN = "is_logged_in"
     const val NYEREREFY_PREFERENCES = "nyererefy_preferences"
+    const val CLASS_NAME = "class_name"
+    const val CANDIDATE_ID = "candidate_id"
+    const val DEVICE = "device"
+
 
     //Other
     const val COVER = "cover"

@@ -108,5 +108,4 @@ class ReviewsDataSource(private val retryExecutor: Executor) : PageKeyedDataSour
             initialLoad.postValue(error)
         }
     }
-
 }

@@ -12,10 +12,7 @@ import com.konektedi.vs.utilities.common.Constants
 import com.konektedi.vs.utilities.common.Constants.UNIVERSITY
 import com.konektedi.vs.utilities.common.Constants.X_API_KEY
 import com.konektedi.vs.utilities.common.Constants.X_API_KEY_VALUE
-import com.konektedi.vs.utilities.models.Category
-import com.konektedi.vs.utilities.models.Election
-import com.konektedi.vs.utilities.models.Review
-import com.konektedi.vs.utilities.models.User
+import com.konektedi.vs.utilities.models.*
 import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
@@ -35,8 +32,8 @@ interface ApiN {
 
     @GET("candidates/candidates")
     fun getCandidates(
-            @Query("election_id") election_id: String,
-            @Query("category_id") category_id: String): Call<List<CandidatesModel>>
+            @Query("election_id") election_id: Int,
+            @Query("category_id") category_id: Int): Call<List<Candidate>>
 
     @GET("feeds/feeds")
     fun getReviews(@Query("offset") offset: Int): Call<List<Review>>
