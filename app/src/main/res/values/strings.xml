@@ -139,6 +139,10 @@
     <string name="error_invalid_email">Invalid Email</string>
     <string name="unknown_error">Unknown error occured Try again later</string>
     <string name="no_category">No category found</string>
+    <string name="add_review">Add review on this Category</string>
+    <string name="image">Image</string>
+    <string name="imageButton">imageButton</string>
+    <string name="review_added">Review added successfully</string>
     <!--motions-->
 
 </resources>

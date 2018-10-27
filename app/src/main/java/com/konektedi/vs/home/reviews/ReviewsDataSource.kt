@@ -11,7 +11,7 @@ import retrofit2.Response
 import java.io.IOException
 import java.util.concurrent.Executor
 
-class ReviewsDataSource(private val retryExecutor: Executor) : PageKeyedDataSource<Int, Review>() {
+class ReviewsDataSource(private val retryExecutor: Executor, private val categoryId: Int) : PageKeyedDataSource<Int, Review>() {
 
     // keep a function reference for the retry event
     private var retry: (() -> Any)? = null
@@ -44,7 +44,7 @@ class ReviewsDataSource(private val retryExecutor: Executor) : PageKeyedDataSour
     override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Review>) {
         networkState.postValue(NetworkState.LOADING)
 
-        apiClient.getReviews(params.key).enqueue(
+        apiClient.getReviews(categoryId, params.key).enqueue(
                 object : retrofit2.Callback<List<Review>> {
                     override fun onFailure(call: Call<List<Review>>, t: Throwable) {
                         retry = {
@@ -80,7 +80,7 @@ class ReviewsDataSource(private val retryExecutor: Executor) : PageKeyedDataSour
             params: LoadInitialParams<Int>,
             callback: LoadInitialCallback<Int, Review>) {
 
-        val request = apiClient.getReviews(0)
+        val request = apiClient.getReviews(categoryId, 0)
         initialLoad.postValue(NetworkState.LOADING)
 
         // triggered by a refresh, we better execute sync

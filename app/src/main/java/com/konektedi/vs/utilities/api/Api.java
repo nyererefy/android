@@ -1,13 +1,10 @@
 package com.konektedi.vs.utilities.api;
 
 
-import com.konektedi.vs.home.candidates.CandidatesModel;
 import com.konektedi.vs.motions.MotionsModel;
 import com.konektedi.vs.motions.opinions.Opinions;
 import com.konektedi.vs.news.NewsModel;
 import com.konektedi.vs.news.comments.Comments;
-import com.konektedi.vs.student.StudentModel;
-import com.konektedi.vs.utilities.models.Category;
 
 import java.util.List;
 import java.util.Map;
@@ -17,26 +14,10 @@ import retrofit2.Call;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface Api {
-
-    @Headers("X-API-KEY: oNQ6r&mv#j|m]u")
-    @FormUrlEncoded
-    @POST("authentication/authentication")
-    Call<StudentModel> authenticate(@FieldMap Map<String, String> map);
-
-    @GET("categories/categories/{election_id}")
-    Call<List<Category>> getCategories(
-            @Path("election_id") String election_id);
-
-    @GET("candidates/candidates/{election_id}/{category_id}")
-    Call<List<CandidatesModel>> getCandidates(
-            @Path("election_id") String election_id,
-            @Path("category_id") String category_id);
-
     @FormUrlEncoded
     @POST("votes/vote")
     Call<ResponseBody> vote(@FieldMap Map<String, String> map);

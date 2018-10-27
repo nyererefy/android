@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.konektedi.vs.R
 import com.konektedi.vs.student.grabPreference
@@ -47,6 +48,7 @@ class CandidatesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 .load(candidate.cover)
                 .apply(RequestOptions()
                         .dontAnimate()
+                        .diskCacheStrategy(DiskCacheStrategy.DATA)
                         .placeholder(R.drawable.holder)
                         .error(R.drawable.holder))
                 .into(cover)

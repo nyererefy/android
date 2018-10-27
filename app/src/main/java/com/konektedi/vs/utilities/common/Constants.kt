@@ -16,11 +16,13 @@ object Constants {
     const val ELECTION_TITLE = "election_title"
     const val CATEGORY_ID = "category_id"
     const val CATEGORY = "category"
+    const val REVIEW = "review"
     const val IS_LOGGED_IN = "is_logged_in"
     const val NYEREREFY_PREFERENCES = "nyererefy_preferences"
     const val CLASS_NAME = "class_name"
     const val CANDIDATE_ID = "candidate_id"
     const val DEVICE = "device"
+    const val REQUEST_FOR_ACTIVITY_CODE = 100
 
 
     //Other

@@ -24,13 +24,10 @@ import com.konektedi.vs.home.elections.ElectionsFragment
 import com.konektedi.vs.motions.MotionsFragment
 import com.konektedi.vs.news.NewsFragment
 import com.konektedi.vs.other.SupportActivityMain
-import com.konektedi.vs.student.LoginActivity
-import com.konektedi.vs.student.Settings
-import com.konektedi.vs.student.StudentProfile
+import com.konektedi.vs.student.*
 
 import java.util.ArrayList
 
-import com.konektedi.vs.student.clearPreferences
 import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
@@ -45,6 +42,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        checkLogin()
 
         contextOfApplication = applicationContext
 
@@ -70,6 +69,13 @@ class MainActivity : AppCompatActivity() {
                     .make(coordinatorLayout, "Internet is not connected", Snackbar.LENGTH_LONG)
                     .setAction("Connect") { Toast.makeText(this, "Okey", Toast.LENGTH_SHORT).show() }
             snackbar.show()
+        }
+    }
+
+    private fun checkLogin() {
+        if (!getLoginPreference(this)) {
+            clearPreferences(this)
+            startActivity<LoginActivity>()
         }
     }
 

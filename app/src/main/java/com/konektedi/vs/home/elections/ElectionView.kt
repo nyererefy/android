@@ -17,7 +17,6 @@ import com.konektedi.vs.utilities.common.NetworkState
 import kotlinx.android.synthetic.main.election_view_activity.*
 import kotlinx.android.synthetic.main.election_view_content.*
 import org.jetbrains.anko.longToast
-import org.jetbrains.anko.toast
 
 class ElectionView : AppCompatActivity() {
     private lateinit var viewModel: CategoriesViewModel

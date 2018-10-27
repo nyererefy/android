@@ -1,5 +1,6 @@
 package com.konektedi.vs.home.categories
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -9,9 +10,11 @@ import android.widget.BaseAdapter
 import android.widget.Button
 import com.konektedi.vs.R
 import com.konektedi.vs.home.candidates.CandidatesActivity
+import com.konektedi.vs.home.reviews.ReviewsActivity
 import com.konektedi.vs.utilities.common.Constants.CATEGORY
 import com.konektedi.vs.utilities.common.Constants.CATEGORY_ID
 import com.konektedi.vs.utilities.common.Constants.ELECTION_ID
+import com.konektedi.vs.utilities.common.Constants.REQUEST_FOR_ACTIVITY_CODE
 import com.konektedi.vs.utilities.models.Category
 
 
@@ -54,15 +57,21 @@ class CategoriesAdapter// Gets the context so it can be used later
         btn.id = position
 
         btn.setOnClickListener {
-            val intent = Intent(mContext, CandidatesActivity::class.java)
-            intent.putExtra(ELECTION_ID, list[position].electionId)
-            intent.putExtra(CATEGORY_ID, list[position].categoryId)
-            intent.putExtra(CATEGORY, list[position].category)
+            //Checking if user has already voted for specific category.
+            val intent: Intent? = if (list[position].hasVoted == 0) {
+                Intent(mContext, CandidatesActivity::class.java)
 
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            } else Intent(mContext, ReviewsActivity::class.java)
+
+            intent?.run {
+                putExtra(ELECTION_ID, list[position].electionId)
+                putExtra(CATEGORY_ID, list[position].categoryId)
+                putExtra(CATEGORY, list[position].category)
+
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
             mContext.startActivity(intent)
         }
-
         return btn
     }
 }

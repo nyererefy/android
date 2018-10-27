@@ -2,7 +2,6 @@ package com.konektedi.vs.utilities.api
 
 import android.util.Log
 import com.konektedi.vs.MainActivity
-import com.konektedi.vs.home.candidates.CandidatesModel
 import com.konektedi.vs.motions.MotionsModel
 import com.konektedi.vs.motions.opinions.Opinions
 import com.konektedi.vs.news.NewsModel
@@ -35,8 +34,16 @@ interface ApiN {
             @Query("election_id") election_id: Int,
             @Query("category_id") category_id: Int): Call<List<Candidate>>
 
-    @GET("feeds/feeds")
-    fun getReviews(@Query("offset") offset: Int): Call<List<Review>>
+    @GET("results/results")
+    fun getResult(@Query("category_id") offset: Int): Call<List<Result>>
+
+    @GET("reviews/reviews")
+    fun getReviews(@Query("category_id") category_id: Int,
+                   @Query("offset") offset: Int): Call<List<Review>>
+
+    @FormUrlEncoded
+    @POST("reviews/review")
+    fun postReview(@FieldMap map: Map<String, String>): Call<ResponseBody>
 
     @GET("news/posts")
     fun getNews(@Query("offset") offset: Int): Call<List<NewsModel>>
