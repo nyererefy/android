@@ -18,6 +18,7 @@ import kotlinx.android.synthetic.main.candidates_content.*
 class CandidatesActivity : AppCompatActivity() {
     private lateinit var adapter: CandidatesAdapter
     private lateinit var viewModel: CandidatesViewModel
+    private lateinit var category: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,12 +30,12 @@ class CandidatesActivity : AppCompatActivity() {
         getCandidates()
     }
 
-    private fun getCandidates() {
+    fun getCandidates() {
         val data = intent.extras
 
         val electionId = data.getInt(ELECTION_ID)
         val categoryId = data.getInt(CATEGORY_ID)
-        val category = data?.getString(CATEGORY)
+        category = data?.getString(CATEGORY)!!
         title = category
 
         viewModel = ViewModelProviders.of(this).get(CandidatesViewModel::class.java)
@@ -89,9 +90,7 @@ class CandidatesActivity : AppCompatActivity() {
         error_msg.setHtml(getString(alertText))
     }
 
-    fun finishVote() {
-        super.onBackPressed()
-    }
+    fun passCategoryName() = category
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

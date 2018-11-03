@@ -13,6 +13,8 @@ import com.konektedi.vs.utilities.models.Review
 class ReviewsAdapter(private val mContext: Context, private val retryCallback: () -> Unit)
     : PagedListAdapter<Review, RecyclerView.ViewHolder>(POST_COMPARATOR) {
 
+
+
     private var networkState: NetworkState? = null
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

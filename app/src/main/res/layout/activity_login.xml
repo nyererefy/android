@@ -67,7 +67,7 @@
                 android:layout_height="50dp"
                 android:layout_margin="8dp"
                 android:background="@drawable/rounded_login_input"
-                android:hint="@string/prompt_reg_no"
+                android:hint="@string/email_or_username"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:padding="8dp"

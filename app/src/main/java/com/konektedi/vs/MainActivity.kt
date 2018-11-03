@@ -25,6 +25,7 @@ import com.konektedi.vs.motions.MotionsFragment
 import com.konektedi.vs.news.NewsFragment
 import com.konektedi.vs.other.SupportActivityMain
 import com.konektedi.vs.student.*
+import com.rohitss.uceh.UCEHandler
 
 import java.util.ArrayList
 
@@ -46,6 +47,9 @@ class MainActivity : AppCompatActivity() {
         checkLogin()
 
         contextOfApplication = applicationContext
+
+        //Get clear errors
+        UCEHandler.Builder(applicationContext).build()
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)

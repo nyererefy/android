@@ -155,7 +155,7 @@ class LoginActivity : Activity(), LoaderCallbacks<Cursor> {
     }
 
     private fun isEmailValid(email: String): Boolean {
-        return email.contains("@")
+        return email.length in 3..100
     }
 
     private fun isPasswordValid(password: String): Boolean {

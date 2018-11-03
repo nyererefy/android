@@ -1,25 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.konektedi.vs">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
         android:fullBackupContent="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:name="android.support.multidex.MultiDexApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="m">
 
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -30,10 +41,6 @@
         <activity
             android:name=".home.elections.ElectionView"
             android:label="@string/title_activity_election_view"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".home.results.ResultsView"
-            android:label="@string/title_activity_results_view"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".motions.MotionsView"
@@ -47,6 +54,9 @@
             android:name=".home.candidates.Profile"
             android:label="@string/title_activity_candidate_profile"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" /><!-- optional (needed if default theme has no action bar) -->
         <activity
             android:name=".motions.Participate"
             android:label="@string/title_activity_participate"
@@ -82,8 +92,8 @@
         <activity
             android:name=".home.reviews.ReviewsActivity"
             android:label="@string/title_activity_reviews"
-            android:windowSoftInputMode="stateHidden"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="stateHidden">
 
         </activity>
     </application>

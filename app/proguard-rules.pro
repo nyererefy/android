@@ -20,9 +20,10 @@
 # hide the original source file NAME.
 #-renamesourcefileattribute SourceFile
 
-#RETROFIT------------------------------
-# Retain generic type information for use by reflection by converters and adapters.
--keepattributes Signature
+#--------------------------RETROFIT----------------------------------
+# Retrofit does reflection on generic parameters. InnerClasses is required to use Signature and
+# EnclosingMethod is required to use InnerClasses.
+-keepattributes Signature, InnerClasses, EnclosingMethod
 
 # Retain service method parameters when optimizing.
 -keepclassmembers,allowshrinking,allowobfuscation interface * {
@@ -35,7 +36,13 @@
 # Ignore JSR 305 annotations for embedding nullability information.
 -dontwarn javax.annotation.**
 
-#OkHTTP-------------------------------
+# Guarded by a NoClassDefFoundError try/catch and only used when on the classpath.
+-dontwarn kotlin.Unit
+
+# Top-level functions that can only be used by Kotlin.
+-dontwarn retrofit2.-KotlinExtensions
+
+#-------------------------OkHTTP-------------------------------
 # JSR 305 annotations are for embedding nullability information.
 -dontwarn javax.annotation.**
 
@@ -48,18 +55,37 @@
 # OkHttp platform used only on JVM and when Conscrypt dependency is available.
 -dontwarn okhttp3.internal.platform.ConscryptPlatform
 
-#OKIO--------------------------------
--dontwarn okio.**
+#--------------------------OKIO--------------------------------
+# Animal Sniffer compileOnly dependency to ensure APIs are compatible with older versions of Java.
+-dontwarn org.codehaus.mojo.animal_sniffer.*
 
-#GLIDE-------------------------------
+#--------------------------GLIDE--------------------------------------
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public class * extends com.bumptech.glide.module.AppGlideModule
 -keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
   **[] $VALUES;
   public *;
 }
+#If you're targeting any API level less than Android API 27, also include:
+-dontwarn com.bumptech.glide.load.resource.bitmap.VideoDecoder
+
+#-------------------------GSON -----------------------------------------
+# Gson uses generic type information stored in a class file when working with
+#fields. Proguard removes such information by default, so configure it to keep
+#all of it.
+-keepattributes Signature
+
+# For using GSON @Expose annotation
+-keepattributes *Annotation*
+
+# Gson specific classes
+-keep class sun.misc.Unsafe { *; }
+#-keep class com.google.gson.stream.** { *; }
+
+#ArthurHub/Android-Image-Cropper
+-keep class android.support.v7.widget.** { *; }
 
 #---------######------------
 #I was getting a lot of errors but all them solved by this below
--ignorewarnings
+#-ignorewarnings
 #---------######------------

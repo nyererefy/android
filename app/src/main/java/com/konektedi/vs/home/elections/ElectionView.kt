@@ -10,7 +10,6 @@ import android.view.View
 import com.konektedi.vs.R
 import com.konektedi.vs.home.categories.CategoriesAdapter
 import com.konektedi.vs.home.categories.CategoriesViewModel
-import com.konektedi.vs.home.results.ResultsView
 import com.konektedi.vs.home.reviews.ReviewsActivity
 import com.konektedi.vs.utilities.common.Constants
 import com.konektedi.vs.utilities.common.NetworkState
@@ -34,11 +33,6 @@ class ElectionView : AppCompatActivity() {
     }
 
     private fun initListeners() {
-        resultsViewBtn.setOnClickListener {
-            val intent = Intent(this@ElectionView, ResultsView::class.java)
-            startActivity(intent)
-        }
-
         reviewsViewBtn.setOnClickListener {
             val intent = Intent(this@ElectionView, ReviewsActivity::class.java)
             startActivity(intent)

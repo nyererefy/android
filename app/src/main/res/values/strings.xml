@@ -143,6 +143,7 @@
     <string name="image">Image</string>
     <string name="imageButton">imageButton</string>
     <string name="review_added">Review added successfully</string>
+    <string name="email_or_username">Email or Username</string>
     <!--motions-->
 
 </resources>

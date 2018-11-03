@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.konektedi.vs.R
+import com.konektedi.vs.home.reviews.ReviewsActivity
 import com.konektedi.vs.student.grabPreference
 import com.konektedi.vs.utilities.api.ApiN
 import com.konektedi.vs.utilities.api.ApiUtilities
@@ -132,7 +133,6 @@ class CandidatesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     }
 
     private fun onSuccessfulVote(candidate: Candidate, mContext: Context) {
-
         val candidateName = candidate.name
         val username = grabPreference(mContext, Constants.USERNAME)
 
@@ -141,7 +141,17 @@ class CandidatesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         builder.setMessage("You have successfully voted for $candidateName.")
         builder.setCancelable(false)
 
-        builder.setNeutralButton("Close") { _, _ -> (mContext as CandidatesActivity).finishVote() }
+        builder.setNeutralButton("Close") { _, _ ->
+            (mContext as CandidatesActivity).getCandidates()
+            val intent = Intent(mContext, ReviewsActivity::class.java)
+
+            intent.run {
+                putExtra(ELECTION_ID, candidate.electionId)
+                putExtra(CATEGORY_ID, candidate.categoryId)
+                putExtra(Constants.CATEGORY, mContext.passCategoryName())
+            }
+            mContext.startActivity(intent)
+        }
 
         builder.show()
     }
