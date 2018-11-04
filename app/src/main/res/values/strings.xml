@@ -15,7 +15,7 @@
     <string name="error">Some error occurred! Try again later</string>
     <string name="failed_connect">Failed to connect to the server! Try again later</string>
     <string name="voted">You have already voted for this category.</string>
-    <string name="voting_disabled">Voting is disabled right now!</string>
+    <string name="voting_disabled">Voting is closed right now!</string>
     <string name="no_candidates">No candidates found in this category!</string>
     <string name="on_success_vote">Thanks for your vote!</string>
     <string name="cant_vote_twice">You can not vote twice!</string>

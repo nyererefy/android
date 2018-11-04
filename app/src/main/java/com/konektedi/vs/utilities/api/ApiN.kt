@@ -34,7 +34,7 @@ interface ApiN {
     @GET("candidates/candidates")
     fun getCandidates(
             @Query(ELECTION_ID) election_id: Int,
-            @Query(CATEGORY_ID) category_id: Int): Call<List<Candidate>>
+            @Query(CATEGORY_ID) category_id: Int): Call<Listing>
 
     @GET("results/results")
     fun getResult(@Query(CATEGORY_ID) category_id: Int): Call<List<Result>>

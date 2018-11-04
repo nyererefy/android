@@ -62,23 +62,30 @@ class CandidatesActivity : AppCompatActivity() {
             }
         })
 
-        viewModel.getCandidates(electionId, categoryId)?.observe(this,
+        viewModel.getCandidates(electionId, categoryId).observe(this,
                 Observer {
                     it?.run {
                         val columns = 2
                         recyclerView.layoutManager = GridLayoutManager(this@CandidatesActivity, columns)
-                        adapter = CandidatesAdapter(this@CandidatesActivity, it)
+                        adapter = CandidatesAdapter(this@CandidatesActivity, it.candidates)
                         recyclerView.adapter = adapter
 
-                        vote_btn.visibility = View.VISIBLE
-                        vote_btn.setOnClickListener {
-                            confirmVoting(adapter.passSelectedCandidate())
-                        }
+                        if (it.category.isOpened == 1) {
+                            if (it.category.hasVoted == 0) {
+                                vote_btn.visibility = View.VISIBLE
+                                vote_btn.setOnClickListener { confirmVoting(adapter.passSelectedCandidate()) }
+                            } else showError(R.string.voted)
+                        } else showError(R.string.voting_disabled)
                     }
                 })
     }
 
-    fun confirmVoting(candidate: Candidate?) {
+//    override fun onResume() {
+//        getCandidates()
+//        super.onResume()
+//    }
+
+    private fun confirmVoting(candidate: Candidate?) {
         if (candidate == null) {
             coordinatorLayout.longSnackbar("Select Candidate!")
         } else {
@@ -150,7 +157,7 @@ class CandidatesActivity : AppCompatActivity() {
         }
     }
 
-    fun showError(alertText: Int) {
+    private fun showError(alertText: Int) {
         cardView.visibility = View.VISIBLE
         error_msg.setHtml(getString(alertText))
     }

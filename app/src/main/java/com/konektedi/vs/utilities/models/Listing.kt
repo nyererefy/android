@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 data class Listing(
         @SerializedName("candidates") val candidates: List<Candidate>,
-        @SerializedName("category") val category: Category
+        @SerializedName("states") val category: Category
 )

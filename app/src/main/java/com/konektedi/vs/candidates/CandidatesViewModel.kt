@@ -4,7 +4,7 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import com.konektedi.vs.utilities.common.NetworkState
-import com.konektedi.vs.utilities.models.Candidate
+import com.konektedi.vs.utilities.models.Listing
 
 
 class CandidatesViewModel : ViewModel() {
@@ -12,7 +12,7 @@ class CandidatesViewModel : ViewModel() {
 
     val networkState = repository.mNetworkState
 
-    fun getCandidates(election_id: Int, category_id: Int): LiveData<List<Candidate>>? {
+    fun getCandidates(election_id: Int, category_id: Int): LiveData<Listing> {
         return repository.getCandidates(election_id, category_id)
     }
 

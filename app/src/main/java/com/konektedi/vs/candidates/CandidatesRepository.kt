@@ -7,6 +7,7 @@ import com.konektedi.vs.utilities.api.ApiN
 import com.konektedi.vs.utilities.api.getError
 import com.konektedi.vs.utilities.common.NetworkState
 import com.konektedi.vs.utilities.models.Candidate
+import com.konektedi.vs.utilities.models.Listing
 import okhttp3.ResponseBody
 
 import retrofit2.Call
@@ -17,17 +18,17 @@ class CandidatesRepository {
     private val apiClient = ApiN.create()
     val mNetworkState = MutableLiveData<NetworkState>()
 
-    fun getCandidates(electionId: Int, categoryId: Int): MutableLiveData<List<Candidate>> {
+    fun getCandidates(electionId: Int, categoryId: Int): MutableLiveData<Listing> {
         mNetworkState.value = NetworkState.LOADING
-        val categoriesList = MutableLiveData<List<Candidate>>()
+        val categoriesList = MutableLiveData<Listing>()
 
         apiClient.getCandidates(electionId, categoryId).enqueue(
-                object : Callback<List<Candidate>> {
-                    override fun onFailure(call: Call<List<Candidate>>, t: Throwable) {
+                object : Callback<Listing> {
+                    override fun onFailure(call: Call<Listing>, t: Throwable) {
                         mNetworkState.value = NetworkState.serverMsg(t.message) //TODO Weka failed to connect basi.
                     }
 
-                    override fun onResponse(call: Call<List<Candidate>>, response: Response<List<Candidate>>) {
+                    override fun onResponse(call: Call<Listing>, response: Response<Listing>) {
                         when {
                             response.isSuccessful -> {
                                 mNetworkState.value = NetworkState.LOADED
@@ -60,20 +61,5 @@ class CandidatesRepository {
         })
         return mNetworkState
     }
-
-    //TODO check
-//    fun checkVote(electionId: Int, categoryId: Int): MutableLiveData<List<Candidate>> {
-//        mNetworkState.value = NetworkState.LOADING
-//
-//        apiClient.getCandidates(electionId, categoryId).enqueue(
-//                object : Callback<List<Candidate>> {
-//                    override fun onFailure(call: Call<List<Candidate>>, t: Throwable) {
-//                    }
-//
-//                    override fun onResponse(call: Call<List<Candidate>>, response: Response<List<Candidate>>) {
-//
-//                    }
-//                })
-//    }
 }
 
