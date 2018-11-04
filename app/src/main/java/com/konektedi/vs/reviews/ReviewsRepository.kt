@@ -47,13 +47,13 @@ class ReviewsRepository {
         apiClient.postReview(map).enqueue(
                 object : Callback<ResponseBody> {
                     override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                        mNetworkState.value = NetworkState.FAILED
+                        mNetworkState.value = NetworkState.error(t.message)
                     }
 
                     override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) =
                             when {
                                 response.isSuccessful -> mNetworkState.value = NetworkState.LOADED
-                                else -> mNetworkState.value = NetworkState.error(response.message())
+                                else -> mNetworkState.value = NetworkState.serverMsg(getError(response))
                             }
                 })
         return mNetworkState

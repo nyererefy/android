@@ -105,7 +105,7 @@ class ReviewsActivity : AppCompatActivity(),
                 }
                 else -> {
                     review_input.isEnabled = true
-                    coordinatorLayout.snackbar(getString(R.string.error_occurred))
+                    coordinatorLayout.snackbar(it?.msg.toString())
                     showSubmitProgress(false)
                 }
             }
