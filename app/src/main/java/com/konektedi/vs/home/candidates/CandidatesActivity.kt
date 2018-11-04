@@ -2,6 +2,7 @@ package com.konektedi.vs.home.candidates
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
+import android.os.Build
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
@@ -9,12 +10,18 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import com.konektedi.vs.R
+import com.konektedi.vs.home.reviews.ReviewsActivity
+import com.konektedi.vs.student.grabPreference
+import com.konektedi.vs.utilities.common.Constants
 import com.konektedi.vs.utilities.common.Constants.CATEGORY
 import com.konektedi.vs.utilities.common.Constants.CATEGORY_ID
 import com.konektedi.vs.utilities.common.Constants.ELECTION_ID
 import com.konektedi.vs.utilities.common.NetworkState
+import com.konektedi.vs.utilities.models.Candidate
 import kotlinx.android.synthetic.main.candidates_activity.*
 import kotlinx.android.synthetic.main.candidates_content.*
+import org.jetbrains.anko.*
+import java.util.*
 
 class CandidatesActivity : AppCompatActivity() {
     private lateinit var adapter: CandidatesAdapter
@@ -27,11 +34,12 @@ class CandidatesActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        viewModel = ViewModelProviders.of(this).get(CandidatesViewModel::class.java)
 
         getCandidates()
     }
 
-    fun getCandidates() {
+    private fun getCandidates() {
         val data = intent.extras
 
         val electionId = data.getInt(ELECTION_ID)
@@ -43,7 +51,6 @@ class CandidatesActivity : AppCompatActivity() {
         category = data?.getString(CATEGORY)!!
         title = category
 
-        viewModel = ViewModelProviders.of(this).get(CandidatesViewModel::class.java)
 
         viewModel.networkState.observe(this, Observer { it ->
             when (it) {
@@ -68,15 +75,68 @@ class CandidatesActivity : AppCompatActivity() {
                 })
     }
 
-    fun hideProgressBar() {
+    fun confirmVoting(candidate: Candidate) {
+        val name = candidate.name
+
+        alert("You are about to vote for $name. Do you really want to proceed?",
+                "Confirm action!") {
+            yesButton {
+                voteForCandidate(candidate)
+            }
+            noButton { toast("Action cancelled") }
+            isCancelable = false
+        }.show()
+    }
+
+    private fun voteForCandidate(candidate: Candidate) {
+        val map = HashMap<String, String>()
+
+        map[ELECTION_ID] = candidate.electionId
+        map[CATEGORY_ID] = candidate.categoryId
+        map[Constants.CANDIDATE_ID] = candidate.candidateId
+        map[Constants.DEVICE] = deviceName
+
+        viewModel.submitVote(map).observe(this, Observer {
+            when (it) {
+                NetworkState.LOADING -> showProgressBar()
+                NetworkState.LOADED -> {
+                    hideProgressBar()
+                    onSuccessfulVote(candidate)
+                }
+                else -> {
+                    hideProgressBar()
+                    showAlert(it?.msg)
+                }
+            }
+        })
+    }
+
+    private fun onSuccessfulVote(candidate: Candidate) {
+        val candidateName = candidate.name
+        val username = grabPreference(this, Constants.USERNAME)
+
+        alert("You have successfully voted for $candidateName.",
+                "Thanks $username!") {
+            yesButton {
+                startActivity<ReviewsActivity>(
+                        ELECTION_ID to candidate.electionId,
+                        CATEGORY_ID to candidate.categoryId
+                )
+            }
+            noButton {}
+            isCancelable = false
+        }.show()
+    }
+
+    private fun hideProgressBar() {
         progressBar.visibility = View.GONE
     }
 
-    fun showProgressBar() {
+    private fun showProgressBar() {
         progressBar.visibility = View.VISIBLE
     }
 
-    fun showAlert(alertText: String?) {
+    private fun showAlert(alertText: String?) {
         alertText?.run {
             cardView.visibility = View.VISIBLE
             error_msg.setHtml(alertText)
@@ -89,6 +149,11 @@ class CandidatesActivity : AppCompatActivity() {
     }
 
     fun passCategoryName() = category
+
+    private val deviceName: String
+        get() = (Build.MANUFACTURER
+                + " " + Build.MODEL + " " + Build.VERSION.RELEASE
+                + " " + Build.VERSION_CODES::class.java.fields[Build.VERSION.SDK_INT].name)
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

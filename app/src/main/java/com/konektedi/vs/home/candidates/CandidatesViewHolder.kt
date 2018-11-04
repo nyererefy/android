@@ -58,9 +58,7 @@ class CandidatesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             voteBtn.visibility = View.GONE
             (mContext as CandidatesActivity).showError(R.string.voted)
 
-        } else {
-            voteBtn.setOnClickListener { confirm(candidate, mContext) }
-        }
+        } else voteBtn.visibility = View.VISIBLE
 
         if (candidate.opened == 0) {
             voteBtn.visibility = View.GONE
@@ -69,98 +67,22 @@ class CandidatesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         nameView.setOnClickListener { showProfile(candidate, mContext) }
         cover.setOnClickListener { showProfile(candidate, mContext) }
-        voteBtn.setOnClickListener { confirm(candidate, mContext) }
+        voteBtn.setOnClickListener {
+            (mContext as CandidatesActivity).confirmVoting(candidate)
+        }
     }
 
     private fun showProfile(candidate: Candidate, mContext: Context) {
-        val intent = Intent(mContext, Profile::class.java)
+        val intent = Intent(mContext, Profile::class.java).apply {
 
-        intent.putExtra(Constants.COVER, candidate.cover)
-        intent.putExtra(Constants.NAME, candidate.name)
-        intent.putExtra(Constants.CLASS_NAME, candidate.abbr)
+            putExtra(Constants.COVER, candidate.cover)
+            putExtra(Constants.NAME, candidate.name)
+            putExtra(Constants.CLASS_NAME, candidate.abbr)
 
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        }
         mContext.startActivity(intent)
     }
-
-    private fun confirm(candidate: Candidate, mContext: Context) {
-
-        val name = candidate.name
-
-        val builder = AlertDialog.Builder(mContext)
-        builder.setTitle("Confirm action!")
-        builder.setMessage("You are about to vote for $name. Do you really want to proceed?")
-        builder.setCancelable(false)
-        builder.setPositiveButton("Yes! Vote now") { _, _ -> submitVote(candidate, mContext) }
-
-        builder.setNegativeButton("No") { _, _ -> Toast.makeText(mContext, "Action cancelled", Toast.LENGTH_SHORT).show() }
-
-        builder.show()
-    }
-
-    private fun submitVote(candidate: Candidate, mContext: Context) {
-
-        (mContext as CandidatesActivity).showProgressBar()
-
-        val map = HashMap<String, String>()
-
-        map[ELECTION_ID] = candidate.electionId
-        map[CATEGORY_ID] = candidate.categoryId
-        map[CANDIDATE_ID] = candidate.candidateId
-        map[DEVICE] = deviceName
-
-        val call = ApiN.create().vote(map)
-
-        call.enqueue(object : Callback<ResponseBody> {
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                mContext.hideProgressBar()
-                when {
-                    response.isSuccessful -> {
-                        onSuccessfulVote(candidate, mContext)
-                    }
-                    else -> {
-                        val error = getError(response)!!
-                        mContext.showAlert(error)
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                mContext.hideProgressBar()
-                Toast.makeText(mContext, R.string.error_occurred, Toast.LENGTH_SHORT).show()
-            }
-        })
-    }
-
-    private fun onSuccessfulVote(candidate: Candidate, mContext: Context) {
-        val candidateName = candidate.name
-        val username = grabPreference(mContext, Constants.USERNAME)
-
-        val builder = AlertDialog.Builder(mContext)
-        builder.setTitle("Thanks $username!")
-        builder.setMessage("You have successfully voted for $candidateName.")
-        builder.setCancelable(false)
-
-        builder.setNeutralButton("Close") { _, _ ->
-            (mContext as CandidatesActivity).getCandidates()
-            val intent = Intent(mContext, ReviewsActivity::class.java)
-
-            intent.run {
-                putExtra(ELECTION_ID, candidate.electionId)
-                putExtra(CATEGORY_ID, candidate.categoryId)
-                putExtra(Constants.CATEGORY, mContext.passCategoryName())
-            }
-            mContext.startActivity(intent)
-        }
-
-        builder.show()
-    }
-
-    private val deviceName: String
-        get() = (Build.MANUFACTURER
-                + " " + Build.MODEL + " " + Build.VERSION.RELEASE
-                + " " + Build.VERSION_CODES::class.java.fields[Build.VERSION.SDK_INT].name)
-
 
     companion object {
         fun create(parent: ViewGroup): CandidatesViewHolder {

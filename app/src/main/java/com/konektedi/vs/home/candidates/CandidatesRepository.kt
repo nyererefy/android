@@ -45,6 +45,25 @@ class CandidatesRepository {
         return categoriesList
     }
 
+    fun vote(map: Map<String, String>): MutableLiveData<NetworkState> {
+        val call = apiClient.vote(map)
+        mNetworkState.value = NetworkState.LOADING
+
+        call.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                when {
+                    response.isSuccessful -> mNetworkState.value = NetworkState.LOADED
+                    else -> mNetworkState.value = NetworkState.serverMsg(getError(response))
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                mNetworkState.value = NetworkState.serverMsg(t.message)
+            }
+        })
+        return mNetworkState
+    }
+
     //TODO check
 //    fun checkVote(electionId: Int, categoryId: Int): MutableLiveData<List<Candidate>> {
 //        mNetworkState.value = NetworkState.LOADING
