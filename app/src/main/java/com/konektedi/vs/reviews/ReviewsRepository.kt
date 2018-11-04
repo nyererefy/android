@@ -3,6 +3,7 @@ package com.konektedi.vs.reviews
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
 import com.konektedi.vs.utilities.api.ApiN
+import com.konektedi.vs.utilities.api.getError
 import com.konektedi.vs.utilities.common.NetworkState
 import com.konektedi.vs.utilities.models.Result
 import okhttp3.ResponseBody
@@ -22,20 +23,17 @@ class ReviewsRepository {
         apiClient.getResult(categoryId).enqueue(
                 object : Callback<List<Result>> {
                     override fun onFailure(call: Call<List<Result>>, t: Throwable) {
-                        mNetworkState.value = NetworkState.FAILED
+                        mNetworkState.value = NetworkState.error(t.message)
                     }
 
                     override fun onResponse(call: Call<List<Result>>, response: Response<List<Result>>) {
-                        Log.d("ReviewsRepository",response.toString())
                         when {
                             response.isSuccessful -> {
                                 mNetworkState.value = NetworkState.LOADED
                                 votesList.value = response.body()
                             }
-                            response.code() == 404 -> mNetworkState.value = NetworkState.END
-                            else -> {
-                                mNetworkState.postValue(NetworkState.error("error code: ${response.code()}"))
-                            }
+                            else -> mNetworkState.postValue(NetworkState.error(getError(response
+                                    as Response<ResponseBody>)))
                         }
                     }
                 })

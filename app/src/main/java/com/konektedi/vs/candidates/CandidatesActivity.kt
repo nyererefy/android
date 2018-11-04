@@ -45,9 +45,6 @@ class CandidatesActivity : AppCompatActivity() {
         val electionId = data.getInt(ELECTION_ID)
         val categoryId = data.getInt(CATEGORY_ID)
 
-        Log.d("categoryId", categoryId.toString())
-        Log.d("electionId", electionId.toString())
-
         category = data?.getString(CATEGORY)!!
         title = category
 
@@ -91,9 +88,9 @@ class CandidatesActivity : AppCompatActivity() {
     private fun voteForCandidate(candidate: Candidate) {
         val map = HashMap<String, String>()
 
-        map[ELECTION_ID] = candidate.electionId
-        map[CATEGORY_ID] = candidate.categoryId
-        map[Constants.CANDIDATE_ID] = candidate.candidateId
+        map[ELECTION_ID] = candidate.electionId.toString()
+        map[CATEGORY_ID] = candidate.categoryId.toString()
+        map[Constants.CANDIDATE_ID] = candidate.candidateId.toString()
         map[Constants.DEVICE] = deviceName
 
         viewModel.submitVote(map).observe(this, Observer {
@@ -119,7 +116,6 @@ class CandidatesActivity : AppCompatActivity() {
                 "Thanks $username!") {
             yesButton {
                 startActivity<ReviewsActivity>(
-                        ELECTION_ID to candidate.electionId,
                         CATEGORY_ID to candidate.categoryId
                 )
             }

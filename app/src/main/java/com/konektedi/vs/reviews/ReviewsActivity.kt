@@ -63,8 +63,9 @@ class ReviewsActivity : AppCompatActivity(),
             when (it) {
                 NetworkState.LOADING -> showProgress(true)
                 NetworkState.LOADED -> showProgress(false)
-                NetworkState.FAILED -> {
-                    coordinatorLayout.longSnackbar(getString(R.string.error_occurred))
+                else -> {
+                    showProgress(false)
+                    coordinatorLayout.longSnackbar(it?.msg.toString())
                 }
             }
         })
