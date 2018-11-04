@@ -1,7 +1,6 @@
-package com.konektedi.vs.home.reviews
+package com.konektedi.vs.reviews
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import android.arch.paging.LivePagedListBuilder

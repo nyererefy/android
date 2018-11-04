@@ -1,11 +1,10 @@
-package com.konektedi.vs.home.reviews
+package com.konektedi.vs.reviews
 
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
 import com.konektedi.vs.utilities.api.ApiN
 import com.konektedi.vs.utilities.common.NetworkState
 import com.konektedi.vs.utilities.models.Result
-import com.konektedi.vs.utilities.models.Review
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback

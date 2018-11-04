@@ -1,4 +1,4 @@
-package com.konektedi.vs.home.reviews
+package com.konektedi.vs.reviews
 
 import android.content.Context
 import android.content.Intent
@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.konektedi.vs.R
-import com.konektedi.vs.home.candidates.Profile
+import com.konektedi.vs.candidates.Profile
 import com.konektedi.vs.utilities.common.Constants
 import com.konektedi.vs.utilities.models.Result
 

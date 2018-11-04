@@ -1,4 +1,4 @@
-package com.konektedi.vs.home.elections
+package com.konektedi.vs.elections
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.PageKeyedDataSource

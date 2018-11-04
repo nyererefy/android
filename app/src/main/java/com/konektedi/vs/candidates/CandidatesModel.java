@@ -1,4 +1,4 @@
-package com.konektedi.vs.home.candidates;
+package com.konektedi.vs.candidates;
 
 /**
  * Created by Sy on b/14/2018.

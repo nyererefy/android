@@ -39,7 +39,7 @@
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".home.elections.ElectionView"
+            android:name="com.konektedi.vs.elections.ElectionView"
             android:label="@string/title_activity_election_view"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -47,11 +47,11 @@
             android:label="@string/title_activity_motion_view"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".home.candidates.CandidatesActivity"
+            android:name="com.konektedi.vs.candidates.CandidatesActivity"
             android:label="@string/title_activity_candidates"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".home.candidates.Profile"
+            android:name="com.konektedi.vs.candidates.Profile"
             android:label="@string/title_activity_candidate_profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -90,7 +90,7 @@
 
         </activity>
         <activity
-            android:name=".home.reviews.ReviewsActivity"
+            android:name="com.konektedi.vs.reviews.ReviewsActivity"
             android:label="@string/title_activity_reviews"
             android:theme="@style/AppTheme"
             android:windowSoftInputMode="stateHidden">

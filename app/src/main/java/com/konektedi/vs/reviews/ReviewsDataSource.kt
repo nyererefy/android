@@ -1,9 +1,8 @@
-package com.konektedi.vs.home.reviews
+package com.konektedi.vs.reviews
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.PageKeyedDataSource
 import com.konektedi.vs.utilities.common.NetworkState
-import com.konektedi.vs.utilities.api.Api
 import com.konektedi.vs.utilities.api.ApiN
 import com.konektedi.vs.utilities.models.Review
 import retrofit2.Call

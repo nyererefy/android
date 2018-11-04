@@ -1,4 +1,4 @@
-package com.konektedi.vs.home.elections
+package com.konektedi.vs.elections
 
 import android.content.Context
 import android.content.Intent

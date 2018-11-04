@@ -1,4 +1,4 @@
-package com.konektedi.vs.home.candidates
+package com.konektedi.vs.candidates
 
 import android.app.Activity
 import android.os.Bundle

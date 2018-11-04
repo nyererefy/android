@@ -1,4 +1,4 @@
-package com.konektedi.vs.home.reviews
+package com.konektedi.vs.reviews
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

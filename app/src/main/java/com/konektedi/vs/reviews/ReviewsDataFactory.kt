@@ -1,4 +1,4 @@
-package com.konektedi.vs.home.reviews
+package com.konektedi.vs.reviews
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.DataSource

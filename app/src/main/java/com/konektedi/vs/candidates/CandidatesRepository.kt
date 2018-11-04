@@ -1,12 +1,9 @@
-package com.konektedi.vs.home.candidates
+package com.konektedi.vs.candidates
 
 
 import android.arch.lifecycle.MutableLiveData
-import android.util.Log
 
-import com.konektedi.vs.utilities.NetworkStatus
 import com.konektedi.vs.utilities.api.ApiN
-import com.konektedi.vs.utilities.api.ApiUtilities
 import com.konektedi.vs.utilities.api.getError
 import com.konektedi.vs.utilities.common.NetworkState
 import com.konektedi.vs.utilities.models.Candidate

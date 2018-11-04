@@ -1,4 +1,4 @@
-package com.konektedi.vs.home.categories
+package com.konektedi.vs.categories
 
 import android.arch.lifecycle.MutableLiveData
 import com.konektedi.vs.utilities.api.ApiN

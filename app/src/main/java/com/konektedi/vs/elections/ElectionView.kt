@@ -1,4 +1,4 @@
-package com.konektedi.vs.home.elections
+package com.konektedi.vs.elections
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -8,9 +8,9 @@ import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
 import com.konektedi.vs.R
-import com.konektedi.vs.home.categories.CategoriesAdapter
-import com.konektedi.vs.home.categories.CategoriesViewModel
-import com.konektedi.vs.home.reviews.ReviewsActivity
+import com.konektedi.vs.categories.CategoriesAdapter
+import com.konektedi.vs.categories.CategoriesViewModel
+import com.konektedi.vs.reviews.ReviewsActivity
 import com.konektedi.vs.utilities.common.Constants
 import com.konektedi.vs.utilities.common.NetworkState
 import kotlinx.android.synthetic.main.election_view_activity.*

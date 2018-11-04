@@ -1,6 +1,5 @@
-package com.konektedi.vs.home.categories
+package com.konektedi.vs.categories
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -9,12 +8,11 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.Button
 import com.konektedi.vs.R
-import com.konektedi.vs.home.candidates.CandidatesActivity
-import com.konektedi.vs.home.reviews.ReviewsActivity
+import com.konektedi.vs.candidates.CandidatesActivity
+import com.konektedi.vs.reviews.ReviewsActivity
 import com.konektedi.vs.utilities.common.Constants.CATEGORY
 import com.konektedi.vs.utilities.common.Constants.CATEGORY_ID
 import com.konektedi.vs.utilities.common.Constants.ELECTION_ID
-import com.konektedi.vs.utilities.common.Constants.REQUEST_FOR_ACTIVITY_CODE
 import com.konektedi.vs.utilities.models.Category
 
 

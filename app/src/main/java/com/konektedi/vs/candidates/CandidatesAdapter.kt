@@ -1,4 +1,4 @@
-package com.konektedi.vs.home.candidates
+package com.konektedi.vs.candidates
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView

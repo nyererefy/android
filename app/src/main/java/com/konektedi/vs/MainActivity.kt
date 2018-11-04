@@ -1,7 +1,6 @@
 package com.konektedi.vs
 
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.os.Bundle
@@ -20,7 +19,7 @@ import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
 
-import com.konektedi.vs.home.elections.ElectionsFragment
+import com.konektedi.vs.elections.ElectionsFragment
 import com.konektedi.vs.motions.MotionsFragment
 import com.konektedi.vs.news.NewsFragment
 import com.konektedi.vs.other.SupportActivityMain

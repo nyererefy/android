@@ -1,4 +1,4 @@
-package com.konektedi.vs.home.elections
+package com.konektedi.vs.elections
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -9,12 +9,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 
 import com.konektedi.vs.R
 import com.konektedi.vs.utilities.ListItemClickListener
-import com.konektedi.vs.utilities.NetworkStatus
-import kotlinx.android.synthetic.main.elections_fragment.*
 
 class ElectionsFragment : Fragment(), ListItemClickListener, Function0<Unit> {
 

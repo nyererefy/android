@@ -1,4 +1,4 @@
-package com.konektedi.vs.home.elections
+package com.konektedi.vs.elections
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Transformations
