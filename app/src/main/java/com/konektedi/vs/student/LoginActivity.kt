@@ -284,10 +284,10 @@ class LoginActivity : Activity(), LoaderCallbacks<Cursor> {
                 val editor = preferences.edit()
                 editor.clear()
 
-                editor.putString(ID, user?.id)
+                editor.putString(ID, user?.id.toString())
                 editor.putString(NAME, user?.name)
                 editor.putString(USERNAME, user?.username)
-                editor.putString(UNIVERSITY, user?.universityId)
+                editor.putString(UNIVERSITY, user?.universityId.toString())
                 editor.putBoolean(IS_LOGGED_IN, true)
 
                 editor.apply()

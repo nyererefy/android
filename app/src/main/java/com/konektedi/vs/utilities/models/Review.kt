@@ -4,8 +4,8 @@ import com.google.gson.annotations.SerializedName
 
 data class Review(
         @SerializedName("review") val review: String,
-        @SerializedName("review_id") val reviewId: String,
+        @SerializedName("review_id") val reviewId: Int,
         @SerializedName("time") val time: String,
         @SerializedName("username") val username: String,
-        @SerializedName("id") val id: String
+        @SerializedName("id") val id: Int
 )
