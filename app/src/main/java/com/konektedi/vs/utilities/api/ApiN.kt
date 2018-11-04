@@ -8,6 +8,8 @@ import com.konektedi.vs.news.NewsModel
 import com.konektedi.vs.news.comments.Comments
 import com.konektedi.vs.student.grabPreference
 import com.konektedi.vs.utilities.common.Constants
+import com.konektedi.vs.utilities.common.Constants.CATEGORY_ID
+import com.konektedi.vs.utilities.common.Constants.ELECTION_ID
 import com.konektedi.vs.utilities.common.Constants.UNIVERSITY
 import com.konektedi.vs.utilities.common.Constants.X_API_KEY
 import com.konektedi.vs.utilities.common.Constants.X_API_KEY_VALUE
@@ -27,18 +29,18 @@ interface ApiN {
 
     @GET("categories/categories")
     fun getCategories(
-            @Query("election_id") election_id: Int): Call<List<Category>>
+            @Query(ELECTION_ID) election_id: Int): Call<List<Category>>
 
     @GET("candidates/candidates")
     fun getCandidates(
-            @Query("election_id") election_id: Int,
-            @Query("category_id") category_id: Int): Call<List<Candidate>>
+            @Query(ELECTION_ID) election_id: Int,
+            @Query(CATEGORY_ID) category_id: Int): Call<List<Candidate>>
 
     @GET("results/results")
-    fun getResult(@Query("category_id") offset: Int): Call<List<Result>>
+    fun getResult(@Query(CATEGORY_ID) category_id: Int): Call<List<Result>>
 
     @GET("reviews/reviews")
-    fun getReviews(@Query("category_id") category_id: Int,
+    fun getReviews(@Query(CATEGORY_ID) category_id: Int,
                    @Query("offset") offset: Int): Call<List<Review>>
 
     @FormUrlEncoded
@@ -91,16 +93,11 @@ interface ApiN {
 
         fun create(): ApiN {
             val logger = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
-                Log.d("API", it)
+                Log.d("URL", it)
             })
             logger.level = HttpLoggingInterceptor.Level.BASIC
 
             val okHttpClient = OkHttpClient.Builder()
-
-            okHttpClient.connectTimeout(20, TimeUnit.SECONDS)
-            okHttpClient.readTimeout(20, TimeUnit.SECONDS)
-            okHttpClient.writeTimeout(20, TimeUnit.SECONDS)
-            okHttpClient.retryOnConnectionFailure(true)
 
             okHttpClient.addInterceptor { chain ->
                 val request = chain.request()

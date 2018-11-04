@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import com.konektedi.vs.R
@@ -35,6 +36,10 @@ class CandidatesActivity : AppCompatActivity() {
 
         val electionId = data.getInt(ELECTION_ID)
         val categoryId = data.getInt(CATEGORY_ID)
+
+        Log.d("categoryId", categoryId.toString())
+        Log.d("electionId", electionId.toString())
+
         category = data?.getString(CATEGORY)!!
         title = category
 
@@ -44,29 +49,20 @@ class CandidatesActivity : AppCompatActivity() {
             when (it) {
                 NetworkState.LOADING -> showProgressBar()
                 NetworkState.LOADED -> hideProgressBar()
-                NetworkState.END -> {
+                else -> {
                     hideProgressBar()
-                    showAlert(getString(R.string.no_candidates))
-                }
-                NetworkState.ERROR -> {
-                    hideProgressBar()
-                    showAlert(getString(R.string.error))
-                }
-                NetworkState.FAILED -> {
-                    hideProgressBar()
-                    showAlert(getString(R.string.failed_connect))
+                    showAlert(it?.msg)
                 }
             }
         })
 
         viewModel.getCandidates(electionId, categoryId)?.observe(this,
-                Observer { candidatesList ->
-                    candidatesList?.run {
-                        val numberOfColumns = 2
-                        recyclerView.layoutManager = GridLayoutManager(this@CandidatesActivity, numberOfColumns)
-                        adapter = CandidatesAdapter(this@CandidatesActivity, candidatesList)
+                Observer {
+                    it?.run {
+                        val columns = 2
+                        recyclerView.layoutManager = GridLayoutManager(this@CandidatesActivity, columns)
+                        adapter = CandidatesAdapter(this@CandidatesActivity, it)
                         recyclerView.adapter = adapter
-
                         //TODO Use only this btn and radioButtons for selecting candidate.
                     }
                 })
@@ -80,9 +76,11 @@ class CandidatesActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
     }
 
-    fun showAlert(alertText: String) {
-        cardView.visibility = View.VISIBLE
-        error_msg.setHtml(alertText)
+    fun showAlert(alertText: String?) {
+        alertText?.run {
+            cardView.visibility = View.VISIBLE
+            error_msg.setHtml(alertText)
+        }
     }
 
     fun showError(alertText: Int) {

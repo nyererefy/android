@@ -45,7 +45,7 @@ class ReviewsViewModel : ViewModel() {
     private val repo = ReviewsRepository()
     val mNetworkState = repo.mNetworkState
 
-    fun getVotes(categoryId: Int): MutableLiveData<List<Result>> {
+    fun getVotes(categoryId: Int): LiveData<List<Result>> {
         return repo.getVotes(categoryId)
     }
 

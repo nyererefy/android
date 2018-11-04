@@ -2,12 +2,15 @@ package com.konektedi.vs.home.candidates
 
 
 import android.arch.lifecycle.MutableLiveData
+import android.util.Log
 
 import com.konektedi.vs.utilities.NetworkStatus
 import com.konektedi.vs.utilities.api.ApiN
 import com.konektedi.vs.utilities.api.ApiUtilities
+import com.konektedi.vs.utilities.api.getError
 import com.konektedi.vs.utilities.common.NetworkState
 import com.konektedi.vs.utilities.models.Candidate
+import okhttp3.ResponseBody
 
 import retrofit2.Call
 import retrofit2.Callback
@@ -24,7 +27,7 @@ class CandidatesRepository {
         apiClient.getCandidates(electionId, categoryId).enqueue(
                 object : Callback<List<Candidate>> {
                     override fun onFailure(call: Call<List<Candidate>>, t: Throwable) {
-                        mNetworkState.value = NetworkState.FAILED
+                        mNetworkState.value = NetworkState.serverMsg(t.message) //TODO Weka failed to connect basi.
                     }
 
                     override fun onResponse(call: Call<List<Candidate>>, response: Response<List<Candidate>>) {
@@ -33,9 +36,8 @@ class CandidatesRepository {
                                 mNetworkState.value = NetworkState.LOADED
                                 categoriesList.value = response.body()
                             }
-                            response.code() == 404 -> mNetworkState.value = NetworkState.END
                             else -> {
-                                mNetworkState.postValue(NetworkState.error("error code: ${response.code()}"))
+                                mNetworkState.value = NetworkState.serverMsg(getError(response as Response<ResponseBody>))
                             }
                         }
                     }

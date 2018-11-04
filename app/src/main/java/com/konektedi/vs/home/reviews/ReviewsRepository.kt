@@ -1,6 +1,7 @@
 package com.konektedi.vs.home.reviews
 
 import android.arch.lifecycle.MutableLiveData
+import android.util.Log
 import com.konektedi.vs.utilities.api.ApiN
 import com.konektedi.vs.utilities.common.NetworkState
 import com.konektedi.vs.utilities.models.Result
@@ -26,6 +27,7 @@ class ReviewsRepository {
                     }
 
                     override fun onResponse(call: Call<List<Result>>, response: Response<List<Result>>) {
+                        Log.d("ReviewsRepository",response.toString())
                         when {
                             response.isSuccessful -> {
                                 mNetworkState.value = NetworkState.LOADED

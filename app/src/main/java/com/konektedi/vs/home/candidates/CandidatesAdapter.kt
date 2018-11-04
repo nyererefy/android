@@ -11,7 +11,7 @@ import com.konektedi.vs.utilities.models.Candidate
  * Created by Sy on b/14/2018.
  */
 
-class CandidatesAdapter(private val mContext: Context, private val candidatesList: List<Candidate>?) :
+class CandidatesAdapter(private val mContext: Context, private val candidatesList: List<Candidate>) :
         RecyclerView.Adapter<CandidatesViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CandidatesViewHolder {
@@ -22,11 +22,11 @@ class CandidatesAdapter(private val mContext: Context, private val candidatesLis
     }
 
     override fun getItemCount(): Int {
-        return candidatesList?.size!!
+        return candidatesList.size
     }
 
     override fun onBindViewHolder(holder: CandidatesViewHolder, position: Int) {
-        holder.bind(candidate = candidatesList?.get(position), mContext = mContext)
+        holder.bind(candidate = candidatesList.get(position), mContext = mContext)
     }
 
 }
