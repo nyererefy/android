@@ -7,4 +7,4 @@ data class Category(
         @SerializedName("category_id") val categoryId: Int,
         @SerializedName("election_id") val electionId: Int,
         @SerializedName("voted") val hasVoted: Int
-)
+        )

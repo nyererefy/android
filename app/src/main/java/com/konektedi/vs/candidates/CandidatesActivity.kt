@@ -21,6 +21,7 @@ import com.konektedi.vs.utilities.models.Candidate
 import kotlinx.android.synthetic.main.candidates_activity.*
 import kotlinx.android.synthetic.main.candidates_content.*
 import org.jetbrains.anko.*
+import org.jetbrains.anko.design.longSnackbar
 import java.text.FieldPosition
 import java.util.*
 
@@ -68,22 +69,30 @@ class CandidatesActivity : AppCompatActivity() {
                         recyclerView.layoutManager = GridLayoutManager(this@CandidatesActivity, columns)
                         adapter = CandidatesAdapter(this@CandidatesActivity, it)
                         recyclerView.adapter = adapter
-                        //TODO Use only this btn and radioButtons for selecting candidate.
+
+                        vote_btn.visibility = View.VISIBLE
+                        vote_btn.setOnClickListener {
+                            confirmVoting(adapter.passSelectedCandidate())
+                        }
                     }
                 })
     }
 
-    fun confirmVoting(candidate: Candidate) {
-        val name = candidate.name
+    fun confirmVoting(candidate: Candidate?) {
+        if (candidate == null) {
+            coordinatorLayout.longSnackbar("Select Candidate!")
+        } else {
+            val name = candidate.name
 
-        alert("You are about to vote for $name. Do you really want to proceed?",
-                "Confirm action!") {
-            yesButton {
-                voteForCandidate(candidate)
-            }
-            noButton { toast("Action cancelled") }
-            isCancelable = false
-        }.show()
+            alert("You are about to vote for $name. Do you really want to proceed?",
+                    "Confirm action!") {
+                yesButton {
+                    voteForCandidate(candidate)
+                }
+                noButton { toast("Action cancelled") }
+                isCancelable = false
+            }.show()
+        }
     }
 
     private fun voteForCandidate(candidate: Candidate) {
@@ -144,10 +153,6 @@ class CandidatesActivity : AppCompatActivity() {
     fun showError(alertText: Int) {
         cardView.visibility = View.VISIBLE
         error_msg.setHtml(getString(alertText))
-    }
-
-    fun notifyAdapter() {
-        adapter.notifyDataSetChanged()
     }
 
     private val deviceName: String

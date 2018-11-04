@@ -11,7 +11,5 @@ data class Candidate(
         @SerializedName("election_id") val electionId: Int,
         @SerializedName("name") val name: String,
         @SerializedName("year") val year: String,
-        @SerializedName("abbr") val abbr: String,
-        @SerializedName("opened") val opened: Int = 0,
-        @SerializedName("participated") val participated: Int = 0
+        @SerializedName("abbr") val abbr: String
 )
