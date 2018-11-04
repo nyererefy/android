@@ -52,6 +52,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.konektedi.vs.candidates.Profile"
+            android:exported="true"
             android:label="@string/title_activity_candidate_profile"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
