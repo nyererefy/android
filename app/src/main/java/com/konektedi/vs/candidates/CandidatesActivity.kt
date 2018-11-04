@@ -116,7 +116,8 @@ class CandidatesActivity : AppCompatActivity() {
                 "Thanks $username!") {
             yesButton {
                 startActivity<ReviewsActivity>(
-                        CATEGORY_ID to candidate.categoryId
+                        CATEGORY_ID to candidate.categoryId,
+                        CATEGORY to category
                 )
             }
             noButton {}
@@ -143,8 +144,6 @@ class CandidatesActivity : AppCompatActivity() {
         cardView.visibility = View.VISIBLE
         error_msg.setHtml(getString(alertText))
     }
-
-    fun passCategoryName() = category
 
     private val deviceName: String
         get() = (Build.MANUFACTURER
