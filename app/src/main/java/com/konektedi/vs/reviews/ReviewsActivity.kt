@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.konektedi.vs.R
@@ -27,6 +28,7 @@ class ReviewsActivity : AppCompatActivity(),
     private lateinit var viewModel: ReviewsViewModel
     private lateinit var adapter: ResultsAdapter
     private lateinit var rAdapter: ReviewsAdapter
+    private var categoryId = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +40,7 @@ class ReviewsActivity : AppCompatActivity(),
         viewModel = ViewModelProviders.of(this).get(ReviewsViewModel::class.java)
 
         val data = intent.extras
-        val categoryId = data.getInt(Constants.CATEGORY_ID)
+        categoryId = data.getInt(Constants.CATEGORY_ID)
         val category = data?.getString(Constants.CATEGORY)
         title = category
 
@@ -144,11 +146,21 @@ class ReviewsActivity : AppCompatActivity(),
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.reviews_activity_menu, menu)
+        return true
+    }
+
+    //Todo find a way to get to categories.
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> super.onBackPressed()
         }
         return true
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
 
 }

@@ -23,6 +23,7 @@ fun loadDpThumbnails(view: ImageView, dpUrl: String?, userId: Int, mContext: Con
     view.setOnClickListener { openKonektediProfile(id = userId, mContext = mContext) }
 }
 
+//TODO not done here.
 fun openKonektediProfile(id: Int, mContext: Context) {
     val intent = mContext
             .packageManager

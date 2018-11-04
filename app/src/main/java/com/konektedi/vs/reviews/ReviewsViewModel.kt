@@ -48,6 +48,10 @@ class ReviewsViewModel : ViewModel() {
         return repo.getVotes(categoryId)
     }
 
+    fun refresh(categoryId: Int) {
+        repo.getVotes(categoryId)
+    }
+
     fun submitReview(map: Map<String, String>): LiveData<NetworkState> {
         return repo.postReview(map)
     }

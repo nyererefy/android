@@ -26,7 +26,7 @@ class CandidatesAdapter(private val mContext: Context, private val candidatesLis
     }
 
     override fun onBindViewHolder(holder: CandidatesViewHolder, position: Int) {
-        holder.bind(candidate = candidatesList.get(position), mContext = mContext)
+        holder.bind(candidatesList[position], mContext, position)
     }
 
 }

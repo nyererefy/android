@@ -21,6 +21,7 @@ import com.konektedi.vs.utilities.models.Candidate
 import kotlinx.android.synthetic.main.candidates_activity.*
 import kotlinx.android.synthetic.main.candidates_content.*
 import org.jetbrains.anko.*
+import java.text.FieldPosition
 import java.util.*
 
 class CandidatesActivity : AppCompatActivity() {
@@ -143,6 +144,10 @@ class CandidatesActivity : AppCompatActivity() {
     fun showError(alertText: Int) {
         cardView.visibility = View.VISIBLE
         error_msg.setHtml(getString(alertText))
+    }
+
+    fun notifyAdapter() {
+        adapter.notifyDataSetChanged()
     }
 
     private val deviceName: String
