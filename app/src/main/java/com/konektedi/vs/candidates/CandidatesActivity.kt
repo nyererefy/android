@@ -38,6 +38,7 @@ class CandidatesActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         viewModel = ViewModelProviders.of(this).get(CandidatesViewModel::class.java)
 
+        swipeRefreshLayout.setOnRefreshListener { getCandidates() }
         getCandidates()
     }
 
@@ -53,10 +54,10 @@ class CandidatesActivity : AppCompatActivity() {
 
         viewModel.networkState.observe(this, Observer { it ->
             when (it) {
-                NetworkState.LOADING -> showProgressBar()
-                NetworkState.LOADED -> hideProgressBar()
+                NetworkState.LOADING -> progress(true)
+                NetworkState.LOADED -> progress(false)
                 else -> {
-                    hideProgressBar()
+                    progress(false)
                     showAlert(it?.msg)
                 }
             }
@@ -79,11 +80,6 @@ class CandidatesActivity : AppCompatActivity() {
                     }
                 })
     }
-
-//    override fun onResume() {
-//        getCandidates()
-//        super.onResume()
-//    }
 
     private fun confirmVoting(candidate: Candidate?) {
         if (candidate == null) {
@@ -112,13 +108,13 @@ class CandidatesActivity : AppCompatActivity() {
 
         viewModel.submitVote(map).observe(this, Observer {
             when (it) {
-                NetworkState.LOADING -> showProgressBar()
+                NetworkState.LOADING -> progress(true)
                 NetworkState.LOADED -> {
-                    hideProgressBar()
+                    progress(false)
                     onSuccessfulVote(candidate)
                 }
                 else -> {
-                    hideProgressBar()
+                    progress(false)
                     showAlert(it?.msg)
                 }
             }
@@ -142,12 +138,8 @@ class CandidatesActivity : AppCompatActivity() {
         }.show()
     }
 
-    private fun hideProgressBar() {
-        progressBar.visibility = View.GONE
-    }
-
-    private fun showProgressBar() {
-        progressBar.visibility = View.VISIBLE
+    private fun progress(boolean: Boolean){
+        swipeRefreshLayout.isRefreshing = boolean
     }
 
     private fun showAlert(alertText: String?) {
