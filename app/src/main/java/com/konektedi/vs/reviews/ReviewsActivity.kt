@@ -47,6 +47,11 @@ class ReviewsActivity : AppCompatActivity(),
         getVotes(categoryId)
         getReviews(categoryId)
 
+        swipeToRefresh.setOnRefreshListener {
+            getVotes(categoryId)
+            getReviews(categoryId)
+        }
+
         review_input.addTextChangedListener(textWatcher)
         add_review_btn.setOnClickListener { submitReview(categoryId) }
     }
@@ -155,6 +160,10 @@ class ReviewsActivity : AppCompatActivity(),
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> super.onBackPressed()
+            R.id.refresh -> swipeToRefresh.setOnRefreshListener {
+                getReviews(categoryId)
+                getVotes(categoryId)
+            }
         }
         return true
     }
