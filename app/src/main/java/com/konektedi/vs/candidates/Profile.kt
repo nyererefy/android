@@ -1,6 +1,8 @@
 package com.konektedi.vs.candidates
 
 import android.app.Activity
+import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.MenuItem
@@ -13,9 +15,13 @@ import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.candidate_profile_activity.*
 import android.content.Intent
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.konektedi.vs.utilities.common.Constants.CANDIDATE_ID
 
 
 class Profile : AppCompatActivity() {
+    private lateinit var viewModel: CandidatesViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,6 +30,8 @@ class Profile : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        viewModel = ViewModelProviders.of(this).get(CandidatesViewModel::class.java)
+
         change_cover.setOnClickListener { uploadCover() }
         showDetails()
     }
@@ -50,22 +58,28 @@ class Profile : AppCompatActivity() {
         val data = intent.extras
 
         val coverURL = data!!.getString(COVER)
+        val candidateId = data.getInt(CANDIDATE_ID)
         val name = data.getString(NAME)
         val className = data.getString(CLASS_NAME)
-        val description = data.getString(DESCRIPTION)
 
         title = name
         schoolView.text = className
-        discriptionView.text = description
 
         Glide.with(this)
                 .load(coverURL)
                 .apply(RequestOptions()
+                        .diskCacheStrategy(DiskCacheStrategy.DATA)
                         .dontAnimate()
                         .placeholder(R.drawable.holder)
                         .error(R.drawable.holder))
                 .into(cover)
 
+        viewModel.getCandidate(candidateId).observe(this, Observer {
+            it?.details.run {
+                val details = it!!.details
+                discriptionView.text = details.biography
+            }
+        })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

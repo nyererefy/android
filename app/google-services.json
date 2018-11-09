@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "779436302059",
+    "firebase_url": "https://nyererefy-273a5.firebaseio.com",
+    "project_id": "nyererefy-273a5",
+    "storage_bucket": "nyererefy-273a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:779436302059:android:9e547c6824bb4421",
+        "android_client_info": {
+          "package_name": "com.konektedi.vs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "779436302059-tk2o9peg9iv9f2831itfj96hr797gqvd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAY8JBpfo22UaY98LDeKD215qRQkly8b4w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -6,7 +6,7 @@ data class Candidate(
         @SerializedName("candidate_id") val candidateId: Int,
         @SerializedName("id") val id: Int,
         @SerializedName("category_id") val categoryId: Int,
-        @SerializedName("biography") val biography: Any,
+        @SerializedName("biography") val biography: String? = null,
         @SerializedName("cover") val cover: String,
         @SerializedName("election_id") val electionId: Int,
         @SerializedName("name") val name: String,

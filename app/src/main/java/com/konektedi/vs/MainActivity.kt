@@ -31,6 +31,11 @@ import java.util.ArrayList
 import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity() {
+    companion object {
+        //TO UNDERSTAND WHAT IS DONE HERE
+        //https://stackoverflow.com/questions/7491287/android-how-to-use-sharedpreferences-in-non-activity-class
+        lateinit var contextOfApplication: Context
+    }
 
     private val isNetworkAvailable: Boolean
         get() {
@@ -165,11 +170,5 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         finishAffinity()
         System.exit(0)
-    }
-
-    companion object {
-        //TO UNDERSTAND WHAT IS DONE HERE
-        //https://stackoverflow.com/questions/7491287/android-how-to-use-sharedpreferences-in-non-activity-class
-        lateinit var contextOfApplication: Context
     }
 }

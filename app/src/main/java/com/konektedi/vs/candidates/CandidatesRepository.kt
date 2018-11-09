@@ -6,7 +6,7 @@ import android.arch.lifecycle.MutableLiveData
 import com.konektedi.vs.utilities.api.ApiN
 import com.konektedi.vs.utilities.api.getError
 import com.konektedi.vs.utilities.common.NetworkState
-import com.konektedi.vs.utilities.models.Candidate
+import com.konektedi.vs.utilities.models.CandidateProfile
 import com.konektedi.vs.utilities.models.Listing
 import okhttp3.ResponseBody
 
@@ -17,6 +17,31 @@ import retrofit2.Response
 class CandidatesRepository {
     private val apiClient = ApiN.create()
     val mNetworkState = MutableLiveData<NetworkState>()
+
+    fun getCandidate(electionId: Int): MutableLiveData<CandidateProfile> {
+        mNetworkState.value = NetworkState.LOADING
+        val candidate = MutableLiveData<CandidateProfile>()
+
+        apiClient.getCandidate(electionId).enqueue(
+                object : Callback<CandidateProfile> {
+                    override fun onFailure(call: Call<CandidateProfile>, t: Throwable) {
+                        mNetworkState.value = NetworkState.serverMsg(t.message)
+                    }
+
+                    override fun onResponse(call: Call<CandidateProfile>, response: Response<CandidateProfile>) {
+                        when {
+                            response.isSuccessful -> {
+                                mNetworkState.value = NetworkState.LOADED
+                                candidate.value = response.body()
+                            }
+                            else -> {
+                                mNetworkState.value = NetworkState.serverMsg(getError(response as Response<ResponseBody>))
+                            }
+                        }
+                    }
+                })
+        return candidate
+    }
 
     fun getCandidates(electionId: Int, categoryId: Int): MutableLiveData<Listing> {
         mNetworkState.value = NetworkState.LOADING

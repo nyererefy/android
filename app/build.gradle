@@ -81,11 +81,13 @@ dependencies {
     }
 
     implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.github.sharish:ShimmerRecyclerView:v1.3'
 
-
+    implementation 'com.google.firebase:firebase-core:16.0.5'
 }
 repositories {
     mavenCentral()
 }
 
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.google.gms.google-services'

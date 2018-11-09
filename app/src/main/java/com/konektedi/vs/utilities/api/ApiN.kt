@@ -8,6 +8,7 @@ import com.konektedi.vs.news.NewsModel
 import com.konektedi.vs.news.comments.Comments
 import com.konektedi.vs.student.grabPreference
 import com.konektedi.vs.utilities.common.Constants
+import com.konektedi.vs.utilities.common.Constants.CANDIDATE_ID
 import com.konektedi.vs.utilities.common.Constants.CATEGORY_ID
 import com.konektedi.vs.utilities.common.Constants.ELECTION_ID
 import com.konektedi.vs.utilities.common.Constants.UNIVERSITY
@@ -35,6 +36,9 @@ interface ApiN {
     fun getCandidates(
             @Query(ELECTION_ID) election_id: Int,
             @Query(CATEGORY_ID) category_id: Int): Call<Listing>
+
+    @GET("candidates/candidate")
+    fun getCandidate(@Query(CANDIDATE_ID) candidate_id: Int): Call<CandidateProfile>
 
     @GET("results/results")
     fun getResult(@Query(CATEGORY_ID) category_id: Int): Call<List<Result>>
