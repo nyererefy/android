@@ -60,6 +60,8 @@ class CandidatesAdapter(private val mContext: Context,
             val intent = Intent(mContext, Profile::class.java).apply {
 
                 putExtra(Constants.COVER, candidate.cover)
+                putExtra(Constants.ELECTION_ID, candidate.electionId)
+                putExtra(Constants.ID, candidate.id)
                 putExtra(Constants.CANDIDATE_ID, candidate.candidateId)
                 putExtra(Constants.NAME, candidate.name)
                 putExtra(Constants.CLASS_NAME, candidate.abbr)

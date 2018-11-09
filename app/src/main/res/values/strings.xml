@@ -144,6 +144,7 @@
     <string name="imageButton">imageButton</string>
     <string name="review_added">Review added successfully</string>
     <string name="email_or_username">Email or Username</string>
+    <string name="cover_changed">Cover changed successfully</string>
     <!--motions-->
 
 </resources>

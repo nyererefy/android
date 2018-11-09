@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@android:color/background_light"
     android:fitsSystemWindows="true">
 
@@ -42,15 +43,27 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageButton
-                    android:id="@+id/change_cover"
+                    android:id="@+id/change_cover_btn"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:background="@color/black_overlay"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@id/cover"
                     app:layout_constraintEnd_toEndOf="@id/cover"
                     app:layout_constraintStart_toStartOf="@id/cover"
                     app:layout_constraintTop_toTopOf="@id/cover"
                     app:srcCompat="@drawable/ic_change_photo" />
+
+                <ProgressBar
+                    android:id="@+id/change_progress_bar"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@color/black_overlay"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@id/cover"
+                    app:layout_constraintEnd_toEndOf="@id/cover"
+                    app:layout_constraintStart_toStartOf="@id/cover"
+                    app:layout_constraintTop_toTopOf="@id/cover" />
 
             </android.support.constraint.ConstraintLayout>
 
@@ -80,28 +93,28 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                tools:text="@string/test_name"
                 android:textColor="@color/bootstrapPrimary"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                tools:text="@string/test_name" />
 
             <TextView
                 android:id="@+id/nameView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                tools:text="@string/test_school"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:visibility="gone" />
+                android:visibility="gone"
+                tools:text="@string/test_school" />
 
             <TextView
                 android:id="@+id/discriptionView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="@string/test_title"
                 android:textColor="@color/normalTextColor"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                tools:text="@string/test_title" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

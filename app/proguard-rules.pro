@@ -82,7 +82,7 @@
 -keep class sun.misc.Unsafe { *; }
 #-keep class com.google.gson.stream.** { *; }
 
-#ArthurHub/Android-Image-Cropper
+#-------------------ARTHURHUB/ANDROID-IMAGE-CROPPER----------------------
 -keep class android.support.v7.widget.** { *; }
 
 #---------######------------

@@ -16,6 +16,7 @@ import com.konektedi.vs.utilities.common.Constants.X_API_KEY
 import com.konektedi.vs.utilities.common.Constants.X_API_KEY_VALUE
 import com.konektedi.vs.utilities.models.*
 import okhttp3.OkHttpClient
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
@@ -66,6 +67,9 @@ interface ApiN {
     @FormUrlEncoded
     @POST("votes/vote")
     fun vote(@FieldMap map: Map<String, String>): Call<ResponseBody>
+
+    @POST("candidates/cover")
+    fun postCover(@Body file: RequestBody): Call<ResponseBody>
 
     @GET("motions/opinions/{motion_id}/{offset}")
     fun getOpinions(

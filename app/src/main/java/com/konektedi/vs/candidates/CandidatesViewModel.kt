@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModel
 import com.konektedi.vs.utilities.common.NetworkState
 import com.konektedi.vs.utilities.models.CandidateProfile
 import com.konektedi.vs.utilities.models.Listing
+import okhttp3.RequestBody
 
 
 class CandidatesViewModel : ViewModel() {
@@ -23,6 +24,10 @@ class CandidatesViewModel : ViewModel() {
 
     fun submitVote(map: Map<String, String>): MutableLiveData<NetworkState> {
         return repository.vote(map)
+    }
+
+    fun uploadCover(requestBody: RequestBody): MutableLiveData<NetworkState> {
+        return repository.uploadCover(requestBody)
     }
 }
 

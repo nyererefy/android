@@ -8,6 +8,7 @@ import com.konektedi.vs.utilities.api.getError
 import com.konektedi.vs.utilities.common.NetworkState
 import com.konektedi.vs.utilities.models.CandidateProfile
 import com.konektedi.vs.utilities.models.Listing
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 
 import retrofit2.Call
@@ -17,6 +18,25 @@ import retrofit2.Response
 class CandidatesRepository {
     private val apiClient = ApiN.create()
     val mNetworkState = MutableLiveData<NetworkState>()
+
+    fun uploadCover(requestBody: RequestBody): MutableLiveData<NetworkState> {
+        val call = apiClient.postCover(requestBody)
+        mNetworkState.value = NetworkState.LOADING
+
+        call.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                when {
+                    response.isSuccessful -> mNetworkState.value = NetworkState.LOADED
+                    else -> mNetworkState.value = NetworkState.serverMsg(getError(response))
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                mNetworkState.value = NetworkState.serverMsg(t.message)
+            }
+        })
+        return mNetworkState
+    }
 
     fun getCandidate(electionId: Int): MutableLiveData<CandidateProfile> {
         mNetworkState.value = NetworkState.LOADING
