@@ -15,6 +15,7 @@ import com.konektedi.vs.utilities.common.Constants
 import com.konektedi.vs.utilities.common.NetworkState
 import kotlinx.android.synthetic.main.election_view_activity.*
 import kotlinx.android.synthetic.main.election_view_content.*
+import org.jetbrains.anko.design.longSnackbar
 import org.jetbrains.anko.longToast
 
 class ElectionView : AppCompatActivity() {
@@ -29,7 +30,7 @@ class ElectionView : AppCompatActivity() {
 
         initListeners()
         showCategories()
-
+        swipeRefreshLayout.setOnRefreshListener { showCategories() }
     }
 
     private fun initListeners() {
@@ -61,15 +62,11 @@ class ElectionView : AppCompatActivity() {
 
         viewModel.networkState.observe(this, Observer {
             when (it) {
-                NetworkState.LOADING -> showProgressBar()
-                NetworkState.LOADED -> hideProgressBar()
-                NetworkState.END -> {
-                    longToast(R.string.no_category)
-                    hideProgressBar()
-                }
+                NetworkState.LOADING -> showProgress(true)
+                NetworkState.LOADED -> showProgress(false)
                 else -> {
-                    hideProgressBar()
-                    longToast(R.string.error_occurred)
+                    showProgress(false)
+                    coordinatorLayout.longSnackbar(it?.msg.toString())
                 }
             }
         })
@@ -82,11 +79,7 @@ class ElectionView : AppCompatActivity() {
         return true
     }
 
-    private fun hideProgressBar() {
-        progressBar.visibility = View.GONE
-    }
-
-    private fun showProgressBar() {
-        progressBar.visibility = View.VISIBLE
+    private fun showProgress(boolean: Boolean) {
+        swipeRefreshLayout.isRefreshing = boolean
     }
 }
