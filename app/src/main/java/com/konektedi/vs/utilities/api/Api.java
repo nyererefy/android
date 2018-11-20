@@ -3,7 +3,6 @@ package com.konektedi.vs.utilities.api;
 
 import com.konektedi.vs.motions.MotionsModel;
 import com.konektedi.vs.motions.opinions.Opinions;
-import com.konektedi.vs.news.NewsModel;
 import com.konektedi.vs.news.comments.Comments;
 
 import java.util.List;
@@ -21,9 +20,6 @@ public interface Api {
     @FormUrlEncoded
     @POST("votes/vote")
     Call<ResponseBody> vote(@FieldMap Map<String, String> map);
-
-    @GET("news/posts")
-    Call<List<NewsModel>> getNews();
 
     @GET("motions/motions")
     Call<List<MotionsModel>> getMotions();

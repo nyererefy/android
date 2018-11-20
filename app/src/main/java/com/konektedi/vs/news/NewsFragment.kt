@@ -1,4 +1,4 @@
-package com.konektedi.vs.elections
+package com.konektedi.vs.news
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
@@ -9,22 +9,21 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import com.konektedi.vs.R
 import com.konektedi.vs.utilities.ListItemClickListener
 
-class ElectionsFragment : Fragment(), ListItemClickListener, Function0<Unit> {
+class NewsFragment : Fragment(), ListItemClickListener, Function0<Unit> {
 
-    private lateinit var adapter: ElectionsAdapter
-    private lateinit var viewModel: ElectionsViewModel
+    private lateinit var adapter: NewsAdapter
+    private lateinit var viewModel: NewsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        adapter = ElectionsAdapter(activity!!, this)
-        viewModel = ViewModelProviders.of(this).get(ElectionsViewModel::class.java)
+        adapter = NewsAdapter(activity!!, this)
+        viewModel = ViewModelProviders.of(this).get(NewsViewModel::class.java)
 
-        viewModel.elections.observe(this, Observer { adapter.submitList(it) })
+        viewModel.news.observe(this, Observer { adapter.submitList(it) })
         viewModel.networkState.observe(this, Observer { adapter.setNetworkState(it) })
     }
 

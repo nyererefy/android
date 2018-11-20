@@ -4,7 +4,6 @@ import android.util.Log
 import com.konektedi.vs.MainActivity
 import com.konektedi.vs.motions.MotionsModel
 import com.konektedi.vs.motions.opinions.Opinions
-import com.konektedi.vs.news.NewsModel
 import com.konektedi.vs.news.comments.Comments
 import com.konektedi.vs.student.grabPreference
 import com.konektedi.vs.utilities.common.Constants
@@ -23,7 +22,6 @@ import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
-import java.util.concurrent.TimeUnit
 
 interface ApiN {
     @GET("elections/elections")
@@ -53,7 +51,7 @@ interface ApiN {
     fun postReview(@FieldMap map: Map<String, String>): Call<ResponseBody>
 
     @GET("news/posts")
-    fun getNews(@Query("offset") offset: Int): Call<List<NewsModel>>
+    fun getNews(@Query("offset") offset: Int): Call<List<Post>>
 
     @get:GET("motions/motions")
     val motions: Call<List<MotionsModel>>
