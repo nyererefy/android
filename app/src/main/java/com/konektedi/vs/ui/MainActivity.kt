@@ -1,20 +1,20 @@
 package com.konektedi.vs.ui
 
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.view.Gravity
+import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
-import android.view.Gravity
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
-import com.ashokvarma.bottomnavigation.BottomNavigationBar
-import com.ashokvarma.bottomnavigation.BottomNavigationItem
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
+import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.konektedi.vs.R
 import com.konektedi.vs.elections.ElectionsFragment
 import com.konektedi.vs.motions.MotionsFragment
@@ -26,6 +26,9 @@ import com.konektedi.vs.student.clearPreferences
 import com.konektedi.vs.student.getLoginPreference
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
+import com.konektedi.vs.R.id.bottomNavigation
+import androidx.core.content.ContextCompat
+import com.aurelhubert.ahbottomnavigation.notification.AHNotification
 
 
 class MainActivity : AppCompatActivity() {
@@ -46,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun showPopupMenu(view: View) {
+    private fun showPopupMenu(view: View) {
         PopupMenu(this, view, Gravity.CENTER_HORIZONTAL).run {
             menuInflater.inflate(R.menu.top_menu, menu)
             setOnMenuItemClickListener { item ->
@@ -104,33 +107,36 @@ class MainActivity : AppCompatActivity() {
     private fun initBottomNav() {
         openFragment(ElectionsFragment())
 
-        bottomNavigationBar
-                .addItem(BottomNavigationItem(R.drawable.ic_email, getString(R.string.title_elections)))
-                .addItem(BottomNavigationItem(R.drawable.ic_menu_camera, getString(R.string.title_motions)))
-                .addItem(BottomNavigationItem(R.drawable.ic_dashboard_black_24dp, getString(R.string.title_news)))
-                .addItem(BottomNavigationItem(R.drawable.icon_facebook, getString(R.string.title_more)))
-                .setFirstSelectedPosition(0)
-                .initialise()
+        bottomNavigation.addItem(AHBottomNavigationItem(R.string.title_elections, R.drawable.ic_elections, R.color.election_tab))
+        bottomNavigation.addItem(AHBottomNavigationItem(R.string.title_motions, R.drawable.ic_motions, R.color.motions_tab))
+        bottomNavigation.addItem(AHBottomNavigationItem(R.string.title_news, R.drawable.ic_news, R.color.news_tab))
+        bottomNavigation.addItem(AHBottomNavigationItem(R.string.title_more, R.drawable.ic_user, R.color.more_tab))
 
-        bottomNavigationBar.setTabSelectedListener(object : BottomNavigationBar.OnTabSelectedListener {
-            override fun onTabReselected(position: Int) {
+        bottomNavigation.setOnTabSelectedListener { position, _ ->
+            when (position) {
+                0 -> openFragment(ElectionsFragment())
+                1 -> openFragment(MotionsFragment())
+                2 -> openFragment(NewsFragment())
+                3 -> showPopupMenu(coordinatorLayout)
             }
+            true
+        }
 
-            override fun onTabUnselected(position: Int) {
+        bottomNavigation.accentColor = ContextCompat.getColor(this, R.color.accent_color)
+        bottomNavigation.inactiveColor = ContextCompat.getColor(this, R.color.inactive_color)
 
-            }
+        bottomNavigation.defaultBackgroundColor = Color.parseColor("#FEFEFE")
+        bottomNavigation.titleState = AHBottomNavigation.TitleState.ALWAYS_SHOW
+        bottomNavigation.isColored = true
+        bottomNavigation.currentItem = 0
 
-            override fun onTabSelected(position: Int) {
-                when (position) {
-                    0 -> openFragment(ElectionsFragment())
-                    1 -> openFragment(MotionsFragment())
-                    2 -> openFragment(NewsFragment())
-                    3 -> showPopupMenu(coordinatorLayout)
-                }
-            }
+        val notification = AHNotification.Builder()
+                .setText("8")
+                .setBackgroundColor(ContextCompat.getColor(this@MainActivity, R.color.red))
+                .setTextColor(ContextCompat.getColor(this@MainActivity, R.color.white))
+                .build()
 
-        })
-
+        bottomNavigation.setNotification(notification, 2)
     }
 
     private fun openFragment(fragment: androidx.fragment.app.Fragment) {

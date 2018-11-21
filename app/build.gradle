@@ -17,7 +17,6 @@ android {
     buildTypes {
         debug {
 //            minifyEnabled true
-//            shrinkResources true
 //            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
@@ -82,7 +81,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-core:16.0.1'
 
-    implementation 'com.ashokvarma.android:bottom-navigation-bar:2.1.0'
+    implementation 'com.aurelhubert:ahbottomnavigation:2.1.0'
 
 }
 repositories {
