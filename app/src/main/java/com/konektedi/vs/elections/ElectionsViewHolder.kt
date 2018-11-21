@@ -2,6 +2,9 @@ package com.konektedi.vs.elections
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.support.constraint.ConstraintLayout
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,14 +12,19 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.konektedi.vs.R
 import com.konektedi.vs.utilities.common.Constants
+import com.konektedi.vs.utilities.common.getRandomColor
 import com.konektedi.vs.utilities.models.Election
 
 class ElectionsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     private val electionView: TextView = view.findViewById(R.id.title_view)
+    private val constraintLayout: ConstraintLayout = view.findViewById(R.id.constraintLayout)
 
     fun bind(election: Election?, mContext: Context) {
         electionView.text = election!!.electionTitle
+
+        val color = getRandomColor(mContext)
+        constraintLayout.setBackgroundColor(Color.parseColor(color))
 
         electionView.setOnClickListener {
             val intent = Intent(mContext, ElectionView::class.java)
