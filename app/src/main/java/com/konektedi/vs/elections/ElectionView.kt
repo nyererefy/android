@@ -5,10 +5,11 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
-import android.view.View
 import com.konektedi.vs.R
-import com.konektedi.vs.categories.CategoriesAdapter
+import com.konektedi.vs.categories.CAdapter
 import com.konektedi.vs.categories.CategoriesViewModel
 import com.konektedi.vs.reviews.ReviewsActivity
 import com.konektedi.vs.utilities.common.Constants
@@ -16,7 +17,6 @@ import com.konektedi.vs.utilities.common.NetworkState
 import kotlinx.android.synthetic.main.election_view_activity.*
 import kotlinx.android.synthetic.main.election_view_content.*
 import org.jetbrains.anko.design.longSnackbar
-import org.jetbrains.anko.longToast
 
 class ElectionView : AppCompatActivity() {
     private lateinit var viewModel: CategoriesViewModel
@@ -28,16 +28,8 @@ class ElectionView : AppCompatActivity() {
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        initListeners()
         showCategories()
         swipeRefreshLayout.setOnRefreshListener { showCategories() }
-    }
-
-    private fun initListeners() {
-        reviewsViewBtn.setOnClickListener {
-            val intent = Intent(this@ElectionView, ReviewsActivity::class.java)
-            startActivity(intent)
-        }
     }
 
     private fun showCategories() {
@@ -55,9 +47,10 @@ class ElectionView : AppCompatActivity() {
 
         title = electionTitle
 
-        viewModel.getCategories(electionId).observe(this, Observer { categories ->
-            val adapter = CategoriesAdapter(this@ElectionView, categories)
-            categoriesGridView.adapter = adapter
+        viewModel.getCategories(electionId).observe(this, Observer {
+            recyclerView.layoutManager = LinearLayoutManager(this@ElectionView)
+            val adapter = CAdapter(this@ElectionView, it!!)
+            recyclerView.adapter = adapter
         })
 
         viewModel.networkState.observe(this, Observer {

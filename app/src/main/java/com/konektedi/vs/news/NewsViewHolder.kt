@@ -30,7 +30,7 @@ class NewsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val color = getRandomColor(mContext)
         constraintLayout.setBackgroundColor(Color.parseColor(color))
 
-        titleView.setOnClickListener {
+        itemView.setOnClickListener {
             val intent = Intent(mContext, NewsView::class.java)
             intent.putExtra(Constants.POST_ID, post.postId)
             intent.putExtra(Constants.POST, post.post)

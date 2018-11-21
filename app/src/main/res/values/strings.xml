@@ -147,6 +147,7 @@
     <string name="cover_changed">Cover changed successfully</string>
     <string name="refresh">Refresh</string>
     <string name="opinion_added">Opinion added successfully</string>
+    <string name="title_more">More</string>
     <!--motions-->
 
 </resources>

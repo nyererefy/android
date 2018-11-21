@@ -27,7 +27,7 @@ class MotionsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val color = getRandomColor(mContext)
         constraintLayout.setBackgroundColor(Color.parseColor(color))
 
-        titleView.setOnClickListener {
+        itemView.setOnClickListener {
             val intent = Intent(mContext, MotionViewActivity::class.java)
             intent.putExtra(Constants.MOTION_ID, motion.motionId)
             mContext.startActivity(intent)

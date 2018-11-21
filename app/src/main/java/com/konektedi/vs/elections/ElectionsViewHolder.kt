@@ -26,7 +26,7 @@ class ElectionsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val color = getRandomColor(mContext)
         constraintLayout.setBackgroundColor(Color.parseColor(color))
 
-        electionView.setOnClickListener {
+        itemView.setOnClickListener {
             val intent = Intent(mContext, ElectionView::class.java)
             intent.putExtra(Constants.ELECTION_ID, election.electionId)
             intent.putExtra(Constants.ELECTION_TITLE, election.electionTitle)
