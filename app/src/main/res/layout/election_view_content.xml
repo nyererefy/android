@@ -9,9 +9,59 @@
     tools:context=".elections.ElectionView"
     tools:showIn="@layout/election_view_activity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textCategories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/backgroundGrey"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/categories"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textCategories" />
+
+
+            <TextView
+                android:id="@+id/textStats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/backgroundGrey"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/stats"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/statsRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textStats" />
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 
 </android.support.v4.widget.SwipeRefreshLayout>

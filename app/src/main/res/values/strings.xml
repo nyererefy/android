@@ -148,6 +148,8 @@
     <string name="refresh">Refresh</string>
     <string name="opinion_added">Opinion added successfully</string>
     <string name="title_more">More</string>
+    <string name="categories">Categories</string>
+    <string name="stats">Statistics</string>
     <!--motions-->
 
 </resources>

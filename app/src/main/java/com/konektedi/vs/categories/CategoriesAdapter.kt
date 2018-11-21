@@ -20,10 +20,9 @@ import com.konektedi.vs.utilities.models.Category
  * Created by Sy on b/14/2018.
  */
 
-class CAdapter(private val mContext: Context,
-               private val list: List<Category>) :
-        RecyclerView.Adapter<CAdapter.CategoriesViewHolder>() {
-
+class CategoriesAdapter(private val mContext: Context,
+                        private val list: List<Category>) :
+        RecyclerView.Adapter<CategoriesAdapter.CategoriesViewHolder>() {
 
     inner class CategoriesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val categoryView: TextView = view.findViewById(R.id.categoryView)
@@ -51,7 +50,6 @@ class CAdapter(private val mContext: Context,
                 }
                 mContext.startActivity(intent)
             }
-
         }
     }
 
