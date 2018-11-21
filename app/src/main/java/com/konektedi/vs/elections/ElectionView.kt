@@ -1,11 +1,11 @@
 package com.konektedi.vs.elections
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.util.Log
 import android.view.MenuItem
 import com.konektedi.vs.R
@@ -48,14 +48,14 @@ class ElectionView : AppCompatActivity() {
         title = electionTitle
 
         viewModel.getCategories(electionId).observe(this, Observer {
-            recyclerView.layoutManager = LinearLayoutManager(this@ElectionView)
+            recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this@ElectionView)
             val adapter = CategoriesAdapter(this@ElectionView, it!!)
             recyclerView.adapter = adapter
         })
 
         viewModel.getStats(electionId).observe(this, Observer {
             val columns = 2
-            statsRecyclerView.layoutManager = GridLayoutManager(this@ElectionView, columns)
+            statsRecyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(this@ElectionView, columns)
             val adapter = StatsAdapter(this@ElectionView, it!!)
             statsRecyclerView.adapter = adapter
         })

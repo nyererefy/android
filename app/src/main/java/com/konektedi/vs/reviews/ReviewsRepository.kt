@@ -1,8 +1,7 @@
 package com.konektedi.vs.reviews
 
-import android.arch.lifecycle.MutableLiveData
-import android.util.Log
-import com.konektedi.vs.utilities.api.ApiN
+import androidx.lifecycle.MutableLiveData
+import com.konektedi.vs.utilities.api.Api
 import com.konektedi.vs.utilities.api.getError
 import com.konektedi.vs.utilities.common.NetworkState
 import com.konektedi.vs.utilities.models.Result
@@ -13,7 +12,7 @@ import retrofit2.Response
 
 class ReviewsRepository {
 
-    private val apiClient = ApiN.create()
+    private val apiClient = Api.create()
     val mNetworkState = MutableLiveData<NetworkState>()
 
     fun getVotes(categoryId: Int): MutableLiveData<List<Result>> {

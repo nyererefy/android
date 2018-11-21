@@ -1,9 +1,9 @@
 package com.konektedi.vs.candidates
 
 
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.MutableLiveData
 
-import com.konektedi.vs.utilities.api.ApiN
+import com.konektedi.vs.utilities.api.Api
 import com.konektedi.vs.utilities.api.getError
 import com.konektedi.vs.utilities.common.NetworkState
 import com.konektedi.vs.utilities.models.CandidateProfile
@@ -16,7 +16,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class CandidatesRepository {
-    private val apiClient = ApiN.create()
+    private val apiClient = Api.create()
     val mNetworkState = MutableLiveData<NetworkState>()
 
     fun uploadCover(requestBody: RequestBody): MutableLiveData<NetworkState> {

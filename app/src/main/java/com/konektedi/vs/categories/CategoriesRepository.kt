@@ -1,7 +1,7 @@
 package com.konektedi.vs.categories
 
-import android.arch.lifecycle.MutableLiveData
-import com.konektedi.vs.utilities.api.ApiN
+import androidx.lifecycle.MutableLiveData
+import com.konektedi.vs.utilities.api.Api
 import com.konektedi.vs.utilities.api.getError
 import com.konektedi.vs.utilities.common.NetworkState
 import com.konektedi.vs.utilities.models.Category
@@ -12,7 +12,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class CategoriesRepository {
-    private val apiClient = ApiN.create()
+    private val apiClient = Api.create()
     val mNetworkState = MutableLiveData<NetworkState>()
 
     fun getCategories(electionId: Int): MutableLiveData<List<Category>> {

@@ -1,11 +1,11 @@
 package com.konektedi.vs.reviews
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.Menu
@@ -24,6 +24,7 @@ import org.jetbrains.anko.design.snackbar
 class ReviewsActivity : AppCompatActivity(),
         ListItemClickListener,
         Function0<Unit> {
+
 
     private lateinit var viewModel: ReviewsViewModel
     private lateinit var adapter: ResultsAdapter
@@ -60,7 +61,7 @@ class ReviewsActivity : AppCompatActivity(),
         viewModel.getVotes(categoryId).observe(this, Observer { it ->
             it?.run {
                 val columns = 2
-                votes_recycler_view.layoutManager = GridLayoutManager(this@ReviewsActivity, columns)
+                votes_recycler_view.layoutManager = androidx.recyclerview.widget.GridLayoutManager(this@ReviewsActivity, columns)
                 adapter = ResultsAdapter(this@ReviewsActivity, it)
                 votes_recycler_view.adapter = adapter
             }
@@ -80,7 +81,7 @@ class ReviewsActivity : AppCompatActivity(),
 
     private fun getReviews(categoryId: Int) {
         rAdapter = ReviewsAdapter(this, this)
-        reviews_recycler_view.layoutManager = LinearLayoutManager(this)
+        reviews_recycler_view.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         reviews_recycler_view.adapter = rAdapter
 
         viewModel.getReviews(categoryId).observe(this, Observer { rAdapter.submitList(it) })
@@ -147,10 +148,6 @@ class ReviewsActivity : AppCompatActivity(),
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onRetryClick(view: View?, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.reviews_activity_menu, menu)
         return true
@@ -166,6 +163,10 @@ class ReviewsActivity : AppCompatActivity(),
             }
         }
         return true
+    }
+
+    override fun onRetryClick(view: View, position: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onBackPressed() {

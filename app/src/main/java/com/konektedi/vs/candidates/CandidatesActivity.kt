@@ -1,14 +1,12 @@
 package com.konektedi.vs.candidates
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Build
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.konektedi.vs.R
 import com.konektedi.vs.reviews.ReviewsActivity
 import com.konektedi.vs.student.grabPreference
@@ -22,7 +20,6 @@ import kotlinx.android.synthetic.main.candidates_activity.*
 import kotlinx.android.synthetic.main.candidates_content.*
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.longSnackbar
-import java.text.FieldPosition
 import java.util.*
 
 class CandidatesActivity : AppCompatActivity() {
@@ -67,7 +64,7 @@ class CandidatesActivity : AppCompatActivity() {
                 Observer {
                     it?.run {
                         val columns = 2
-                        recyclerView.layoutManager = GridLayoutManager(this@CandidatesActivity, columns)
+                        recyclerView.layoutManager = androidx.recyclerview.widget.GridLayoutManager(this@CandidatesActivity, columns)
                         adapter = CandidatesAdapter(this@CandidatesActivity, it.candidates)
                         recyclerView.adapter = adapter
 

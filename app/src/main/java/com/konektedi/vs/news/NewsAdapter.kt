@@ -1,9 +1,9 @@
 package com.konektedi.vs.news
 
-import android.arch.paging.PagedListAdapter
+import androidx.paging.PagedListAdapter
 import android.content.Context
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
 import android.view.ViewGroup
 import com.konektedi.vs.R
 import com.konektedi.vs.utilities.common.NetworkState
@@ -11,11 +11,11 @@ import com.konektedi.vs.utilities.common.NetworkStateItemViewHolder
 import com.konektedi.vs.utilities.models.Post
 
 class NewsAdapter(private val mContext: Context, private val retryCallback: () -> Unit)
-    : PagedListAdapter<Post, RecyclerView.ViewHolder>(POST_COMPARATOR) {
+    : PagedListAdapter<Post, androidx.recyclerview.widget.RecyclerView.ViewHolder>(POST_COMPARATOR) {
 
     private var networkState: NetworkState? = null
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
             R.layout.z_post -> (holder as NewsViewHolder).bind(getItem(position), mContext)
             R.layout.network_state_item -> (holder as NetworkStateItemViewHolder).bindTo(
@@ -24,7 +24,7 @@ class NewsAdapter(private val mContext: Context, private val retryCallback: () -
     }
 
     override fun onBindViewHolder(
-            holder: RecyclerView.ViewHolder,
+            holder: androidx.recyclerview.widget.RecyclerView.ViewHolder,
             position: Int,
             payloads: MutableList<Any>) {
         if (payloads.isNotEmpty()) {
@@ -35,7 +35,7 @@ class NewsAdapter(private val mContext: Context, private val retryCallback: () -
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         return when (viewType) {
             R.layout.z_post -> NewsViewHolder.create(parent)
             R.layout.network_state_item -> NetworkStateItemViewHolder.create(parent, retryCallback)

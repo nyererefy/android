@@ -1,6 +1,6 @@
 package com.konektedi.vs.utilities.common
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +16,7 @@ import com.konektedi.vs.R
  */
 class NetworkStateItemViewHolder(view: View,
                                  private val retryCallback: () -> Unit)
-    : RecyclerView.ViewHolder(view) {
+    : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
     private val progressBar = view.findViewById<ProgressBar>(R.id.progress_bar)
     private val retry = view.findViewById<Button>(R.id.retry_button)
     private val errorMsg = view.findViewById<TextView>(R.id.error_msg)

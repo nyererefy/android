@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.support.constraint.ConstraintLayout
-import android.support.v7.widget.RecyclerView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +15,7 @@ import com.konektedi.vs.utilities.common.Constants
 import com.konektedi.vs.utilities.common.getRandomColor
 import com.konektedi.vs.utilities.models.Election
 
-class ElectionsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class ElectionsViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
     private val electionView: TextView = view.findViewById(R.id.title_view)
     private val constraintLayout: ConstraintLayout = view.findViewById(R.id.constraintLayout)

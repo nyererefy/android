@@ -1,7 +1,7 @@
 package com.konektedi.vs.opinions
 
 import android.content.Context
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +9,7 @@ import android.widget.TextView
 import com.konektedi.vs.R
 import com.konektedi.vs.utilities.models.Opinion
 
-class OpinionViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class OpinionViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
     private var nameView: TextView = view.findViewById(R.id.nameView)
     private val opinionView: TextView = view.findViewById(R.id.opinionView)
     private var timeView: TextView = view.findViewById(R.id.timeView)

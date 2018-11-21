@@ -1,11 +1,11 @@
 package com.konektedi.vs.motions
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
 import com.konektedi.vs.R
@@ -71,7 +71,7 @@ class MotionViewActivity : AppCompatActivity(), Function0<Unit> {
     }
 
     private fun getOpinions() {
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
 
         val adapter = OpinionsAdapter(this, this)
 
@@ -79,8 +79,8 @@ class MotionViewActivity : AppCompatActivity(), Function0<Unit> {
 
         oViewModel.networkState.observe(this, Observer { adapter.setNetworkState(it) })
 
-        recyclerView.addItemDecoration(DividerItemDecoration(this,
-                DividerItemDecoration.VERTICAL))
+        recyclerView.addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(this,
+                androidx.recyclerview.widget.DividerItemDecoration.VERTICAL))
         recyclerView.adapter = adapter
     }
 

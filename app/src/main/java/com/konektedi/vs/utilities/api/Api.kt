@@ -1,13 +1,15 @@
 package com.konektedi.vs.utilities.api
 
 import android.util.Log
-import com.konektedi.vs.MainActivity
+import com.konektedi.vs.App.Companion.appContext
+import com.konektedi.vs.ui.MainActivity
 import com.konektedi.vs.student.grabPreference
 import com.konektedi.vs.utilities.common.Constants
 import com.konektedi.vs.utilities.common.Constants.CANDIDATE_ID
 import com.konektedi.vs.utilities.common.Constants.CATEGORY_ID
 import com.konektedi.vs.utilities.common.Constants.ELECTION_ID
 import com.konektedi.vs.utilities.common.Constants.MOTION_ID
+import com.konektedi.vs.utilities.common.Constants.OFFSET
 import com.konektedi.vs.utilities.common.Constants.UNIVERSITY
 import com.konektedi.vs.utilities.common.Constants.X_API_KEY
 import com.konektedi.vs.utilities.common.Constants.X_API_KEY_VALUE
@@ -21,9 +23,9 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
-interface ApiN {
+interface Api {
     @GET("elections/elections")
-    fun getElections(@Query("offset") offset: Int): Call<List<Election>>
+    fun getElections(@Query(OFFSET) offset: Int): Call<List<Election>>
 
     @GET("categories/categories")
     fun getCategories(
@@ -46,26 +48,24 @@ interface ApiN {
 
     @GET("reviews/reviews")
     fun getReviews(@Query(CATEGORY_ID) category_id: Int,
-                   @Query("offset") offset: Int): Call<List<Review>>
+                   @Query(OFFSET) offset: Int): Call<List<Review>>
 
     @FormUrlEncoded
     @POST("reviews/review")
     fun postReview(@FieldMap map: Map<String, String>): Call<ResponseBody>
 
     @GET("news/posts")
-    fun getNews(@Query("offset") offset: Int): Call<List<Post>>
+    fun getNews(@Query(OFFSET) offset: Int): Call<List<Post>>
 
     @GET("motions/motions")
-    fun getMotions(@Query("offset") offset: Int): Call<List<Motion>>
+    fun getMotions(@Query(OFFSET) offset: Int): Call<List<Motion>>
 
     @GET("motions/motion")
     fun getMotion(@Query(MOTION_ID) motion_id: Int): Call<Motion>
 
-    @Headers("X-API-KEY: oNQ6r&mv#j|m]u")
     @FormUrlEncoded
     @POST("authentication/authenticate")
     fun authenticate(@FieldMap map: Map<String, String>): Call<User>
-
 
     @FormUrlEncoded
     @POST("votes/vote")
@@ -84,26 +84,17 @@ interface ApiN {
     fun postOpinion(@FieldMap map: Map<String, String>): Call<ResponseBody>
 
 //    @GET("news/comments/{post_id}/{offset}")
-//    fun getComments(@Path("post_id") post_id: Int, @Path("offset") offset: Int): Call<List<Comments>>
+//    fun getComments(@Path("post_id") post_id: Int, @Path(OFFSET) offset: Int): Call<List<Comments>>
 
     @FormUrlEncoded
     @POST("news/comment")
     fun postComment(@FieldMap map: Map<String, String>): Call<ResponseBody>
 
-    @FormUrlEncoded
-    @POST("settings/password")
-    fun changePassword(@FieldMap map: Map<String, String>): Call<ResponseBody>
-
-    @FormUrlEncoded
-    @POST("settings/username")
-    fun changeUsername(@FieldMap map: Map<String, String>): Call<ResponseBody>
-
-
     companion object {
         //        private const val BASE_URL = "http://vs.konektedi.com/api/v1/"
         private const val BASE_URL = "http://192.168.43.228/konektedi_vs/api/v1/"
 
-        fun create(): ApiN {
+        fun create(): Api {
             val logger = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
                 Log.d("URL", it)
             })
@@ -113,7 +104,7 @@ interface ApiN {
 
             okHttpClient.addInterceptor { chain ->
                 val request = chain.request()
-                val applicationContext = MainActivity.contextOfApplication
+                val applicationContext = appContext
 
                 val session = request.newBuilder()
                         .addHeader(Constants.ID, grabPreference(applicationContext, Constants.ID))
@@ -128,11 +119,11 @@ interface ApiN {
                     .client(okHttpClient.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
-                    .create(ApiN::class.java)
+                    .create(Api::class.java)
         }
 
         //Used only when login
-        fun subClient(): ApiN {
+        fun subClient(): Api {
             val okHttpClient = OkHttpClient.Builder()
 
             okHttpClient.addInterceptor { chain ->
@@ -149,7 +140,7 @@ interface ApiN {
                     .client(okHttpClient.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
-                    .create(ApiN::class.java)
+                    .create(Api::class.java)
         }
     }
 }

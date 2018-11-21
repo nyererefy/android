@@ -2,7 +2,7 @@ package com.konektedi.vs.candidates
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,12 +20,12 @@ import com.konektedi.vs.utilities.models.Candidate
 
 class CandidatesAdapter(private val mContext: Context,
                         private val candidatesList: List<Candidate>) :
-        RecyclerView.Adapter<CandidatesAdapter.CandidatesViewHolder>() {
+        androidx.recyclerview.widget.RecyclerView.Adapter<CandidatesAdapter.CandidatesViewHolder>() {
 
     private var selectedPosition = -1
     private var selectedCandidate: Candidate? = null
 
-    inner class CandidatesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class CandidatesViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
         private val nameView: TextView = view.findViewById(R.id.nameView)
         private val schoolView: TextView = view.findViewById(R.id.schoolView)
         private val cover: ImageView = view.findViewById(R.id.cover)

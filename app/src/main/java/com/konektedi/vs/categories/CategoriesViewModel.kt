@@ -1,7 +1,7 @@
 package com.konektedi.vs.categories
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import com.konektedi.vs.utilities.models.Category
 import com.konektedi.vs.utilities.models.Stat
 

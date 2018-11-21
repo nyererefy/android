@@ -19,9 +19,9 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import com.konektedi.vs.MainActivity
+import com.konektedi.vs.ui.MainActivity
 import com.konektedi.vs.R
-import com.konektedi.vs.utilities.api.ApiN
+import com.konektedi.vs.utilities.api.Api
 import com.konektedi.vs.utilities.api.getError
 import com.konektedi.vs.utilities.common.Constants.EMAIL
 import com.konektedi.vs.utilities.common.Constants.ID
@@ -255,7 +255,7 @@ class LoginActivity : Activity(), LoaderCallbacks<Cursor> {
             map[EMAIL] = mEmail
             map[PASSWORD] = mPassword
 
-            val request = ApiN.subClient().authenticate(map)
+            val request = Api.subClient().authenticate(map)
             try {
                 val response = request.execute()
 

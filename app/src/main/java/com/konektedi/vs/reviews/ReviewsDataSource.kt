@@ -1,9 +1,9 @@
 package com.konektedi.vs.reviews
 
-import android.arch.lifecycle.MutableLiveData
-import android.arch.paging.PageKeyedDataSource
+import androidx.lifecycle.MutableLiveData
+import androidx.paging.PageKeyedDataSource
 import com.konektedi.vs.utilities.common.NetworkState
-import com.konektedi.vs.utilities.api.ApiN
+import com.konektedi.vs.utilities.api.Api
 import com.konektedi.vs.utilities.models.Review
 import retrofit2.Call
 import retrofit2.Response
@@ -14,7 +14,7 @@ class ReviewsDataSource(private val retryExecutor: Executor, private val categor
 
     // keep a function reference for the retry event
     private var retry: (() -> Any)? = null
-    private val apiClient = ApiN.create()
+    private val apiClient = Api.create()
 
     /**
      * There is no sync on the state because paging will always call loadInitial first then wait

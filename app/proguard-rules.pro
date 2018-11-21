@@ -1,24 +1,13 @@
 # Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
+# By default, the flags in this file are appended to flags specified
+# in C:\Users\Sy\AppData\Local\Android\Sdk/tools/proguard/proguard-android.txt
+# You can edit the include path and order by changing the proguardFiles
+# directive in build.gradle.
 #
 # For more details, see
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class NAME to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
-
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
-
-# If you keep the line number information, uncomment this to
-# hide the original source file NAME.
-#-renamesourcefileattribute SourceFile
+# Add any project specific keep options here:
 
 #--------------------------RETROFIT----------------------------------
 # Retrofit does reflection on generic parameters. InnerClasses is required to use Signature and
@@ -82,10 +71,29 @@
 -keep class sun.misc.Unsafe { *; }
 #-keep class com.google.gson.stream.** { *; }
 
-#-------------------ARTHURHUB/ANDROID-IMAGE-CROPPER----------------------
--keep class android.support.v7.widget.** { *; }
-
 #---------######------------
 #I was getting a lot of errors but all them solved by this below
 #-ignorewarnings
 #---------######------------
+
+
+# If your project uses WebView with JS, uncomment the following
+# and specify the fully qualified class username to the JavaScript interface
+# class:
+-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+   public *;
+}
+
+# Uncomment this to preserve the line number information for
+# debugging stack traces.
+#-keepattributes SourceFile,LineNumberTable
+
+# If you keep the line number information, uncomment this to
+# hide the original source file username.
+#-renamesourcefileattribute SourceFile
+
+
+#-------------------ARTHURHUB/ANDROID-IMAGE-CROPPER----------------------
+-keep class android.support.v7.widget.** { *; }
+
+#------

@@ -2,7 +2,7 @@ package com.konektedi.vs.reviews
 
 import android.content.Context
 import android.content.Intent
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +16,7 @@ import com.konektedi.vs.candidates.Profile
 import com.konektedi.vs.utilities.common.Constants
 import com.konektedi.vs.utilities.models.Result
 
-class ResultViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+class ResultViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 
     private val nameView: TextView = view.findViewById(R.id.nameView)
     private val resultView: TextView = view.findViewById(R.id.result_view)
