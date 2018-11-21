@@ -1,4 +1,4 @@
-package com.konektedi.vs.motions.opinions;
+package com.konektedi.vs.comments;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Transformations;
@@ -11,20 +11,19 @@ import com.konektedi.vs.utilities.NetworkState;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-public class OpinionsViewModel extends ViewModel {
-
-    public LiveData<PagedList<Opinions>> postList;
+public class CommentsViewModel extends ViewModel {
+    public LiveData<PagedList<Comments>> postList;
     public LiveData<NetworkState> networkState;
     Executor executor;
-    LiveData<OpinionsDataSource> tDataSource;
+    LiveData<CommentsDataSource> tDataSource;
 
-    public OpinionsViewModel() {
+    public CommentsViewModel() {
     }
 
-    public LiveData<PagedList<Opinions>> getPostList(int motion_id) {
+    public LiveData<PagedList<Comments>> getPostList(int post_id) {
 
         executor = Executors.newFixedThreadPool(5);
-        OpinionsDataFactory dataFactory = new OpinionsDataFactory(executor, motion_id);
+        CommentsDataFactory dataFactory = new CommentsDataFactory(executor, post_id);
 
         tDataSource = dataFactory.getMutableLiveData();
 
@@ -43,5 +42,4 @@ public class OpinionsViewModel extends ViewModel {
 
         return postList;
     }
-
 }

@@ -1,4 +1,4 @@
-package com.konektedi.vs.news.comments;
+package com.konektedi.vs.comments;
 
 import android.arch.paging.PagedListAdapter;
 import android.support.v7.widget.RecyclerView;

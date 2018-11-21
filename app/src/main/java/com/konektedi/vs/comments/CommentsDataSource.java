@@ -1,4 +1,4 @@
-package com.konektedi.vs.news.comments;
+package com.konektedi.vs.comments;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.paging.PageKeyedDataSource;

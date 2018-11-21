@@ -24,6 +24,13 @@ object Constants {
     const val DEVICE = "device"
     const val REQUEST_FOR_ACTIVITY_CODE = 100
 
+    //Motions
+    const val OFFSET = "offset"
+    const val MOTION_ID = "motion_id"
+    const val MOTION = "motion"
+    const val OPINION = "opinion"
+    const val VOTE = "vote"
+
 
     //Other
     const val COVER = "cover"

@@ -30,7 +30,7 @@ class ElectionsViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     companion object {
         fun create(parent: ViewGroup): ElectionsViewHolder {
             val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.z_election_item, parent, false)
+                    .inflate(R.layout.z_election, parent, false)
             return ElectionsViewHolder(view)
         }
     }

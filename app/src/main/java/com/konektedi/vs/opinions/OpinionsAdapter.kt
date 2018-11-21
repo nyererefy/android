@@ -1,4 +1,4 @@
-package com.konektedi.vs.elections
+package com.konektedi.vs.opinions
 
 import android.arch.paging.PagedListAdapter
 import android.content.Context
@@ -8,16 +8,16 @@ import android.view.ViewGroup
 import com.konektedi.vs.R
 import com.konektedi.vs.utilities.common.NetworkState
 import com.konektedi.vs.utilities.common.NetworkStateItemViewHolder
-import com.konektedi.vs.utilities.models.Election
+import com.konektedi.vs.utilities.models.Opinion
 
-class ElectionsAdapter(private val mContext: Context, private val retryCallback: () -> Unit)
-    : PagedListAdapter<Election, RecyclerView.ViewHolder>(POST_COMPARATOR) {
-
+class OpinionsAdapter(private val mContext: Context, private val retryCallback: () -> Unit)
+    : PagedListAdapter<Opinion, RecyclerView.ViewHolder>(POST_COMPARATOR) {
+    
     private var networkState: NetworkState? = null
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
-            R.layout.z_election -> (holder as ElectionsViewHolder).bind(getItem(position), mContext)
+            R.layout.z_opinion -> (holder as OpinionViewHolder).bind(getItem(position), mContext)
             R.layout.network_state_item -> (holder as NetworkStateItemViewHolder).bindTo(
                     networkState)
         }
@@ -29,7 +29,7 @@ class ElectionsAdapter(private val mContext: Context, private val retryCallback:
             payloads: MutableList<Any>) {
         if (payloads.isNotEmpty()) {
             val item = getItem(position)
-            (holder as ElectionsViewHolder).bind(item, mContext)
+            (holder as OpinionViewHolder).bind(item, mContext)
         } else {
             onBindViewHolder(holder, position)
         }
@@ -37,7 +37,7 @@ class ElectionsAdapter(private val mContext: Context, private val retryCallback:
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when (viewType) {
-            R.layout.z_election -> ElectionsViewHolder.create(parent)
+            R.layout.z_opinion -> OpinionViewHolder.create(parent)
             R.layout.network_state_item -> NetworkStateItemViewHolder.create(parent, retryCallback)
             else -> throw IllegalArgumentException("unknown view type $viewType")
         }
@@ -49,7 +49,7 @@ class ElectionsAdapter(private val mContext: Context, private val retryCallback:
         return if (hasExtraRow() && position == itemCount - 1) {
             R.layout.network_state_item
         } else {
-            R.layout.z_election
+            R.layout.z_opinion
         }
     }
 
@@ -74,12 +74,12 @@ class ElectionsAdapter(private val mContext: Context, private val retryCallback:
     }
 
     companion object {
-        val POST_COMPARATOR = object : DiffUtil.ItemCallback<Election>() {
-            override fun areContentsTheSame(oldItem: Election, newItem: Election): Boolean =
+        val POST_COMPARATOR = object : DiffUtil.ItemCallback<Opinion>() {
+            override fun areContentsTheSame(oldItem: Opinion, newItem: Opinion): Boolean =
                     oldItem == newItem
 
-            override fun areItemsTheSame(oldItem: Election, newItem: Election): Boolean =
-                    oldItem.electionId == newItem.electionId
+            override fun areItemsTheSame(oldItem: Opinion, newItem: Opinion): Boolean =
+                    oldItem.opinionId == newItem.opinionId
         }
 
     }

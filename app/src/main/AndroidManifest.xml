@@ -59,11 +59,11 @@
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
         <activity
-            android:name=".motions.Participate"
+            android:name=".motions.MotionViewActivity"
             android:label="@string/title_activity_participate"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".motions.opinions.OpinionsActivity"
+            android:name="com.konektedi.vs.opinions.OpinionsActivity"
             android:label="@string/title_activity_opinions"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

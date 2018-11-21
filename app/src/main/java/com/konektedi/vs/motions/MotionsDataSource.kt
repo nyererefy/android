@@ -1,17 +1,17 @@
-package com.konektedi.vs.motions.opinions
+package com.konektedi.vs.motions
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.PageKeyedDataSource
 import com.konektedi.vs.utilities.api.ApiN
 import com.konektedi.vs.utilities.common.NetworkState
-import com.konektedi.vs.utilities.models.Election
+import com.konektedi.vs.utilities.models.Motion
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 import java.util.concurrent.Executor
 
-class OpinionsDataSource(private val retryExecutor: Executor) : PageKeyedDataSource<Int, Election>() {
+class MotionsDataSource(private val retryExecutor: Executor) : PageKeyedDataSource<Int, Motion>() {
 
     // keep a function reference for the retry event
     private var retry: (() -> Any)? = null
@@ -37,15 +37,15 @@ class OpinionsDataSource(private val retryExecutor: Executor) : PageKeyedDataSou
 
     override fun loadBefore(
             params: LoadParams<Int>,
-            callback: LoadCallback<Int, Election>) {
+            callback: LoadCallback<Int, Motion>) {
         // ignored, since we only ever append to our initial load
     }
 
-    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Election>) {
+    override fun loadAfter(params: LoadParams<Int>, callback: LoadCallback<Int, Motion>) {
         networkState.postValue(NetworkState.LOADING)
-        apiClient.getElections(params.key).enqueue(
-                object : Callback<List<Election>> {
-                    override fun onFailure(call: Call<List<Election>>, t: Throwable) {
+        apiClient.getMotions(params.key).enqueue(
+                object : Callback<List<Motion>> {
+                    override fun onFailure(call: Call<List<Motion>>, t: Throwable) {
                         retry = {
                             loadAfter(params, callback)
                         }
@@ -53,12 +53,12 @@ class OpinionsDataSource(private val retryExecutor: Executor) : PageKeyedDataSou
                     }
 
                     override fun onResponse(
-                            call: Call<List<Election>>,
-                            response: Response<List<Election>>) {
+                            call: Call<List<Motion>>,
+                            response: Response<List<Motion>>) {
                         when {
                             response.isSuccessful -> {
                                 retry = null
-                                callback.onResult(response.body() as MutableList<Election>, params.key + 10)
+                                callback.onResult(response.body() as MutableList<Motion>, params.key + 10)
                                 networkState.postValue(NetworkState.LOADED)
                             }
                             response.code() == 404 -> networkState.postValue(NetworkState.END)
@@ -77,9 +77,9 @@ class OpinionsDataSource(private val retryExecutor: Executor) : PageKeyedDataSou
 
     override fun loadInitial(
             params: LoadInitialParams<Int>,
-            callback: LoadInitialCallback<Int, Election>) {
+            callback: LoadInitialCallback<Int, Motion>) {
 
-        val request = apiClient.getElections(0)
+        val request = apiClient.getMotions(0)
 
         networkState.postValue(NetworkState.LOADING)
         initialLoad.postValue(NetworkState.LOADING)
@@ -93,7 +93,7 @@ class OpinionsDataSource(private val retryExecutor: Executor) : PageKeyedDataSou
                 response.isSuccessful -> {
                     networkState.postValue(NetworkState.LOADED)
                     initialLoad.postValue(NetworkState.LOADED)
-                    callback.onResult(response.body() as MutableList<Election>, 0, 10)
+                    callback.onResult(response.body() as MutableList<Motion>, 0, 10)
                 }
                 response.code() == 404 -> networkState.postValue(NetworkState.END)
                 else -> networkState.postValue(

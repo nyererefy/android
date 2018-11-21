@@ -2,14 +2,13 @@ package com.konektedi.vs.utilities.api
 
 import android.util.Log
 import com.konektedi.vs.MainActivity
-import com.konektedi.vs.motions.MotionsModel
-import com.konektedi.vs.motions.opinions.Opinions
-import com.konektedi.vs.news.comments.Comments
+import com.konektedi.vs.comments.Comments
 import com.konektedi.vs.student.grabPreference
 import com.konektedi.vs.utilities.common.Constants
 import com.konektedi.vs.utilities.common.Constants.CANDIDATE_ID
 import com.konektedi.vs.utilities.common.Constants.CATEGORY_ID
 import com.konektedi.vs.utilities.common.Constants.ELECTION_ID
+import com.konektedi.vs.utilities.common.Constants.MOTION_ID
 import com.konektedi.vs.utilities.common.Constants.UNIVERSITY
 import com.konektedi.vs.utilities.common.Constants.X_API_KEY
 import com.konektedi.vs.utilities.common.Constants.X_API_KEY_VALUE
@@ -53,8 +52,11 @@ interface ApiN {
     @GET("news/posts")
     fun getNews(@Query("offset") offset: Int): Call<List<Post>>
 
-    @get:GET("motions/motions")
-    val motions: Call<List<MotionsModel>>
+    @GET("motions/motions")
+    fun getMotions(@Query("offset") offset: Int): Call<List<Motion>>
+
+    @GET("motions/motion")
+    fun getMotion(@Query(MOTION_ID) motion_id: Int): Call<Motion>
 
     @Headers("X-API-KEY: oNQ6r&mv#j|m]u")
     @FormUrlEncoded
@@ -69,9 +71,10 @@ interface ApiN {
     @POST("candidates/cover")
     fun postCover(@Body file: RequestBody): Call<ResponseBody>
 
-    @GET("motions/opinions/{motion_id}/{offset}")
+    @GET("motions/opinions")
     fun getOpinions(
-            @Path("motion_id") motion_id: Int, @Path("offset") offset: Int): Call<List<Opinions>>
+            @Query(Constants.MOTION_ID) motion_id: Int,
+            @Query(Constants.OFFSET) offset: Int): Call<List<Opinion>>
 
     @FormUrlEncoded
     @POST("motions/opinion")

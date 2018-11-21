@@ -117,11 +117,11 @@
     <string name="whatsapp_us">WhatsApp us</string>
     <string name="support_rate_us">Rate this App</string>
 
-    <!--Participate Strings-->
+    <!--MotionViewActivity Strings-->
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="submit">Submit</string>
-    <string name="add_opinion">Type your opinion here</string>
+    <string name="add_opinion">Add optional opinion</string>
 
     <!--Action bar titles-->
     <string name="motion">Motion</string>
@@ -146,6 +146,7 @@
     <string name="email_or_username">Email or Username</string>
     <string name="cover_changed">Cover changed successfully</string>
     <string name="refresh">Refresh</string>
+    <string name="opinion_added">Opinion added successfully</string>
     <!--motions-->
 
 </resources>

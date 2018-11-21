@@ -1,4 +1,4 @@
-package com.konektedi.vs.news.comments;
+package com.konektedi.vs.comments;
 
 import android.support.annotation.NonNull;
 import android.support.v7.util.DiffUtil;

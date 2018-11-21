@@ -14,8 +14,8 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.konektedi.vs.R
-import com.konektedi.vs.news.comments.CommentsAdapter
-import com.konektedi.vs.news.comments.CommentsViewModel
+import com.konektedi.vs.comments.CommentsAdapter
+import com.konektedi.vs.comments.CommentsViewModel
 import com.konektedi.vs.student.grabPreference
 import com.konektedi.vs.utilities.Constants.ID
 import com.konektedi.vs.utilities.Constants.UNIVERSITY
