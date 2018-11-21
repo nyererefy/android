@@ -1,36 +1,23 @@
 package com.konektedi.vs.news
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import com.konektedi.vs.R
-import com.konektedi.vs.comments.CommentsAdapter
-import com.konektedi.vs.comments.CommentsViewModel
 import com.konektedi.vs.student.grabPreference
-import com.konektedi.vs.utilities.Constants.ID
-import com.konektedi.vs.utilities.Constants.UNIVERSITY
-import com.konektedi.vs.utilities.ListItemClickListener
-import com.konektedi.vs.utilities.api.ApiUtilities
+import com.konektedi.vs.utilities.common.Constants.ID
+import com.konektedi.vs.utilities.common.Constants.UNIVERSITY
 import kotlinx.android.synthetic.main.activity_news_view.*
 import kotlinx.android.synthetic.main.news_view_content.*
-import okhttp3.ResponseBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import java.util.HashMap
 
-class NewsView : AppCompatActivity(), ListItemClickListener {
-    private lateinit var viewModel: CommentsViewModel
+class NewsView : AppCompatActivity() {
+//    private lateinit var viewModel: CommentsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,19 +67,19 @@ class NewsView : AppCompatActivity(), ListItemClickListener {
     }
 
     private fun getComments(post_id: Int) {
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        viewModel = ViewModelProviders.of(this).get(CommentsViewModel::class.java)
-
-        val adapter = CommentsAdapter(this)
-
-        viewModel.getPostList(post_id).observe(this, Observer { adapter.submitList(it) })
-
-        viewModel.networkState.observe(this, Observer { adapter.setNetworkState(it) })
-
-        recyclerView.addItemDecoration(DividerItemDecoration(this,
-                DividerItemDecoration.VERTICAL))
-        recyclerView.adapter = adapter
+//        recyclerView.layoutManager = LinearLayoutManager(this)
+//
+//        viewModel = ViewModelProviders.of(this).get(CommentsViewModel::class.java)
+//
+//        val adapter = CommentsAdapter(this)
+//
+//        viewModel.getPostList(post_id).observe(this, Observer { adapter.submitList(it) })
+//
+//        viewModel.networkState.observe(this, Observer { adapter.setNetworkState(it) })
+//
+//        recyclerView.addItemDecoration(DividerItemDecoration(this,
+//                DividerItemDecoration.VERTICAL))
+//        recyclerView.adapter = adapter
     }
 
     private fun addComment(post_id: Int) {
@@ -109,29 +96,29 @@ class NewsView : AppCompatActivity(), ListItemClickListener {
         hideKeyboard()
         commentInput.setText("")
 
-        val call = ApiUtilities.getClient().postComment(map)
-        call.enqueue(object : Callback<ResponseBody> {
-            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
-                showProgressBar(false)
-
-                if (response.isSuccessful) {
-                    hideKeyboard()
-                    Toast.makeText(this@NewsView, "success", Toast.LENGTH_SHORT).show()
-                    getComments(post_id)
-
-                } else {
-                    hideKeyboard()
-                    commentInput.setText(comment)
-                    Toast.makeText(this@NewsView, R.string.error_occurred, Toast.LENGTH_SHORT).show()
-                }
-
-            }
-
-            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                showProgressBar(false)
-                Toast.makeText(this@NewsView, R.string.error_occurred, Toast.LENGTH_SHORT).show()
-            }
-        })
+//        val call = ApiUtilities.getClient().postComment(map)
+//        call.enqueue(object : Callback<ResponseBody> {
+//            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+//                showProgressBar(false)
+//
+//                if (response.isSuccessful) {
+//                    hideKeyboard()
+//                    Toast.makeText(this@NewsView, "success", Toast.LENGTH_SHORT).show()
+//                    getComments(post_id)
+//
+//                } else {
+//                    hideKeyboard()
+//                    commentInput.setText(comment)
+//                    Toast.makeText(this@NewsView, R.string.error_occurred, Toast.LENGTH_SHORT).show()
+//                }
+//
+//            }
+//
+//            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+//                showProgressBar(false)
+//                Toast.makeText(this@NewsView, R.string.error_occurred, Toast.LENGTH_SHORT).show()
+//            }
+//        })
     }
 
     fun hideKeyboard() {
@@ -142,7 +129,7 @@ class NewsView : AppCompatActivity(), ListItemClickListener {
         }
     }
 
-    override fun onRetryClick(view: View, position: Int) {
+    fun onRetryClick(view: View, position: Int) {
 
     }
 

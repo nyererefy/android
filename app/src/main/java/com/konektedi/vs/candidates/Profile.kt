@@ -14,12 +14,12 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.konektedi.vs.R
 import com.konektedi.vs.student.grabPreference
-import com.konektedi.vs.utilities.Constants.COVER
-import com.konektedi.vs.utilities.Constants.NAME
 import com.konektedi.vs.utilities.common.Constants.CANDIDATE_ID
 import com.konektedi.vs.utilities.common.Constants.CLASS_NAME
+import com.konektedi.vs.utilities.common.Constants.COVER
 import com.konektedi.vs.utilities.common.Constants.ELECTION_ID
 import com.konektedi.vs.utilities.common.Constants.ID
+import com.konektedi.vs.utilities.common.Constants.NAME
 import com.konektedi.vs.utilities.common.NetworkState
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView

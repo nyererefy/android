@@ -2,7 +2,6 @@ package com.konektedi.vs.utilities.api
 
 import android.util.Log
 import com.konektedi.vs.MainActivity
-import com.konektedi.vs.comments.Comments
 import com.konektedi.vs.student.grabPreference
 import com.konektedi.vs.utilities.common.Constants
 import com.konektedi.vs.utilities.common.Constants.CANDIDATE_ID
@@ -84,8 +83,8 @@ interface ApiN {
     @POST("motions/opinion")
     fun postOpinion(@FieldMap map: Map<String, String>): Call<ResponseBody>
 
-    @GET("news/comments/{post_id}/{offset}")
-    fun getComments(@Path("post_id") post_id: Int, @Path("offset") offset: Int): Call<List<Comments>>
+//    @GET("news/comments/{post_id}/{offset}")
+//    fun getComments(@Path("post_id") post_id: Int, @Path("offset") offset: Int): Call<List<Comments>>
 
     @FormUrlEncoded
     @POST("news/comment")

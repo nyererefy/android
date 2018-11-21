@@ -11,7 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.konektedi.vs.R
-import com.konektedi.vs.utilities.ListItemClickListener
+import com.konektedi.vs.utilities.common.ListItemClickListener
 
 class ElectionsFragment : Fragment(), ListItemClickListener, Function0<Unit> {
 

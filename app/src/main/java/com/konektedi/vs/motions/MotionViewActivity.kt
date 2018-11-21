@@ -11,7 +11,6 @@ import android.view.View
 import com.konektedi.vs.R
 import com.konektedi.vs.opinions.OpinionsAdapter
 import com.konektedi.vs.opinions.OpinionsViewModel
-import com.konektedi.vs.utilities.ListItemClickListener
 import com.konektedi.vs.utilities.common.Constants
 import com.konektedi.vs.utilities.common.NetworkState
 import kotlinx.android.synthetic.main.activity_motion_view.*
@@ -19,11 +18,8 @@ import kotlinx.android.synthetic.main.content_motion_view.*
 import kotlinx.android.synthetic.main.motion_not_participated_sub_content.*
 import kotlinx.android.synthetic.main.motion_participated_sub_content.*
 import org.jetbrains.anko.design.longSnackbar
-import org.jetbrains.anko.longToast
 
-class MotionViewActivity : AppCompatActivity(), ListItemClickListener, Function0<Unit> {
-
-
+class MotionViewActivity : AppCompatActivity(), Function0<Unit> {
     private lateinit var viewModel: MotionsViewModel
     private lateinit var oViewModel: OpinionsViewModel
     private var motionId = 0
@@ -49,8 +45,6 @@ class MotionViewActivity : AppCompatActivity(), ListItemClickListener, Function0
             title = it!!.title
             title_view.text = it.title
             motion_view.text = it.motion
-
-            longToast(it.participated.toString())
 
             //Showing it after loading data to avoid stupid layout coming front.
             viewSwitcher.visibility = View.VISIBLE
@@ -137,7 +131,4 @@ class MotionViewActivity : AppCompatActivity(), ListItemClickListener, Function0
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onRetryClick(view: View?, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 }

@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.konektedi.vs.R;
 
 import static com.konektedi.vs.student.UserPreferencesKt.grabPreference;
-import static com.konektedi.vs.utilities.Constants.NAME;
+import static com.konektedi.vs.utilities.common.Constants.NAME;
 
 public class StudentProfile extends AppCompatActivity {
 

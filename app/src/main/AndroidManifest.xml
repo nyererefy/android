@@ -73,12 +73,6 @@
 
         </activity>
         <activity
-            android:name=".student.Settings"
-            android:label="@string/title_activity_settings"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-        <activity
             android:name=".news.NewsView"
             android:label="@string/title_activity_news_view"
             android:theme="@style/AppTheme.NoActionBar">

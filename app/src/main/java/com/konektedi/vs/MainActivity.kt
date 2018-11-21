@@ -69,9 +69,6 @@ class MainActivity : AppCompatActivity() {
                         clearPreferences(this@MainActivity)
                         startActivity<LoginActivity>()
                     }
-                    R.id.settings -> {
-                        startActivity<Settings>()
-                    }
                     R.id.about -> showAbout()
                     R.id.support -> {
                         startActivity<SupportActivityMain>()

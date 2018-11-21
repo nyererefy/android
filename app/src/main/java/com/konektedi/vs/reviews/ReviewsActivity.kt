@@ -12,9 +12,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import com.konektedi.vs.R
-import com.konektedi.vs.utilities.ListItemClickListener
 import com.konektedi.vs.utilities.common.Constants
 import com.konektedi.vs.utilities.common.Constants.REVIEW
+import com.konektedi.vs.utilities.common.ListItemClickListener
 import com.konektedi.vs.utilities.common.NetworkState
 import kotlinx.android.synthetic.main.activity_reviews.*
 import kotlinx.android.synthetic.main.content_reviews.*
