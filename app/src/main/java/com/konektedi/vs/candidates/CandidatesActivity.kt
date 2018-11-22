@@ -1,10 +1,12 @@
 package com.konektedi.vs.candidates
 
+import android.graphics.PorterDuff
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.konektedi.vs.R
@@ -33,6 +35,9 @@ class CandidatesActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        val drawable = toolbar.navigationIcon
+        drawable!!.setColorFilter(ContextCompat.getColor(this, R.color.accent_color), PorterDuff.Mode.SRC_ATOP)
+
         viewModel = ViewModelProviders.of(this).get(CandidatesViewModel::class.java)
 
         swipeRefreshLayout.setOnRefreshListener { getCandidates() }

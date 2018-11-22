@@ -1,7 +1,6 @@
 package com.konektedi.vs.ui
 
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
@@ -13,23 +12,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager.widget.ViewPager
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
+import com.aurelhubert.ahbottomnavigation.notification.AHNotification
 import com.konektedi.vs.R
 import com.konektedi.vs.elections.ElectionsFragment
 import com.konektedi.vs.motions.MotionsFragment
 import com.konektedi.vs.news.NewsFragment
 import com.konektedi.vs.other.SupportActivityMain
-import com.konektedi.vs.student.LoginActivity
-import com.konektedi.vs.student.StudentProfile
-import com.konektedi.vs.student.clearPreferences
-import com.konektedi.vs.student.getLoginPreference
+import com.konektedi.vs.student.*
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
-import com.konektedi.vs.R.id.bottomNavigation
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
-import com.aurelhubert.ahbottomnavigation.notification.AHNotification
 
 
 class MainActivity : AppCompatActivity() {
@@ -41,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         checkLogin()
         initBottomNav()
         centerTitle()
+        setupViewPager(viewPager)
     }
 
     private fun checkLogin() {
@@ -106,8 +105,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initBottomNav() {
-        openFragment(ElectionsFragment())
-
         bottomNavigation.addItem(AHBottomNavigationItem(getString(R.string.title_elections), R.drawable.ic_elections))
         bottomNavigation.addItem(AHBottomNavigationItem(getString(R.string.title_motions), R.drawable.ic_motions))
         bottomNavigation.addItem(AHBottomNavigationItem(getString(R.string.title_news), R.drawable.ic_news))
@@ -115,10 +112,10 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigation.setOnTabSelectedListener { position, _ ->
             when (position) {
-                0 -> openFragment(ElectionsFragment())
-                1 -> openFragment(MotionsFragment())
-                2 -> openFragment(NewsFragment())
-                3 -> showPopupMenu(coordinatorLayout)
+                0 -> viewPager.currentItem = 0
+                1 -> viewPager.currentItem = 1
+                2 -> viewPager.currentItem = 2
+                3 -> viewPager.currentItem = 3
             }
             true
         }
@@ -137,12 +134,6 @@ class MainActivity : AppCompatActivity() {
                 .build()
 
         bottomNavigation.setNotification(notification, 2)
-    }
-
-    private fun openFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.container, fragment)
-        transaction.commit()
     }
 
     private fun centerTitle() {
@@ -174,5 +165,44 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         finishAffinity()
         System.exit(0)
+    }
+
+    private fun setupViewPager(viewPager: ViewPager) {
+        val adapter = SectionsPagerAdapter(supportFragmentManager)
+
+        adapter.addFragment(ElectionsFragment())
+        adapter.addFragment(MotionsFragment())
+        adapter.addFragment(NewsFragment())
+        adapter.addFragment(UserFragment())
+        viewPager.adapter = adapter
+
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {
+            }
+
+            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            }
+
+            override fun onPageSelected(position: Int) {
+                bottomNavigation.currentItem = position
+            }
+
+        })
+    }
+
+    private inner class SectionsPagerAdapter internal constructor(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+        private val fragmentList = ArrayList<Fragment>()
+
+        override fun getItem(position: Int): Fragment {
+            return fragmentList[position]
+        }
+
+        override fun getCount(): Int {
+            return 4
+        }
+
+        internal fun addFragment(fragment: Fragment) {
+            fragmentList.add(fragment)
+        }
     }
 }

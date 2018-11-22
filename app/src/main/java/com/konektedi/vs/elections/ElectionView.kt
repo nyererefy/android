@@ -17,6 +17,12 @@ import com.konektedi.vs.utilities.common.NetworkState
 import kotlinx.android.synthetic.main.election_view_activity.*
 import kotlinx.android.synthetic.main.election_view_content.*
 import org.jetbrains.anko.design.longSnackbar
+import android.graphics.PorterDuff
+import androidx.core.content.ContextCompat
+import com.konektedi.vs.R.id.toolbar
+import android.graphics.drawable.Drawable
+
+
 
 class ElectionView : AppCompatActivity() {
     private lateinit var viewModel: CategoriesViewModel
@@ -27,6 +33,8 @@ class ElectionView : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        val drawable = toolbar.navigationIcon
+        drawable!!.setColorFilter(ContextCompat.getColor(this, R.color.accent_color), PorterDuff.Mode.SRC_ATOP)
 
         showCategories()
         swipeRefreshLayout.setOnRefreshListener { showCategories() }

@@ -1,5 +1,6 @@
 package com.konektedi.vs.motions
 
+import android.graphics.PorterDuff
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -8,6 +9,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
+import androidx.core.content.ContextCompat
 import com.konektedi.vs.R
 import com.konektedi.vs.opinions.OpinionsAdapter
 import com.konektedi.vs.opinions.OpinionsViewModel
@@ -30,6 +32,9 @@ class MotionViewActivity : AppCompatActivity(), Function0<Unit> {
         setSupportActionBar(toolbar)
 
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        val drawable = toolbar.navigationIcon
+        drawable!!.setColorFilter(ContextCompat.getColor(this, R.color.accent_color), PorterDuff.Mode.SRC_ATOP)
+
 
         viewModel = ViewModelProviders.of(this).get(MotionsViewModel::class.java)
         oViewModel = ViewModelProviders.of(this).get(OpinionsViewModel::class.java)

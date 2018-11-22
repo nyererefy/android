@@ -1,6 +1,7 @@
 package com.konektedi.vs.news
 
 import android.content.Context
+import android.graphics.PorterDuff
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.text.Editable
@@ -8,6 +9,7 @@ import android.text.TextWatcher
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat
 import com.konektedi.vs.R
 import com.konektedi.vs.student.grabPreference
 import com.konektedi.vs.utilities.common.Constants.ID
@@ -24,7 +26,10 @@ class NewsView : AppCompatActivity() {
         setContentView(R.layout.activity_news_view)
 
         setSupportActionBar(toolbar)
+
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+        val drawable = toolbar.navigationIcon
+        drawable!!.setColorFilter(ContextCompat.getColor(this, R.color.accent_color), PorterDuff.Mode.SRC_ATOP)
 
         getPost()
     }
@@ -33,10 +38,11 @@ class NewsView : AppCompatActivity() {
         val data = intent.extras!!
 
         val post = data.getString("post")
-        val title = data.getString("title")
+        val titleText = data.getString("title")
         val postId = data.getInt("post_id")
 
-        post_view.text = title
+        title = titleText
+        post_view.text = titleText
         title_view.text = post
 
         getComments(postId)
