@@ -28,6 +28,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
 import com.konektedi.vs.R.id.bottomNavigation
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification
 
 
@@ -107,10 +108,10 @@ class MainActivity : AppCompatActivity() {
     private fun initBottomNav() {
         openFragment(ElectionsFragment())
 
-        bottomNavigation.addItem(AHBottomNavigationItem(R.string.title_elections, R.drawable.ic_elections, R.color.election_tab))
-        bottomNavigation.addItem(AHBottomNavigationItem(R.string.title_motions, R.drawable.ic_motions, R.color.motions_tab))
-        bottomNavigation.addItem(AHBottomNavigationItem(R.string.title_news, R.drawable.ic_news, R.color.news_tab))
-        bottomNavigation.addItem(AHBottomNavigationItem(R.string.title_more, R.drawable.ic_user, R.color.more_tab))
+        bottomNavigation.addItem(AHBottomNavigationItem(getString(R.string.title_elections), R.drawable.ic_elections))
+        bottomNavigation.addItem(AHBottomNavigationItem(getString(R.string.title_motions), R.drawable.ic_motions))
+        bottomNavigation.addItem(AHBottomNavigationItem(getString(R.string.title_news), R.drawable.ic_news))
+        bottomNavigation.addItem(AHBottomNavigationItem(getString(R.string.title_more), R.drawable.ic_user))
 
         bottomNavigation.setOnTabSelectedListener { position, _ ->
             when (position) {
@@ -125,21 +126,20 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.accentColor = ContextCompat.getColor(this, R.color.accent_color)
         bottomNavigation.inactiveColor = ContextCompat.getColor(this, R.color.inactive_color)
 
-        bottomNavigation.defaultBackgroundColor = Color.parseColor("#FEFEFE")
-        bottomNavigation.titleState = AHBottomNavigation.TitleState.ALWAYS_SHOW
-        bottomNavigation.isColored = true
+        bottomNavigation.defaultBackgroundColor = ContextCompat.getColor(this, R.color.bn_background)
+        bottomNavigation.titleState = AHBottomNavigation.TitleState.ALWAYS_HIDE
         bottomNavigation.currentItem = 0
 
         val notification = AHNotification.Builder()
-                .setText("8")
-                .setBackgroundColor(ContextCompat.getColor(this@MainActivity, R.color.red))
+                .setText("5")
+                .setBackgroundColor(ContextCompat.getColor(this@MainActivity, R.color.colorPrimary))
                 .setTextColor(ContextCompat.getColor(this@MainActivity, R.color.white))
                 .build()
 
         bottomNavigation.setNotification(notification, 2)
     }
 
-    private fun openFragment(fragment: androidx.fragment.app.Fragment) {
+    private fun openFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container, fragment)
         transaction.commit()

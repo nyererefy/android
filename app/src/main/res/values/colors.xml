@@ -40,8 +40,9 @@
 
     <!--Bottom Nav-->
     <color name="red">#D84315</color>
-    <color name="accent_color">#F63D2B</color>
+    <color name="accent_color">#000000</color>
     <color name="inactive_color">#747474</color>
+    <color name="bn_background">#FAFAFA</color>
 
 
     <!--Material design Colors used in displaying articles background.-->

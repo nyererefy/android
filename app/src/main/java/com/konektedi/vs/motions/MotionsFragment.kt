@@ -42,4 +42,19 @@ class MotionsFragment : androidx.fragment.app.Fragment(), ListItemClickListener,
     override fun invoke() {
     }
 
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser && isResumed) {
+            onResume()
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (!userVisibleHint) {
+            return
+        }
+        activity!!.setTitle(R.string.title_motions)
+    }
+
 }
