@@ -21,7 +21,6 @@
                 android:id="@+id/dpView"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/holder" />
 
@@ -109,8 +108,6 @@
                     android:drawablePadding="8dp"
                     android:text="@string/logout_activity"
                     android:textSize="20sp" />
-
-
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

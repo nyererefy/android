@@ -1,15 +1,11 @@
 package com.konektedi.vs.utilities.common
 
 object Constants {
-
     const val USER_PREFERENCES = "userPreferences"
-
     const val ID = "id"
     const val NAME = "name"
     const val EMAIL = "email"
     const val PASSWORD = "password"
-    const val NEW_PASSWORD = "new_password"
-    const val CONFIRM_PASSWORD = "confirm_password"
     const val USERNAME = "username"
     const val UNIVERSITY = "university"
     const val ELECTION_ID = "election_id"
@@ -22,15 +18,12 @@ object Constants {
     const val CLASS_NAME = "class_name"
     const val CANDIDATE_ID = "candidate_id"
     const val DEVICE = "device"
-    const val REQUEST_FOR_ACTIVITY_CODE = 100
 
     //Motions
     const val OFFSET = "offset"
     const val MOTION_ID = "motion_id"
-    const val MOTION = "motion"
     const val OPINION = "opinion"
     const val VOTE = "vote"
-
 
     //Other
     const val COVER = "cover"
@@ -48,7 +41,10 @@ object Constants {
     const val INITIAL_LOAD = 5
     const val PAGE_SIZE = 10 //2 * Initial load
 
+    const val TOKEN = "token" //If you change. Change also in api.java
     const val X_API_KEY = "X-API-KEY" //If you change. Change also in api.java
     const val X_API_KEY_VALUE = "oNQ6r&mv#j|m]u" //If you change. Change also in api.java
 
+    const val BASE_URL = "http://vs.konektedi.com/api/v2/"
+//    const val BASE_URL = "http://192.168.43.228/konektedi_vs/api/v2/"
 }

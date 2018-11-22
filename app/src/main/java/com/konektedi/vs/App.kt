@@ -3,6 +3,8 @@ package com.konektedi.vs
 import android.content.Context
 import androidx.multidex.MultiDexApplication
 import com.rohitss.uceh.UCEHandler
+import androidx.appcompat.app.AppCompatDelegate
+
 
 class App : MultiDexApplication() {
     override fun onCreate() {
@@ -14,5 +16,10 @@ class App : MultiDexApplication() {
 
     companion object {
         lateinit var appContext: Context
+
+//        //For solving drawableStart in TextViews problems. and ahbottomnavigation
+//        init {
+//            AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+//        }
     }
 }

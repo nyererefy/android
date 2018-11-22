@@ -1,10 +1,9 @@
 package com.konektedi.vs.utilities.api
 
-import android.util.Log
 import com.konektedi.vs.App.Companion.appContext
-import com.konektedi.vs.ui.MainActivity
 import com.konektedi.vs.student.grabPreference
 import com.konektedi.vs.utilities.common.Constants
+import com.konektedi.vs.utilities.common.Constants.BASE_URL
 import com.konektedi.vs.utilities.common.Constants.CANDIDATE_ID
 import com.konektedi.vs.utilities.common.Constants.CATEGORY_ID
 import com.konektedi.vs.utilities.common.Constants.ELECTION_ID
@@ -17,23 +16,21 @@ import com.konektedi.vs.utilities.models.*
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
+import java.util.concurrent.TimeUnit
 
 interface Api {
     @GET("elections/elections")
     fun getElections(@Query(OFFSET) offset: Int): Call<List<Election>>
 
     @GET("categories/categories")
-    fun getCategories(
-            @Query(ELECTION_ID) election_id: Int): Call<List<Category>>
+    fun getCategories(@Query(ELECTION_ID) election_id: Int): Call<List<Category>>
 
     @GET("elections/stats")
-    fun getStats(
-            @Query(ELECTION_ID) election_id: Int): Call<List<Stat>>
+    fun getStats(@Query(ELECTION_ID) election_id: Int): Call<List<Stat>>
 
     @GET("candidates/candidates")
     fun getCandidates(
@@ -91,16 +88,13 @@ interface Api {
     fun postComment(@FieldMap map: Map<String, String>): Call<ResponseBody>
 
     companion object {
-        //        private const val BASE_URL = "http://vs.konektedi.com/api/v1/"
-        private const val BASE_URL = "http://192.168.43.228/konektedi_vs/api/v1/"
-
         fun create(): Api {
-            val logger = HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
-                Log.d("URL", it)
-            })
-            logger.level = HttpLoggingInterceptor.Level.BASIC
-
             val okHttpClient = OkHttpClient.Builder()
+
+            okHttpClient.connectTimeout(30, TimeUnit.SECONDS)
+            okHttpClient.readTimeout(30, TimeUnit.SECONDS)
+            okHttpClient.writeTimeout(30, TimeUnit.SECONDS)
+            okHttpClient.retryOnConnectionFailure(true)
 
             okHttpClient.addInterceptor { chain ->
                 val request = chain.request()
@@ -125,6 +119,11 @@ interface Api {
         //Used only when login
         fun subClient(): Api {
             val okHttpClient = OkHttpClient.Builder()
+
+            okHttpClient.connectTimeout(30, TimeUnit.SECONDS)
+            okHttpClient.readTimeout(30, TimeUnit.SECONDS)
+            okHttpClient.writeTimeout(30, TimeUnit.SECONDS)
+            okHttpClient.retryOnConnectionFailure(true)
 
             okHttpClient.addInterceptor { chain ->
                 val request = chain.request()

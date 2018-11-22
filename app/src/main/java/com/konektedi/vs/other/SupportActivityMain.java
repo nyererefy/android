@@ -98,6 +98,7 @@ public class SupportActivityMain extends AppCompatActivity {
             path = "com.whatsapp";
         }
 
+        //TODO change number
         String smsNumber = "255753535059"; //without '+'
         try {
             Intent sendIntent = new Intent("android.intent.action.MAIN");

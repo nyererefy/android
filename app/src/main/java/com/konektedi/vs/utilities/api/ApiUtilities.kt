@@ -1,6 +1,7 @@
 package com.konektedi.vs.utilities.api
 
 import com.google.gson.Gson
+import com.konektedi.vs.utilities.models.ApiError
 import okhttp3.ResponseBody
 import retrofit2.Response
 
