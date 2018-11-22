@@ -23,22 +23,6 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/verCodeView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/vs_about_build"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/madeWith"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/made_with"
-        android:textSize="16sp" />
-
-    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"

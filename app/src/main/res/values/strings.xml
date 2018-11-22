@@ -102,10 +102,9 @@
     <string name="title_activity_news_view">NewsView</string>
 
     <!--About strings-->
-    <string name="vs_about_title">VS for Android</string>
+    <string name="vs_about_title">Nyererefy App</string>
     <string name="vs_about_version">Version: 2018.1</string>
-    <string name="vs_about_build">Build: 2</string>
-    <string name="vs_property_of">Property of Konektedi.</string>
+    <string name="vs_property_of">Property of Konektedi</string>
 
     <!--Support Strings-->
     <string name="connections">Connections</string>
@@ -147,7 +146,7 @@
     <string name="cover_changed">Cover changed successfully</string>
     <string name="refresh">Refresh</string>
     <string name="opinion_added">Opinion added successfully</string>
-    <string name="title_more">More</string>
+    <string name="title_more">Profile</string>
     <string name="categories">Categories</string>
     <string name="stats">Statistics</string>
     <!--motions-->

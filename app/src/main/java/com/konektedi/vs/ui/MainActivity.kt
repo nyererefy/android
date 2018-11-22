@@ -49,61 +49,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showPopupMenu(view: View) {
-        PopupMenu(this, view, Gravity.CENTER_HORIZONTAL).run {
-            menuInflater.inflate(R.menu.top_menu, menu)
-            setOnMenuItemClickListener { item ->
-                when (item.itemId) {
-                    R.id.profile -> {
-                        startActivity<StudentProfile>()
-                    }
-                    R.id.logout -> {
-                        clearPreferences(this@MainActivity)
-                        startActivity<LoginActivity>()
-                    }
-                    R.id.about -> showAbout()
-                    R.id.support -> {
-                        startActivity<SupportActivityMain>()
-                    }
-                }
-                true
-            }
-            show()
-        }
-    }
-
-    private fun showAbout() {
-        var version = ""
-        var verCode = 0
-
-        try {
-            val pInfo = this.packageManager.getPackageInfo(packageName, 0)
-            version = pInfo.versionName
-            verCode = pInfo.versionCode
-        } catch (e: PackageManager.NameNotFoundException) {
-            e.printStackTrace()
-        }
-
-        val builder = AlertDialog.Builder(this)
-
-        val inflater = layoutInflater
-        val dialogView = inflater.inflate(R.layout.v_about, null)
-        val versionView = dialogView.findViewById<TextView>(R.id.versionView)
-        val verCodeView = dialogView.findViewById<TextView>(R.id.verCodeView)
-
-        val versionTitle = "Version: $version"
-        val versionCodeTitle = "Build: $verCode"
-
-        versionView.text = versionTitle
-        verCodeView.text = versionCodeTitle
-
-        builder.setCancelable(true)
-        builder.setView(dialogView)
-
-        val dialog = builder.create()
-        dialog.show()
-    }
-
     private fun initBottomNav() {
         bottomNavigation.addItem(AHBottomNavigationItem(getString(R.string.title_elections), R.drawable.ic_elections))
         bottomNavigation.addItem(AHBottomNavigationItem(getString(R.string.title_motions), R.drawable.ic_motions))

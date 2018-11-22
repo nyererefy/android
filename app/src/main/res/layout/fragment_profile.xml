@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/dpView"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:fitsSystemWindows="true"
+                android:scaleType="centerCrop"
+                tools:src="@drawable/holder" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:elevation="8dp"
+            tools:targetApi="lollipop">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/nameView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_user_coloured"
+                    android:drawableLeft="@drawable/ic_user_coloured"
+                    android:drawablePadding="8dp"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    tools:text="@string/test_name" />
+
+                <TextView
+                    android:id="@+id/usernameView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_user_coloured"
+                    android:drawableLeft="@drawable/ic_user_coloured"
+                    android:drawablePadding="8dp"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    tools:text="Nux" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:elevation="8dp"
+            tools:targetApi="lollipop">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/about"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_user_coloured"
+                    android:drawableLeft="@drawable/ic_user_coloured"
+                    android:drawablePadding="8dp"
+                    android:text="@string/about_activity"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/support"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_user_coloured"
+                    android:drawableLeft="@drawable/ic_user_coloured"
+                    android:drawablePadding="8dp"
+                    android:text="@string/support_title"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_user_coloured"
+                    android:drawableLeft="@drawable/ic_user_coloured"
+                    android:drawablePadding="8dp"
+                    android:text="@string/logout_activity"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+</ScrollView>

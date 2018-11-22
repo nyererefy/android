@@ -59,12 +59,6 @@
             android:label="@string/title_activity_participate"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".student.StudentProfile"
-            android:label="@string/title_activity_profile"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-        <activity
             android:name=".news.NewsView"
             android:label="@string/title_activity_news_view"
             android:theme="@style/AppTheme.NoActionBar">
