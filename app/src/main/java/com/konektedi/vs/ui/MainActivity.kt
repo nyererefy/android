@@ -1,16 +1,11 @@
 package com.konektedi.vs.ui
 
-import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -24,14 +19,22 @@ import com.konektedi.vs.R
 import com.konektedi.vs.elections.ElectionsFragment
 import com.konektedi.vs.motions.MotionsFragment
 import com.konektedi.vs.news.NewsFragment
-import com.konektedi.vs.other.SupportActivityMain
-import com.konektedi.vs.student.*
+import com.konektedi.vs.student.LoginActivity
+import com.konektedi.vs.student.UserFragment
+import com.konektedi.vs.student.clearPreferences
+import com.konektedi.vs.student.getLoginPreference
+import com.konektedi.vs.utilities.api.Api
+import com.konektedi.vs.utilities.models.AppUpdate
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.startActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme) //Splash finished.
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
@@ -110,6 +113,19 @@ class MainActivity : AppCompatActivity() {
     override fun onBackPressed() {
         finishAffinity()
         System.exit(0)
+    }
+
+    private fun checkUpdates() {
+        val apiClient = Api.subClient()
+
+        apiClient.checkUpdate().enqueue(
+                object : Callback<AppUpdate> {
+                    override fun onFailure(call: Call<AppUpdate>, t: Throwable) {
+                    }
+
+                    override fun onResponse(call: Call<AppUpdate>, response: Response<AppUpdate>) {
+                    }
+                })
     }
 
     private fun setupViewPager(viewPager: ViewPager) {

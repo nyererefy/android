@@ -10,6 +10,10 @@
 
     </style>
 
+    <style name="splashScreenTheme" parent="@android:style/Theme.DeviceDefault.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
+
     <!--Separator used globally-->
     <style name="SeparatorLine">
         <item name="android:layout_width">match_parent</item>

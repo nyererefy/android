@@ -5,7 +5,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
@@ -25,12 +24,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-
         <activity
             android:name=".ui.MainActivity"
+            android:theme="@style/splashScreenTheme"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -39,15 +39,15 @@
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.konektedi.vs.elections.ElectionView"
+            android:name=".elections.ElectionView"
             android:label="@string/title_activity_election_view"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.konektedi.vs.candidates.CandidatesActivity"
+            android:name=".candidates.CandidatesActivity"
             android:label="@string/title_activity_candidates"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.konektedi.vs.candidates.Profile"
+            android:name=".candidates.Profile"
             android:exported="true"
             android:label="@string/title_activity_candidate_profile"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -61,22 +61,17 @@
         <activity
             android:name=".news.NewsView"
             android:label="@string/title_activity_news_view"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".other.SupportActivityMain"
             android:label="@string/title_activity_support"
-            android:theme="@style/AppTheme">
-
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
-            android:name="com.konektedi.vs.reviews.ReviewsActivity"
+            android:name=".reviews.ReviewsActivity"
             android:label="@string/title_activity_reviews"
             android:theme="@style/AppTheme"
-            android:windowSoftInputMode="stateHidden">
-
-        </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
+        <activity android:name=".ui.SplashActivity"></activity>
     </application>
 
 </manifest>

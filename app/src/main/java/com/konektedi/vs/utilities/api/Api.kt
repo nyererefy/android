@@ -57,6 +57,10 @@ interface Api {
     @GET("motions/motions")
     fun getMotions(@Query(OFFSET) offset: Int): Call<List<Motion>>
 
+    //Not the same base url
+    @GET("appupdates/android")
+    fun checkUpdate(): Call<AppUpdate>
+
     @GET("motions/motion")
     fun getMotion(@Query(MOTION_ID) motion_id: Int): Call<Motion>
 
@@ -117,7 +121,8 @@ interface Api {
         }
 
         //Used only when login
-        fun subClient(): Api {
+        //So that I can override it.
+        fun subClient(baseUrl: String = BASE_URL): Api {
             val okHttpClient = OkHttpClient.Builder()
 
             okHttpClient.connectTimeout(30, TimeUnit.SECONDS)
@@ -135,7 +140,7 @@ interface Api {
             }
 
             return Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(baseUrl)
                     .client(okHttpClient.build())
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
