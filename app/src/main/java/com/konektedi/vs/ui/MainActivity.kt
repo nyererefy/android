@@ -26,10 +26,19 @@ import com.konektedi.vs.student.getLoginPreference
 import com.konektedi.vs.utilities.api.Api
 import com.konektedi.vs.utilities.models.AppUpdate
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.startActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import android.R.attr.versionName
+import android.R.attr.versionCode
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.content.pm.PackageInfo
+import android.net.Uri
+import android.util.Log
+import com.konektedi.vs.BuildConfig
+import com.konektedi.vs.utilities.common.Constants.BASE_URL_WITH_NO_VERSION
+import org.jetbrains.anko.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -40,9 +49,10 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         checkLogin()
-        initBottomNav()
         centerTitle()
+        initBottomNav()
         setupViewPager(viewPager)
+        checkUpdates()
     }
 
     private fun checkLogin() {
@@ -116,7 +126,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkUpdates() {
-        val apiClient = Api.subClient()
+        val apiClient = Api.subClient(BASE_URL_WITH_NO_VERSION)
 
         apiClient.checkUpdate().enqueue(
                 object : Callback<AppUpdate> {
@@ -124,6 +134,37 @@ class MainActivity : AppCompatActivity() {
                     }
 
                     override fun onResponse(call: Call<AppUpdate>, response: Response<AppUpdate>) {
+                        if (response.isSuccessful) {
+                            val result = response.body()
+                            if (BuildConfig.VERSION_CODE < result!!.versionCode) {
+                                //Convert this strings to new lines.
+                                alert(result.newFeatures.joinToString(
+                                        "\r\n",
+                                        "What\'s new! \r\n \r\n",
+                                        "\n ${result.warning}"),
+                                        "New update available")
+                                {
+                                    positiveButton("Update Now") {
+
+                                        val uri = Uri.parse("market://details?id=$packageName")
+                                        val goToMarket = Intent(Intent.ACTION_VIEW, uri)
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY or
+                                                    Intent.FLAG_ACTIVITY_NEW_DOCUMENT or
+                                                    Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+                                        }
+                                        try {
+                                            startActivity(goToMarket)
+                                        } catch (e: ActivityNotFoundException) {
+                                            startActivity(Intent(Intent.ACTION_VIEW,
+                                                    Uri.parse("http://play.google.com/store/apps/details?id=$packageName")))
+                                        }
+                                    }
+                                    negativeButton("Later") { it.dismiss() }
+                                    isCancelable = false
+                                }.show()
+                            }
+                        }
                     }
                 })
     }

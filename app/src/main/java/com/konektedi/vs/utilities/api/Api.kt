@@ -58,7 +58,7 @@ interface Api {
     fun getMotions(@Query(OFFSET) offset: Int): Call<List<Motion>>
 
     //Not the same base url
-    @GET("appupdates/android")
+    @GET("updates/android")
     fun checkUpdate(): Call<AppUpdate>
 
     @GET("motions/motion")

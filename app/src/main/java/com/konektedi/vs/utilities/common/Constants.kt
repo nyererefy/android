@@ -45,6 +45,8 @@ object Constants {
     const val X_API_KEY = "X-API-KEY" //If you change. Change also in api.java
     const val X_API_KEY_VALUE = "oNQ6r&mv#j|m]u" //If you change. Change also in api.java
 
-    const val BASE_URL = "http://vs.konektedi.com/api/v2/"
-//    const val BASE_URL = "http://192.168.43.228/konektedi_vs/api/v2/"
+    //    const val BASE_URL = "http://vs.konektedi.com/api/v2/"
+//    const val BASE_URL_WITH_NO_VERSION = "http://vs.konektedi.com/api/"
+    const val BASE_URL = "http://192.168.43.228/konektedi_vs/api/v2/"
+    const val BASE_URL_WITH_NO_VERSION = "http://192.168.43.228/konektedi_vs/api/"
 }
