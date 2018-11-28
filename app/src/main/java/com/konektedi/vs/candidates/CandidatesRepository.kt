@@ -1,9 +1,7 @@
 package com.konektedi.vs.candidates
 
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
-
 import com.konektedi.vs.utilities.api.Api
 import com.konektedi.vs.utilities.api.getError
 import com.konektedi.vs.utilities.common.NetworkState
@@ -11,7 +9,6 @@ import com.konektedi.vs.utilities.models.CandidateProfile
 import com.konektedi.vs.utilities.models.Listing
 import okhttp3.RequestBody
 import okhttp3.ResponseBody
-
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

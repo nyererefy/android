@@ -1,23 +1,20 @@
 package com.konektedi.vs.candidates
 
 import android.app.Activity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
-import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.konektedi.vs.R
 import com.konektedi.vs.student.grabPreference
 import com.konektedi.vs.utilities.common.Constants.CANDIDATE_ID
-import com.konektedi.vs.utilities.common.Constants.CLASS_NAME
 import com.konektedi.vs.utilities.common.Constants.COVER
 import com.konektedi.vs.utilities.common.Constants.ELECTION_ID
 import com.konektedi.vs.utilities.common.Constants.ID
@@ -125,15 +122,12 @@ class ProfileActivity : AppCompatActivity() {
         id = data.getInt(ID)
         electionId = data.getInt(ELECTION_ID)
 
-        val name = data.getString(NAME)
         val coverURL = data.getString(COVER)
 
         if (id.toString() != grabPreference(this, ID)) {
             change_cover_btn.visibility = View.GONE
             change_bio.visibility = View.GONE
         }
-
-        name_view.text = name
 
         Glide.with(this)
                 .load(coverURL)
@@ -149,11 +143,21 @@ class ProfileActivity : AppCompatActivity() {
             bioTexts = details.biography.toString()
             username_view.text = details.username
 
+            name_view.text = details.name
+
             val schoolText = "${details.abbr} ${details.year}"
             school_view.text = schoolText
 
             bio_view.text = details.biography
             bio_input.setText(bioTexts)
+        })
+
+        viewModel.networkState.observe(this, Observer {
+            when (it) {
+                NetworkState.LOADING -> progress_bar.visibility = View.VISIBLE
+                NetworkState.LOADED -> progress_bar.visibility = View.GONE
+                else -> coordinatorLayout.longSnackbar(it.msg.toString())
+            }
         })
     }
 
