@@ -17,6 +17,7 @@ object Constants {
     const val NYEREREFY_PREFERENCES = "nyererefy_preferences"
     const val CLASS_NAME = "class_name"
     const val CANDIDATE_ID = "candidate_id"
+    const val BIOGRAPHY = "biography"
     const val DEVICE = "device"
 
     //Motions

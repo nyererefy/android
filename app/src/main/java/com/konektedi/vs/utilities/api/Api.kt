@@ -75,6 +75,10 @@ interface Api {
     @POST("candidates/cover")
     fun postCover(@Body file: RequestBody): Call<ResponseBody>
 
+    @FormUrlEncoded
+    @POST("candidates/biography")
+    fun postBio(@FieldMap map: Map<String, String>): Call<ResponseBody>
+
     @GET("motions/opinions")
     fun getOpinions(
             @Query(Constants.MOTION_ID) motion_id: Int,

@@ -153,6 +153,7 @@
     <string name="change_dp">Change Image</string>
     <string name="type_bio">Type bio here</string>
     <string name="about_me">Bio</string>
+    <string name="bio_updated">Biography updated successfully</string>
     <!--motions-->
 
 </resources>

@@ -26,6 +26,10 @@ class CandidatesViewModel : ViewModel() {
         return repository.vote(map)
     }
 
+    fun updateBiography(map: Map<String, String>): LiveData<NetworkState> {
+        return repository.updateBiography(map)
+    }
+
     fun uploadCover(requestBody: RequestBody): LiveData<NetworkState> {
         return repository.uploadCover(requestBody)
     }

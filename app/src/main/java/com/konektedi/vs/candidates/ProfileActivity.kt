@@ -14,6 +14,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.konektedi.vs.R
 import com.konektedi.vs.student.grabPreference
+import com.konektedi.vs.utilities.common.Constants.BIOGRAPHY
 import com.konektedi.vs.utilities.common.Constants.CANDIDATE_ID
 import com.konektedi.vs.utilities.common.Constants.COVER
 import com.konektedi.vs.utilities.common.Constants.ELECTION_ID
@@ -61,6 +62,7 @@ class ProfileActivity : AppCompatActivity() {
             bio_view.visibility = View.GONE
             bio_input.visibility = View.VISIBLE
         }
+        save_bio.setOnClickListener { postBio() }
     }
 
     private fun startCropper() {
@@ -157,6 +159,35 @@ class ProfileActivity : AppCompatActivity() {
                 NetworkState.LOADING -> progress_bar.visibility = View.VISIBLE
                 NetworkState.LOADED -> progress_bar.visibility = View.GONE
                 else -> coordinatorLayout.longSnackbar(it.msg.toString())
+            }
+        })
+    }
+
+    private fun postBio() {
+        val bioInput = bio_input.text.toString()
+
+        val map = mapOf(
+                CANDIDATE_ID to candidateId.toString(),
+                BIOGRAPHY to bioInput
+        )
+
+        viewModel.updateBiography(map).observe(this, Observer {
+            when (it) {
+                NetworkState.LOADING -> save_bio.visibility = View.GONE
+                NetworkState.LOADED -> {
+                    change_bio.visibility = View.VISIBLE
+                    save_bio.visibility = View.GONE
+
+                    bio_input.visibility = View.GONE
+                    bio_view.visibility = View.VISIBLE
+
+                    bio_view.text = bioInput
+                    coordinatorLayout.longSnackbar(R.string.bio_updated)
+                }
+                else -> {
+                    save_bio.visibility = View.VISIBLE
+                    coordinatorLayout.longSnackbar(it.msg.toString())
+                }
             }
         })
     }

@@ -17,6 +17,25 @@ class CandidatesRepository {
     private val apiClient = Api.create()
     val mNetworkState = MutableLiveData<NetworkState>()
 
+    fun updateBiography(map: Map<String, String>): MutableLiveData<NetworkState> {
+        val call = apiClient.postBio(map)
+        mNetworkState.value = NetworkState.LOADING
+
+        call.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                when {
+                    response.isSuccessful -> mNetworkState.value = NetworkState.LOADED
+                    else -> mNetworkState.value = NetworkState.serverMsg(getError(response))
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                mNetworkState.value = NetworkState.serverMsg(t.message)
+            }
+        })
+        return mNetworkState
+    }
+
     fun uploadCover(requestBody: RequestBody): MutableLiveData<NetworkState> {
         val call = apiClient.postCover(requestBody)
         mNetworkState.value = NetworkState.LOADING
