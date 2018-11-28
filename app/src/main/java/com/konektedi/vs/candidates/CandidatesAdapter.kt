@@ -2,7 +2,6 @@ package com.konektedi.vs.candidates
 
 import android.content.Context
 import android.content.Intent
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,16 +56,13 @@ class CandidatesAdapter(private val mContext: Context,
         }
 
         private fun showProfile(candidate: Candidate, mContext: Context) {
-            val intent = Intent(mContext, Profile::class.java).apply {
+            val intent = Intent(mContext, ProfileActivity::class.java).apply {
 
                 putExtra(Constants.COVER, candidate.cover)
                 putExtra(Constants.ELECTION_ID, candidate.electionId)
                 putExtra(Constants.ID, candidate.id)
                 putExtra(Constants.CANDIDATE_ID, candidate.candidateId)
                 putExtra(Constants.NAME, candidate.name)
-                putExtra(Constants.CLASS_NAME, candidate.abbr)
-
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
             mContext.startActivity(intent)
         }

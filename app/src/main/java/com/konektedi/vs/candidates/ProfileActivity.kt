@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import android.view.View
@@ -32,11 +34,14 @@ import org.jetbrains.anko.longToast
 import java.io.File
 
 
-class Profile : AppCompatActivity() {
+class ProfileActivity : AppCompatActivity() {
     private lateinit var viewModel: CandidatesViewModel
     private var imageUri: Uri? = null
-    private var candidateId: Int? = null
-    private var electionId: Int? = null
+    private var candidateId: Int = 0
+    private var electionId: Int = 0
+    private var id: Int = 0
+    private var bioTexts = ""
+//    private lateinit var thisMenu: Menu
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +53,18 @@ class Profile : AppCompatActivity() {
         viewModel = ViewModelProviders.of(this).get(CandidatesViewModel::class.java)
 
         showDetails()
+        initListeners()
+    }
+
+    private fun initListeners() {
         change_cover_btn.setOnClickListener { startCropper() }
+        change_bio.setOnClickListener {
+            change_bio.visibility = View.GONE
+            save_bio.visibility = View.VISIBLE
+
+            bio_view.visibility = View.GONE
+            bio_input.visibility = View.VISIBLE
+        }
     }
 
     private fun startCropper() {
@@ -89,17 +105,14 @@ class Profile : AppCompatActivity() {
         viewModel.uploadCover(requestBody).observe(this, Observer {
             when (it) {
                 NetworkState.LOADING -> {
-                    change_cover_btn.visibility = View.GONE
                     change_progress_bar.visibility = View.VISIBLE
                 }
                 NetworkState.LOADED -> {
                     coordinatorLayout.longSnackbar(getString(R.string.cover_changed))
-                    change_cover_btn.visibility = View.VISIBLE
                     change_progress_bar.visibility = View.GONE
                 }
                 else -> {
                     coordinatorLayout.longSnackbar(it?.msg.toString())
-                    change_cover_btn.visibility = View.VISIBLE
                     change_progress_bar.visibility = View.GONE
                 }
             }
@@ -109,42 +122,75 @@ class Profile : AppCompatActivity() {
     private fun showDetails() {
         val data = intent.extras
 
-        val coverURL = data!!.getString(COVER)
-        candidateId = data.getInt(CANDIDATE_ID)
+        candidateId = data!!.getInt(CANDIDATE_ID)
+        id = data.getInt(ID)
         electionId = data.getInt(ELECTION_ID)
-        val id = data.getInt(ID)
-        val name = data.getString(NAME)
-        val className = data.getString(CLASS_NAME)
 
-        //Checking if current user is a candidate
-        if (id.toString() == grabPreference(this, ID)) {
-            change_cover_btn.visibility = View.VISIBLE
+        val name = data.getString(NAME)
+        val coverURL = data.getString(COVER)
+
+        if (id.toString() != grabPreference(this, ID)) {
+            change_cover_btn.visibility = View.GONE
+            change_bio.visibility = View.GONE
         }
 
-        title = name
-        schoolView.text = className
+        name_view.text = name
 
         Glide.with(this)
                 .load(coverURL)
                 .apply(RequestOptions()
-                        .diskCacheStrategy(DiskCacheStrategy.DATA)
+                        .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                         .dontAnimate()
                         .placeholder(R.drawable.holder)
                         .error(R.drawable.holder))
                 .into(cover)
 
-        viewModel.getCandidate(candidateId!!).observe(this, Observer {
-            it?.details.run {
-                val details = it!!.details
-                discriptionView.text = details.biography
-            }
+        viewModel.getCandidate(candidateId).observe(this, Observer {
+            val details = it.details
+            bioTexts = details.biography.toString()
+            username_view.text = details.username
+
+            val schoolText = "${details.abbr} ${details.year}"
+            school_view.text = schoolText
+
+            bio_view.text = details.biography
+            bio_input.setText(bioTexts)
         })
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> super.onBackPressed()
+//            R.id.change_dp -> startCropper()
+//            R.id.edit_bio -> {
+//                editBio(item)
+//            }
+//            R.id.save_bio -> {
+//                saveBio(item)
+//            }
         }
         return true
     }
+
+//    private fun editBio(item: MenuItem) {
+//        item.isVisible = false
+//        thisMenu.findItem(R.id.save_bio).isVisible = true
+//
+//        bio_input.visibility = View.VISIBLE
+//        discriptionView.visibility = View.GONE
+//    }
+
+//    private fun saveBio(item: MenuItem) {
+////        item.isVisible = false
+////        thisMenu.findItem(R.id.edit_bio).isVisible = true
+//    }
+
+//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+//        //Checking if current user is a candidate
+//        if (id.toString() == grabPreference(this, ID)) {
+//            menuInflater.inflate(R.menu.candidate_activity_menu, menu)
+//            thisMenu = menu
+//        }
+//        return super.onCreateOptionsMenu(menu)
+//    }
 }

@@ -18,15 +18,15 @@ class CandidatesViewModel : ViewModel() {
         return repository.getCandidates(election_id, category_id)
     }
 
-    fun getCandidate(election_id: Int): LiveData<CandidateProfile> {
-        return repository.getCandidate(election_id)
+    fun getCandidate(candidate_id: Int): LiveData<CandidateProfile> {
+        return repository.getCandidate(candidate_id)
     }
 
-    fun submitVote(map: Map<String, String>): MutableLiveData<NetworkState> {
+    fun submitVote(map: Map<String, String>): LiveData<NetworkState> {
         return repository.vote(map)
     }
 
-    fun uploadCover(requestBody: RequestBody): MutableLiveData<NetworkState> {
+    fun uploadCover(requestBody: RequestBody): LiveData<NetworkState> {
         return repository.uploadCover(requestBody)
     }
 }

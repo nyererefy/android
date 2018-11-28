@@ -3,6 +3,7 @@ package com.konektedi.vs.candidates
 import android.graphics.PorterDuff
 import android.os.Build
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -140,7 +141,7 @@ class CandidatesActivity : AppCompatActivity() {
         }.show()
     }
 
-    private fun progress(boolean: Boolean){
+    private fun progress(boolean: Boolean) {
         swipeRefreshLayout.isRefreshing = boolean
     }
 

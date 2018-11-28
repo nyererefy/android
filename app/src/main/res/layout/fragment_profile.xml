@@ -11,11 +11,10 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardElevation="8dp"
-            tools:targetApi="lollipop">
+            app:cardElevation="8dp">
 
             <ImageView
                 android:id="@+id/dpView"
@@ -24,14 +23,13 @@
                 android:scaleType="centerCrop"
                 tools:src="@drawable/holder" />
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:elevation="8dp"
-            tools:targetApi="lollipop">
+            app:cardElevation="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -41,10 +39,12 @@
 
                 <TextView
                     android:id="@+id/nameView"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_user_black"
                     android:drawableLeft="@drawable/ic_user_black"
+                    android:drawableEnd="@drawable/ic_verified"
+                    android:drawableRight="@drawable/ic_verified"
                     android:drawablePadding="8dp"
                     android:textSize="24sp"
                     android:textStyle="bold"
@@ -54,8 +54,8 @@
                     android:id="@+id/usernameView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_username"
-                    android:drawableLeft="@drawable/ic_username"
+                    android:drawableStart="@drawable/ic_at"
+                    android:drawableLeft="@drawable/ic_at"
                     android:drawablePadding="8dp"
                     android:textSize="24sp"
                     android:textStyle="bold"
@@ -63,15 +63,13 @@
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:elevation="8dp"
-            app:cardElevation="8dp"
-            tools:targetApi="lollipop">
+            app:cardElevation="8dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -110,7 +108,7 @@
                     android:textSize="20sp" />
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 </ScrollView>

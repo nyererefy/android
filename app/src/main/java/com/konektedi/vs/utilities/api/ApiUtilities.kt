@@ -13,12 +13,3 @@ fun getError(response: Response<ResponseBody>): String? {
     val message = gson.fromJson(response.errorBody()?.charStream(), ApiError::class.java)
     return message.message
 }
-
-/*
-    * Returns a certain value from server requests
- */
-fun getValue(response: Response<ResponseBody>): Int? {
-    val gson = Gson()
-    val value = gson.fromJson(response.body()?.charStream(), ApiError::class.java)
-    return value.value
-}

@@ -47,9 +47,9 @@
             android:label="@string/title_activity_candidates"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".candidates.Profile"
+            android:name=".candidates.ProfileActivity"
             android:exported="true"
-            android:label="@string/title_activity_candidate_profile"
+            android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"

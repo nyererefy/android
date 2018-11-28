@@ -149,6 +149,10 @@
     <string name="title_more">Profile</string>
     <string name="categories">Categories</string>
     <string name="stats">Statistics</string>
+    <string name="edit_bio">Edit Bio</string>
+    <string name="change_dp">Change Image</string>
+    <string name="type_bio">Type bio here</string>
+    <string name="about_me">Bio</string>
     <!--motions-->
 
 </resources>

@@ -1,6 +1,7 @@
 package com.konektedi.vs.candidates
 
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 
 import com.konektedi.vs.utilities.api.Api
@@ -54,9 +55,7 @@ class CandidatesRepository {
                                 mNetworkState.value = NetworkState.LOADED
                                 candidate.value = response.body()
                             }
-                            else -> {
-                                mNetworkState.value = NetworkState.serverMsg(getError(response as Response<ResponseBody>))
-                            }
+                            else -> mNetworkState.value = NetworkState.serverMsg(getError(response as Response<ResponseBody>))
                         }
                     }
                 })

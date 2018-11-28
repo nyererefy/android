@@ -10,6 +10,7 @@ data class Candidate(
         @SerializedName("cover") val cover: String,
         @SerializedName("election_id") val electionId: Int,
         @SerializedName("name") val name: String,
+        @SerializedName("username") val username: String,
         @SerializedName("year") val year: String,
         @SerializedName("abbr") val abbr: String
 )
