@@ -41,7 +41,6 @@ class ProfileActivity : AppCompatActivity() {
     private var electionId: Int = 0
     private var id: Int = 0
     private var bioTexts = ""
-//    private lateinit var thisMenu: Menu
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -161,36 +160,8 @@ class ProfileActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> super.onBackPressed()
-//            R.id.change_dp -> startCropper()
-//            R.id.edit_bio -> {
-//                editBio(item)
-//            }
-//            R.id.save_bio -> {
-//                saveBio(item)
-//            }
         }
         return true
     }
 
-//    private fun editBio(item: MenuItem) {
-//        item.isVisible = false
-//        thisMenu.findItem(R.id.save_bio).isVisible = true
-//
-//        bio_input.visibility = View.VISIBLE
-//        discriptionView.visibility = View.GONE
-//    }
-
-//    private fun saveBio(item: MenuItem) {
-////        item.isVisible = false
-////        thisMenu.findItem(R.id.edit_bio).isVisible = true
-//    }
-
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        //Checking if current user is a candidate
-//        if (id.toString() == grabPreference(this, ID)) {
-//            menuInflater.inflate(R.menu.candidate_activity_menu, menu)
-//            thisMenu = menu
-//        }
-//        return super.onCreateOptionsMenu(menu)
-//    }
 }
