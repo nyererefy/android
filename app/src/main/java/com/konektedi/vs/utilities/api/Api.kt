@@ -1,5 +1,7 @@
 package com.konektedi.vs.utilities.api
 
+import android.annotation.SuppressLint
+import android.util.Log
 import com.konektedi.vs.App.Companion.appContext
 import com.konektedi.vs.student.grabPreference
 import com.konektedi.vs.utilities.common.Constants
@@ -13,14 +15,25 @@ import com.konektedi.vs.utilities.common.Constants.UNIVERSITY
 import com.konektedi.vs.utilities.common.Constants.X_API_KEY
 import com.konektedi.vs.utilities.common.Constants.X_API_KEY_VALUE
 import com.konektedi.vs.utilities.models.*
-import okhttp3.OkHttpClient
-import okhttp3.RequestBody
-import okhttp3.ResponseBody
+import okhttp3.*
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 import java.util.concurrent.TimeUnit
+import android.content.Intent
+import android.os.Build
+import android.provider.Settings
+import android.view.Gravity
+import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
+import com.konektedi.vs.student.LoginActivity
+import com.konektedi.vs.student.clearPreferences
+import okhttp3.OkHttpClient
+import org.jetbrains.anko.startActivity
+import androidx.core.content.ContextCompat.startActivity
+import com.konektedi.vs.other.ErrorHandlerActivity
+
 
 interface Api {
     @GET("elections/elections")
@@ -96,7 +109,8 @@ interface Api {
     fun postComment(@FieldMap map: Map<String, String>): Call<ResponseBody>
 
     companion object {
-        fun create(): Api {
+        /*   Being naked means we don't add identity parameters in the header */
+        fun create(naked: Boolean = false, baseUrl: String = BASE_URL): Api {
             val okHttpClient = OkHttpClient.Builder()
 
             okHttpClient.connectTimeout(30, TimeUnit.SECONDS)
@@ -106,41 +120,41 @@ interface Api {
 
             okHttpClient.addInterceptor { chain ->
                 val request = chain.request()
-                val applicationContext = appContext
 
                 val session = request.newBuilder()
-                        .addHeader(Constants.ID, grabPreference(applicationContext, Constants.ID))
-                        .addHeader(Constants.UNIVERSITY, grabPreference(applicationContext, UNIVERSITY))
-                        .addHeader(Constants.X_API_KEY, X_API_KEY_VALUE)
+
+                session.addHeader(Constants.DEVICE, deviceName)
+                session.addHeader(Constants.ANDROID_ID, getAndroidID())
+
+                if (!naked) {
+                    session.addHeader(Constants.ID, grabPreference(appContext, Constants.ID))
+                    session.addHeader(Constants.UNIVERSITY, grabPreference(appContext, UNIVERSITY))
+                    session.addHeader(Constants.TOKEN, grabPreference(appContext, Constants.TOKEN))
+                }
 
                 chain.proceed(session.build())
             }
 
-            return Retrofit.Builder()
-                    .baseUrl(BASE_URL)
-                    .client(okHttpClient.build())
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-                    .create(Api::class.java)
-        }
-
-        //Used only when login
-        //So that I can override it.
-        fun subClient(baseUrl: String = BASE_URL): Api {
-            val okHttpClient = OkHttpClient.Builder()
-
-            okHttpClient.connectTimeout(30, TimeUnit.SECONDS)
-            okHttpClient.readTimeout(30, TimeUnit.SECONDS)
-            okHttpClient.writeTimeout(30, TimeUnit.SECONDS)
-            okHttpClient.retryOnConnectionFailure(true)
-
             okHttpClient.addInterceptor { chain ->
                 val request = chain.request()
+                val response = chain.proceed(request)
 
-                val session = request.newBuilder()
-                        .addHeader(X_API_KEY, X_API_KEY_VALUE)
+                when (response.code()) {
+                    401 -> {
+                        clearPreferences(appContext)
 
-                chain.proceed(session.build())
+                        val i = Intent(appContext, LoginActivity::class.java)
+                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        appContext.startActivity(i)
+                    }
+                    500 -> {
+                        val i = Intent(appContext, ErrorHandlerActivity::class.java)
+                        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        appContext.startActivity(i)
+                    }
+                }
+
+                response
             }
 
             return Retrofit.Builder()
@@ -150,5 +164,13 @@ interface Api {
                     .build()
                     .create(Api::class.java)
         }
+
+        private val deviceName: String
+            get() = ("${Build.MANUFACTURER} ${Build.MODEL} ${Build.VERSION.RELEASE} ${Build.VERSION_CODES::class.java.fields[Build.VERSION.SDK_INT].name}")
+
+        @SuppressLint("HardwareIds")
+        private fun getAndroidID(): String = Settings.Secure.getString(appContext.contentResolver,
+                Settings.Secure.ANDROID_ID)
+
     }
 }

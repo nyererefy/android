@@ -19,6 +19,7 @@ object Constants {
     const val CANDIDATE_ID = "candidate_id"
     const val BIOGRAPHY = "biography"
     const val DEVICE = "device"
+    const val ANDROID_ID = "identifier"
 
     //Motions
     const val OFFSET = "offset"

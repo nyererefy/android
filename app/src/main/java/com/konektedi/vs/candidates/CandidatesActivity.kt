@@ -107,7 +107,6 @@ class CandidatesActivity : AppCompatActivity() {
         map[ELECTION_ID] = candidate.electionId.toString()
         map[CATEGORY_ID] = candidate.categoryId.toString()
         map[Constants.CANDIDATE_ID] = candidate.candidateId.toString()
-        map[Constants.DEVICE] = deviceName
 
         viewModel.submitVote(map).observe(this, Observer {
             when (it) {
@@ -157,10 +156,6 @@ class CandidatesActivity : AppCompatActivity() {
         error_msg.setHtml(getString(alertText))
     }
 
-    private val deviceName: String
-        get() = (Build.MANUFACTURER
-                + " " + Build.MODEL + " " + Build.VERSION.RELEASE
-                + " " + Build.VERSION_CODES::class.java.fields[Build.VERSION.SDK_INT].name)
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

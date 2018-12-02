@@ -126,7 +126,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkUpdates() {
-        val apiClient = Api.subClient(BASE_URL_WITH_NO_VERSION)
+        val apiClient = Api.create(false, BASE_URL_WITH_NO_VERSION)
 
         apiClient.checkUpdate().enqueue(
                 object : Callback<AppUpdate> {

@@ -6,5 +6,6 @@ data class User(
         @SerializedName("id") val id: Int,
         @SerializedName("username") val username: String,
         @SerializedName("name") val name: String,
-        @SerializedName("university_id") val universityId: Int
+        @SerializedName("university_id") val universityId: Int,
+        @SerializedName("token") val token: String
 )

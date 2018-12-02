@@ -48,6 +48,7 @@
     <string name="change_username">Change Username</string>
     <string name="password_changed">Password changed successfully.</string>
     <string name="error_occurred">Error occurred. Try again later.</string>
+    <string name="error_500">The service is unavailable. Make sure you have working internet connection and latest App update.</string>
 
 
     <!--Buttons-->

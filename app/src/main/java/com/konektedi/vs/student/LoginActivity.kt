@@ -29,6 +29,7 @@ import com.konektedi.vs.utilities.common.Constants.IS_LOGGED_IN
 import com.konektedi.vs.utilities.common.Constants.NAME
 import com.konektedi.vs.utilities.common.Constants.NYEREREFY_PREFERENCES
 import com.konektedi.vs.utilities.common.Constants.PASSWORD
+import com.konektedi.vs.utilities.common.Constants.TOKEN
 import com.konektedi.vs.utilities.common.Constants.UNIVERSITY
 import com.konektedi.vs.utilities.common.Constants.USERNAME
 import com.konektedi.vs.utilities.models.User
@@ -255,7 +256,7 @@ class LoginActivity : Activity(), LoaderCallbacks<Cursor> {
             map[EMAIL] = mEmail
             map[PASSWORD] = mPassword
 
-            val request = Api.subClient().authenticate(map)
+            val request = Api.create(true).authenticate(map)
             try {
                 val response = request.execute()
 
@@ -288,6 +289,7 @@ class LoginActivity : Activity(), LoaderCallbacks<Cursor> {
                 editor.putString(NAME, user?.name)
                 editor.putString(USERNAME, user?.username)
                 editor.putString(UNIVERSITY, user?.universityId.toString())
+                editor.putString(TOKEN, user?.token)
                 editor.putBoolean(IS_LOGGED_IN, true)
 
                 editor.apply()
