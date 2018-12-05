@@ -54,6 +54,11 @@ class MotionViewActivity : AppCompatActivity(), Function0<Unit> {
             //Showing it after loading data to avoid stupid layout coming front.
             viewSwitcher.visibility = View.VISIBLE
             if (it.participated == 1) {
+
+                yesCount.text = it.yesCounts
+                opinionsCount.text = it.opinionsCounts
+                noCount.text = it.noCounts
+
                 getOpinions()
                 if (viewSwitcher.currentView != participated_layout) viewSwitcher.showNext()
             } else {
@@ -133,7 +138,5 @@ class MotionViewActivity : AppCompatActivity(), Function0<Unit> {
     }
 
     override fun invoke() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
-
 }

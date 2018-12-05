@@ -2,9 +2,7 @@ package com.konektedi.vs.student
 
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -16,6 +14,7 @@ import com.konektedi.vs.other.SupportActivityMain
 import com.konektedi.vs.utilities.common.Constants.NAME
 import com.konektedi.vs.utilities.common.Constants.USERNAME
 import org.jetbrains.anko.support.v4.startActivity
+
 
 class UserFragment : Fragment() {
 

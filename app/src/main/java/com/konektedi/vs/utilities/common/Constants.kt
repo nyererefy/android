@@ -1,7 +1,6 @@
 package com.konektedi.vs.utilities.common
 
 object Constants {
-    const val USER_PREFERENCES = "userPreferences"
     const val ID = "id"
     const val NAME = "name"
     const val EMAIL = "email"
@@ -15,7 +14,6 @@ object Constants {
     const val REVIEW = "review"
     const val IS_LOGGED_IN = "is_logged_in"
     const val NYEREREFY_PREFERENCES = "nyererefy_preferences"
-    const val CLASS_NAME = "class_name"
     const val CANDIDATE_ID = "candidate_id"
     const val BIOGRAPHY = "biography"
     const val DEVICE = "device"
@@ -33,11 +31,7 @@ object Constants {
     const val COMMENT = "comment"
     const val POST = "post"
     const val TITLE = "title"
-    const val PHOTO = "photo"
     const val FILE = "file"
-    const val AUTHOR = "author"
-    const val TIME = "time"
-    const val TYPE = "type"
 
     //Paging Library
     const val INITIAL_LOAD = 5
@@ -47,8 +41,8 @@ object Constants {
     const val X_API_KEY = "X-API-KEY" //If you change. Change also in api.java
     const val X_API_KEY_VALUE = "oNQ6r&mv#j|m]u" //If you change. Change also in api.java
 
-//    const val BASE_URL = "http://vs.konektedi.com/api/v2/"
-//    const val BASE_URL_WITH_NO_VERSION = "http://vs.konektedi.com/api/"
-    const val BASE_URL = "http://192.168.43.228/konektedi_vs/api/v2/"
-    const val BASE_URL_WITH_NO_VERSION = "http://192.168.43.228/konektedi_vs/api/"
+    const val BASE_URL = "http://vs.konektedi.com/api/v2/"
+    const val BASE_URL_WITH_NO_VERSION = "http://vs.konektedi.com/api/"
+//    const val BASE_URL = "http://192.168.43.228/konektedi_vs/api/v2/"
+//    const val BASE_URL_WITH_NO_VERSION = "http://192.168.43.228/konektedi_vs/api/"
 }

@@ -32,6 +32,9 @@
     <color name="whatsAppColor">#1B5E20</color>
     <color name="rateAppColor">#311B92</color>
 
+    <!--Motions buttons-->
+    <color name="yes_counts_color">#43A047</color>
+
     <!--Tab colours-->
     <color name="election_tab">#337AB7</color>
     <color name="motions_tab">#5D4037</color>

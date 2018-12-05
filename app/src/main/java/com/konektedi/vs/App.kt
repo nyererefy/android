@@ -7,6 +7,17 @@ import androidx.appcompat.app.AppCompatDelegate
 
 
 class App : MultiDexApplication() {
+    companion object {
+        lateinit var appContext: Context
+
+//        /**
+//         * For solving drawableStart in TextViews problems. and ahbottomnavigation
+//         */
+//        init {
+//            AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
+//        }
+    }
+
     override fun onCreate() {
         super.onCreate()
         appContext = this
@@ -14,12 +25,4 @@ class App : MultiDexApplication() {
         UCEHandler.Builder(this).build()
     }
 
-    companion object {
-        lateinit var appContext: Context
-
-//        //For solving drawableStart in TextViews problems. and ahbottomnavigation
-//        init {
-//            AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
-//        }
-    }
 }

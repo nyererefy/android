@@ -14,7 +14,6 @@ import com.konektedi.vs.utilities.common.ListItemClickListener
 
 class MotionsFragment : androidx.fragment.app.Fragment(), ListItemClickListener, Function0<Unit> {
     override fun onRetryClick(view: View, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     private lateinit var adapter: MotionsAdapter
@@ -37,7 +36,6 @@ class MotionsFragment : androidx.fragment.app.Fragment(), ListItemClickListener,
         recyclerView.adapter = adapter
         return rootView
     }
-
 
     override fun invoke() {
     }

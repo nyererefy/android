@@ -78,6 +78,7 @@ class MainActivity : AppCompatActivity() {
             true
         }
 
+        bottomNavigation.isBehaviorTranslationEnabled = false
         bottomNavigation.accentColor = ContextCompat.getColor(this, R.color.accent_color)
         bottomNavigation.inactiveColor = ContextCompat.getColor(this, R.color.inactive_color)
 
