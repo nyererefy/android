@@ -50,7 +50,7 @@ public class SupportActivityMain extends AppCompatActivity {
         emailUsBtn.setOnClickListener(view -> openGmail());
         rateAppBtn.setOnClickListener(view -> rateThisApp());
         kInstagramBtn.setOnClickListener(view -> openInstagram("konektedi"));
-        sInstagramBtn.setOnClickListener(view -> openInstagram("sylvanuskateile"));
+        sInstagramBtn.setOnClickListener(view -> openInstagram("nyererefy"));
         sBlogBtn.setOnClickListener(view -> openBrowser("https://kateile.blogspot.com"));
         kWebBtn.setOnClickListener(view -> openBrowser("https://konektedi.com"));
         kFacebookBtn.setOnClickListener(view -> openFacebookPage("konektedi", "1967247010153586"));
@@ -98,8 +98,7 @@ public class SupportActivityMain extends AppCompatActivity {
             path = "com.whatsapp";
         }
 
-        //TODO change number
-        String smsNumber = "255753535059"; //without '+'
+        String smsNumber = "255692388395"; //without '+'
         try {
             Intent sendIntent = new Intent("android.intent.action.MAIN");
             sendIntent.setAction(Intent.ACTION_SEND);

@@ -20,10 +20,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingEnd="24dp"
+            android:paddingStart="24dp"
             android:paddingLeft="24dp"
-            android:paddingRight="24dp"
-            android:paddingStart="24dp">
+            android:paddingEnd="24dp"
+            android:paddingRight="24dp">
 
             <Button
                 android:id="@+id/emailUsBtn"
@@ -31,8 +31,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/emailColor"
-                android:drawableLeft="@drawable/icon_gmail_24"
                 android:drawableStart="@drawable/icon_gmail_24"
+                android:drawableLeft="@drawable/icon_gmail_24"
                 android:text="@string/email_us" />
 
             <Button
@@ -41,8 +41,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/whatsAppColor"
-                android:drawableLeft="@drawable/icon_whatsapp_24"
                 android:drawableStart="@drawable/icon_whatsapp_24"
+                android:drawableLeft="@drawable/icon_whatsapp_24"
                 android:text="@string/whatsapp_us" />
 
             <Button
@@ -51,8 +51,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/rateAppColor"
-                android:drawableLeft="@drawable/icon_rate_24"
                 android:drawableStart="@drawable/icon_rate_24"
+                android:drawableLeft="@drawable/icon_rate_24"
                 android:text="@string/support_rate_us" />
         </LinearLayout>
 
