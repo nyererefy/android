@@ -1,47 +1,39 @@
 package com.nyererefy.ui.fragments
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import com.nyererefy.R
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.nyererefy.adapters.ElectionsAdapter
-import com.nyererefy.utilities.common.ListItemClickListener
+import com.nyererefy.databinding.ElectionsFragmentBinding
 import com.nyererefy.viewmodels.ElectionsViewModel
 
-class ElectionsFragment : androidx.fragment.app.Fragment(), ListItemClickListener, Function0<Unit> {
-    private lateinit var adapter: ElectionsAdapter
+class ElectionsFragment : Fragment() {
     private lateinit var viewModel: ElectionsViewModel
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
+        val binding = ElectionsFragmentBinding.inflate(inflater, container, false)
 
-        adapter = ElectionsAdapter(activity!!, this)
         viewModel = ViewModelProviders.of(this).get(ElectionsViewModel::class.java)
 
-        viewModel.elections.observe(this, Observer { adapter.submitList(it) })
-        viewModel.networkState.observe(this, Observer { adapter.setNetworkState(it) })
+        val adapter = ElectionsAdapter {} //retry here.
+        binding.recyclerView.adapter = adapter
+        subscribeUI(adapter)
+
+        return binding.root
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment, container, false)
-        val recyclerView = rootView.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView
-        recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.activity)
-        recyclerView.adapter = adapter
-        return rootView
+    private fun subscribeUI(adapter: ElectionsAdapter) {
+        viewModel.elections.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it)
+        })
+        viewModel.networkState.observe(viewLifecycleOwner, Observer { adapter.setNetworkState(it) })
     }
-
-    override fun onRetryClick(view: View, position: Int) {
-
-    }
-
-
-    override fun invoke() {
-
-    }
-
-
 }

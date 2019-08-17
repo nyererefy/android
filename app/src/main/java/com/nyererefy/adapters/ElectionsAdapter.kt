@@ -1,23 +1,22 @@
 package com.nyererefy.adapters
 
-import androidx.paging.PagedListAdapter
-import android.content.Context
-import androidx.recyclerview.widget.DiffUtil
 import android.view.ViewGroup
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import com.nyererefy.R
 import com.nyererefy.adapters.viewholders.ElectionsViewHolder
 import com.nyererefy.utilities.common.NetworkState
 import com.nyererefy.utilities.common.NetworkStateItemViewHolder
 import com.nyererefy.utilities.models.Election
 
-class ElectionsAdapter(private val mContext: Context, private val retryCallback: () -> Unit)
+class ElectionsAdapter(private val retryCallback: () -> Unit)
     : PagedListAdapter<Election, androidx.recyclerview.widget.RecyclerView.ViewHolder>(POST_COMPARATOR) {
 
     private var networkState: NetworkState? = null
 
     override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         when (getItemViewType(position)) {
-            R.layout.z_election -> (holder as ElectionsViewHolder).bind(getItem(position), mContext)
+            R.layout.z_election_item -> (holder as ElectionsViewHolder).bind(getItem(position))
             R.layout.network_state_item -> (holder as NetworkStateItemViewHolder).bindTo(
                     networkState)
         }
@@ -29,7 +28,7 @@ class ElectionsAdapter(private val mContext: Context, private val retryCallback:
             payloads: MutableList<Any>) {
         if (payloads.isNotEmpty()) {
             val item = getItem(position)
-            (holder as ElectionsViewHolder).bind(item, mContext)
+            (holder as ElectionsViewHolder).bind(item)
         } else {
             onBindViewHolder(holder, position)
         }
@@ -37,7 +36,7 @@ class ElectionsAdapter(private val mContext: Context, private val retryCallback:
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         return when (viewType) {
-            R.layout.z_election -> ElectionsViewHolder.create(parent)
+            R.layout.z_election_item -> ElectionsViewHolder.create(parent)
             R.layout.network_state_item -> NetworkStateItemViewHolder.create(parent, retryCallback)
             else -> throw IllegalArgumentException("unknown view type $viewType")
         }
@@ -49,7 +48,7 @@ class ElectionsAdapter(private val mContext: Context, private val retryCallback:
         return if (hasExtraRow() && position == itemCount - 1) {
             R.layout.network_state_item
         } else {
-            R.layout.z_election
+            R.layout.z_election_item
         }
     }
 

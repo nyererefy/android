@@ -155,6 +155,7 @@
     <string name="type_bio">Type bio here</string>
     <string name="about_me">Bio</string>
     <string name="bio_updated">Biography updated successfully</string>
+    <string name="no_network">No network</string>
     <!--motions-->
 
 </resources>

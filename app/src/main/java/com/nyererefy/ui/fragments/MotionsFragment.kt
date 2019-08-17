@@ -29,7 +29,7 @@ class MotionsFragment : androidx.fragment.app.Fragment(), ListItemClickListener,
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.fragment, container, false)
+        val rootView = inflater.inflate(R.layout.elections_fragment, container, false)
         val recyclerView = rootView.findViewById(R.id.recyclerView) as androidx.recyclerview.widget.RecyclerView
         recyclerView.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this.activity)
         recyclerView.adapter = adapter
