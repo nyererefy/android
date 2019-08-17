@@ -2,7 +2,9 @@ package com.nyererefy.ui.fragments
 
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -12,9 +14,9 @@ import com.bumptech.glide.request.RequestOptions
 import com.nyererefy.R
 import com.nyererefy.ui.LoginActivity
 import com.nyererefy.utilities.clearPreferences
-import com.nyererefy.utilities.grabPreference
 import com.nyererefy.utilities.common.Constants.NAME
 import com.nyererefy.utilities.common.Constants.USERNAME
+import com.nyererefy.utilities.grabPreference
 import org.jetbrains.anko.support.v4.startActivity
 
 
@@ -99,19 +101,5 @@ class UserFragment : Fragment() {
         dialog.show()
     }
 
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser && isResumed) {
-            onResume()
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (!userVisibleHint) {
-            return
-        }
-        activity!!.title = getString(R.string.title_more)
-    }
 
 }

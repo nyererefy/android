@@ -6,13 +6,13 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorWhiteGrey">#FAFAFA</color>
 
-
     <color name="bootstrapPrimary">#337ab7</color>
     <color name="bootstrapSecondary">#5bc0de</color>
     <color name="bootstrapDanger">#d43f3a</color>
     <color name="backgroundGrey">#EEEEEE</color>
     <color name="inputBackgroundColor">#FFFFFF</color>
 
+    <color name="iconTintColor">#37474F</color>
     <color name="separatorBackground">#9E9E9E</color>
     <color name="white">#FFFFFF</color>
     <color name="cardBackground">#EEEEEE</color>

@@ -43,19 +43,5 @@ class ElectionsFragment : androidx.fragment.app.Fragment(), ListItemClickListene
 
     }
 
-    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
-        super.setUserVisibleHint(isVisibleToUser)
-        if (isVisibleToUser && isResumed) {
-            onResume()
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (!userVisibleHint) {
-            return
-        }
-        activity!!.setTitle(R.string.title_elections)
-    }
 
 }
