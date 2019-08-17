@@ -1,5 +1,8 @@
 package com.konektedi.vs.ui
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -15,30 +18,20 @@ import androidx.viewpager.widget.ViewPager
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification
+import com.konektedi.vs.BuildConfig
 import com.konektedi.vs.R
 import com.konektedi.vs.elections.ElectionsFragment
 import com.konektedi.vs.motions.MotionsFragment
-import com.konektedi.vs.news.NewsFragment
-import com.konektedi.vs.student.LoginActivity
 import com.konektedi.vs.student.UserFragment
-import com.konektedi.vs.student.clearPreferences
-import com.konektedi.vs.student.getLoginPreference
 import com.konektedi.vs.utilities.api.Api
+import com.konektedi.vs.utilities.common.Constants.BASE_URL_WITH_NO_VERSION
 import com.konektedi.vs.utilities.models.AppUpdate
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.alert
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import android.R.attr.versionName
-import android.R.attr.versionCode
-import android.content.ActivityNotFoundException
-import android.content.Intent
-import android.content.pm.PackageInfo
-import android.net.Uri
-import android.util.Log
-import com.konektedi.vs.BuildConfig
-import com.konektedi.vs.utilities.common.Constants.BASE_URL_WITH_NO_VERSION
-import org.jetbrains.anko.*
+import kotlin.system.exitProcess
 
 
 class MainActivity : AppCompatActivity() {
@@ -56,16 +49,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkLogin() {
-        if (!getLoginPreference(this)) {
-            clearPreferences(this)
-            startActivity<LoginActivity>()
-        }
+//        if (!getLoginPreference(this)) {
+//            clearPreferences(this)
+//            startActivity<LoginActivity>()
+//        }
     }
 
     private fun initBottomNav() {
         bottomNavigation.addItem(AHBottomNavigationItem(getString(R.string.title_elections), R.drawable.ic_elections))
         bottomNavigation.addItem(AHBottomNavigationItem(getString(R.string.title_motions), R.drawable.ic_motions))
-        bottomNavigation.addItem(AHBottomNavigationItem(getString(R.string.title_news), R.drawable.ic_news))
         bottomNavigation.addItem(AHBottomNavigationItem(getString(R.string.title_more), R.drawable.ic_user))
 
         bottomNavigation.setOnTabSelectedListener { position, _ ->
@@ -73,7 +65,6 @@ class MainActivity : AppCompatActivity() {
                 0 -> viewPager.currentItem = 0
                 1 -> viewPager.currentItem = 1
                 2 -> viewPager.currentItem = 2
-                3 -> viewPager.currentItem = 3
             }
             true
         }
@@ -92,7 +83,7 @@ class MainActivity : AppCompatActivity() {
                 .setTextColor(ContextCompat.getColor(this@MainActivity, R.color.white))
                 .build()
 
-        bottomNavigation.setNotification(notification, 2)
+        bottomNavigation.setNotification(notification, 0)
     }
 
     private fun centerTitle() {
@@ -123,7 +114,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         finishAffinity()
-        System.exit(0)
+        exitProcess(0)
     }
 
     private fun checkUpdates() {
@@ -175,7 +166,6 @@ class MainActivity : AppCompatActivity() {
 
         adapter.addFragment(ElectionsFragment())
         adapter.addFragment(MotionsFragment())
-        adapter.addFragment(NewsFragment())
         adapter.addFragment(UserFragment())
         viewPager.adapter = adapter
 
@@ -201,7 +191,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         override fun getCount(): Int {
-            return 4
+            return fragmentList.size
         }
 
         internal fun addFragment(fragment: Fragment) {

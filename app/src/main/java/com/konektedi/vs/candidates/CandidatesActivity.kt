@@ -1,9 +1,7 @@
 package com.konektedi.vs.candidates
 
 import android.graphics.PorterDuff
-import android.os.Build
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -11,7 +9,6 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.konektedi.vs.R
-import com.konektedi.vs.reviews.ReviewsActivity
 import com.konektedi.vs.student.grabPreference
 import com.konektedi.vs.utilities.common.Constants
 import com.konektedi.vs.utilities.common.Constants.CATEGORY
@@ -21,8 +18,11 @@ import com.konektedi.vs.utilities.common.NetworkState
 import com.konektedi.vs.utilities.models.Candidate
 import kotlinx.android.synthetic.main.candidates_activity.*
 import kotlinx.android.synthetic.main.candidates_content.*
-import org.jetbrains.anko.*
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.design.longSnackbar
+import org.jetbrains.anko.noButton
+import org.jetbrains.anko.toast
+import org.jetbrains.anko.yesButton
 import java.util.*
 
 class CandidatesActivity : AppCompatActivity() {
@@ -129,14 +129,8 @@ class CandidatesActivity : AppCompatActivity() {
 
         alert("You have successfully voted for $candidateName.",
                 "Thanks $username!") {
-            yesButton {
-                startActivity<ReviewsActivity>(
-                        CATEGORY_ID to candidate.categoryId,
-                        CATEGORY to category
-                )
-            }
             noButton {}
-            isCancelable = false
+            isCancelable = true
         }.show()
     }
 

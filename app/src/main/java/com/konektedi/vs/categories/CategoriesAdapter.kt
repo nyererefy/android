@@ -1,18 +1,13 @@
 package com.konektedi.vs.categories
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.konektedi.vs.R
-import com.konektedi.vs.candidates.CandidatesActivity
-import com.konektedi.vs.reviews.ReviewsActivity
-import com.konektedi.vs.utilities.common.Constants
 import com.konektedi.vs.utilities.common.getRandomColor
 import com.konektedi.vs.utilities.models.Category
 
@@ -34,22 +29,22 @@ class CategoriesAdapter(private val mContext: Context,
             val color = getRandomColor(mContext)
             constraintLayout.setBackgroundColor(Color.parseColor(color))
 
-            itemView.setOnClickListener {
-                //Checking if user has already voted for specific category.
-                val intent: Intent? = if (candidate.hasVoted == 0) {
-                    Intent(mContext, CandidatesActivity::class.java)
-
-                } else Intent(mContext, ReviewsActivity::class.java)
-
-                intent?.run {
-                    putExtra(Constants.ELECTION_ID, candidate.electionId)
-                    putExtra(Constants.CATEGORY_ID, candidate.categoryId)
-                    putExtra(Constants.CATEGORY, candidate.category)
-
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                }
-                mContext.startActivity(intent)
-            }
+//            itemView.setOnClickListener {
+//                //Checking if user has already voted for specific category.
+//                val intent: Intent? = if (candidate.hasVoted == 0) {
+//                    Intent(mContext, CandidatesActivity::class.java)
+//
+//                } else Intent(mContext, ReviewsActivity::class.java)
+//
+//                intent?.run {
+//                    putExtra(Constants.ELECTION_ID, candidate.electionId)
+//                    putExtra(Constants.CATEGORY_ID, candidate.categoryId)
+//                    putExtra(Constants.CATEGORY, candidate.category)
+//
+//                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                }
+//                mContext.startActivity(intent)
+//            }
         }
     }
 
