@@ -1,4 +1,4 @@
-package com.nyererefy.vs;
+package com.nyererefy;
 
 import org.junit.Test;
 

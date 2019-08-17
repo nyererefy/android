@@ -35,19 +35,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.nyererefy.student.LoginActivity"
+            android:name="com.nyererefy.ui.LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.nyererefy.elections.ElectionView"
+            android:name="com.nyererefy.ui.fragments.ElectionView"
             android:label="@string/title_activity_election_view"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.nyererefy.candidates.CandidatesActivity"
+            android:name="com.nyererefy.ui.fragments.CandidatesActivity"
             android:label="@string/title_activity_candidates"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.nyererefy.candidates.ProfileActivity"
+            android:name="com.nyererefy.ui.fragments.ProfileActivity"
             android:exported="true"
             android:label=""
             android:theme="@style/AppTheme.NoActionBar" />
@@ -55,14 +55,13 @@
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
         <activity
-            android:name="com.nyererefy.motions.MotionViewActivity"
+            android:name="com.nyererefy.ui.fragments.MotionViewActivity"
             android:label="@string/title_activity_participate"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.nyererefy.other.SupportActivityMain"
+            android:name="com.nyererefy.ui.fragments.SupportActivityMain"
             android:label="@string/title_activity_support"
             android:theme="@style/AppTheme" />
-        <activity android:name="com.nyererefy.other.ErrorHandlerActivity"></activity>
     </application>
 
 </manifest>

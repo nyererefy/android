@@ -20,10 +20,10 @@ import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification
 import com.nyererefy.BuildConfig
 import com.nyererefy.R
-import com.nyererefy.elections.ElectionsFragment
-import com.nyererefy.motions.MotionsFragment
-import com.nyererefy.student.UserFragment
-import com.nyererefy.utilities.api.Api
+import com.nyererefy.ui.fragments.ElectionsFragment
+import com.nyererefy.ui.fragments.MotionsFragment
+import com.nyererefy.ui.fragments.UserFragment
+import com.nyererefy.data.Api
 import com.nyererefy.utilities.common.Constants.BASE_URL_WITH_NO_VERSION
 import com.nyererefy.utilities.models.AppUpdate
 import kotlinx.android.synthetic.main.activity_main.*

@@ -1,4 +1,4 @@
-package com.nyererefy.vs;
+package com.nyererefy;
 
 import android.content.Context;
 import androidx.test.InstrumentationRegistry;

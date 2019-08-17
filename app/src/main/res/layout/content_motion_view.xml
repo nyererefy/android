@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.nyererefy.motions.MotionViewActivity"
+    tools:context=".ui.fragments.MotionViewActivity"
     tools:showIn="@layout/activity_motion_view">
 
     <androidx.constraintlayout.widget.ConstraintLayout
