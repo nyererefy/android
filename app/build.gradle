@@ -2,23 +2,19 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
-        applicationId "com.konektedi.vs"
+        applicationId "com.nyererefy"
         minSdkVersion 16
-        targetSdkVersion 28
-        versionCode 11
-        versionName "2018.12.11" //Last digits same as last two versionCode
+        targetSdkVersion 29
+        versionCode 1
+        versionName "0.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
     }
     buildTypes {
         debug {
-//            minifyEnabled true
-//            shrinkResources false
-//            useProguard true
-//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         release {
             minifyEnabled true
@@ -79,7 +75,7 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.0'
     implementation 'com.github.sharish:ShimmerRecyclerView:v1.3'
 
-    implementation 'com.google.firebase:firebase-core:16.0.1'
+    //implementation 'com.google.firebase:firebase-core:16.0.1'
 
     implementation 'com.aurelhubert:ahbottomnavigation:2.1.0'
 
@@ -91,4 +87,4 @@ repositories {
 }
 
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.gms.google-services'
