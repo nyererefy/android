@@ -1,17 +1,19 @@
 package com.nyererefy.ui.fragments
 
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.nyererefy.R
 import com.nyererefy.adapters.MotionsAdapter
+import com.nyererefy.di.Injectable
 import com.nyererefy.utilities.common.ListItemClickListener
 import com.nyererefy.viewmodels.MotionsViewModel
 
-class MotionsFragment : androidx.fragment.app.Fragment(), ListItemClickListener, Function0<Unit> {
+class SurveysFragment : Fragment(), ListItemClickListener, Function0<Unit>, Injectable {
     override fun onRetryClick(view: View, position: Int) {
     }
 

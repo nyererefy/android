@@ -9,7 +9,7 @@
         android:label="Elections" />
     <fragment
         android:id="@+id/surveys"
-        android:name="com.nyererefy.ui.fragments.MotionsFragment"
+        android:name="com.nyererefy.ui.fragments.SurveysFragment"
         android:label="Surveys" />
     <fragment
         android:id="@+id/profile"

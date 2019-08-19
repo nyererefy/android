@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.nyererefy.R
+import com.nyererefy.di.Injectable
 import com.nyererefy.ui.LoginActivity
 import com.nyererefy.utilities.clearPreferences
 import com.nyererefy.utilities.common.Constants.NAME
@@ -20,7 +21,7 @@ import com.nyererefy.utilities.grabPreference
 import org.jetbrains.anko.support.v4.startActivity
 
 
-class UserFragment : Fragment() {
+class UserFragment : Fragment(), Injectable {
 
     private var name = ""
     private var username = ""

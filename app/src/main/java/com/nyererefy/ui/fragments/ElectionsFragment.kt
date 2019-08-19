@@ -9,9 +9,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.nyererefy.adapters.ElectionsAdapter
 import com.nyererefy.databinding.ElectionsFragmentBinding
+import com.nyererefy.di.Injectable
 import com.nyererefy.viewmodels.ElectionsViewModel
 
-class ElectionsFragment : Fragment() {
+class ElectionsFragment : Fragment(), Injectable {
     private lateinit var viewModel: ElectionsViewModel
 
     override fun onCreateView(
