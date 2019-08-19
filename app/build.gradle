@@ -12,15 +12,20 @@ android {
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
-        versionName "0.0.1"
+        versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
     }
     buildTypes {
         debug {
+            buildConfigField "String", "BASE_URL", DEV_BASE_URL
+            buildConfigField "String", "API_KEY", DEV_API_KEY
         }
         release {
+            buildConfigField "String", "BASE_URL", LIVE_BASE_URL
+            buildConfigField "String", "API_KEY", LIVE_API_KEY
+
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

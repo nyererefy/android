@@ -1,0 +1,9 @@
+query elections {
+    elections {
+        id
+        title
+        isOpen
+        startAt
+        endAt
+    }
+}

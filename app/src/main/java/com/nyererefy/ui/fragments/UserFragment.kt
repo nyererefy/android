@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.nyererefy.R
 import com.nyererefy.di.Injectable
-import com.nyererefy.ui.LoginActivity
 import com.nyererefy.utilities.clearPreferences
 import com.nyererefy.utilities.common.Constants.NAME
 import com.nyererefy.utilities.common.Constants.USERNAME
@@ -58,15 +57,15 @@ class UserFragment : Fragment(), Injectable {
     }
 
     private fun initMenu(rootView: View) {
-        val logout = rootView.findViewById(R.id.logout) as TextView
+//        val logout = rootView.findViewById(R.id.logout) as TextView
         val about = rootView.findViewById(R.id.about) as TextView
         val support = rootView.findViewById(R.id.support) as TextView
 
         about.setOnClickListener { showAbout() }
-        logout.setOnClickListener {
-            clearPreferences(activity!!)
-            startActivity<LoginActivity>()
-        }
+//        logout.setOnClickListener {
+//            clearPreferences(activity!!)
+//            startActivity<LoginActivity>()
+//        }
         support.setOnClickListener {
             clearPreferences(activity!!)
             startActivity<SupportActivityMain>()

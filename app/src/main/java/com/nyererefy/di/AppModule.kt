@@ -1,6 +1,7 @@
 package com.nyererefy.di
 
 import com.apollographql.apollo.ApolloClient
+import com.nyererefy.BuildConfig.BASE_URL
 import com.nyererefy.utilities.common.Constants
 import dagger.Module
 import dagger.Provides
@@ -19,20 +20,20 @@ class AppModule {
                         .readTimeout(30, TimeUnit.SECONDS)
                         .writeTimeout(30, TimeUnit.SECONDS)
                         .retryOnConnectionFailure(true)
+                        .addInterceptor {
+                            val request = it.request()
+                            val builder = request.newBuilder()
 
-                        .addInterceptor { chain ->
-                            val request = chain.request()
+                            //Adding things to request...
+                            builder.addHeader(Constants.DEVICE, "")
 
-                            val session = request.newBuilder()
-
-                            session.addHeader(Constants.DEVICE, "")
-
-                            chain.proceed(session.build())
+                            //Then proceed...
+                            it.proceed(builder.build())
                         }
                         .build()
 
         return ApolloClient.builder()
-                .serverUrl("https://3333.com")
+                .serverUrl(BASE_URL)
                 .okHttpClient(okHttpClient)
                 .build()
     }
