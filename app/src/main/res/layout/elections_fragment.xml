@@ -3,15 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="noNetwork"
-            type="boolean" />
-    </data>
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeToRefresh"
+        showProgress="@{viewModel.status}"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -20,19 +14,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
-            app:isGone="@{noNetwork}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:context=".ui.MainActivity"
             tools:listitem="@layout/list_item_election">
 
         </androidx.recyclerview.widget.RecyclerView>
 
-        <!--todo weka main activity-->
-
-        <include
-            layout="@layout/no_network"
-            android:visibility="gone"
-            app:isGone="@{!noNetwork}"/>
-
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.nyererefy.viewmodels.ElectionsViewModel" />
+    </data>
 </layout>
