@@ -10,7 +10,8 @@ import javax.inject.Inject
 class ElectionsViewModel
 @Inject constructor(private val repository: ElectionsRepository) : ViewModel() {
 
-    fun getElections(): LiveData<Resource<ElectionsQuery.Data>> {
-        return repository.fetchElections()
-    }
+    val elections: LiveData<Resource<ElectionsQuery.Data>>
+        get() {
+            return repository.fetchElections()
+        }
 }

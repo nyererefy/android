@@ -1,0 +1,6 @@
+query categories($electionId: ID!) {
+    categories(electionId: $electionId) {
+        id
+        title
+    }
+}

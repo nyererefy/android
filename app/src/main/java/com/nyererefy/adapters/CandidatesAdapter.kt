@@ -74,7 +74,7 @@
 //
 //    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CandidatesViewHolder {
 //        val view = LayoutInflater.from(mContext)
-//                .inflate(R.layout.z_candidate, parent, false)
+//                .inflate(R.layout.list_item_candidate, parent, false)
 //
 //        return CandidatesViewHolder(view)
 //    }

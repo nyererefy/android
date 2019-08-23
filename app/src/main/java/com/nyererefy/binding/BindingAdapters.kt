@@ -1,4 +1,4 @@
-package com.nyererefy.adapters
+package com.nyererefy.binding
 
 import android.view.View
 import androidx.databinding.BindingAdapter

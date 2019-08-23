@@ -3,36 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="noNetwork"
-            type="boolean" />
-    </data>
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeToRefresh"
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:clipToPadding="false"
-            app:isGone="@{noNetwork}"
+            android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:context=".ui.MainActivity"
-            tools:listitem="@layout/list_item_election">
-
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <!--todo weka main activity-->
-
-        <include
-            layout="@layout/no_network"
-            android:visibility="gone"
-            app:isGone="@{!noNetwork}"/>
+            tools:listitem="@layout/list_item_category" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

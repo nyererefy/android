@@ -6,7 +6,11 @@
     <fragment
         android:id="@+id/elections"
         android:name="com.nyererefy.ui.fragments.ElectionsFragment"
-        android:label="Elections" />
+        android:label="Elections" >
+        <action
+            android:id="@+id/action_elections_to_categoriesFragment"
+            app:destination="@id/categories" />
+    </fragment>
     <fragment
         android:id="@+id/surveys"
         android:name="com.nyererefy.ui.fragments.SurveysFragment"
@@ -15,4 +19,12 @@
         android:id="@+id/profile"
         android:name="com.nyererefy.ui.fragments.UserFragment"
         android:label="Profile" />
+    <fragment
+        android:id="@+id/categories"
+        android:name="com.nyererefy.ui.fragments.CategoriesFragment"
+        android:label="Categories">
+        <argument
+            android:name="electionId"
+            app:argType="string" />
+    </fragment>
 </navigation>
