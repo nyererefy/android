@@ -47,12 +47,12 @@
 //    }
 //
 //    private fun getCandidates() {
-//        val data = intent.extras
+//        val elections = intent.extras
 //
-//        val electionId = data?.getInt(ELECTION_ID)
-//        val categoryId = data?.getInt(CATEGORY_ID)
+//        val electionId = elections?.getInt(ELECTION_ID)
+//        val categoryId = elections?.getInt(CATEGORY_ID)
 //
-//        category = data?.getString(CATEGORY)!!
+//        category = elections?.getString(CATEGORY)!!
 //        title = category
 //
 //

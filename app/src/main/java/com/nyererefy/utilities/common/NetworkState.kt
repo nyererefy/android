@@ -10,8 +10,6 @@ enum class Status {
     ERROR       // Connected and got Error response from server. This comes with message.
 }
 
-// TODO Getting all error messages as response from server and displaying. Casting required here.
-
 @Suppress("DataClassPrivateConstructor")
 data class NetworkState private constructor(
         val status: Status,

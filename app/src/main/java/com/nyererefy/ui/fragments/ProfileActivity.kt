@@ -72,9 +72,9 @@
 //                .start(this)
 //    }
 //
-//    public override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//    public override fun onActivityResult(requestCode: Int, resultCode: Int, elections: Intent?) {
 //        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-//            val result = CropImage.getActivityResult(data)
+//            val result = CropImage.getActivityResult(elections)
 //            when (resultCode) {
 //                Activity.RESULT_OK -> {
 //                    imageUri = result.uri
@@ -94,7 +94,7 @@
 //        builder.setType(MultipartBody.FORM)
 //
 //        val file = File(imageUri!!.path)
-//        builder.addFormDataPart(COVER, file.name, RequestBody.create(MediaType.parse("multipart/form-data"), file))
+//        builder.addFormDataPart(COVER, file.name, RequestBody.create(MediaType.parse("multipart/form-elections"), file))
 //        builder.addFormDataPart(CANDIDATE_ID, candidateId.toString())
 //        builder.addFormDataPart(ELECTION_ID, electionId.toString())
 //
@@ -117,13 +117,13 @@
 //    }
 //
 //    private fun showDetails() {
-//        val data = intent.extras
+//        val elections = intent.extras
 //
-//        candidateId = data!!.getInt(CANDIDATE_ID)
-//        id = data.getInt(ID)
-//        electionId = data.getInt(ELECTION_ID)
+//        candidateId = elections!!.getInt(CANDIDATE_ID)
+//        id = elections.getInt(ID)
+//        electionId = elections.getInt(ELECTION_ID)
 //
-//        val coverURL = data.getString(COVER)
+//        val coverURL = elections.getString(COVER)
 //
 //        if (id.toString() != grabPreference(this, ID)) {
 //            change_cover_btn.visibility = View.GONE

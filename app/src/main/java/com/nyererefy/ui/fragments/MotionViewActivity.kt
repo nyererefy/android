@@ -39,15 +39,15 @@
 //    }
 //
 //    private fun showMotion() {
-//        val data = intent.extras!!
+//        val elections = intent.extras!!
 //
-//        motionId = data.getInt(Constants.MOTION_ID)
+//        motionId = elections.getInt(Constants.MOTION_ID)
 //        viewModel.getMotion(motionId).observe(this, Observer {
 //            title = it!!.title
 //            title_view.text = it.title
 //            motion_view.text = it.motion
 //
-//            //Showing it after loading data to avoid stupid layout coming front.
+//            //Showing it after loading elections to avoid stupid layout coming front.
 //            viewSwitcher.visibility = View.VISIBLE
 //            if (it.participated == 1) {
 //

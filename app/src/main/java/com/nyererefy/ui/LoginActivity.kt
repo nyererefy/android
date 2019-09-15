@@ -20,7 +20,7 @@
 //import android.widget.ArrayAdapter
 //import android.widget.TextView
 //import com.nyererefy.R
-//import com.nyererefy.data.getError
+//import com.nyererefy.elections.getError
 //import com.nyererefy.utilities.common.Constants.EMAIL
 //import com.nyererefy.utilities.common.Constants.ID
 //import com.nyererefy.utilities.common.Constants.IS_LOGGED_IN
@@ -194,7 +194,7 @@
 //
 //    override fun onCreateLoader(i: Int, bundle: Bundle?): Loader<Cursor> {
 //        return CursorLoader(this,
-//                // Retrieve data rows for the device user's 'profile' contact.
+//                // Retrieve elections rows for the device user's 'profile' contact.
 //                Uri.withAppendedPath(ContactsContract.Profile.CONTENT_URI,
 //                        ContactsContract.Contacts.Data.CONTENT_DIRECTORY), ProfileQuery.PROJECTION,
 //

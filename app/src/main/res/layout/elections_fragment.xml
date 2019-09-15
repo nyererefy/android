@@ -16,9 +16,7 @@
             android:clipToPadding="false"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:context=".ui.MainActivity"
-            tools:listitem="@layout/list_item_election">
-
-        </androidx.recyclerview.widget.RecyclerView>
+            tools:listitem="@layout/list_item_election" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
