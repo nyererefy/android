@@ -21,6 +21,7 @@
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <data>
+
         <variable
             name="viewModel"
             type="com.nyererefy.viewmodels.ElectionsViewModel" />

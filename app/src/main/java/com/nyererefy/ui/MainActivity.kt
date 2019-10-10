@@ -33,14 +33,9 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
                 R.layout.activity_main)
 
         navController = findNavController(R.id.nav_fragment)
-        appBarConfiguration = AppBarConfiguration(navController.graph)
 
-        // Set up ActionBar
-        setSupportActionBar(bind.toolbar)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-
-        // Set up Bottom Navigation menu
-        bind.bottomNavigation.setupWithNavController(navController)
+        // Set up Bottom app bar
+        bind.bottomAppBar.setupWithNavController(navController)
 
         checkLogin()
     }
