@@ -137,7 +137,7 @@
     <string name="made_with">Made with Love, Kotlin and Java.</string>
     <string name="title_activity_reviews">ReviewsActivity</string>
     <string name="error_invalid_email">Invalid Email</string>
-    <string name="unknown_error">Unknown error occured Try again later</string>
+    <string name="unknown_error">Unknown error occurred Try again later</string>
     <string name="no_category">No category found</string>
     <string name="add_review">Add review on this Category</string>
     <string name="image">Image</string>
@@ -156,6 +156,9 @@
     <string name="about_me">Bio</string>
     <string name="bio_updated">Biography updated successfully</string>
     <string name="no_network">No network</string>
+    <string name="server_client_id" >888907700282-akq10n9hvdrft4e7pnsj3fqrs73ar9f1.apps.googleusercontent.com</string>
+    <string name="sign_in_with_google">Login with Google</string>
+    <string name="by_creating_an_account">By login you are agree with</string>
     <!--motions-->
 
 </resources>

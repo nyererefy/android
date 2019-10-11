@@ -8,12 +8,12 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.nyererefy.R
 import com.nyererefy.databinding.ActivityMainBinding
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
+import org.jetbrains.anko.startActivity
 import javax.inject.Inject
 
 
@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme) //Splash finished.
@@ -36,8 +35,6 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
         // Set up Bottom app bar
         bind.bottomAppBar.setupWithNavController(navController)
-
-        checkLogin()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -45,12 +42,4 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     }
 
     override fun supportFragmentInjector() = dispatchingAndroidInjector
-
-    private fun checkLogin() {
-        /*if (!getLoginPreference(this)) {
-            clearPreferences(this)
-            startActivity<LoginActivity>()
-        }*/
-    }
-
 }

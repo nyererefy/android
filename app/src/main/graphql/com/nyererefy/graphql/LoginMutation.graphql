@@ -1,0 +1,8 @@
+mutation login($token: String!) {
+    login(input: { token: $token, strategy: GOOGLE }) {
+        id
+        name
+        regNo
+        username
+    }
+}
