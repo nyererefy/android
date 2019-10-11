@@ -11,10 +11,11 @@ import androidx.navigation.fragment.navArgs
 import com.nyererefy.adapters.CategoriesAdapter
 import com.nyererefy.databinding.CategoriesFragmentBinding
 import com.nyererefy.di.Injectable
+import com.nyererefy.ui.fragments.base.BaseFragment
 import com.nyererefy.viewmodels.CategoriesViewModel
 import javax.inject.Inject
 
-class CategoriesFragment : Fragment(), Injectable {
+class CategoriesFragment : BaseFragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: CategoriesViewModel by viewModels { viewModelFactory }

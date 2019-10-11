@@ -4,12 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.nyererefy.R
 import com.nyererefy.di.Injectable
+import com.nyererefy.ui.fragments.base.BaseFragment
 import com.nyererefy.utilities.common.ListItemClickListener
 
-class SurveysFragment : Fragment(), ListItemClickListener, Function0<Unit>, Injectable {
+class SurveysFragment : BaseFragment(), ListItemClickListener, Function0<Unit>, Injectable {
     override fun onRetryClick(view: View, position: Int) {
     }
 

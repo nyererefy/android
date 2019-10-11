@@ -12,6 +12,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.nyererefy.R
+import com.nyererefy.utilities.Pref
+import com.nyererefy.utilities.common.Constants.ID
+import com.nyererefy.utilities.common.Constants.NAME
+import com.nyererefy.utilities.common.Constants.USERNAME
 import com.nyererefy.viewmodels.LoginViewModel
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_login.*
@@ -26,6 +30,7 @@ class LoginActivity : AppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val loginViewModel: LoginViewModel by viewModels { viewModelFactory }
+    private lateinit var pref: Pref
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +38,7 @@ class LoginActivity : AppCompatActivity() {
 
         AndroidInjection.inject(this)
 
+        pref = Pref(this)
         setUpGoogleLogin()
     }
 
@@ -77,16 +83,20 @@ class LoginActivity : AppCompatActivity() {
             //User data
             loginViewModel.data.observe(this, Observer {
                 Timber.d("data: $it")
-                afterLogin()
+
+                val editor = pref.sharedPref.edit()
+
+                editor.putString(ID, it.login().id())
+                editor.putString(NAME, it.login().name())
+                editor.putString(USERNAME, it.login().username())
+                editor.apply()
+
+                startActivity(intentFor<MainActivity>().clearTop())
             })
         } catch (e: ApiException) {
             Timber.e(e, "handleSignInResult:error")
             container.longSnackbar(getString(R.string.error))
         }
-    }
-
-    private fun afterLogin() {
-        startActivity(intentFor<MainActivity>().clearTop())
     }
 
     companion object {
