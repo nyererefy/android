@@ -27,7 +27,7 @@ class ElectionsFragment : Fragment(), Injectable {
     ): View? {
         val binding = ElectionsFragmentBinding.inflate(inflater, container, false)
 
-        val adapter = ElectionsAdapter()
+        val adapter = ElectionsAdapter { viewModel.retry() }
         binding.recyclerView.adapter = adapter
         subscribeUI(adapter)
 
@@ -35,8 +35,14 @@ class ElectionsFragment : Fragment(), Injectable {
     }
 
     private fun subscribeUI(adapter: ElectionsAdapter) {
-        viewModel.data.observe(viewLifecycleOwner, Observer {
-            if (it != null) adapter.submitList(it.elections())
+        viewModel.setQuery("") //todo for searching elections.
+
+        viewModel.elections.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it)
+        })
+
+        viewModel.networkState.observe(viewLifecycleOwner, Observer {
+            adapter.setNetworkState(it)
         })
     }
 }

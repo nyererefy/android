@@ -1,4 +1,4 @@
-query categories($electionId: ID!) {
+query categories($electionId: Int!) {
     categories(electionId: $electionId) {
         id
         title

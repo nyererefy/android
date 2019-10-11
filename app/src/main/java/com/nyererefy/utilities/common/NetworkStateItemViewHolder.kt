@@ -28,7 +28,7 @@ class NetworkStateItemViewHolder(view: View,
     }
 
     fun bindTo(networkState: NetworkState?) {
-        progressBar.visibility = toVisibility(networkState?.status == Status.RUNNING)
+        progressBar.visibility = toVisibility(networkState?.status == Status.LOADING)
         retry.visibility = toVisibility(networkState?.status == Status.FAILED)
         endMsg.visibility = toVisibility(networkState?.status == Status.EMPTY)
 

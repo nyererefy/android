@@ -89,8 +89,10 @@ dependencies {
 
     //--------------------------------------------------------------
     //Apollo
-    implementation 'com.apollographql.apollo:apollo-runtime:1.0.1'
-    implementation 'com.apollographql.apollo:apollo-http-cache:1.0.1'
+    compileOnly 'org.jetbrains:annotations:13.0'
+    testCompileOnly 'org.jetbrains:annotations:13.0'
+    implementation "com.apollographql.apollo:apollo-runtime:$apollo_version"
+    implementation "com.apollographql.apollo:apollo-http-cache:$apollo_version"
 
     //okhttp3
     implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'

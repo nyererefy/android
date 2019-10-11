@@ -1,13 +1,12 @@
-
-
 package com.nyererefy.utilities.common
 
 enum class Status {
-    RUNNING,
+    LOADING,
+    END,
     SUCCESS,
-    FAILED,     // Failed to connect to the server or any unknown reasons.
-    EMPTY,      // Empty response like 404
-    ERROR       // Connected and got Error response from server. This comes with message.
+    FAILED,
+    EMPTY,
+    ERROR
 }
 
 @Suppress("DataClassPrivateConstructor")
@@ -17,13 +16,11 @@ data class NetworkState private constructor(
 
     companion object {
         val LOADED = NetworkState(Status.SUCCESS)
-        val LOADING = NetworkState(Status.RUNNING)
-        val END = NetworkState(Status.EMPTY)
+        val LOADING = NetworkState(Status.LOADING)
+        val END = NetworkState(Status.END)
         val FAILED = NetworkState(Status.FAILED)
+        val EMPTY = NetworkState(Status.EMPTY)
         val ERROR = NetworkState(Status.ERROR)
         fun error(msg: String?) = NetworkState(Status.FAILED, msg)
-
-        //Returns error message from the server. Used in Repositories.
-        fun serverMsg(msg: String?) = NetworkState(Status.ERROR, msg)
     }
 }
