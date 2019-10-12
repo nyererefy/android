@@ -21,9 +21,13 @@ import javax.inject.Singleton
 class AppModule {
     @Singleton
     @Provides
-    fun provideApolloClient(): ApolloClient {
-        val cookieJar = PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(appContext))
+    fun provideCookieJar(): PersistentCookieJar {
+        return PersistentCookieJar(SetCookieCache(), SharedPrefsCookiePersistor(appContext))
+    }
 
+    @Singleton
+    @Provides
+    fun provideApolloClient(cookieJar: PersistentCookieJar): ApolloClient {
         //Logger
         val logger = HttpLoggingInterceptor()
         logger.level = HttpLoggingInterceptor.Level.BODY
@@ -35,18 +39,7 @@ class AppModule {
                         .writeTimeout(30, TimeUnit.SECONDS)
                         .retryOnConnectionFailure(true)
                         .addInterceptor(logger)
-                        .addInterceptor {
-                            val request = it.request()
-                            val builder = request.newBuilder()
-
-                            //Adding things to request...
-                            builder.addHeader(Constants.DEVICE, "")
-
-                            //Then proceed...
-                            it.proceed(builder.build())
-                        }
                         .cookieJar(cookieJar)
-                        //.cookieJar(JavaNetCookieJar(cookieManager))
                         .build()
 
         return ApolloClient.builder()

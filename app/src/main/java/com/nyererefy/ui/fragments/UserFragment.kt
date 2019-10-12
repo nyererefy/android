@@ -1,27 +1,51 @@
 package com.nyererefy.ui.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.nyererefy.R
+import com.nyererefy.databinding.FragmentProfileBinding
 import com.nyererefy.di.Injectable
 import com.nyererefy.ui.LoginActivity
 import com.nyererefy.ui.fragments.base.BaseFragment
-import org.jetbrains.anko.support.v4.startActivity
+import com.nyererefy.utilities.common.Constants.NAME
+import com.nyererefy.utilities.common.Constants.USERNAME
+import org.jetbrains.anko.clearTop
+import org.jetbrains.anko.support.v4.intentFor
+import javax.inject.Inject
 
 
 class UserFragment : BaseFragment(), Injectable {
+    @Inject
+    lateinit var cookieJar: PersistentCookieJar
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
+    ): View? {
+        val bind = FragmentProfileBinding.inflate(inflater, container, false)
 
-        startActivity<LoginActivity>()
+        bind.nameView.text = pref.get(NAME)
+        bind.usernameView.text = pref.get(USERNAME)
+
+        setHasOptionsMenu(true)
+
+        return bind.root
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.user_profile, menu)
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.logout -> logout()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 
 //    private fun showDetails(rootView: View) {
 //        val usernameView = rootView.findViewById(R.id.usernameView) as TextView
@@ -31,7 +55,7 @@ class UserFragment : BaseFragment(), Injectable {
 //        usernameView.text = name
 //        nameView.text = username
 //
-//        //TODO LoadDp
+//
 //        Glide.with(activity!!)
 //                .load("")
 //                .apply(RequestOptions()
@@ -86,5 +110,12 @@ class UserFragment : BaseFragment(), Injectable {
 //        dialog.show()
 //    }
 
+    private fun logout() {
+        //todo call server too.
+        pref.clear()
+        cookieJar.clear()
+
+        startActivity(intentFor<LoginActivity>().clearTop())
+    }
 
 }

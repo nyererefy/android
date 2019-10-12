@@ -38,11 +38,6 @@ class LoginActivity : AppCompatActivity() {
 
         AndroidInjection.inject(this)
 
-        pref = Pref(this)
-
-        //when reaching here you are logged out.
-        pref.clear()
-
         setUpGoogleLogin()
     }
 
