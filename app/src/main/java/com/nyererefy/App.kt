@@ -27,6 +27,5 @@ class App : MultiDexApplication(), HasActivityInjector {
 
     companion object {
         lateinit var appContext: Context
-
     }
 }

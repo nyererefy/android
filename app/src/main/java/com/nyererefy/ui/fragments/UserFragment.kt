@@ -6,10 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import com.nyererefy.R
 import com.nyererefy.di.Injectable
+import com.nyererefy.ui.LoginActivity
 import com.nyererefy.ui.fragments.base.BaseFragment
+import org.jetbrains.anko.support.v4.startActivity
 
 
 class UserFragment : BaseFragment(), Injectable {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        startActivity<LoginActivity>()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_profile, container, false)
