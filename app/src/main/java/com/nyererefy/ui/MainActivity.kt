@@ -12,6 +12,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.nyererefy.R
 import com.nyererefy.databinding.ActivityMainBinding
+import com.nyererefy.utilities.Pref
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,13 +25,14 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
     private val navController by lazy { findNavController(R.id.nav_host_fragment) }
     private lateinit var appBarConfig: AppBarConfiguration
+    private lateinit var bind: ActivityMainBinding
+    private lateinit var pref: Pref
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
 
-        val bind: ActivityMainBinding = DataBindingUtil.setContentView(this,
-                R.layout.activity_main)
+        bind = DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         appBarConfig = AppBarConfiguration(navController.graph, bind.drawerLayout)
 
@@ -38,10 +40,19 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         setupActionBarWithNavController(navController, appBarConfig)
         bind.navView.setupWithNavController(navController)
 
-        setUpNav()
+        pref = Pref(this)
     }
 
-    private fun setUpNav() {
+    override fun onResume() {
+        super.onResume()
+        when {
+            !pref.isLoggedIn -> {
+                bind.navView.menu.removeItem(R.id.settings)
+                bind.navView.menu.removeItem(R.id.profile)
+                bind.navView.menu.removeItem(R.id.logout)
+            }
+            else -> bind.navView.menu.removeItem(R.id.login)
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
