@@ -2,8 +2,6 @@ query elections($offset: Int, $limit: Int, $query: String) {
   elections(offset: $offset, limit: $limit, query: $query) {
     id
     title
-    startAt
-    endAt
     isOpen
   }
 }
