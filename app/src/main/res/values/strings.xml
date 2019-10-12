@@ -159,6 +159,11 @@
     <string name="server_client_id" >888907700282-akq10n9hvdrft4e7pnsj3fqrs73ar9f1.apps.googleusercontent.com</string>
     <string name="sign_in_with_google">Login with Google</string>
     <string name="by_creating_an_account">By login you are agree with</string>
+    <string name="logout">Logout</string>
+    <string name="settings">Settings</string>
+    <string name="search">Search</string>
+    <string name="support">Support</string>
+    <string name="login">Login</string>
     <!--motions-->
 
 </resources>

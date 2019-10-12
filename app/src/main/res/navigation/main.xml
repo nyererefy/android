@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_nav.xml"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav.xml"
     app:startDestination="@id/elections">
 
     <fragment
@@ -27,4 +29,13 @@
             android:name="electionId"
             app:argType="string" />
     </fragment>
+    <activity
+        android:id="@+id/login"
+        android:name="com.nyererefy.ui.LoginActivity"
+        android:label="Login" />
+    <activity
+        android:id="@+id/support"
+        android:name="com.nyererefy.ui.fragments.SupportActivityMain"
+        android:label="Support"
+        tools:layout="@layout/activity_support" />
 </navigation>

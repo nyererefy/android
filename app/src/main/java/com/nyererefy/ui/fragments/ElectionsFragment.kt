@@ -1,12 +1,11 @@
 package com.nyererefy.ui.fragments
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.nyererefy.R
 import com.nyererefy.adapters.ElectionsAdapter
 import com.nyererefy.databinding.ElectionsFragmentBinding
 import com.nyererefy.di.Injectable
@@ -31,6 +30,8 @@ class ElectionsFragment : BaseFragment(), Injectable {
         binding.recyclerView.adapter = adapter
         subscribeUI(adapter)
 
+        setHasOptionsMenu(true)
+
         return binding.root
     }
 
@@ -44,5 +45,10 @@ class ElectionsFragment : BaseFragment(), Injectable {
         viewModel.networkState.observe(viewLifecycleOwner, Observer {
             adapter.setNetworkState(it)
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.elections, menu)
     }
 }
