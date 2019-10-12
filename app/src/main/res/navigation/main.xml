@@ -23,7 +23,7 @@
         android:label="Profile" />
     <fragment
         android:id="@+id/categories"
-        android:name="com.nyererefy.ui.fragments.CategoriesFragment"
+        android:name="com.nyererefy.ui.fragments.SubcategoriesFragment"
         android:label="Categories">
         <argument
             android:name="electionId"

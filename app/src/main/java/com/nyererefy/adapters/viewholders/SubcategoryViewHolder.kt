@@ -4,18 +4,18 @@ import android.view.View
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.nyererefy.R
-import com.nyererefy.databinding.ListItemCategoryBinding
-import com.nyererefy.graphql.CategoriesQuery
+import com.nyererefy.databinding.ListItemSubcategoryBinding
+import com.nyererefy.graphql.SubcategoriesQuery
 
-class CategoryViewHolder(private val binding: ListItemCategoryBinding)
+class SubcategoryViewHolder(private val binding: ListItemSubcategoryBinding)
     : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: CategoriesQuery.Category) {
+    fun bind(item: SubcategoriesQuery.Subcategory) {
         val listener = createOnClickListener(item.id())
 
         binding.apply {
             clickListener = listener
-            category = item
+            subcategory = item
             executePendingBindings()
         }
     }

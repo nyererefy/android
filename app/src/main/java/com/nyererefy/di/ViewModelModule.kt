@@ -2,7 +2,7 @@ package com.nyererefy.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.nyererefy.viewmodels.CategoriesViewModel
+import com.nyererefy.viewmodels.SubcategoriesViewModel
 import com.nyererefy.viewmodels.ElectionsViewModel
 import com.nyererefy.viewmodels.LoginViewModel
 import dagger.Binds
@@ -22,8 +22,8 @@ abstract class ViewModelModule {
 
     @Binds
     @IntoMap
-    @ViewModelKey(CategoriesViewModel::class)
-    abstract fun bindCategoriesViewModel(viewModel: CategoriesViewModel): ViewModel
+    @ViewModelKey(SubcategoriesViewModel::class)
+    abstract fun bindSubcategoriesViewModel(viewModel: SubcategoriesViewModel): ViewModel
 
     @Binds
     @IntoMap

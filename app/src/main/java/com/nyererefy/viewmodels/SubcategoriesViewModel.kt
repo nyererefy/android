@@ -1,20 +1,21 @@
 package com.nyererefy.viewmodels
 
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.nyererefy.data.repositories.CategoriesRepository
 import javax.inject.Inject
 
-class CategoriesViewModel
+class SubcategoriesViewModel
 @Inject constructor(private val repository: CategoriesRepository) : ViewModel() {
     private val _electionId = MutableLiveData<String>()
 
-//    val categories: LiveData<Resource<CategoriesQuery.Data>>
-//        get() {
-//            return Transformations.switchMap(_electionId) {
-//                repository.fetchCategories(it)
-//            }
-//        }
+    private val _resource = Transformations.map(_electionId) {
+        repository.fetchCategories(it)
+    }
+
+    val data = Transformations.switchMap(_resource) { it.data }
+    val networkState = Transformations.switchMap(_resource) { it.networkState }
 
     fun setElectionId(electionId: String) {
         if (_electionId.value != electionId) {

@@ -1,6 +1,0 @@
-query categories($electionId: Int!) {
-    categories(electionId: $electionId) {
-        id
-        title
-    }
-}

@@ -38,6 +38,8 @@ class LoginActivity : AppCompatActivity() {
 
         AndroidInjection.inject(this)
 
+        pref = Pref(this)
+
         setUpGoogleLogin()
     }
 

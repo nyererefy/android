@@ -1,0 +1,6 @@
+query subcategories($electionId: Int!) {
+    subcategories(electionId: $electionId) {
+        id
+        title
+    }
+}

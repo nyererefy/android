@@ -1,7 +1,7 @@
 package com.nyererefy.di
 
 
-import com.nyererefy.ui.fragments.CategoriesFragment
+import com.nyererefy.ui.fragments.SubcategoriesFragment
 import com.nyererefy.ui.fragments.ElectionsFragment
 import com.nyererefy.ui.fragments.SurveysFragment
 import com.nyererefy.ui.fragments.UserFragment
@@ -22,5 +22,5 @@ abstract class FragmentBuildersModule {
     abstract fun contributeSurveysFragment(): SurveysFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeCategoriesFragment(): CategoriesFragment
+    abstract fun contributeCategoriesFragment(): SubcategoriesFragment
 }

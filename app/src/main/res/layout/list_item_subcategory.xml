@@ -20,7 +20,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@{category.title()}"
+                android:text="@{subcategory.title()}"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 tools:text="@string/test_name" />
@@ -31,8 +31,8 @@
     <data>
 
         <variable
-            name="category"
-            type="com.nyererefy.graphql.CategoriesQuery.Category" />
+            name="subcategory"
+            type="com.nyererefy.graphql.SubcategoriesQuery.Subcategory" />
 
         <variable
             name="clickListener"
