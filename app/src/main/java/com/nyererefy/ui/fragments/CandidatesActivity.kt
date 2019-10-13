@@ -18,7 +18,7 @@
 //import com.nyererefy.utilities.common.NetworkState
 //import com.nyererefy.utilities.models.Candidate
 //import kotlinx.android.synthetic.main.candidates_activity.*
-//import kotlinx.android.synthetic.main.candidates_content.*
+//import kotlinx.android.synthetic.main.fragment_candidates.*
 //import org.jetbrains.anko.alert
 //import org.jetbrains.anko.design.longSnackbar
 //import org.jetbrains.anko.noButton

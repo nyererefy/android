@@ -1,10 +1,7 @@
 package com.nyererefy.di
 
 
-import com.nyererefy.ui.fragments.SubcategoriesFragment
-import com.nyererefy.ui.fragments.ElectionsFragment
-import com.nyererefy.ui.fragments.SurveysFragment
-import com.nyererefy.ui.fragments.UserFragment
+import com.nyererefy.ui.fragments.*
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -23,4 +20,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeCategoriesFragment(): SubcategoriesFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeCandidatesFragment(): CandidatesFragment
 }

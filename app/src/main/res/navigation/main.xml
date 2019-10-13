@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/elections"
         android:name="com.nyererefy.ui.fragments.ElectionsFragment"
-        android:label="Elections" >
+        android:label="Elections">
         <action
             android:id="@+id/action_elections_to_categoriesFragment"
             app:destination="@id/categories" />
@@ -28,6 +28,9 @@
         <argument
             android:name="electionId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_categories_to_candidatesFragment"
+            app:destination="@id/candidates" />
     </fragment>
     <activity
         android:id="@+id/login"
@@ -38,4 +41,12 @@
         android:name="com.nyererefy.ui.fragments.SupportActivityMain"
         android:label="Support"
         tools:layout="@layout/activity_support" />
+    <fragment
+        android:id="@+id/candidates"
+        android:name="com.nyererefy.ui.fragments.CandidatesFragment"
+        android:label="Candidates">
+        <argument
+            android:name="subcategoryId"
+            app:argType="string" />
+    </fragment>
 </navigation>

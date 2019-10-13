@@ -1,0 +1,9 @@
+query candidates($subcategoryId: Int!) {
+    candidates(subcategoryId: $subcategoryId) {
+        id
+        user {
+            id
+            name
+        }
+    }
+}

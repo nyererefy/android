@@ -5,6 +5,13 @@
 
     <data>
 
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="candidate"
+            type="com.nyererefy.graphql.CandidatesQuery.Candidate" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -34,6 +41,8 @@
                 android:layout_height="60dp"
                 android:layout_marginTop="8dp"
                 android:gravity="center"
+                android:onClick="@{clickListener}"
+                android:text="@{candidate.user().name()}"
                 android:textColor="@color/bootstrapPrimary"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -41,20 +50,6 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cover"
                 tools:text="@string/test_name" />
-
-            <TextView
-                android:id="@+id/schoolView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:gravity="center"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/checkbox"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/nameView"
-                tools:text="@string/test_school" />
 
             <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/checkbox"
@@ -68,7 +63,7 @@
                 android:button="@null"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/schoolView" />
+                app:layout_constraintTop_toBottomOf="@id/nameView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

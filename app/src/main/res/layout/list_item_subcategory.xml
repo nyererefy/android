@@ -3,6 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="subcategory"
+            type="com.nyererefy.graphql.SubcategoriesQuery.Subcategory" />
+
+        <variable
+            name="clickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -28,14 +39,5 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <data>
 
-        <variable
-            name="subcategory"
-            type="com.nyererefy.graphql.SubcategoriesQuery.Subcategory" />
-
-        <variable
-            name="clickListener"
-            type="android.view.View.OnClickListener" />
-    </data>
 </layout>

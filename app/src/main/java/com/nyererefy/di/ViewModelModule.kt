@@ -2,6 +2,7 @@ package com.nyererefy.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.nyererefy.viewmodels.CandidatesViewModel
 import com.nyererefy.viewmodels.SubcategoriesViewModel
 import com.nyererefy.viewmodels.ElectionsViewModel
 import com.nyererefy.viewmodels.LoginViewModel
@@ -29,4 +30,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(LoginViewModel::class)
     abstract fun bindLoginViewModel(viewModel: LoginViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CandidatesViewModel::class)
+    abstract fun bindCandidatesViewModel(viewModel: CandidatesViewModel): ViewModel
 }

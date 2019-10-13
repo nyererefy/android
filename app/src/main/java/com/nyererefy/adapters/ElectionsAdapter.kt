@@ -85,6 +85,5 @@ class ElectionsAdapter(
             override fun areItemsTheSame(old: ElectionsQuery.Election, new: ElectionsQuery.Election) =
                     old.id() == new.id()
         }
-
     }
 }
