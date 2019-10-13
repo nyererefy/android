@@ -30,7 +30,7 @@ class CandidatesFragment : BaseFragment(), Injectable {
     ): View? {
         val binding = FragmentCandidatesBinding.inflate(inflater, container, false)
 
-        val adapter = CandidatesAdapter()
+        val adapter = CandidatesAdapter { viewModel.retry() }
         binding.recyclerView.adapter = adapter
         subscribeUI(adapter)
 
@@ -42,6 +42,10 @@ class CandidatesFragment : BaseFragment(), Injectable {
 
         viewModel.data.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it.candidates())
+        })
+
+        viewModel.networkState.observe(viewLifecycleOwner, Observer {
+            adapter.setNetworkState(it)
         })
     }
 }

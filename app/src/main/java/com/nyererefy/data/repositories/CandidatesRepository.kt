@@ -33,7 +33,10 @@ class CandidatesRepository
                     response.hasErrors() -> {
                         networkState.postValue(NetworkState.error(response.errors()[0].message()))
                     }
-                    else -> data.postValue(response.data())
+                    else -> {
+                        networkState.postValue(NetworkState.LOADED)
+                        data.postValue(response.data())
+                    }
                 }
             }
         })
