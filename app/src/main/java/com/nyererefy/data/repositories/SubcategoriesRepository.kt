@@ -12,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CategoriesRepository
+class SubcategoriesRepository
 @Inject constructor(private val client: ApolloClient) {
 
     fun fetchCategories(id: String): Resource<SubcategoriesQuery.Data> {
@@ -33,7 +33,10 @@ class CategoriesRepository
                     response.hasErrors() -> {
                         networkState.postValue(NetworkState.error(response.errors().toString()))
                     }
-                    else -> data.postValue(response.data())
+                    else -> {
+                        data.postValue(response.data())
+                        networkState.postValue(NetworkState.LOADED)
+                    }
                 }
             }
         })

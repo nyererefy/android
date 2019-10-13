@@ -1,35 +1,44 @@
 package com.nyererefy.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
-import com.nyererefy.adapters.viewholders.SubcategoryViewHolder
+import com.nyererefy.R
 import com.nyererefy.databinding.ListItemSubcategoryBinding
 import com.nyererefy.graphql.SubcategoriesQuery.Subcategory
+import com.nyererefy.ui.fragments.SubcategoriesFragmentDirections
+import com.nyererefy.utilities.common.BaseListAdapter
 
-/**
- * Created by Sy on b/14/2018.
- */
 
-class SubcategoriesAdapter : ListAdapter<Subcategory, SubcategoryViewHolder>(DiffCallback()) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SubcategoryViewHolder {
-        return SubcategoryViewHolder(ListItemSubcategoryBinding.inflate(
+class SubcategoriesAdapter(retryCallback: () -> Unit)
+    : BaseListAdapter<Subcategory, ListItemSubcategoryBinding>(COMPARATOR, retryCallback) {
+
+    override val layout = R.layout.list_item_subcategory
+
+    override fun createBinding(parent: ViewGroup): ListItemSubcategoryBinding {
+        return ListItemSubcategoryBinding.inflate(
                 LayoutInflater.from(parent.context), parent, false
-        ))
+        )
     }
 
-    override fun onBindViewHolder(holder: SubcategoryViewHolder, position: Int) {
-        holder.bind(getItem(position))
+    override fun bind(binding: ListItemSubcategoryBinding, item: Subcategory) {
+        binding.apply {
+            subcategory = item
+            executePendingBindings()
+            clickListener = View.OnClickListener {
+                val direction = SubcategoriesFragmentDirections.actionCategoriesToCandidatesFragment(item.id())
+                it.findNavController().navigate(direction)
+            }
+        }
     }
-}
 
-private class DiffCallback : DiffUtil.ItemCallback<Subcategory>() {
-    override fun areItemsTheSame(oldItem: Subcategory, newItem: Subcategory): Boolean {
-        return oldItem.id() == newItem.id()
-    }
+    companion object {
+        val COMPARATOR = object : DiffUtil.ItemCallback<Subcategory>() {
+            override fun areContentsTheSame(old: Subcategory, new: Subcategory) = old == new
 
-    override fun areContentsTheSame(oldItem: Subcategory, newItem: Subcategory): Boolean {
-        return oldItem == newItem
+            override fun areItemsTheSame(old: Subcategory, new: Subcategory) = old.id() == new.id()
+        }
     }
 }

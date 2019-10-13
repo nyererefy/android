@@ -3,11 +3,11 @@ package com.nyererefy.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.nyererefy.data.repositories.CategoriesRepository
+import com.nyererefy.data.repositories.SubcategoriesRepository
 import javax.inject.Inject
 
 class SubcategoriesViewModel
-@Inject constructor(private val repository: CategoriesRepository) : ViewModel() {
+@Inject constructor(private val repository: SubcategoriesRepository) : ViewModel() {
     private val _electionId = MutableLiveData<String>()
 
     private val _resource = Transformations.map(_electionId) {

@@ -27,7 +27,7 @@ class SubcategoriesFragment : BaseFragment(), Injectable {
             savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentSubcategoriesBinding.inflate(inflater, container, false)
-        val adapter = SubcategoriesAdapter()
+        val adapter = SubcategoriesAdapter { viewModel.retry() }
         binding.recyclerView.adapter = adapter
 
         subscribeUI(adapter)
@@ -39,6 +39,10 @@ class SubcategoriesFragment : BaseFragment(), Injectable {
 
         viewModel.data.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it.subcategories())
+        })
+
+        viewModel.networkState.observe(viewLifecycleOwner, Observer {
+            adapter.setNetworkState(it)
         })
     }
 }
