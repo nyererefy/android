@@ -1,11 +1,14 @@
 package com.nyererefy.data.repositories
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
 import com.nyererefy.graphql.CandidatesQuery
+import com.nyererefy.graphql.CreateVoteMutation
+import com.nyererefy.graphql.type.VoteInput
 import com.nyererefy.utilities.Resource
 import com.nyererefy.utilities.common.NetworkState
 import javax.inject.Inject
@@ -41,5 +44,28 @@ class CandidatesRepository
             }
         })
         return Resource(data, networkState)
+    }
+
+    fun submitVote(input: VoteInput): MutableLiveData<NetworkState> {
+        val mutation = CreateVoteMutation.builder().input(input).build()
+
+        val networkState = MutableLiveData<NetworkState>()
+        networkState.value = NetworkState.LOADING
+
+        client.mutate(mutation).enqueue(object : ApolloCall.Callback<CreateVoteMutation.Data>() {
+            override fun onFailure(e: ApolloException) {
+                networkState.postValue(NetworkState.error(e.localizedMessage))
+            }
+
+            override fun onResponse(response: Response<CreateVoteMutation.Data>) {
+                when {
+                    response.hasErrors() -> {
+                        networkState.postValue(NetworkState.error(response.errors()[0].message()))
+                    }
+                    else -> networkState.postValue(NetworkState.LOADED)
+                }
+            }
+        })
+        return networkState
     }
 }

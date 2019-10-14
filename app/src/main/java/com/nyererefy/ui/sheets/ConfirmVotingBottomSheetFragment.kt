@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.nyererefy.R
 import com.nyererefy.graphql.CandidatesQuery
+import com.nyererefy.graphql.type.VoteInput
 import com.nyererefy.utilities.CandidateCheckListener
 import com.nyererefy.utilities.htmlText
 
@@ -56,7 +57,19 @@ class ConfirmVotingBottomSheetFragment(
                 return@setOnClickListener
             }
 
-            listener.onCandidateConfirmed(candidateId = candidate.id(), password = pass)
+            val uuid = candidate.uuid()
+
+            if (uuid.isNullOrBlank()) {
+                //todo redirect to login mmh!!
+                return@setOnClickListener
+            }
+
+            val input = VoteInput.builder()
+                    .uuid(uuid)
+                    .password(pass)
+                    .build()
+
+            listener.onCandidateConfirmed(input)
         }
 
         dialog.setContentView(view)

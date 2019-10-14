@@ -1,6 +1,7 @@
 query candidates($subcategoryId: Int!) {
     candidates(subcategoryId: $subcategoryId) {
         id
+        uuid
         user {
             id
             name

@@ -1,6 +1,8 @@
 package com.nyererefy.utilities
 
+import com.nyererefy.graphql.type.VoteInput
+
 interface CandidateCheckListener {
     fun onCandidateChecked()
-    fun onCandidateConfirmed(candidateId: String, password: String)
+    fun onCandidateConfirmed(input: VoteInput)
 }

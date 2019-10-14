@@ -8,14 +8,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import com.nyererefy.R
 import com.nyererefy.adapters.CandidatesAdapter
 import com.nyererefy.databinding.FragmentCandidatesBinding
 import com.nyererefy.di.Injectable
+import com.nyererefy.graphql.type.VoteInput
 import com.nyererefy.ui.fragments.base.BaseFragment
 import com.nyererefy.ui.sheets.ConfirmVotingBottomSheetFragment
 import com.nyererefy.utilities.CandidateCheckListener
 import com.nyererefy.utilities.SpacesItemDecoration
+import com.nyererefy.utilities.common.NetworkState
 import com.nyererefy.viewmodels.CandidatesViewModel
+import org.jetbrains.anko.design.indefiniteSnackbar
 import javax.inject.Inject
 
 
@@ -26,6 +30,7 @@ class CandidatesFragment : BaseFragment(), Injectable, CandidateCheckListener {
     private val args by navArgs<CandidatesFragmentArgs>()
     private lateinit var adapter: CandidatesAdapter
     private lateinit var bottomSheetFragment: ConfirmVotingBottomSheetFragment
+    private lateinit var binding: FragmentCandidatesBinding
 
 
     override fun onCreateView(
@@ -33,7 +38,7 @@ class CandidatesFragment : BaseFragment(), Injectable, CandidateCheckListener {
             container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
-        val binding = FragmentCandidatesBinding.inflate(inflater, container, false)
+        binding = FragmentCandidatesBinding.inflate(inflater, container, false)
 
         adapter = CandidatesAdapter(this) { viewModel.retry() }
         binding.recyclerView.adapter = adapter
@@ -70,10 +75,29 @@ class CandidatesFragment : BaseFragment(), Injectable, CandidateCheckListener {
         viewModel.isVoteBtnEnabled.value = true
     }
 
-    override fun onCandidateConfirmed(candidateId: String, password: String) {
-        bottomSheetFragment.showProgressBar()
-        bottomSheetFragment.dismiss()
+    override fun onCandidateConfirmed(input: VoteInput) {
+        viewModel.submitVote(input).observe(viewLifecycleOwner, Observer {
+            when (it) {
+                NetworkState.LOADING -> bottomSheetFragment.showProgressBar()
+                NetworkState.LOADED -> {
+                    viewModel.isVoteBtnGone.value = true
+                    bottomSheetFragment.dismiss()
+                    binding.swipeRefreshLayout.indefiniteSnackbar(
+                            getString(R.string.on_success_vote),
+                            getString(R.string.dismiss))
+                    {}
+                }
+                else -> {
+                    bottomSheetFragment.dismiss()
 
-        //todo show server error by snckbr
+                    it.msg?.run {
+                        binding.swipeRefreshLayout.indefiniteSnackbar(
+                                this,
+                                getString(R.string.dismiss)
+                        ) {}
+                    }
+                }
+            }
+        })
     }
 }

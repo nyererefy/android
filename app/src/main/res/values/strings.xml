@@ -170,6 +170,7 @@
     <string name="close">Close</string>
     <string name="confirm_voting_msg">You are about to vote for</string>
     <string name="enter_password_to_proceed">Please enter your password to proceed.</string>
+    <string name="dismiss">Dismiss</string>
     <!--motions-->
 
 </resources>

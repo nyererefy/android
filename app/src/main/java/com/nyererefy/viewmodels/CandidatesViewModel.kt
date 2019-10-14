@@ -4,12 +4,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.nyererefy.data.repositories.CandidatesRepository
+import com.nyererefy.graphql.type.VoteInput
 import javax.inject.Inject
 
 class CandidatesViewModel
 @Inject constructor(private val repository: CandidatesRepository) : ViewModel() {
     private val _subcategoryId = MutableLiveData<String>()
     val isVoteBtnEnabled = MutableLiveData(false)
+    val isVoteBtnGone = MutableLiveData(false)
 
     private val _resource = Transformations.map(_subcategoryId) {
         repository.fetchCandidates(it)
@@ -29,4 +31,6 @@ class CandidatesViewModel
             _subcategoryId.value = it
         }
     }
+
+    fun submitVote(input: VoteInput) = repository.submitVote(input)
 }
