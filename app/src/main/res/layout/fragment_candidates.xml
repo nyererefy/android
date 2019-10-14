@@ -40,12 +40,12 @@
 
             <Button
                 android:id="@+id/vote_btn"
+                style="@style/Widget.MaterialComponents.Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="16dp"
                 android:layout_marginBottom="8dp"
-                android:background="@drawable/btn_primary"
                 android:enabled="@{viewmodel.isVoteBtnEnabled}"
                 android:onClick="@{() -> fragment.onVoteClicked()}"
                 android:text="@string/vote"

@@ -135,4 +135,8 @@
         <item>#000000</item>
     </string-array>
 
+    <color name="grey_5">#f2f2f2</color>
+    <color name="grey_60">#666666</color>
+    <color name="grey_90">#263238</color>
+    <color name="grey_100_">#0d0d0d</color>
 </resources>

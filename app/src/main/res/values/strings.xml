@@ -45,6 +45,7 @@
     <string name="password_not_match">Passwords do not match</string>
     <string name="wrong_password">Wrong Password</string>
     <string name="change_password">Change Password</string>
+    <string name="enter_password">Enter Password</string>
     <string name="change_username">Change Username</string>
     <string name="password_changed">Password changed successfully.</string>
     <string name="error_occurred">Error occurred. Try again later.</string>
@@ -95,7 +96,8 @@
     <string name="forget_password">Forget Password?</string>
     <string name="help">Need Help?</string>
     <string name="error_invalid_reg_no">This Registration number is invalid</string>
-    <string name="error_invalid_password">Password must contain 6 to 10 characters.</string>
+    <string name="error_empty_password">Password must not be empty</string>
+    <string name="error_less_password">Password must contain at least 6 characters</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="title_profile">Profile</string>
@@ -164,6 +166,10 @@
     <string name="search">Search</string>
     <string name="support">Support</string>
     <string name="login">Login</string>
+    <string name="confirm">Confirm</string>
+    <string name="close">Close</string>
+    <string name="confirm_voting_msg">You are about to vote for</string>
+    <string name="enter_password_to_proceed">Please enter your password to proceed.</string>
     <!--motions-->
 
 </resources>

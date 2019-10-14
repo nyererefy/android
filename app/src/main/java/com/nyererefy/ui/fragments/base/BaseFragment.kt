@@ -15,3 +15,5 @@ abstract class BaseFragment : Fragment() {
         pref = Pref(this.requireContext())
     }
 }
+
+//todo injectble should be here.
