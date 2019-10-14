@@ -12,15 +12,18 @@ import com.nyererefy.adapters.CandidatesAdapter
 import com.nyererefy.databinding.FragmentCandidatesBinding
 import com.nyererefy.di.Injectable
 import com.nyererefy.ui.fragments.base.BaseFragment
+import com.nyererefy.utilities.CandidateCheckListener
 import com.nyererefy.viewmodels.CandidatesViewModel
+import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 
-class CandidatesFragment : BaseFragment(), Injectable {
+class CandidatesFragment : BaseFragment(), Injectable, CandidateCheckListener {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: CandidatesViewModel by viewModels { viewModelFactory }
     private val args by navArgs<CandidatesFragmentArgs>()
+    private lateinit var adapter: CandidatesAdapter
 
 
     override fun onCreateView(
@@ -30,8 +33,11 @@ class CandidatesFragment : BaseFragment(), Injectable {
     ): View? {
         val binding = FragmentCandidatesBinding.inflate(inflater, container, false)
 
-        val adapter = CandidatesAdapter { viewModel.retry() }
+        adapter = CandidatesAdapter(this) { viewModel.retry() }
         binding.recyclerView.adapter = adapter
+        binding.fragment = this
+        binding.lifecycleOwner = this
+        binding.viewmodel = viewModel
         subscribeUI(adapter)
 
         return binding.root
@@ -47,5 +53,14 @@ class CandidatesFragment : BaseFragment(), Injectable {
         viewModel.networkState.observe(viewLifecycleOwner, Observer {
             adapter.setNetworkState(it)
         })
+    }
+
+    fun onVoteClicked() {
+        val candidate = adapter.selectedCandidate
+        toast("${candidate.user().name()}")
+    }
+
+    override fun onCandidateChecked() {
+        viewModel.isVoteBtnEnabled.value = true
     }
 }

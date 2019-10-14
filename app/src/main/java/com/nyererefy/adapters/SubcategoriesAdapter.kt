@@ -23,7 +23,7 @@ class SubcategoriesAdapter(retryCallback: () -> Unit)
         )
     }
 
-    override fun bind(binding: ListItemSubcategoryBinding, item: Subcategory) {
+    override fun bind(binding: ListItemSubcategoryBinding, item: Subcategory, position: Int) {
         binding.apply {
             subcategory = item
             executePendingBindings()

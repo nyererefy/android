@@ -9,6 +9,7 @@ import javax.inject.Inject
 class CandidatesViewModel
 @Inject constructor(private val repository: CandidatesRepository) : ViewModel() {
     private val _subcategoryId = MutableLiveData<String>()
+    val isVoteBtnEnabled = MutableLiveData(false)
 
     private val _resource = Transformations.map(_subcategoryId) {
         repository.fetchCandidates(it)

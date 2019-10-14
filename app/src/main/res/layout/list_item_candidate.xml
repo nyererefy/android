@@ -10,6 +10,10 @@
             type="android.view.View.OnClickListener" />
 
         <variable
+            name="onCheckListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
             name="candidate"
             type="com.nyererefy.graphql.CandidatesQuery.Candidate" />
     </data>
@@ -61,6 +65,7 @@
                 android:layout_marginRight="8dp"
                 android:background="?android:attr/listChoiceIndicatorMultiple"
                 android:button="@null"
+                android:onClick="@{onCheckListener}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/nameView" />

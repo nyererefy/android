@@ -7,10 +7,15 @@ import androidx.recyclerview.widget.DiffUtil
 import com.nyererefy.R
 import com.nyererefy.databinding.ListItemCandidateBinding
 import com.nyererefy.graphql.CandidatesQuery
+import com.nyererefy.utilities.CandidateCheckListener
 import com.nyererefy.utilities.common.BaseListAdapter
 
-class CandidatesAdapter(retryCallback: () -> Unit)
-    : BaseListAdapter<CandidatesQuery.Candidate, ListItemCandidateBinding>(COMPARATOR, retryCallback) {
+class CandidatesAdapter(
+        private val candidateCheckListener: CandidateCheckListener,
+        retryCallback: () -> Unit
+) : BaseListAdapter<CandidatesQuery.Candidate, ListItemCandidateBinding>(COMPARATOR, retryCallback) {
+    private var selectedPosition = -1
+    lateinit var selectedCandidate: CandidatesQuery.Candidate
 
     override val layout = R.layout.list_item_candidate
 
@@ -20,9 +25,21 @@ class CandidatesAdapter(retryCallback: () -> Unit)
         )
     }
 
-    override fun bind(binding: ListItemCandidateBinding, item: CandidatesQuery.Candidate) {
-        binding.candidate = item
-        binding.clickListener = View.OnClickListener {
+    override fun bind(binding: ListItemCandidateBinding, item: CandidatesQuery.Candidate, position: Int) {
+        binding.apply {
+            this.candidate = item
+
+            this.clickListener = View.OnClickListener {}
+
+            this.checkbox.isChecked = position == selectedPosition
+
+            this.onCheckListener = View.OnClickListener {
+                selectedPosition = position
+                selectedCandidate = item
+                notifyDataSetChanged()
+
+                candidateCheckListener.onCandidateChecked()
+            }
         }
     }
 

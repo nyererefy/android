@@ -30,7 +30,7 @@ abstract class BaseListAdapter<T, V : ViewDataBinding>(
             else -> {
                 val vh = holder as BaseViewHolder<V>
 
-                bind(vh.binding, getItem(position))
+                bind(vh.binding, getItem(position), position)
                 vh.binding.executePendingBindings()
             }
         }
@@ -38,7 +38,7 @@ abstract class BaseListAdapter<T, V : ViewDataBinding>(
 
     protected abstract fun createBinding(parent: ViewGroup): V
 
-    protected abstract fun bind(binding: V, item: T)
+    protected abstract fun bind(binding: V, item: T, position: Int)
 
     protected abstract val layout: Int
 
