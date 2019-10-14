@@ -47,7 +47,6 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.cardview:cardview:1.0.0'
     implementation 'com.google.android.material:material:1.1.0-beta01'
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
@@ -74,21 +73,16 @@ dependencies {
     implementation "org.jetbrains.anko:anko:$anko_version"
     implementation "org.jetbrains.anko:anko-design:$anko_version"
 
-    implementation 'org.sufficientlysecure:html-textview:3.6'
 
     //Cropping Image
     implementation('com.theartofdev.edmodo:android-image-cropper:2.4.+') {
         exclude group: 'com.android.support'
     }
     implementation 'androidx.exifinterface:exifinterface:1.0.0'
-
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'com.github.sharish:ShimmerRecyclerView:v1.3'
 
     //--------------------------------------------------------------
     //Apollo
-    compileOnly 'org.jetbrains:annotations:13.0'
-    testCompileOnly 'org.jetbrains:annotations:13.0'
     implementation "com.apollographql.apollo:apollo-runtime:$apollo_version"
     implementation "com.apollographql.apollo:apollo-http-cache:$apollo_version"
 
