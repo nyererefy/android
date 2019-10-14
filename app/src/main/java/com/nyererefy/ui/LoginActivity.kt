@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -12,14 +13,17 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.nyererefy.R
+import com.nyererefy.databinding.ActivityLoginBinding
 import com.nyererefy.utilities.Pref
 import com.nyererefy.utilities.common.Constants.ID
 import com.nyererefy.utilities.common.Constants.NAME
 import com.nyererefy.utilities.common.Constants.USERNAME
+import com.nyererefy.utilities.common.NetworkState
 import com.nyererefy.viewmodels.LoginViewModel
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.clearTop
+import org.jetbrains.anko.design.indefiniteSnackbar
 import org.jetbrains.anko.design.longSnackbar
 import org.jetbrains.anko.intentFor
 import timber.log.Timber
@@ -34,9 +38,15 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
 
         AndroidInjection.inject(this)
+
+        val binding: ActivityLoginBinding = DataBindingUtil.setContentView(
+                this, R.layout.activity_login
+        )
+
+        binding.viewModel = loginViewModel
+        binding.lifecycleOwner = this
 
         pref = Pref(this)
 
@@ -80,6 +90,22 @@ class LoginActivity : AppCompatActivity() {
             Timber.d("Token: $idToken")
 
             idToken?.let { loginViewModel.setToken(it) }
+
+            //Todo find best way to handle this.
+            loginViewModel.networkState.observe(this, Observer {
+                when (it) {
+                    NetworkState.LOADING -> loginViewModel.isLoading.value = true
+                    else -> {
+                        loginViewModel.isLoading.value = false
+                        it.msg?.run {
+                            container.indefiniteSnackbar(
+                                    this,
+                                    getString(R.string.dismiss)
+                            ) {}
+                        }
+                    }
+                }
+            })
 
             //User data
             loginViewModel.data.observe(this, Observer {
