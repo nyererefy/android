@@ -13,6 +13,7 @@ import com.nyererefy.databinding.FragmentCandidatesBinding
 import com.nyererefy.di.Injectable
 import com.nyererefy.ui.fragments.base.BaseFragment
 import com.nyererefy.utilities.CandidateCheckListener
+import com.nyererefy.utilities.SpacesItemDecoration
 import com.nyererefy.viewmodels.CandidatesViewModel
 import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
@@ -35,6 +36,7 @@ class CandidatesFragment : BaseFragment(), Injectable, CandidateCheckListener {
 
         adapter = CandidatesAdapter(this) { viewModel.retry() }
         binding.recyclerView.adapter = adapter
+        binding.recyclerView.addItemDecoration(SpacesItemDecoration(8))
         binding.fragment = this
         binding.lifecycleOwner = this
         binding.viewmodel = viewModel
