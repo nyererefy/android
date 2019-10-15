@@ -20,11 +20,13 @@ android {
     buildTypes {
         debug {
             buildConfigField "String", "BASE_URL", DEV_BASE_URL
-            buildConfigField "String", "API_KEY", DEV_API_KEY
+            //buildConfigField "String", "API_KEY", DEV_API_KEY
+            buildConfigField "String", "WS_URL", DEV_WS_URL
         }
         release {
             buildConfigField "String", "BASE_URL", LIVE_BASE_URL
-            buildConfigField "String", "API_KEY", LIVE_API_KEY
+            //buildConfigField "String", "API_KEY", LIVE_API_KEY
+            buildConfigField "String", "WS_URL", LIVE_WS_URL
 
             minifyEnabled true
             shrinkResources true
@@ -55,6 +57,7 @@ dependencies {
 
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta2'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
+    implementation 'com.google.android.gms:play-services-plus:17.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

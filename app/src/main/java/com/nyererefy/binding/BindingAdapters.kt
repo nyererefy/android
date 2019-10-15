@@ -31,3 +31,8 @@ fun bindProgress(layout: SwipeRefreshLayout, networkState: NetworkState, retry: 
         }
     }
 }
+
+@BindingAdapter("userId", "studentId")
+fun hideIfNotOwner(view: View, userId: String?, studentId: String?) {
+    view.visibility = if (userId != studentId) View.GONE else View.VISIBLE
+}

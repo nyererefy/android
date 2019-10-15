@@ -1,0 +1,10 @@
+subscription candidateSubscription($id: Int!) {
+    candidate(id: $id) {
+        bio
+        avatar
+        user {
+            id
+            name
+        }
+    }
+}

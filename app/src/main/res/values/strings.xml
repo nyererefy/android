@@ -172,6 +172,8 @@
     <string name="enter_password_to_proceed">Please enter your password to proceed.</string>
     <string name="dismiss">Dismiss</string>
     <string name="share">Share</string>
+    <string name="cancel">Cancel</string>
+    <string name="error_empty_bio">Bio must not be empty</string>
     <!--motions-->
 
 </resources>

@@ -1,12 +1,14 @@
 package com.nyererefy.di
 
 import com.apollographql.apollo.ApolloClient
+import com.apollographql.apollo.subscription.WebSocketSubscriptionTransport
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.franmontiel.persistentcookiejar.cache.SetCookieCache
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import com.nyererefy.App.Companion.appContext
 import com.nyererefy.BuildConfig.BASE_URL
-import com.nyererefy.utilities.common.Constants
+import com.nyererefy.BuildConfig.WS_URL
+import com.nyererefy.utilities.Pref
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -19,6 +21,12 @@ import javax.inject.Singleton
 
 @Module(includes = [ViewModelModule::class])
 class AppModule {
+    @Singleton
+    @Provides
+    fun providePref(): Pref {
+        return Pref(appContext)
+    }
+
     @Singleton
     @Provides
     fun provideCookieJar(): PersistentCookieJar {
@@ -42,9 +50,12 @@ class AppModule {
                         .cookieJar(cookieJar)
                         .build()
 
+        val factory = WebSocketSubscriptionTransport.Factory(WS_URL, okHttpClient)
+
         return ApolloClient.builder()
                 .serverUrl(BASE_URL)
                 .okHttpClient(okHttpClient)
+                .subscriptionTransportFactory(factory)
                 .build()
     }
 
