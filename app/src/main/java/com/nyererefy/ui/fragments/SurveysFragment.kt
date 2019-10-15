@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.nyererefy.R
 import com.nyererefy.di.Injectable
-import com.nyererefy.ui.fragments.base.BaseFragment
+import com.nyererefy.utilities.common.BaseFragment
 import com.nyererefy.utilities.common.ListItemClickListener
 
 class SurveysFragment : BaseFragment(), ListItemClickListener, Function0<Unit>, Injectable {

@@ -13,7 +13,7 @@ import com.nyererefy.adapters.CandidatesAdapter
 import com.nyererefy.databinding.FragmentCandidatesBinding
 import com.nyererefy.di.Injectable
 import com.nyererefy.graphql.type.VoteInput
-import com.nyererefy.ui.fragments.base.BaseFragment
+import com.nyererefy.utilities.common.BaseFragment
 import com.nyererefy.ui.sheets.ConfirmVotingBottomSheetFragment
 import com.nyererefy.utilities.CandidateCheckListener
 import com.nyererefy.utilities.SpacesItemDecoration

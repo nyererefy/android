@@ -9,7 +9,9 @@ import com.nyererefy.graphql.LoginMutation
 import com.nyererefy.utilities.Resource
 import com.nyererefy.utilities.common.NetworkState
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class LoginRepository
 @Inject constructor(private val client: ApolloClient) {
     fun submitGoogleToken(token: String): Resource<LoginMutation.Data> {

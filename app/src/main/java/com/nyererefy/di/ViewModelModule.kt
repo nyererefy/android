@@ -2,10 +2,7 @@ package com.nyererefy.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.nyererefy.viewmodels.CandidatesViewModel
-import com.nyererefy.viewmodels.SubcategoriesViewModel
-import com.nyererefy.viewmodels.ElectionsViewModel
-import com.nyererefy.viewmodels.LoginViewModel
+import com.nyererefy.viewmodels.*
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -35,4 +32,14 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CandidatesViewModel::class)
     abstract fun bindCandidatesViewModel(viewModel: CandidatesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SetInfoViewModel::class)
+    abstract fun bindSetInfoViewModel(viewModel: SetInfoViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ConfirmClassViewModel::class)
+    abstract fun bindConfirmClassViewModel(viewModel: ConfirmClassViewModel): ViewModel
 }

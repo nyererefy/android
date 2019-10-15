@@ -158,7 +158,7 @@
     <string name="about_me">Bio</string>
     <string name="bio_updated">Biography updated successfully</string>
     <string name="no_network">No network</string>
-    <string name="server_client_id" >888907700282-akq10n9hvdrft4e7pnsj3fqrs73ar9f1.apps.googleusercontent.com</string>
+    <string name="server_client_id">888907700282-akq10n9hvdrft4e7pnsj3fqrs73ar9f1.apps.googleusercontent.com</string>
     <string name="sign_in_with_google">Login with Google</string>
     <string name="by_creating_an_account">By login you are agree with</string>
     <string name="logout">Logout</string>
@@ -171,6 +171,7 @@
     <string name="confirm_voting_msg">You are about to vote for</string>
     <string name="enter_password_to_proceed">Please enter your password to proceed.</string>
     <string name="dismiss">Dismiss</string>
+    <string name="title_activity_setup">SetupActivity</string>
     <!--motions-->
 
 </resources>

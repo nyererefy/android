@@ -1,4 +1,4 @@
-package com.nyererefy.ui.fragments.base
+package com.nyererefy.utilities.common
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

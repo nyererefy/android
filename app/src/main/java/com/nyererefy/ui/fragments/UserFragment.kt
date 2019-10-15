@@ -7,7 +7,7 @@ import com.nyererefy.R
 import com.nyererefy.databinding.FragmentProfileBinding
 import com.nyererefy.di.Injectable
 import com.nyererefy.ui.LoginActivity
-import com.nyererefy.ui.fragments.base.BaseFragment
+import com.nyererefy.utilities.common.BaseFragment
 import com.nyererefy.utilities.common.Constants.NAME
 import com.nyererefy.utilities.common.Constants.USERNAME
 import org.jetbrains.anko.clearTop

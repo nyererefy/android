@@ -16,6 +16,7 @@ import com.nyererefy.utilities.Pref
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.startActivity
 import javax.inject.Inject
 
 
@@ -41,6 +42,8 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         bind.navView.setupWithNavController(navController)
 
         pref = Pref(this)
+
+        startActivity<SetupActivity>() //todo remove.
     }
 
     override fun onResume() {

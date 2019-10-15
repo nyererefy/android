@@ -11,7 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.nyererefy.adapters.SubcategoriesAdapter
 import com.nyererefy.databinding.FragmentSubcategoriesBinding
 import com.nyererefy.di.Injectable
-import com.nyererefy.ui.fragments.base.BaseFragment
+import com.nyererefy.utilities.common.BaseFragment
 import com.nyererefy.viewmodels.SubcategoriesViewModel
 import javax.inject.Inject
 
