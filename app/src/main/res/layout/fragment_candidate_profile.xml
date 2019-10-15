@@ -36,15 +36,6 @@
                     android:gravity="center_horizontal"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/spacing_large"
-                        android:text="@{viewModel.data.candidate().user().name()}"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
-                        android:textColor="@color/grey_90"
-                        tools:text="@string/test_name" />
-
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="160dp"
                         android:layout_height="160dp"
@@ -56,13 +47,22 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_large"
+                        android:text="@{viewModel.data.candidate().user().name()}"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Title"
+                        android:textColor="@color/grey_90"
+                        tools:text="@string/test_name" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/spacing_xlarge"
                         android:layout_marginTop="@dimen/spacing_large"
                         android:layout_marginRight="@dimen/spacing_xlarge"
-                        android:gravity="center"
                         android:lineSpacingExtra="2dp"
                         android:text="@{viewModel.data.candidate().bio()}"
                         android:textColor="@color/grey_90"
+                        android:textSize="16sp"
                         tools:text="@string/test_title" />
 
                 </LinearLayout>

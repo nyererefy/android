@@ -49,7 +49,7 @@
                 android:onClick="@{clickListener}"
                 android:singleLine="true"
                 android:text="@{candidate.user().name()}"
-                android:textColor="@color/bootstrapPrimary"
+                android:textColor="@color/grey_90"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
