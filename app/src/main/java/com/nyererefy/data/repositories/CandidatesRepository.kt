@@ -1,11 +1,11 @@
 package com.nyererefy.data.repositories
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
+import com.nyererefy.graphql.CandidateQuery
 import com.nyererefy.graphql.CandidatesQuery
 import com.nyererefy.graphql.CreateVoteMutation
 import com.nyererefy.graphql.type.VoteInput
@@ -32,6 +32,34 @@ class CandidatesRepository
             }
 
             override fun onResponse(response: Response<CandidatesQuery.Data>) {
+                when {
+                    response.hasErrors() -> {
+                        networkState.postValue(NetworkState.error(response.errors()[0].message()))
+                    }
+                    else -> {
+                        networkState.postValue(NetworkState.LOADED)
+                        data.postValue(response.data())
+                    }
+                }
+            }
+        })
+        return Resource(data, networkState)
+    }
+
+    fun fetchCandidate(id: String): Resource<CandidateQuery.Data> {
+        val query = CandidateQuery.builder().id(id.toInt()).build()
+
+        val networkState = MutableLiveData<NetworkState>()
+        val data = MutableLiveData<CandidateQuery.Data>()
+
+        networkState.value = NetworkState.LOADING
+
+        client.query(query).enqueue(object : ApolloCall.Callback<CandidateQuery.Data>() {
+            override fun onFailure(e: ApolloException) {
+                networkState.postValue(NetworkState.error(e.localizedMessage))
+            }
+
+            override fun onResponse(response: Response<CandidateQuery.Data>) {
                 when {
                     response.hasErrors() -> {
                         networkState.postValue(NetworkState.error(response.errors()[0].message()))

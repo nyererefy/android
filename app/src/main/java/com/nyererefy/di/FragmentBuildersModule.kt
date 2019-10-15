@@ -23,4 +23,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeCandidatesFragment(): CandidatesFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeCandidateProfileFragment(): CandidateProfileFragment
 }

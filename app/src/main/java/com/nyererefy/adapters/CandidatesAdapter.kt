@@ -3,10 +3,12 @@ package com.nyererefy.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import com.nyererefy.R
 import com.nyererefy.databinding.ListItemCandidateBinding
 import com.nyererefy.graphql.CandidatesQuery
+import com.nyererefy.ui.fragments.CandidatesFragmentDirections
 import com.nyererefy.utilities.CandidateCheckListener
 import com.nyererefy.utilities.common.BaseListAdapter
 
@@ -29,7 +31,10 @@ class CandidatesAdapter(
         binding.apply {
             this.candidate = item
 
-            this.clickListener = View.OnClickListener {}
+            this.clickListener = View.OnClickListener {
+                val direction = CandidatesFragmentDirections.actionCandidatesToCandidateProfileFragment(item.id())
+                it.findNavController().navigate(direction)
+            }
 
             this.checkbox.isChecked = position == selectedPosition
 
