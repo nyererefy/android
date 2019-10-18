@@ -8,7 +8,7 @@ import com.nyererefy.App.Companion.appContext
 import com.nyererefy.R
 import com.nyererefy.utilities.common.NetworkState
 import com.nyererefy.utilities.common.Status
-import org.jetbrains.anko.design.indefiniteSnackbar
+import org.jetbrains.anko.design.longSnackbar
 
 @BindingAdapter("isGone")
 fun bindIsGone(view: View, isGone: Boolean) {
@@ -50,14 +50,12 @@ fun hideWhenLoading(view: View, networkState: NetworkState?) {
 }
 
 /**
- * For showing indefinite snackBar with retry when error occurred.
+ * For showing long snackBar with retry when error occurred.
  */
 @BindingAdapter("app:handleError", "app:handleRetry")
 fun handleErrorAndRetry(view: View, networkState: NetworkState?, retry: () -> Unit) {
-    if (networkState == NetworkState.ERROR) {
-        networkState.msg?.run {
-            view.indefiniteSnackbar(this, "Retry") { retry() }
-        }
+    networkState?.msg?.run {
+        view.longSnackbar(this, appContext.getString(R.string.retry)) { retry() }
     }
 }
 
