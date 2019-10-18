@@ -1,0 +1,5 @@
+mutation setupAccount($input: UserSetupInput!) {
+    setupAccount(input: $input) {
+        isAccountSet
+    }
+}

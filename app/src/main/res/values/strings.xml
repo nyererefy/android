@@ -38,7 +38,9 @@
     <string name="username_changed">Username successfully changed.</string>
     <string name="username_taken">Username is taken.Choose another one</string>
     <string name="same_username">Username must be different from previous.</string>
-    <string name="invalid_username">Username must have 3 to 16 characters.</string>
+    <string name="invalid_name">Name must have 1 to 21 characters.</string>
+    <string name="invalid_username">Username must have 1 to 16 characters.</string>
+    <string name="invalid_password">Invalid password</string>
     <string name="invalid_characters">Only - , . and _ characters are allowed.</string>
     <string name="new_username">New Username</string>
     <string name="password_should_not_match">New Password must not match with previous.</string>
@@ -56,7 +58,7 @@
     <string name="vote">Vote</string>
 
 
-    Home Buttons-->
+    <!--Home Buttons-->
     <string name="live_results">Live Results</string>
     <string name="live_votes">Live Votes</string>
     <string name="live_reviews">Live Reviews</string>
@@ -92,6 +94,7 @@
     <string name="current_password">Current Password</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="save_changes">Save changes</string>
+    <string name="save">Save</string>
     <string name="action_sign_in">LOGIN</string>
     <string name="forget_password">Forget Password?</string>
     <string name="help">Need Help?</string>
@@ -171,7 +174,13 @@
     <string name="confirm_voting_msg">You are about to vote for</string>
     <string name="enter_password_to_proceed">Please enter your password to proceed.</string>
     <string name="dismiss">Dismiss</string>
-    <string name="title_activity_setup">SetupActivity</string>
-    <!--motions-->
+    <string name="title_activity_setup">Account Setup</string>
+
+    <string name="name">Name</string>
+    <string name="username">Username</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="other">Other</string>
+
 
 </resources>

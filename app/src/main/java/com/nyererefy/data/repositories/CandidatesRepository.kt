@@ -1,6 +1,5 @@
 package com.nyererefy.data.repositories
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.ApolloClient
