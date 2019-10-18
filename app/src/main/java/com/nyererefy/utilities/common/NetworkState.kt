@@ -5,8 +5,7 @@ enum class Status {
     END,
     SUCCESS,
     FAILED,
-    EMPTY,
-    ERROR
+    EMPTY
 }
 
 @Suppress("DataClassPrivateConstructor")
@@ -18,9 +17,7 @@ data class NetworkState private constructor(
         val LOADED = NetworkState(Status.SUCCESS)
         val LOADING = NetworkState(Status.LOADING)
         val END = NetworkState(Status.END)
-        val FAILED = NetworkState(Status.FAILED)
         val EMPTY = NetworkState(Status.EMPTY)
-        val ERROR = NetworkState(Status.ERROR)
         fun error(msg: String?) = NetworkState(Status.FAILED, msg)
     }
 }
