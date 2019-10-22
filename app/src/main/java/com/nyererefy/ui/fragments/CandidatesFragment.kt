@@ -13,10 +13,10 @@ import com.nyererefy.adapters.CandidatesAdapter
 import com.nyererefy.databinding.FragmentCandidatesBinding
 import com.nyererefy.di.Injectable
 import com.nyererefy.graphql.type.VoteInput
-import com.nyererefy.utilities.common.BaseFragment
 import com.nyererefy.ui.sheets.ConfirmVotingBottomSheetFragment
 import com.nyererefy.utilities.CandidateCheckListener
 import com.nyererefy.utilities.SpacesItemDecoration
+import com.nyererefy.utilities.common.BaseFragment
 import com.nyererefy.utilities.common.NetworkState
 import com.nyererefy.viewmodels.CandidatesViewModel
 import org.jetbrains.anko.design.indefiniteSnackbar
@@ -76,7 +76,9 @@ class CandidatesFragment : BaseFragment(), Injectable, CandidateCheckListener {
     }
 
     override fun onCandidateConfirmed(input: VoteInput) {
-        viewModel.submitVote(input).observe(viewLifecycleOwner, Observer {
+        viewModel.submitVote(input)
+
+        viewModel.votingNetworkState.observe(viewLifecycleOwner, Observer {
             when (it) {
                 NetworkState.LOADING -> bottomSheetFragment.showProgressBar()
                 NetworkState.LOADED -> {

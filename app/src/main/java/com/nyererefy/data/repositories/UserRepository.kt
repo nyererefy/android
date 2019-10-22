@@ -6,10 +6,13 @@ import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
 import com.nyererefy.graphql.ConfirmDataMutation
+import com.nyererefy.graphql.MeQuery
 import com.nyererefy.graphql.SetupAccountMutation
 import com.nyererefy.graphql.type.UserSetupInput
 import com.nyererefy.utilities.Resource
 import com.nyererefy.utilities.common.NetworkState
+import com.nyererefy.utilities.common.invokeMutation
+import com.nyererefy.utilities.common.invokeQuery
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -52,29 +55,13 @@ class UserRepository
     fun setupAccount(input: UserSetupInput): Resource<SetupAccountMutation.Data> {
         val mutation = SetupAccountMutation.builder().input(input).build()
 
-        val networkState = MutableLiveData<NetworkState>()
-        val data = MutableLiveData<SetupAccountMutation.Data>()
+        return invokeMutation<SetupAccountMutation.Data>(client.mutate(mutation))
+    }
 
-        networkState.value = NetworkState.LOADING
+    fun me(): Resource<MeQuery.Data> {
+        val query = MeQuery.builder().build()
 
-        client.mutate(mutation).enqueue(object : ApolloCall.Callback<SetupAccountMutation.Data>() {
-            override fun onFailure(e: ApolloException) {
-                networkState.postValue(NetworkState.error(e.localizedMessage))
-            }
-
-            override fun onResponse(response: Response<SetupAccountMutation.Data>) {
-                when {
-                    response.hasErrors() -> {
-                        networkState.postValue(NetworkState.error(response.errors()[0].message()))
-                    }
-                    else -> {
-                        networkState.postValue(NetworkState.LOADED)
-                        data.postValue(response.data())
-                    }
-                }
-            }
-        })
-        return Resource(data, networkState)
+        return invokeQuery<MeQuery.Data>(client.query(query))
     }
 
 }

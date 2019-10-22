@@ -3,6 +3,8 @@ mutation login($token: String!) {
         id
         name
         regNo
+        isDataConfirmed
+        isAccountSet
         username
     }
 }

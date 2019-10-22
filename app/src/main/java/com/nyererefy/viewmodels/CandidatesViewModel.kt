@@ -10,15 +10,21 @@ import javax.inject.Inject
 class CandidatesViewModel
 @Inject constructor(private val repository: CandidatesRepository) : ViewModel() {
     private val _subcategoryId = MutableLiveData<String>()
+    private val _voteInput = MutableLiveData<VoteInput>()
     val isVoteBtnEnabled = MutableLiveData(false)
     val isVoteBtnGone = MutableLiveData(false)
 
-    private val _resource = Transformations.map(_subcategoryId) {
+    private val _candidatesResource = Transformations.map(_subcategoryId) {
         repository.fetchCandidates(it)
     }
 
-    val data = Transformations.switchMap(_resource) { it.data }
-    val networkState = Transformations.switchMap(_resource) { it.networkState }
+    private val _votingResource = Transformations.map(_voteInput) {
+        repository.submitVote(it)
+    }
+
+    val data = Transformations.switchMap(_candidatesResource) { it.data }
+    val networkState = Transformations.switchMap(_candidatesResource) { it.networkState }
+    val votingNetworkState = Transformations.switchMap(_votingResource) { it.networkState }
 
     fun setSubcategoryId(electionId: String) {
         if (_subcategoryId.value != electionId) {
@@ -32,5 +38,7 @@ class CandidatesViewModel
         }
     }
 
-    fun submitVote(input: VoteInput) = repository.submitVote(input)
+    fun submitVote(input: VoteInput) {
+        _voteInput.value = input
+    }
 }
