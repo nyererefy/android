@@ -8,13 +8,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.nyererefy.R
 import com.nyererefy.adapters.ElectionsAdapter
 import com.nyererefy.databinding.ElectionsFragmentBinding
-import com.nyererefy.di.Injectable
 import com.nyererefy.utilities.common.BaseFragment
 import com.nyererefy.viewmodels.ElectionsViewModel
 import javax.inject.Inject
 
 
-class ElectionsFragment : BaseFragment(), Injectable {
+class ElectionsFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: ElectionsViewModel by viewModels { viewModelFactory }

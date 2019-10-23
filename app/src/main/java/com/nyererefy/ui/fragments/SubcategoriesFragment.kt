@@ -10,12 +10,11 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.nyererefy.adapters.SubcategoriesAdapter
 import com.nyererefy.databinding.FragmentSubcategoriesBinding
-import com.nyererefy.di.Injectable
 import com.nyererefy.utilities.common.BaseFragment
 import com.nyererefy.viewmodels.SubcategoriesViewModel
 import javax.inject.Inject
 
-class SubcategoriesFragment : BaseFragment(), Injectable {
+class SubcategoriesFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: SubcategoriesViewModel by viewModels { viewModelFactory }

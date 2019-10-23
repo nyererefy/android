@@ -8,12 +8,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.nyererefy.databinding.FragmentConfirmClassBinding
-import com.nyererefy.di.Injectable
 import com.nyererefy.utilities.common.BaseFragment
 import com.nyererefy.viewmodels.ConfirmClassViewModel
 import javax.inject.Inject
 
-class ConfirmClassFragment : BaseFragment(), Injectable {
+class ConfirmClassFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: ConfirmClassViewModel by viewModels { viewModelFactory }

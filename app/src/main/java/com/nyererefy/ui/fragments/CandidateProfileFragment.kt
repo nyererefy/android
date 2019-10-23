@@ -2,18 +2,16 @@ package com.nyererefy.ui.fragments
 
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import com.nyererefy.R
 import com.nyererefy.databinding.FragmentCandidateProfileBinding
-import com.nyererefy.di.Injectable
 import com.nyererefy.graphql.type.CandidateEditInput
 import com.nyererefy.ui.sheets.EditBioBottomSheetFragment
 import com.nyererefy.utilities.BioListener
-import com.nyererefy.utilities.Pref
+import com.nyererefy.utilities.common.BaseFragment
 import com.nyererefy.utilities.common.Constants.NYEREREFY_URL
 import com.nyererefy.utilities.common.NetworkState
 import com.nyererefy.viewmodels.CandidateProfileViewModel
@@ -22,7 +20,7 @@ import org.jetbrains.anko.support.v4.longToast
 import org.jetbrains.anko.support.v4.share
 import javax.inject.Inject
 
-class CandidateProfileFragment : Fragment(), Injectable, BioListener {
+class CandidateProfileFragment : BaseFragment(), BioListener {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: CandidateProfileViewModel by viewModels { viewModelFactory }
@@ -83,7 +81,6 @@ class CandidateProfileFragment : Fragment(), Injectable, BioListener {
     }
 
     fun getUserId(): String? {
-        val pref = Pref(requireContext())
         return pref.studentId
     }
 

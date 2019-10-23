@@ -5,7 +5,6 @@ import android.view.*
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.nyererefy.R
 import com.nyererefy.databinding.FragmentProfileBinding
-import com.nyererefy.di.Injectable
 import com.nyererefy.ui.LoginActivity
 import com.nyererefy.utilities.common.BaseFragment
 import com.nyererefy.utilities.common.Constants.NAME
@@ -15,7 +14,7 @@ import org.jetbrains.anko.support.v4.intentFor
 import javax.inject.Inject
 
 
-class UserFragment : BaseFragment(), Injectable {
+class UserFragment : BaseFragment() {
     @Inject
     lateinit var cookieJar: PersistentCookieJar
 

@@ -24,7 +24,7 @@ import org.jetbrains.anko.clearTop
 import org.jetbrains.anko.support.v4.intentFor
 import javax.inject.Inject
 
-class SetInfoFragment : BaseFragment(), Injectable {
+class SetInfoFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: SetInfoViewModel by viewModels { viewModelFactory }

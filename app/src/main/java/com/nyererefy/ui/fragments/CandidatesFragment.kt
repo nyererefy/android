@@ -11,7 +11,6 @@ import androidx.navigation.fragment.navArgs
 import com.nyererefy.R
 import com.nyererefy.adapters.CandidatesAdapter
 import com.nyererefy.databinding.FragmentCandidatesBinding
-import com.nyererefy.di.Injectable
 import com.nyererefy.graphql.type.VoteInput
 import com.nyererefy.ui.sheets.ConfirmVotingBottomSheetFragment
 import com.nyererefy.utilities.CandidateCheckListener
@@ -23,7 +22,7 @@ import org.jetbrains.anko.design.indefiniteSnackbar
 import javax.inject.Inject
 
 
-class CandidatesFragment : BaseFragment(), Injectable, CandidateCheckListener {
+class CandidatesFragment : BaseFragment(), CandidateCheckListener {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: CandidatesViewModel by viewModels { viewModelFactory }
