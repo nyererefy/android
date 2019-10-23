@@ -1,16 +1,12 @@
 package com.nyererefy.data.repositories
 
-import androidx.lifecycle.MutableLiveData
-import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.ApolloClient
-import com.apollographql.apollo.api.Response
-import com.apollographql.apollo.exception.ApolloException
+import com.nyererefy.graphql.ClassInfoQuery
 import com.nyererefy.graphql.ConfirmDataMutation
 import com.nyererefy.graphql.MeQuery
 import com.nyererefy.graphql.SetupAccountMutation
 import com.nyererefy.graphql.type.UserSetupInput
 import com.nyererefy.utilities.Resource
-import com.nyererefy.utilities.common.NetworkState
 import com.nyererefy.utilities.common.invokeMutation
 import com.nyererefy.utilities.common.invokeQuery
 import javax.inject.Inject
@@ -20,36 +16,10 @@ import javax.inject.Singleton
 class UserRepository
 @Inject constructor(private val client: ApolloClient) {
 
-    fun confirmData(): MutableLiveData<NetworkState> {
+    fun confirmData(): Resource<ConfirmDataMutation.Data> {
         val mutation = ConfirmDataMutation.builder().build()
 
-        val networkState = MutableLiveData<NetworkState>()
-        networkState.value = NetworkState.LOADING
-
-        client.mutate(mutation).enqueue(object : ApolloCall.Callback<ConfirmDataMutation.Data>() {
-            override fun onFailure(e: ApolloException) {
-                networkState.postValue(NetworkState.error(e.localizedMessage))
-            }
-
-            override fun onResponse(response: Response<ConfirmDataMutation.Data>) {
-                when {
-                    response.hasErrors() -> {
-                        networkState.postValue(NetworkState.error(response.errors()[0].message()))
-                    }
-                    else -> {
-                        val isDataConfirmed = response.data()?.confirmData()?.isDataConfirmed
-
-                        if (isDataConfirmed != null && isDataConfirmed == true) {
-                            networkState.postValue(NetworkState.LOADED)
-                        } else {
-                            networkState.postValue(NetworkState.error("Failed to confirm"))
-                        }
-                    }
-                }
-            }
-        })
-
-        return networkState
+        return invokeMutation<ConfirmDataMutation.Data>(client.mutate(mutation))
     }
 
     fun setupAccount(input: UserSetupInput): Resource<SetupAccountMutation.Data> {
@@ -62,6 +32,12 @@ class UserRepository
         val query = MeQuery.builder().build()
 
         return invokeQuery<MeQuery.Data>(client.query(query))
+    }
+
+    fun fetchClassInfo(): Resource<ClassInfoQuery.Data> {
+        val query = ClassInfoQuery.builder().build()
+
+        return invokeQuery<ClassInfoQuery.Data>(client.query(query))
     }
 
 }

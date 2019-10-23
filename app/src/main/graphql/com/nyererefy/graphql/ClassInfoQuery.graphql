@@ -1,0 +1,8 @@
+query classInfo {
+    me {
+        regNo
+        class {
+            title
+        }
+    }
+}

@@ -4,6 +4,7 @@ object Constants {
     const val ID = "id"
     const val NAME = "name"
     const val USERNAME = "username"
+    const val IS_ACCOUNT_SET = "isAccountSet"
     const val NYEREREFY_PREFERENCES = "nyererefy_preferences"
 
     //Paging Library

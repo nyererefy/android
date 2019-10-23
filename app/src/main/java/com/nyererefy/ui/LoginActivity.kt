@@ -16,6 +16,7 @@ import com.nyererefy.R
 import com.nyererefy.databinding.ActivityLoginBinding
 import com.nyererefy.utilities.Pref
 import com.nyererefy.utilities.common.Constants.ID
+import com.nyererefy.utilities.common.Constants.IS_ACCOUNT_SET
 import com.nyererefy.utilities.common.Constants.NAME
 import com.nyererefy.utilities.common.Constants.USERNAME
 import com.nyererefy.utilities.common.NetworkState
@@ -26,6 +27,7 @@ import org.jetbrains.anko.clearTop
 import org.jetbrains.anko.design.indefiniteSnackbar
 import org.jetbrains.anko.design.longSnackbar
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.startActivity
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -116,9 +118,15 @@ class LoginActivity : AppCompatActivity() {
                 editor.putString(ID, it.login().id())
                 editor.putString(NAME, it.login().name())
                 editor.putString(USERNAME, it.login().username())
+                editor.putBoolean(IS_ACCOUNT_SET, it.login().isAccountSet)
                 editor.apply()
 
-                startActivity(intentFor<MainActivity>().clearTop())
+                when {
+                    !it.login().isDataConfirmed -> {
+                        startActivity<SetupActivity>()
+                    }
+                    else -> startActivity(intentFor<MainActivity>().clearTop())
+                }
             })
         } catch (e: ApiException) {
             Timber.e(e, "handleSignInResult:error")

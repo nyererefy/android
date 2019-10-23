@@ -49,6 +49,22 @@ fun hideWhenLoading(view: View, networkState: NetworkState?) {
     }
 }
 
+@BindingAdapter("app:showAfterSuccess")
+fun showAfterSuccess(view: View, networkState: NetworkState?) {
+    view.visibility = when (networkState) {
+        NetworkState.LOADED -> View.VISIBLE
+        else -> View.GONE
+    }
+}
+
+@BindingAdapter("app:hideAfterSuccess")
+fun hideAfterSuccess(view: View, networkState: NetworkState?) {
+    view.visibility = when (networkState) {
+        NetworkState.LOADED -> View.GONE
+        else -> View.VISIBLE
+    }
+}
+
 /**
  * For showing long snackBar with retry when error occurred.
  */

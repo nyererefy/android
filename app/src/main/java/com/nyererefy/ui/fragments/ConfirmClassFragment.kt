@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.nyererefy.databinding.FragmentConfirmClassBinding
 import com.nyererefy.di.Injectable
 import com.nyererefy.utilities.common.BaseFragment
@@ -24,6 +24,20 @@ class ConfirmClassFragment : BaseFragment(), Injectable {
             savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentConfirmClassBinding.inflate(inflater, container, false)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.fragment = this
+
         return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        viewModel.fetch()
+    }
+
+    fun navigate() {
+        val direction = ConfirmClassFragmentDirections.actionConfirmToSetup()
+        findNavController().navigate(direction)
     }
 }

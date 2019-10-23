@@ -23,7 +23,7 @@ class SurveysFragment : BaseFragment(), ListItemClickListener, Function0<Unit>, 
 //        viewModel = ViewModelProviders.of(this).get(MotionsViewModel::class.java)
 //
 //        viewModel.motions.observe(this, Observer { adapter.submitList(it) })
-//        viewModel.networkState.observe(this, Observer { adapter.setNetworkState(it) })
+//        viewModel.infoState.observe(this, Observer { adapter.setNetworkState(it) })
 //    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

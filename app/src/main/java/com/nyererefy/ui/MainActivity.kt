@@ -13,6 +13,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.nyererefy.R
 import com.nyererefy.databinding.ActivityMainBinding
 import com.nyererefy.utilities.Pref
+import com.nyererefy.utilities.common.Constants.IS_ACCOUNT_SET
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
@@ -43,7 +44,13 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
 
         pref = Pref(this)
 
-        startActivity<SetupActivity>() //todo remove.
+        if (pref.isLoggedIn) {
+            val isAccountSet = pref.sharedPref.getBoolean(IS_ACCOUNT_SET, false)
+
+            if (!isAccountSet) {
+                startActivity<SetupActivity>()
+            }
+        }
     }
 
     override fun onResume() {

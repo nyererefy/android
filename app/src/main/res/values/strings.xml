@@ -181,6 +181,15 @@
     <string name="male">Male</string>
     <string name="female">Female</string>
     <string name="other">Other</string>
-
+    <string name="reg_no">Registration Number</string>
+    <string name="continue_">Continue</string>
+    <string name="klass">Class</string>
+    <string name="data_confirmation">Data Confirmation</string>
+    <string name="setup">Setup</string>
+    <string name="confirm_msg">The information below should reflect your <b>registration number</b> as well
+        as <b>class</b>. If it is correct click confirm otherwise please contact your university/college\'s
+        Nyererefy Bridge administrator.\n<b>Note</b> After confirming account your data will no
+        longer receive changes via Nyererefy Bridge.
+    </string>
 
 </resources>

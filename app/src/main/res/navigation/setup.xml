@@ -3,20 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/setup"
-    app:startDestination="@id/setup">
+    app:startDestination="@id/confirm">
 
     <fragment
         android:id="@+id/setup"
         android:name="com.nyererefy.ui.fragments.SetInfoFragment"
-        android:label="Setup"
-        tools:layout="@layout/fragment_set_info" >
-        <action
-            android:id="@+id/action_setup_to_confirm"
-            app:destination="@id/confirm" />
-    </fragment>
+        android:label="@string/setup"
+        tools:layout="@layout/fragment_set_info" />
     <fragment
         android:id="@+id/confirm"
         android:name="com.nyererefy.ui.fragments.ConfirmClassFragment"
-        android:label="Confirm"
-        tools:layout="@layout/fragment_confirm_class" />
+        android:label="@string/data_confirmation"
+        tools:layout="@layout/fragment_confirm_class">
+        <action
+            android:id="@+id/action_confirm_to_setup"
+            app:destination="@id/setup" />
+    </fragment>
 </navigation>
