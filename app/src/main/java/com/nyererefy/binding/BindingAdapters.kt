@@ -36,6 +36,16 @@ fun bindProgress(layout: SwipeRefreshLayout, networkState: NetworkState, retry: 
     }
 }
 
+/**
+ * For executing refresh on SwipeRefreshLayout.
+ */
+@BindingAdapter("onRefresh")
+fun handleRefreshing(swipeRefreshLayout: SwipeRefreshLayout, onRefresh: () -> Unit) {
+    swipeRefreshLayout.setOnRefreshListener {
+        onRefresh()
+    }
+}
+
 @BindingAdapter("userId", "studentId")
 fun hideIfNotOwner(view: View, userId: String?, studentId: String?) {
     view.visibility = if (userId != studentId) View.GONE else View.VISIBLE
