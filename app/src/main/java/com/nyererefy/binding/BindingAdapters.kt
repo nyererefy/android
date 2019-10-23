@@ -44,7 +44,7 @@ fun hideIfNotOwner(view: View, userId: String?, studentId: String?) {
 /**
  * For showing progress bar when network state is loading.
  */
-@BindingAdapter("app:showLoading")
+@BindingAdapter("showLoading")
 fun showProgressBar(view: View, networkState: NetworkState?) {
     view.visibility = when (networkState) {
         NetworkState.LOADING -> View.VISIBLE
@@ -55,7 +55,7 @@ fun showProgressBar(view: View, networkState: NetworkState?) {
 /**
  * For hiding any layout when network state is loading.
  */
-@BindingAdapter("app:hideWhenLoading")
+@BindingAdapter("hideWhenLoading")
 fun hideWhenLoading(view: View, networkState: NetworkState?) {
     view.visibility = when (networkState) {
         NetworkState.LOADING -> View.GONE
@@ -63,7 +63,7 @@ fun hideWhenLoading(view: View, networkState: NetworkState?) {
     }
 }
 
-@BindingAdapter("app:showAfterSuccess")
+@BindingAdapter("showAfterSuccess")
 fun showAfterSuccess(view: View, networkState: NetworkState?) {
     view.visibility = when (networkState) {
         NetworkState.LOADED -> View.VISIBLE
@@ -71,7 +71,7 @@ fun showAfterSuccess(view: View, networkState: NetworkState?) {
     }
 }
 
-@BindingAdapter("app:hideAfterSuccess")
+@BindingAdapter("hideAfterSuccess")
 fun hideAfterSuccess(view: View, networkState: NetworkState?) {
     view.visibility = when (networkState) {
         NetworkState.LOADED -> View.GONE
@@ -82,7 +82,7 @@ fun hideAfterSuccess(view: View, networkState: NetworkState?) {
 /**
  * For showing long snackBar with retry when error occurred.
  */
-@BindingAdapter("app:handleError", "app:handleRetry")
+@BindingAdapter("handleError", "handleRetry")
 fun handleErrorAndRetry(view: View, networkState: NetworkState?, retry: () -> Unit) {
     networkState?.msg?.run {
         view.longSnackbar(this, appContext.getString(R.string.retry)) { retry() }
@@ -92,11 +92,9 @@ fun handleErrorAndRetry(view: View, networkState: NetworkState?, retry: () -> Un
 /**
  * For showing error in EditText.
  */
-@BindingAdapter("app:showError")
+@BindingAdapter("showError")
 fun showError(editText: EditText, error: Int?) {
     error?.run {
         editText.error = appContext.getString(error)
     }
 }
-
-//todo remove all namespaces.

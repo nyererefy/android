@@ -16,8 +16,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:handleError="@{viewModel.networkState}"
-        app:handleRetry="@{viewModel.retry}">
+        handleError="@{viewModel.networkState}"
+        handleRetry="@{viewModel.retry}">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                     android:layout_height="match_parent"
                     android:hint="@string/name"
                     android:padding="0dp"
-                    app:showError="@{viewModel.formState.nameError}" />
+                    showError="@{viewModel.formState.nameError}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,7 +57,7 @@
                     android:layout_height="match_parent"
                     android:hint="@string/username"
                     android:padding="0dp"
-                    app:showError="@{viewModel.formState.usernameError}" />
+                    showError="@{viewModel.formState.usernameError}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -100,7 +100,7 @@
                     android:hint="@string/confirm_password"
                     android:inputType="textPassword"
                     android:padding="0dp"
-                    app:showError="@{viewModel.formState.passwordError}" />
+                    showError="@{viewModel.formState.passwordError}" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -131,14 +131,14 @@
                 android:enabled="@{viewModel.formState.dataValid}"
                 android:onClick="@{()->fragment.submitData()}"
                 android:text="@string/save"
-                app:hideWhenLoading="@{viewModel.networkState}" />
+                hideWhenLoading="@{viewModel.networkState}" />
 
             <ProgressBar
                 android:id="@+id/progressBar"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:showLoading="@{viewModel.networkState}" />
+                showLoading="@{viewModel.networkState}" />
 
         </LinearLayout>
     </ScrollView>

@@ -17,17 +17,17 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:handleError="@{viewModel.infoState}"
-        app:handleRetry="@{viewModel.fetch}">
+        handleError="@{viewModel.infoState}"
+        handleRetry="@{viewModel.fetch}">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="@dimen/spacing_middle"
-            app:handleError="@{viewModel.confirmState}"
-            app:handleRetry="@{viewModel.confirm}"
-            app:hideWhenLoading="@{viewModel.infoState}">
+            handleError="@{viewModel.confirmState}"
+            handleRetry="@{viewModel.confirm}"
+            hideWhenLoading="@{viewModel.infoState}">
 
             <TextView
                 android:layout_width="match_parent"
@@ -42,7 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="@dimen/spacing_middle"
-                app:hideWhenLoading="@{viewModel.confirmState}"
+                hideWhenLoading="@{viewModel.confirmState}"
                 tools:targetApi="lollipop">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -100,7 +100,7 @@
                 style="?android:attr/progressBarStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:showLoading="@{viewModel.confirmState}" />
+                showLoading="@{viewModel.confirmState}" />
 
             <View
                 android:layout_width="match_parent"
@@ -113,15 +113,15 @@
                 android:layout_height="wrap_content"
                 android:onClick="@{()->viewModel.confirm()}"
                 android:text="@string/confirm"
-                app:hideAfterSuccess="@{viewModel.confirmState}"
-                app:hideWhenLoading="@{viewModel.confirmState}" />
+                hideAfterSuccess="@{viewModel.confirmState}"
+                hideWhenLoading="@{viewModel.confirmState}" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="@{()->fragment.navigate()}"
                 android:text="@string/continue_"
-                app:showAfterSuccess="@{viewModel.confirmState}" />
+                showAfterSuccess="@{viewModel.confirmState}" />
 
         </LinearLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
