@@ -17,6 +17,8 @@ import com.nyererefy.graphql.type.UserSetupInput
 import com.nyererefy.ui.MainActivity
 import com.nyererefy.utilities.afterTextChanged
 import com.nyererefy.utilities.common.BaseFragment
+import com.nyererefy.utilities.common.Constants.NAME
+import com.nyererefy.utilities.common.Constants.USERNAME
 import com.nyererefy.viewmodels.SetInfoViewModel
 import org.jetbrains.anko.clearTop
 import org.jetbrains.anko.support.v4.intentFor
@@ -40,10 +42,16 @@ class SetInfoFragment : BaseFragment(), Injectable {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.fragment = this
 
+        preFillInputs(binding)
         setUpSexSpinner()
         observeInputs()
 
         return binding.root
+    }
+
+    private fun preFillInputs(binding: FragmentSetInfoBinding) {
+        binding.name.setText(pref.get(NAME))
+        binding.username.setText(pref.get(USERNAME))
     }
 
     private fun observeInputs() {

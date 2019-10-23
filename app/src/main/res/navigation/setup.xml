@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/setup"
-    app:startDestination="@id/confirm">
+    app:startDestination="@id/setup">
 
     <fragment
         android:id="@+id/setup"
