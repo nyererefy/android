@@ -1,0 +1,5 @@
+mutation updateCandidate($input: CandidateEditInput!) {
+    updateCandidate(input: $input) {
+        id
+    }
+}

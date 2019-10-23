@@ -25,6 +25,9 @@ abstract class FragmentBuildersModule {
     abstract fun contributeCandidatesFragment(): CandidatesFragment
 
     @ContributesAndroidInjector
+    abstract fun contributeCandidateProfileFragment(): CandidateProfileFragment
+
+    @ContributesAndroidInjector
     abstract fun contributeConfirmClassFragment(): ConfirmClassFragment
 
     @ContributesAndroidInjector

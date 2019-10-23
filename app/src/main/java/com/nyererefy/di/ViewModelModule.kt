@@ -42,4 +42,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ConfirmClassViewModel::class)
     abstract fun bindConfirmClassViewModel(viewModel: ConfirmClassViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CandidateProfileViewModel::class)
+    abstract fun bindCandidateProfileViewModel(viewModel: CandidateProfileViewModel): ViewModel
 }

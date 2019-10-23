@@ -7,7 +7,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.nyererefy.App.Companion.appContext
 import com.nyererefy.R
 import com.nyererefy.utilities.common.NetworkState
-import com.nyererefy.utilities.common.Status
+import org.jetbrains.anko.design.indefiniteSnackbar
 import org.jetbrains.anko.design.longSnackbar
 
 @BindingAdapter("isGone")
@@ -19,12 +19,26 @@ fun bindIsGone(view: View, isGone: Boolean) {
     }
 }
 
-@BindingAdapter("showProgress")
-fun bindProgress(layout: SwipeRefreshLayout, status: Status?) {
-    when (status) {
-        Status.LOADING -> layout.isRefreshing = true
-        else -> layout.isRefreshing = false
+/**
+ * For showing refreshing on SwipeRefreshLayout.
+ */
+@BindingAdapter("showRefreshing", "retry")
+fun bindProgress(layout: SwipeRefreshLayout, networkState: NetworkState, retry: () -> Unit) {
+    when (networkState) {
+        NetworkState.LOADING -> layout.isRefreshing = true
+        else -> {
+            layout.isRefreshing = false
+
+            networkState.msg?.run {
+                layout.indefiniteSnackbar(this, "Retry") { retry() }
+            }
+        }
     }
+}
+
+@BindingAdapter("userId", "studentId")
+fun hideIfNotOwner(view: View, userId: String?, studentId: String?) {
+    view.visibility = if (userId != studentId) View.GONE else View.VISIBLE
 }
 
 /**
@@ -84,3 +98,5 @@ fun showError(editText: EditText, error: Int?) {
         editText.error = appContext.getString(error)
     }
 }
+
+//todo remove all namespaces.

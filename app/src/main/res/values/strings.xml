@@ -191,5 +191,9 @@
         Nyererefy Bridge administrator.\n<b>Note</b> After confirming account your data will no
         longer receive changes via Nyererefy Bridge.
     </string>
+    <string name="share">Share</string>
+    <string name="cancel">Cancel</string>
+    <string name="error_empty_bio">Bio must not be empty</string>
+    <!--motions-->
 
 </resources>

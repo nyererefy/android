@@ -6,6 +6,7 @@ object Constants {
     const val USERNAME = "username"
     const val IS_ACCOUNT_SET = "isAccountSet"
     const val NYEREREFY_PREFERENCES = "nyererefy_preferences"
+    const val NYEREREFY_URL = "https://nyererefy.com"
 
     //Paging Library
     const val INITIAL_LOAD = 5
