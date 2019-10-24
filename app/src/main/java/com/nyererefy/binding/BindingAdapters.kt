@@ -2,6 +2,7 @@ package com.nyererefy.binding
 
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.nyererefy.App.Companion.appContext
@@ -107,4 +108,9 @@ fun showError(editText: EditText, error: Int?) {
     error?.run {
         editText.error = appContext.getString(error)
     }
+}
+
+@BindingAdapter("setTextFromInt")
+fun setTextFromInt(textView: TextView, int: Int) {
+    textView.text = "$int"
 }

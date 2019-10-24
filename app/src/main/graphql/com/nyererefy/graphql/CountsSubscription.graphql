@@ -1,0 +1,10 @@
+subscription countsSubscription($subcategoryId: Int!) {
+    candidatesAndVotesCount(subcategoryId: $subcategoryId) {
+        id
+        votesCount
+        avatar
+        user {
+            name
+        }
+    }
+}

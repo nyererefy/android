@@ -47,7 +47,7 @@ class SubcategoryViewFragment : Fragment() {
         pagerAdapter = ViewPagerAdapter(childFragmentManager)
 
         pagerAdapter.addFragment(CandidatesFragment(), getString(R.string.candidates))
-        pagerAdapter.addFragment(LiveVotesAndReviewsFragment(), getString(R.string.votes_and_reviews))
+        pagerAdapter.addFragment(CountsAndReviewsFragment(), getString(R.string.votes_and_reviews))
         binding.viewPager.adapter = pagerAdapter
         binding.tabLayout.setupWithViewPager(binding.viewPager)
     }

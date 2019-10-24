@@ -8,24 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.nyererefy.R
-import com.nyererefy.viewmodels.LiveVotesAndReviewsViewModel
+import com.nyererefy.viewmodels.AddReviewViewModel
 
-class LiveVotesAndReviewsFragment : Fragment() {
+class AddReviewFragment : Fragment() {
 
     companion object {
-        fun newInstance() = LiveVotesAndReviewsFragment()
+        fun newInstance() = AddReviewFragment()
     }
 
-    private lateinit var viewModel: LiveVotesAndReviewsViewModel
+    private lateinit var viewModel: AddReviewViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.live_votes_and_reviews_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_add_review, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(LiveVotesAndReviewsViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(AddReviewViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

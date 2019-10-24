@@ -47,4 +47,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CandidateProfileViewModel::class)
     abstract fun bindCandidateProfileViewModel(viewModel: CandidateProfileViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CountsViewModel::class)
+    abstract fun bindCountsViewModel(viewModel: CountsViewModel): ViewModel
 }

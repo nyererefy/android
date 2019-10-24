@@ -18,12 +18,8 @@ import com.nyererefy.utilities.SpacesItemDecoration
 import com.nyererefy.utilities.common.BaseFragment
 import com.nyererefy.utilities.common.NetworkState
 import com.nyererefy.viewmodels.CandidatesViewModel
-import com.nyererefy.viewmodels.LiveVotesAndReviewsViewModel
 import com.nyererefy.viewmodels.SubcategoryViewViewModel
 import org.jetbrains.anko.design.indefiniteSnackbar
-import org.jetbrains.anko.support.v4.longToast
-import org.jetbrains.anko.support.v4.toast
-import timber.log.Timber
 import javax.inject.Inject
 
 

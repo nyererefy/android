@@ -32,4 +32,10 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeSetInfoFragment(): SetInfoFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeCountsFragment(): CountsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeCountsAndReviewsFragment(): CountsAndReviewsFragment
 }

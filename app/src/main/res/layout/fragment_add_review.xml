@@ -3,9 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.LiveVotesAndReviewsFragment">
+    tools:context=".ui.fragments.AddReviewFragment">
 
     <TextView
+        android:textSize="46sp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="Hello" />

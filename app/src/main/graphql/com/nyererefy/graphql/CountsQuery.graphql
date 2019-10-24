@@ -1,0 +1,10 @@
+query countsQuery($subcategoryId: Int!) {
+    candidatesAndVotesCount(subcategoryId: $subcategoryId) {
+        id
+        votesCount
+        avatar
+        user {
+            name
+        }
+    }
+}

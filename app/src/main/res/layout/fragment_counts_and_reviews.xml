@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".ui.fragments.CountsAndReviewsFragment">
+
+        <fragment
+            android:id="@+id/votes"
+            android:name="com.nyererefy.ui.fragments.CountsFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_xsmall"
+            android:background="@color/grey_5" />
+
+        <fragment
+            android:id="@+id/reviews"
+            android:name="com.nyererefy.ui.fragments.ReviewsFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="6" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_xsmall"
+            android:background="@color/grey_5" />
+
+        <fragment
+            android:id="@+id/add"
+            android:name="com.nyererefy.ui.fragments.AddReviewFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+</layout>

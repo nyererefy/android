@@ -32,6 +32,12 @@ class CandidatesRepository
         return invokeQuery<CandidateQuery.Data>(client.query(query))
     }
 
+    fun fetchCandidatesAndVotes(id: String): Resource<CountsQuery.Data> {
+        val query = CountsQuery.builder().subcategoryId(id.toInt()).build()
+
+        return invokeQuery<CountsQuery.Data>(client.query(query))
+    }
+
     fun subscribeCandidate(id: String): Resource<CandidateSubscription.Data> {
         val subscription = CandidateSubscription.builder().id(id.toInt()).build()
 
