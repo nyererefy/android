@@ -194,6 +194,9 @@
     <string name="share">Share</string>
     <string name="cancel">Cancel</string>
     <string name="error_empty_bio">Bio must not be empty</string>
+
+    <string name="candidates">Candidates</string>
+    <string name="votes_and_reviews">Votes and Reviews</string>
     <!--motions-->
 
 </resources>

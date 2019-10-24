@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import com.nyererefy.R
 import com.nyererefy.databinding.ListItemCandidateBinding
 import com.nyererefy.graphql.CandidatesQuery
-import com.nyererefy.ui.fragments.CandidatesFragmentDirections
+import com.nyererefy.ui.fragments.SubcategoryViewFragmentDirections
 import com.nyererefy.utilities.CandidateCheckListener
 import com.nyererefy.utilities.common.BaseListAdapter
 
@@ -32,7 +32,7 @@ class CandidatesAdapter(
             this.candidate = item
 
             this.clickListener = View.OnClickListener {
-                val direction = CandidatesFragmentDirections.actionCandidatesToCandidateProfileFragment(item.id())
+                val direction = SubcategoryViewFragmentDirections.actionSubcategoryViewToCandidateProfile(item.id())
                 it.findNavController().navigate(direction)
             }
 

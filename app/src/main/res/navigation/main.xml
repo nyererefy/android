@@ -29,8 +29,8 @@
             android:name="electionId"
             app:argType="string" />
         <action
-            android:id="@+id/action_categories_to_candidatesFragment"
-            app:destination="@id/candidates" />
+            android:id="@+id/action_categories_to_subcategoryViewFragment"
+            app:destination="@id/subcategoryView" />
     </fragment>
     <activity
         android:id="@+id/login"
@@ -42,18 +42,7 @@
         android:label="Support"
         tools:layout="@layout/activity_support" />
     <fragment
-        android:id="@+id/candidates"
-        android:name="com.nyererefy.ui.fragments.CandidatesFragment"
-        android:label="Candidates">
-        <argument
-            android:name="subcategoryId"
-            app:argType="string" />
-        <action
-            android:id="@+id/action_candidates_to_candidateProfileFragment"
-            app:destination="@id/candidateProfileFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/candidateProfileFragment"
+        android:id="@+id/candidateProfile"
         android:name="com.nyererefy.ui.fragments.CandidateProfileFragment"
         android:label="Profile">
         <argument
@@ -64,5 +53,16 @@
             android:autoVerify="true"
             app:uri="https://nyererefy.com/candidate/{candidateId}"
             tools:targetApi="m" />
+    </fragment>
+    <fragment
+        android:id="@+id/subcategoryView"
+        android:name="com.nyererefy.ui.fragments.SubcategoryViewFragment"
+        android:label="Category" >
+        <argument
+            android:name="subcategoryId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_subcategoryView_to_candidateProfile"
+            app:destination="@id/candidateProfile" />
     </fragment>
 </navigation>

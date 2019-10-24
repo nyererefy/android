@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.navArgs
+import androidx.lifecycle.ViewModelProviders
 import com.nyererefy.R
 import com.nyererefy.adapters.CandidatesAdapter
 import com.nyererefy.databinding.FragmentCandidatesBinding
@@ -18,19 +18,35 @@ import com.nyererefy.utilities.SpacesItemDecoration
 import com.nyererefy.utilities.common.BaseFragment
 import com.nyererefy.utilities.common.NetworkState
 import com.nyererefy.viewmodels.CandidatesViewModel
+import com.nyererefy.viewmodels.LiveVotesAndReviewsViewModel
+import com.nyererefy.viewmodels.SubcategoryViewViewModel
 import org.jetbrains.anko.design.indefiniteSnackbar
+import org.jetbrains.anko.support.v4.longToast
+import org.jetbrains.anko.support.v4.toast
+import timber.log.Timber
 import javax.inject.Inject
 
 
 class CandidatesFragment : BaseFragment(), CandidateCheckListener {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    private lateinit var  subcategoryViewViewModel: SubcategoryViewViewModel
     private val viewModel: CandidatesViewModel by viewModels { viewModelFactory }
-    private val args by navArgs<CandidatesFragmentArgs>()
     private lateinit var adapter: CandidatesAdapter
     private lateinit var bottomSheetFragment: ConfirmVotingBottomSheetFragment
     private lateinit var binding: FragmentCandidatesBinding
 
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        subcategoryViewViewModel = activity?.run {
+            ViewModelProviders.of(this)[SubcategoryViewViewModel::class.java]
+        } ?: throw Exception("Invalid Activity")
+
+        subcategoryViewViewModel.subcategoryId.observe(this, Observer {
+            viewModel.setSubcategoryId(it)
+        })
+    }
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -51,8 +67,6 @@ class CandidatesFragment : BaseFragment(), CandidateCheckListener {
     }
 
     private fun subscribeUI(adapter: CandidatesAdapter) {
-        viewModel.setSubcategoryId(args.subcategoryId)
-
         viewModel.data.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it.candidates())
         })

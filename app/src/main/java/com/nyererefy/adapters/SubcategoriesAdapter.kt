@@ -28,7 +28,7 @@ class SubcategoriesAdapter(retryCallback: () -> Unit)
             subcategory = item
             executePendingBindings()
             clickListener = View.OnClickListener {
-                val direction = SubcategoriesFragmentDirections.actionCategoriesToCandidatesFragment(item.id())
+                val direction = SubcategoriesFragmentDirections.actionCategoriesToSubcategoryViewFragment(item.id())
                 it.findNavController().navigate(direction)
             }
         }
