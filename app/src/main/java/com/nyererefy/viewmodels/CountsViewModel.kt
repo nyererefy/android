@@ -10,12 +10,18 @@ class CountsViewModel
 @Inject constructor(private val repository: CandidatesRepository) : ViewModel() {
     private val _subcategoryId = MutableLiveData<String>()
 
-    private val _candidatesResource = Transformations.map(_subcategoryId) {
+    private val _countsQueryResource = Transformations.map(_subcategoryId) {
         repository.fetchCandidatesAndVotes(it)
     }
 
-    val data = Transformations.switchMap(_candidatesResource) { it.data }
-    val networkState = Transformations.switchMap(_candidatesResource) { it.networkState }
+    private val _countsSubscriptionResource = Transformations.map(_subcategoryId) {
+        repository.subscribeToCandidatesAndVotes(it)
+    }
+
+    val data = Transformations.switchMap(_countsQueryResource) { it.data }
+    val networkState = Transformations.switchMap(_countsQueryResource) { it.networkState }
+    val subscriptionData = Transformations.switchMap(_countsSubscriptionResource) { it.data }
+
 
     fun setSubcategoryId(electionId: String) {
         if (_subcategoryId.value != electionId) {

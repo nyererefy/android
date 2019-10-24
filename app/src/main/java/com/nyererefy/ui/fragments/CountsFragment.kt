@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.nyererefy.adapters.CountsAdapter
 import com.nyererefy.databinding.FragmentCountsBinding
+import com.nyererefy.graphql.CountsQuery
 import com.nyererefy.utilities.SpacesItemDecoration
 import com.nyererefy.utilities.common.BaseFragment
 import com.nyererefy.viewmodels.CountsViewModel
@@ -53,9 +54,14 @@ class CountsFragment : BaseFragment() {
         return binding.root
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun subscribeUI() {
         viewModel.data.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it.candidatesAndVotesCount())
+        })
+
+        viewModel.subscriptionData.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it.candidatesAndVotesCount() as List<CountsQuery.CandidatesAndVotesCount>)
         })
 
         viewModel.networkState.observe(viewLifecycleOwner, Observer {
