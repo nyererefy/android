@@ -1,5 +1,6 @@
 package com.nyererefy.di
 
+import android.content.Intent
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.subscription.WebSocketSubscriptionTransport
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
@@ -8,6 +9,7 @@ import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersisto
 import com.nyererefy.App.Companion.appContext
 import com.nyererefy.BuildConfig.BASE_URL
 import com.nyererefy.BuildConfig.WS_URL
+import com.nyererefy.ui.LoginActivity
 import com.nyererefy.utilities.Pref
 import dagger.Module
 import dagger.Provides
@@ -35,7 +37,7 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideApolloClient(cookieJar: PersistentCookieJar): ApolloClient {
+    fun provideApolloClient(cookieJar: PersistentCookieJar, pref: Pref): ApolloClient {
         //Logger
         val logger = HttpLoggingInterceptor()
         logger.level = HttpLoggingInterceptor.Level.BODY
@@ -46,8 +48,26 @@ class AppModule {
                         .readTimeout(30, TimeUnit.SECONDS)
                         .writeTimeout(30, TimeUnit.SECONDS)
                         .retryOnConnectionFailure(true)
-                        .addInterceptor(logger)
                         .cookieJar(cookieJar)
+                        .addInterceptor(logger)
+                        .addInterceptor {
+                            val request = it.request()
+                            val response = it.proceed(request)
+
+                            when (response.code()) {
+                                401 -> {
+                                    //clearing all pref..
+                                    pref.clear()
+
+                                    //Taking the user to LoginActivity.
+                                    val i = Intent(appContext, LoginActivity::class.java)
+                                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP) //todo
+                                    appContext.startActivity(i)
+                                }
+                            }
+                            response
+                        }
                         .build()
 
         val factory = WebSocketSubscriptionTransport.Factory(WS_URL, okHttpClient)
