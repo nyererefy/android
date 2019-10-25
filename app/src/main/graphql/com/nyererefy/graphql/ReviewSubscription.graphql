@@ -1,0 +1,11 @@
+subscription review($subcategoryId: Int!) {
+    review(subcategoryId: $subcategoryId) {
+        id
+        content
+        user {
+            id
+            avatar
+            name
+        }
+    }
+}

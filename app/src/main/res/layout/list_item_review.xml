@@ -7,7 +7,7 @@
 
         <variable
             name="review"
-            type="com.nyererefy.graphql.ReviewsQuery.Review" />
+            type="com.nyererefy.utilities.model.Review" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +35,7 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:gravity="center_vertical"
-            android:text="@{review.user().name()}"
+            android:text="@{review.user.name}"
             android:textAppearance="@style/TextAppearance.AppCompat.Caption"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
@@ -52,7 +52,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:gravity="center_vertical"
-            android:text="@{review.content()}"
+            android:text="@{review.content}"
             android:textColor="@color/grey_90"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"

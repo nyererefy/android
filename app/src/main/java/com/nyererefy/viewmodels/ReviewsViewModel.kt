@@ -16,8 +16,13 @@ class ReviewsViewModel
         repository.fetchReviews(it)
     }
 
+    private val _subscriptionResource = Transformations.map(_args) {
+        repository.subscribeToReviews(it.subcategoryId)
+    }
+
     val data = Transformations.switchMap(_resource) { it.data }
     val networkState = Transformations.switchMap(_resource) { it.networkState }
+    val review = Transformations.switchMap(_subscriptionResource) { it.data }
 
     fun setArgs(subcategoryId: Int, offset: Int? = null) {
         val args = ReviewsArgs(subcategoryId, offset)

@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProviders
 import com.nyererefy.adapters.ReviewsAdapter
 import com.nyererefy.databinding.FragmentReviewsBinding
 import com.nyererefy.utilities.common.BaseFragment
+import com.nyererefy.utilities.model.Review
+import com.nyererefy.utilities.model.User
 import com.nyererefy.viewmodels.ReviewsViewModel
 import com.nyererefy.viewmodels.SubcategoryViewViewModel
 import javax.inject.Inject
@@ -21,6 +23,7 @@ class ReviewsFragment : BaseFragment() {
     private val viewModel: ReviewsViewModel by viewModels { viewModelFactory }
     private lateinit var subcategoryViewViewModel: SubcategoryViewViewModel
     private lateinit var adapter: ReviewsAdapter
+    private lateinit var binding: FragmentReviewsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,7 +37,7 @@ class ReviewsFragment : BaseFragment() {
             inflater: LayoutInflater,
             container: ViewGroup?,
             savedInstanceState: Bundle?): View? {
-        val binding = FragmentReviewsBinding.inflate(inflater, container, false)
+        binding = FragmentReviewsBinding.inflate(inflater, container, false)
 
         adapter = ReviewsAdapter { viewModel.retry() }
 
@@ -48,11 +51,32 @@ class ReviewsFragment : BaseFragment() {
         viewModel.setArgs(subcategoryViewViewModel.subcategoryId.value!!.toInt())
 
         viewModel.data.observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it.reviews())
+            adapter.submitList(it.reviews().map { r ->
+                val user = User(id = r.user().id(), avatar = r.user().avatar(), name = r.user().name())
+                val review = Review(id = r.id(), content = r.content(), user = user)
+
+                review
+            })
         })
 
         viewModel.networkState.observe(viewLifecycleOwner, Observer {
             adapter.setNetworkState(it)
+        })
+
+        viewModel.review.observe(viewLifecycleOwner, Observer {
+            val currentList = adapter.currentList.toMutableList()
+            val r = it.review()
+
+            val user = User(id = r.user().id(), avatar = r.user().avatar(), name = r.user().name())
+            val review = Review(id = r.id(), content = r.content(), user = user)
+            currentList.add(review)
+
+            adapter.submitList(currentList)
+
+            //Scroll to bottom for user to see his/her review.
+            if (pref.studentId == user.id) {
+                binding.recyclerView.smoothScrollToPosition(currentList.size - 1)
+            }
         })
     }
 
