@@ -1,32 +1,59 @@
 package com.nyererefy.ui.fragments
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import com.nyererefy.R
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import com.nyererefy.adapters.ReviewsAdapter
+import com.nyererefy.databinding.FragmentReviewsBinding
+import com.nyererefy.utilities.common.BaseFragment
 import com.nyererefy.viewmodels.ReviewsViewModel
+import com.nyererefy.viewmodels.SubcategoryViewViewModel
+import javax.inject.Inject
 
-class ReviewsFragment : Fragment() {
+class ReviewsFragment : BaseFragment() {
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val viewModel: ReviewsViewModel by viewModels { viewModelFactory }
+    private lateinit var subcategoryViewViewModel: SubcategoryViewViewModel
+    private lateinit var adapter: ReviewsAdapter
 
-    companion object {
-        fun newInstance() = ReviewsFragment()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        subcategoryViewViewModel = activity?.run {
+            ViewModelProviders.of(this)[SubcategoryViewViewModel::class.java]
+        } ?: throw Exception("Invalid Activity")
     }
 
-    private lateinit var viewModel: ReviewsViewModel
+    override fun onCreateView(
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?): View? {
+        val binding = FragmentReviewsBinding.inflate(inflater, container, false)
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_reviews, container, false)
+        adapter = ReviewsAdapter { viewModel.retry() }
+
+        binding.recyclerView.adapter = adapter
+        subscribeUI()
+
+        return binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ReviewsViewModel::class.java)
-        // TODO: Use the ViewModel
+    private fun subscribeUI() {
+        viewModel.setArgs(subcategoryViewViewModel.subcategoryId.value!!.toInt())
+
+        viewModel.data.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it.reviews())
+        })
+
+        viewModel.networkState.observe(viewLifecycleOwner, Observer {
+            adapter.setNetworkState(it)
+        })
     }
 
 }

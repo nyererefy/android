@@ -41,4 +41,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeAddReviewFragment(): AddReviewFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeReviewsFragment(): ReviewsFragment
 }

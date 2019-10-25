@@ -1,0 +1,11 @@
+query reviews($subcategoryId: Int!, $offset: Int) {
+    reviews(subcategoryId: $subcategoryId, offset: $offset) {
+        id
+        content
+        user {
+            id
+            avatar
+            name
+        }
+    }
+}

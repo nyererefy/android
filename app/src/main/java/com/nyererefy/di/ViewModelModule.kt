@@ -57,4 +57,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AddReviewViewModel::class)
     abstract fun bindAddReviewViewModel(viewModel: AddReviewViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(ReviewsViewModel::class)
+    abstract fun bindReviewsViewModel(viewModel: ReviewsViewModel): ViewModel
 }

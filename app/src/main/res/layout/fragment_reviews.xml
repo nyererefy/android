@@ -14,13 +14,13 @@
         tools:context=".ui.fragments.ReviewsFragment">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/reviews_recyclerView"
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:context=".ui.MainActivity"
-            tools:listitem="@layout/list_item_subcategory" />
+            tools:listitem="@layout/list_item_review" />
 
         <View
             android:layout_width="match_parent"
