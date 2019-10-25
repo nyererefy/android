@@ -52,4 +52,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CountsViewModel::class)
     abstract fun bindCountsViewModel(viewModel: CountsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AddReviewViewModel::class)
+    abstract fun bindAddReviewViewModel(viewModel: AddReviewViewModel): ViewModel
 }

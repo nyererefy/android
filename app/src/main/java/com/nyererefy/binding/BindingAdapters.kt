@@ -66,11 +66,21 @@ fun showProgressBar(view: View, networkState: NetworkState?) {
 /**
  * For hiding any layout when network state is loading.
  */
-@BindingAdapter("hideWhenLoading")
-fun hideWhenLoading(view: View, networkState: NetworkState?) {
-    view.visibility = when (networkState) {
-        NetworkState.LOADING -> View.GONE
-        else -> View.VISIBLE
+@BindingAdapter("hideWhenLoading", "isGoneBefore", requireAll = false)
+fun hideWhenLoading(view: View, networkState: NetworkState?, isGoneBefore: Boolean?) {
+    // Control view behavior before network state comes into play.
+    if (isGoneBefore != null && networkState == null ||
+            isGoneBefore != null && networkState == NetworkState.LOADED) {
+        view.visibility = if (isGoneBefore) {
+            View.GONE
+        } else {
+            View.VISIBLE
+        }
+    } else {
+        view.visibility = when (networkState) {
+            NetworkState.LOADING -> View.GONE
+            else -> View.VISIBLE
+        }
     }
 }
 
@@ -113,4 +123,11 @@ fun showError(editText: EditText, error: Int?) {
 @BindingAdapter("setTextFromInt")
 fun setTextFromInt(textView: TextView, int: Int) {
     textView.text = "$int"
+}
+
+@BindingAdapter("clearAfterSuccess")
+fun clearAfterSuccess(editText: EditText, networkState: NetworkState?) {
+    when (networkState) {
+        NetworkState.LOADED -> editText.setText("")
+    }
 }
