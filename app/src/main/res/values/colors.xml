@@ -33,16 +33,20 @@
     <color name="rateAppColor">#311B92</color>
 
     <!--Motions buttons-->
-    <color name="yes_counts_color">#43A047</color>
 
     <!--Tab colours-->
     <color name="election_tab">#337AB7</color>
-    <color name="motions_tab">#5D4037</color>
     <color name="news_tab">#37474F</color>
     <color name="more_tab">#311B92</color>
 
     <!--Bottom Nav-->
     <color name="red">#D84315</color>
+    <color name="blue">#1E88E5</color>
+    <color name="green">#43A047</color>
+    <color name="brown">#5D4037</color>
+    <color name="lime">#827717</color>
+
+
     <color name="accent_color">#000000</color>
     <color name="inactive_color">#757575</color>
     <color name="bn_background">#F5F5F5</color>

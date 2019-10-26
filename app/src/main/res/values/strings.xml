@@ -198,6 +198,9 @@
     <string name="candidates">Candidates</string>
     <string name="votes_and_reviews">Votes and Reviews</string>
     <string name="type_review">Type ..</string>
+    <string name="connecting">Connecting....</string>
+    <string name="connected">Connected</string>
+    <string name="failed_to_subscribe">Failed to subscribe</string>
     <!--motions-->
 
 </resources>

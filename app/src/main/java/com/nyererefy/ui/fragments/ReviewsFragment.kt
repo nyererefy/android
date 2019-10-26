@@ -41,6 +41,8 @@ class ReviewsFragment : BaseFragment() {
 
         adapter = ReviewsAdapter { viewModel.retry() }
 
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.recyclerView.adapter = adapter
         subscribeUI()
 

@@ -49,6 +49,7 @@ class CountsFragment : BaseFragment() {
         adapter = CountsAdapter { viewModel.retry() }
         binding.recyclerView.adapter = adapter
         binding.recyclerView.addItemDecoration(SpacesItemDecoration(8))
+        binding.viewModel = viewModel
         binding.lifecycleOwner = this
         subscribeUI()
 
@@ -71,7 +72,7 @@ class CountsFragment : BaseFragment() {
             adapter.setNetworkState(it)
         })
 
-        viewModel.subscriptionData.observe(viewLifecycleOwner, Observer {
+        viewModel.subData.observe(viewLifecycleOwner, Observer {
             val c = it.candidateAndVotesCount()
 
             val count = CandidateAndVotesCount(

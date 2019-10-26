@@ -5,11 +5,17 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.nyererefy.viewmodels.CountsViewModel" />
     </data>
 
     <LinearLayout
+        handleSubscription="@{viewModel.subState}"
+        retry="@{viewModel.reconnect}"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".ui.fragments.CountsFragment">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -21,6 +27,12 @@
             app:spanCount="2"
             tools:context=".ui.MainActivity"
             tools:listitem="@layout/list_item_count" />
+
+        <View
+            showSubscriptionStateSign="@{viewModel.subState}"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_xsmall"
+            android:background="@color/grey_5" />
 
     </LinearLayout>
 </layout>

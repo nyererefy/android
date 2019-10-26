@@ -5,9 +5,14 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.nyererefy.viewmodels.ReviewsViewModel" />
     </data>
 
     <LinearLayout
+        handleSubscription="@{viewModel.subState}"
+        retry="@{viewModel.reconnect}"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -23,6 +28,7 @@
             tools:listitem="@layout/list_item_review" />
 
         <View
+            showSubscriptionStateSign="@{viewModel.subState}"
             android:layout_width="match_parent"
             android:layout_height="@dimen/spacing_xsmall"
             android:background="@color/grey_5" />

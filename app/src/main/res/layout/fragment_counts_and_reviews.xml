@@ -19,11 +19,6 @@
             android:layout_height="0dp"
             android:layout_weight="3" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/spacing_xsmall"
-            android:background="@color/grey_5" />
-
         <fragment
             android:id="@+id/reviews"
             android:name="com.nyererefy.ui.fragments.ReviewsFragment"

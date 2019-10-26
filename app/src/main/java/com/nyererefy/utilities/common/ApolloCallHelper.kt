@@ -7,7 +7,6 @@ import com.apollographql.apollo.ApolloQueryCall
 import com.apollographql.apollo.ApolloSubscriptionCall
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
-import com.nyererefy.graphql.CandidateSubscription
 import com.nyererefy.utilities.Resource
 import timber.log.Timber
 
@@ -74,44 +73,49 @@ fun <T : Any> invokeMutation(apolloMutationCall: ApolloMutationCall<T>): Resourc
 
 fun <T : Any> invokeSubscription(apolloSubscriptionCall: ApolloSubscriptionCall<T>): Resource<T> {
     val networkState = MutableLiveData<NetworkState>()
+    val subState = MutableLiveData<SubscriptionState>()
+
     val data = MutableLiveData<T>()
 
-    networkState.value = NetworkState.LOADING
+    subState.postValue(SubscriptionState.CONNECTING)
 
     apolloSubscriptionCall.execute(
             object : ApolloSubscriptionCall.Callback<T> {
                 override fun onResponse(response: Response<T>) {
+                    subState.postValue(SubscriptionState.RESPONDED)
                     Timber.d("onResponse")
 
                     when {
                         response.hasErrors() -> {
                             networkState.postValue(NetworkState.error(response.errors()[0].message()))
                         }
-                        else -> {
-                            networkState.postValue(NetworkState.LOADED)
-                            data.postValue(response.data())
-                        }
+                        else -> data.postValue(response.data())
                     }
                 }
 
                 override fun onFailure(e: ApolloException) {
+                    apolloSubscriptionCall.cancel()
                     Timber.e(e.message)
+                    subState.postValue(SubscriptionState.FAILED)
                     networkState.postValue(NetworkState.error(e.localizedMessage))
                 }
 
                 override fun onConnected() {
+                    subState.postValue(SubscriptionState.CONNECTED)
                     Timber.d("Connected")
                 }
 
                 override fun onTerminated() {
+                    subState.postValue(SubscriptionState.TERMINATED)
                     Timber.d("Terminated")
                 }
 
                 override fun onCompleted() {
+                    subState.postValue(SubscriptionState.COMPLETED)
                     Timber.d("Completed")
                 }
             })
 
-    return Resource(data, networkState)
+    return Resource(data, networkState, subState)
 }
 

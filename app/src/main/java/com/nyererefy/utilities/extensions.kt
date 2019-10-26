@@ -4,11 +4,14 @@ import android.os.Build
 import android.text.Editable
 import android.text.Html
 import android.text.TextWatcher
+import android.view.View
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import com.nyererefy.App
 
 @Suppress("DEPRECATION")
-fun TextView.htmlText(text: String){
+fun TextView.htmlText(text: String) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         setText(Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY))
     } else {
@@ -29,4 +32,9 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
 
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
     })
+}
+
+
+fun View.setViewColor(color: Int) {
+    this.setBackgroundColor(ContextCompat.getColor(App.appContext, color))
 }
