@@ -1111,7 +1111,7 @@
           },
           {
             "name": "votesCount",
-            "description": "Not in every query",
+            "description": "Not to be used in every query",
             "args": [],
             "type": {
               "kind": "NON_NULL",
@@ -4107,7 +4107,7 @@
             "deprecationReason": null
           },
           {
-            "name": "candidatesAndVotesCount",
+            "name": "candidateAndVotesCount",
             "description": null,
             "args": [
               {
@@ -4129,17 +4129,9 @@
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "Candidate",
-                    "ofType": null
-                  }
-                }
+                "kind": "OBJECT",
+                "name": "Candidate",
+                "ofType": null
               }
             },
             "isDeprecated": false,

@@ -1,5 +1,5 @@
 subscription countsSubscription($subcategoryId: Int!) {
-    candidatesAndVotesCount(subcategoryId: $subcategoryId) {
+    candidateAndVotesCount(subcategoryId: $subcategoryId) {
         id
         votesCount
         avatar

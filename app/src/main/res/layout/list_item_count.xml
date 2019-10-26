@@ -7,7 +7,7 @@
 
         <variable
             name="candidate"
-            type="com.nyererefy.graphql.CountsQuery.CandidatesAndVotesCount" />
+            type="com.nyererefy.utilities.model.CandidateAndVotesCount" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -38,7 +38,7 @@
                 android:layout_marginTop="8dp"
                 android:gravity="center"
                 android:singleLine="true"
-                android:text="@{candidate.user().name()}"
+                android:text="@{candidate.user.name}"
                 android:textColor="@color/grey_90"
                 android:textSize="20sp"
                 android:textStyle="bold"
@@ -50,7 +50,7 @@
             <TextView
                 android:id="@+id/count"
                 style="@style/TextAppearance.AppCompat.Title"
-                setTextFromInt="@{candidate.votesCount()}"
+                setTextFromInt="@{candidate.votesCount}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
