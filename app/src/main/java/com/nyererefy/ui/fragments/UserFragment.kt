@@ -3,6 +3,8 @@ package com.nyererefy.ui.fragments
 import android.os.Bundle
 import android.view.*
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.nyererefy.R
 import com.nyererefy.databinding.FragmentProfileBinding
 import com.nyererefy.ui.LoginActivity
@@ -113,6 +115,10 @@ class UserFragment : BaseFragment() {
         //todo call server too.
         pref.clear()
         cookieJar.clear()
+
+        //clear google login
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
+        GoogleSignIn.getClient(requireActivity(), gso).signOut()
 
         startActivity(intentFor<LoginActivity>().clearTop())
     }
