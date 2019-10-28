@@ -1,6 +1,7 @@
 package com.nyererefy.ui
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
@@ -14,9 +15,12 @@ import com.nyererefy.R
 import com.nyererefy.databinding.ActivityMainBinding
 import com.nyererefy.utilities.Pref
 import com.nyererefy.utilities.common.Constants.IS_ACCOUNT_SET
+import com.nyererefy.utilities.common.Constants.NAME
+import com.nyererefy.utilities.common.Constants.USERNAME
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.nav_header.view.*
 import org.jetbrains.anko.startActivity
 import javax.inject.Inject
 
@@ -43,13 +47,19 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         bind.navView.setupWithNavController(navController)
 
         pref = Pref(this)
+        val header = bind.navView.getHeaderView(0)
 
         if (pref.isLoggedIn) {
+            header.name.text = pref.get(NAME)
+            header.username.text = pref.get(USERNAME)
+
             val isAccountSet = pref.sharedPref.getBoolean(IS_ACCOUNT_SET, false)
 
             if (!isAccountSet) {
                 startActivity<SetupActivity>()
             }
+        } else {
+            header.visibility = View.GONE
         }
     }
 
