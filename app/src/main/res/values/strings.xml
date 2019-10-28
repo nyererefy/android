@@ -194,6 +194,10 @@
     <string name="share">Share</string>
     <string name="cancel">Cancel</string>
     <string name="error_empty_bio">Bio must not be empty</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="developers">Developers</string>
     <!--motions-->
 
 </resources>

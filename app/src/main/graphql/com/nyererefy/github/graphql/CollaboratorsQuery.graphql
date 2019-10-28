@@ -1,0 +1,17 @@
+query collaborators($name: String!) {
+    repository(owner: "nyererefy", name: $name) {
+        collaborators {
+            #Todo we need to parse URI type (used fo url of avatarUrl and websiteUrl)
+            nodes {
+                id
+                #avatarUrl
+                bio
+                location
+                email
+                login
+                name
+                #websiteUrl
+            }
+        }
+    }
+}

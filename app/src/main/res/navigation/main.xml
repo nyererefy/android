@@ -65,4 +65,8 @@
             app:uri="https://nyererefy.com/candidate/{candidateId}"
             tools:targetApi="m" />
     </fragment>
+    <fragment
+        android:id="@+id/developers"
+        android:name="com.nyererefy.ui.fragments.ContributorsFragment"
+        android:label="Developers" />
 </navigation>

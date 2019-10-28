@@ -20,13 +20,15 @@ android {
     buildTypes {
         debug {
             buildConfigField "String", "BASE_URL", DEV_BASE_URL
-            //buildConfigField "String", "API_KEY", DEV_API_KEY
             buildConfigField "String", "WS_URL", DEV_WS_URL
+            buildConfigField "String", "GITHUB_GRAPHQL_URL", GITHUB_GRAPHQL_URL
+            buildConfigField "String", "GITHUB_TOKEN", GITHUB_TOKEN
         }
         release {
             buildConfigField "String", "BASE_URL", LIVE_BASE_URL
-            //buildConfigField "String", "API_KEY", LIVE_API_KEY
             buildConfigField "String", "WS_URL", LIVE_WS_URL
+            buildConfigField "String", "GITHUB_GRAPHQL_URL", GITHUB_GRAPHQL_URL
+            buildConfigField "String", "GITHUB_TOKEN", GITHUB_TOKEN
 
             minifyEnabled true
             shrinkResources true
@@ -127,7 +129,8 @@ dependencies {
 
 apollo {
     customTypeMapping = [
-            "Upload": "com.apollographql.apollo.api.FileUpload"
+            "Upload": "com.apollographql.apollo.api.FileUpload",
+            "URI": "java.net.URI",
     ]
 }
 
