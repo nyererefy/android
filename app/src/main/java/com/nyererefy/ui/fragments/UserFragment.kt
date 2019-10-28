@@ -2,23 +2,14 @@ package com.nyererefy.ui.fragments
 
 import android.os.Bundle
 import android.view.*
-import com.franmontiel.persistentcookiejar.PersistentCookieJar
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.nyererefy.R
 import com.nyererefy.databinding.FragmentProfileBinding
-import com.nyererefy.ui.LoginActivity
 import com.nyererefy.utilities.common.BaseFragment
 import com.nyererefy.utilities.common.Constants.NAME
 import com.nyererefy.utilities.common.Constants.USERNAME
-import org.jetbrains.anko.clearTop
-import org.jetbrains.anko.support.v4.intentFor
-import javax.inject.Inject
 
 
 class UserFragment : BaseFragment() {
-    @Inject
-    lateinit var cookieJar: PersistentCookieJar
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -33,18 +24,6 @@ class UserFragment : BaseFragment() {
         setHasOptionsMenu(true)
 
         return bind.root
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.user_profile, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.logout -> logout()
-        }
-        return super.onOptionsItemSelected(item)
     }
 
 
@@ -110,17 +89,4 @@ class UserFragment : BaseFragment() {
 //        val dialog = builder.create()
 //        dialog.show()
 //    }
-
-    private fun logout() {
-        //todo call server too.
-        pref.clear()
-        cookieJar.clear()
-
-        //clear google login
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build()
-        GoogleSignIn.getClient(requireActivity(), gso).signOut()
-
-        startActivity(intentFor<LoginActivity>().clearTop())
-    }
-
 }
