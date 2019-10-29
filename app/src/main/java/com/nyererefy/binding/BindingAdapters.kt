@@ -149,7 +149,7 @@ fun showSubscriptionStateSign(view: View, subState: SubscriptionState?) {
             view.setViewColor(R.color.grey_5)
         }
         SubscriptionState.CONNECTING -> {
-            view.setViewColor(R.color.grey_40)
+            view.setViewColor(R.color.white)
         }
         SubscriptionState.RESPONDED -> {
             view.setViewColor(R.color.green)

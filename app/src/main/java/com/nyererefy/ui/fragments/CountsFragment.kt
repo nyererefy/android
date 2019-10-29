@@ -75,7 +75,7 @@ class CountsFragment : BaseFragment() {
         viewModel.subData.observe(viewLifecycleOwner, Observer {
             val c = it.candidateAndVotesCount()
 
-            val count = CandidateAndVotesCount(
+            val newCount = CandidateAndVotesCount(
                     id = c.id(),
                     votesCount = c.votesCount(),
                     avatar = c.avatar(),
@@ -83,8 +83,12 @@ class CountsFragment : BaseFragment() {
             )
 
             val currentList = adapter.currentList.toMutableList()
-            currentList.add(count)
+            val currentCount = currentList.find { i -> i.id == c.id() }
 
+            //Previous count need to be replaced here since DiffUtil seems like useless to me for this.
+            currentList[currentList.indexOf(currentCount)] = newCount
+
+            //Submitting new list.
             adapter.submitList(currentList)
         })
     }
