@@ -12,7 +12,6 @@ import com.nyererefy.utilities.common.SubscriptionState
 import com.nyererefy.utilities.setViewColor
 import org.jetbrains.anko.design.indefiniteSnackbar
 import org.jetbrains.anko.design.longSnackbar
-import org.jetbrains.anko.design.snackbar
 
 @BindingAdapter("isGone")
 fun bindIsGone(view: View, isGone: Boolean) {
@@ -138,38 +137,25 @@ fun clearAfterSuccess(editText: EditText, networkState: NetworkState?) {
 
 @BindingAdapter("handleSubscription", "retry")
 fun handleSubscription(view: View, subState: SubscriptionState?, retry: () -> Unit) {
-    when (subState) {
-        SubscriptionState.CONNECTING -> {
-            view.snackbar(appContext.getString(R.string.connecting))
-        }
-        SubscriptionState.CONNECTED -> {
-            view.snackbar(appContext.getString(R.string.connected))
-        }
-        SubscriptionState.FAILED -> {
-            view.indefiniteSnackbar(
-                    appContext.getString(R.string.failed_to_subscribe),
-                    appContext.getString(R.string.retry))
-            { retry() }
-        }
-        else -> {
-        }
+    if (subState == SubscriptionState.FAILED) {
+        retry()
     }
 }
 
 @BindingAdapter("showSubscriptionStateSign")
 fun showSubscriptionStateSign(view: View, subState: SubscriptionState?) {
     when (subState) {
-        SubscriptionState.CONNECTING -> {
-            view.setViewColor(R.color.grey_20)
-        }
         SubscriptionState.CONNECTED -> {
-            view.setViewColor(R.color.blue)
+            view.setViewColor(R.color.grey_5)
+        }
+        SubscriptionState.CONNECTING -> {
+            view.setViewColor(R.color.grey_40)
         }
         SubscriptionState.RESPONDED -> {
             view.setViewColor(R.color.green)
         }
         SubscriptionState.TERMINATED -> {
-            view.setViewColor(R.color.brown)
+            view.setViewColor(R.color.blue)
         }
         SubscriptionState.COMPLETED -> {
             view.setViewColor(R.color.lime)
