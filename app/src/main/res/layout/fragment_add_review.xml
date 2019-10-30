@@ -20,6 +20,8 @@
         tools:context=".ui.fragments.AddReviewFragment">
 
         <LinearLayout
+            android:id="@+id/linearLayout"
+            isVisibleWhenLoggedIn="@{true}"
             android:layout_width="match_parent"
             android:layout_height="@dimen/spacing_xxlarge"
             android:layout_marginStart="8dp"
@@ -39,7 +41,10 @@
                 android:layout_weight="1"
                 android:background="@android:color/transparent"
                 android:hint="@string/type_review"
-                android:imeOptions="actionSearch" />
+                android:imeOptions="actionDone"
+                android:inputType="textMultiLine"
+                android:maxLength="200"
+                android:maxLines="6" />
 
 
             <ImageView
@@ -65,5 +70,15 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/button"
+            isVisibleWhenLoggedIn="@{false}"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_to_post_review"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

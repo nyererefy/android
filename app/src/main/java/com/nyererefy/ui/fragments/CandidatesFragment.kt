@@ -91,7 +91,7 @@ class CandidatesFragment : BaseFragment(), CandidateCheckListener {
             when (it) {
                 NetworkState.LOADING -> bottomSheetFragment.showProgressBar()
                 NetworkState.LOADED -> {
-                    viewModel.isVoteBtnGone.value = true
+                    viewModel.isVoteBtnEnabled.value = false
                     bottomSheetFragment.dismiss()
                     binding.swipeRefreshLayout.indefiniteSnackbar(
                             getString(R.string.on_success_vote),

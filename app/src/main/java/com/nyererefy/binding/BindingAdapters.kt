@@ -7,6 +7,7 @@ import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.nyererefy.App.Companion.appContext
 import com.nyererefy.R
+import com.nyererefy.utilities.Pref
 import com.nyererefy.utilities.common.NetworkState
 import com.nyererefy.utilities.common.SubscriptionState
 import com.nyererefy.utilities.setViewColor
@@ -162,6 +163,27 @@ fun showSubscriptionStateSign(view: View, subState: SubscriptionState?) {
         }
         SubscriptionState.FAILED -> {
             view.setViewColor(R.color.red)
+        }
+    }
+}
+
+
+/**
+ * For showing and hiding view depending of login state.
+ */
+@BindingAdapter("isVisibleWhenLoggedIn")
+fun isVisibleWhenLoggedIn(view: View, show: Boolean) {
+    val isLoggedIn = Pref(appContext).isLoggedIn
+
+    if (isLoggedIn) {
+        view.visibility = when {
+            show -> View.VISIBLE
+            else -> View.GONE
+        }
+    } else {
+        view.visibility = when {
+            show -> View.GONE
+            else -> View.VISIBLE
         }
     }
 }

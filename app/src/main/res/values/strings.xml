@@ -201,6 +201,8 @@
     <string name="connecting">Connecting....</string>
     <string name="connected">Connected</string>
     <string name="failed_to_subscribe">Failed to subscribe</string>
+    <string name="login_to_post_review">Sign in to post</string>
+    <string name="login_to_vote">Sign in to vote</string>
     <!--motions-->
 
 </resources>

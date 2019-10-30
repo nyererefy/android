@@ -12,7 +12,6 @@ class CandidatesViewModel
     private val _subcategoryId = MutableLiveData<String>()
     private val _voteInput = MutableLiveData<VoteInput>()
     val isVoteBtnEnabled = MutableLiveData(false)
-    val isVoteBtnGone = MutableLiveData(false)
 
     private val _candidatesResource = Transformations.map(_subcategoryId) {
         repository.fetchCandidates(it)
