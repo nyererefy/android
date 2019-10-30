@@ -45,11 +45,6 @@
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
-
-        <activity
-            android:name=".ui.fragments.SupportActivityMain"
-            android:label="@string/title_activity_support"
-            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

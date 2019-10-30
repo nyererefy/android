@@ -78,7 +78,7 @@ class UserFragment : BaseFragment() {
 ////        }
 //        support.setOnClickListener {
 //            clearPreferences(activity!!)
-//            startActivity<SupportActivityMain>()
+//            startActivity<SupportFragment>()
 //        }
 //
 //    }
