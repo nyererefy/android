@@ -39,11 +39,13 @@
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/nav_view"
-            android:layout_width="220dp"
+            android:layout_width="match_parent"
+            app:headerLayout="@layout/nav_header"
             android:layout_height="match_parent"
             android:layout_gravity="start"
             android:fitsSystemWindows="false"
-            app:menu="@menu/main" />
+            app:menu="@menu/main"
+            android:background="@android:color/white" />
 
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>

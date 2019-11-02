@@ -1,0 +1,5 @@
+mutation updateUserAvatar($input: UserAvatarInput!) {
+    updateUserAvatar(input: $input) {
+        id
+    }
+}

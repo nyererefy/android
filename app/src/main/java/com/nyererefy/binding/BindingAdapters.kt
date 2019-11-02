@@ -2,9 +2,12 @@ package com.nyererefy.binding
 
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.nyererefy.App.Companion.appContext
 import com.nyererefy.R
 import com.nyererefy.utilities.Pref
@@ -185,5 +188,20 @@ fun isVisibleWhenLoggedIn(view: View, show: Boolean) {
             show -> View.GONE
             else -> View.VISIBLE
         }
+    }
+}
+
+/**
+ * For showing image using Glide.
+ */
+@BindingAdapter("imageFromUrl")
+fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
+    if (!imageUrl.isNullOrEmpty()) {
+        Glide.with(view.context)
+                .load(imageUrl)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .placeholder(R.drawable.holder)
+                .error(R.drawable.holder)
+                .into(view)
     }
 }

@@ -65,4 +65,8 @@
             android:id="@+id/action_subcategoryView_to_candidateProfile"
             app:destination="@id/candidateProfile" />
     </fragment>
+    <fragment
+        android:id="@+id/developers"
+        android:name="com.nyererefy.ui.fragments.ContributorsFragment"
+        android:label="Developers" />
 </navigation>
