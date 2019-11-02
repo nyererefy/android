@@ -11,12 +11,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.nyererefy.adapters.SexSpinnerAdapter
 import com.nyererefy.adapters.sexList
 import com.nyererefy.databinding.FragmentSetInfoBinding
-import com.nyererefy.di.Injectable
 import com.nyererefy.graphql.type.Sex
 import com.nyererefy.graphql.type.UserSetupInput
 import com.nyererefy.ui.MainActivity
 import com.nyererefy.utilities.afterTextChanged
 import com.nyererefy.utilities.common.BaseFragment
+import com.nyererefy.utilities.common.Constants.IS_ACCOUNT_SET
 import com.nyererefy.utilities.common.Constants.NAME
 import com.nyererefy.utilities.common.Constants.USERNAME
 import com.nyererefy.viewmodels.SetInfoViewModel
@@ -104,6 +104,15 @@ class SetInfoFragment : BaseFragment() {
 
         viewModel.data.observe(viewLifecycleOwner, Observer {
             if (it.setupAccount().isAccountSet) {
+
+                val editor = pref.sharedPref.edit()
+
+                editor.putBoolean(IS_ACCOUNT_SET, it.setupAccount().isAccountSet)
+                editor.putString(NAME, it.setupAccount().name())
+                editor.putString(USERNAME, it.setupAccount().username())
+
+                editor.apply()
+
                 startActivity(intentFor<MainActivity>().clearTop())
             }
         })

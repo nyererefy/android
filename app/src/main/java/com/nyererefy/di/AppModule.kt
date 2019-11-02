@@ -9,6 +9,7 @@ import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersisto
 import com.nyererefy.App.Companion.appContext
 import com.nyererefy.BuildConfig.BASE_URL
 import com.nyererefy.BuildConfig.WS_URL
+import com.nyererefy.data.repositories.GithubRepository
 import com.nyererefy.ui.LoginActivity
 import com.nyererefy.utilities.Pref
 import dagger.Module
@@ -82,5 +83,14 @@ class AppModule {
     @Provides
     @Singleton
     fun provideRetryExecutor(): Executor = Executors.newFixedThreadPool(5)
+
+    /**
+     * Since this repository doesn't use the same instance of ApolloClient.
+     */
+    @Singleton
+    @Provides
+    fun provideGithubClient(): GithubRepository {
+        return GithubRepository()
+    }
 
 }

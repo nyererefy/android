@@ -2,6 +2,7 @@ package com.nyererefy.data.repositories
 
 import com.apollographql.apollo.ApolloClient
 import com.nyererefy.graphql.*
+import com.nyererefy.graphql.type.CandidateAvatarInput
 import com.nyererefy.graphql.type.CandidateEditInput
 import com.nyererefy.graphql.type.VoteInput
 import com.nyererefy.utilities.Resource
@@ -55,5 +56,11 @@ class CandidatesRepository
         val mutation = UpdateCandidateMutation.builder().input(input).build()
 
         return invokeMutation<UpdateCandidateMutation.Data>(client.mutate(mutation))
+    }
+
+    fun updateAvatar(input: CandidateAvatarInput): Resource<UpdateCandidateAvatarMutation.Data> {
+        val mutation = UpdateCandidateAvatarMutation.builder().input(input).build()
+
+        return invokeMutation<UpdateCandidateAvatarMutation.Data>(client.mutate(mutation))
     }
 }

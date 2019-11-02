@@ -1,5 +1,7 @@
 mutation setupAccount($input: UserSetupInput!) {
     setupAccount(input: $input) {
+        name
+        username
         isAccountSet
     }
 }

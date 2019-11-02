@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/profile"
-        android:icon="@drawable/ic_profile"
-        android:title="@string/title_profile" />
-
+        android:id="@+id/login"
+        android:icon="@drawable/ic_logout"
+        android:title="@string/login" />
     <item
         android:id="@+id/settings"
         android:icon="@drawable/ic_profile"
         android:title="@string/settings" />
-
     <item
         android:id="@+id/support"
         android:icon="@drawable/ic_support"
         android:title="@string/support" />
 
     <item
-        android:id="@+id/login"
-        android:icon="@drawable/ic_logout"
-        android:title="@string/login" />
+        android:id="@+id/developers"
+        android:icon="@drawable/ic_support"
+        android:title="@string/developers" />
 
 </menu>
