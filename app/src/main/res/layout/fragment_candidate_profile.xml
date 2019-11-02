@@ -92,6 +92,32 @@
                 app:rippleColor="@android:color/white"
                 app:srcCompat="@drawable/ic_edit" />
 
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_img"
+                hideWhenLoading="@{viewModel.avatarState}"
+                studentId="@{viewModel.data.candidate().user().id()}"
+                userId="@{fragment.getUserId()}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|start"
+                android:layout_margin="@dimen/spacing_smlarge"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{()->fragment.openCropper()}"
+                android:tint="@android:color/white"
+                app:backgroundTint="@color/colorPrimary"
+                app:fabSize="normal"
+                app:rippleColor="@android:color/white"
+                app:srcCompat="@drawable/ic_add_photo" />
+
+            <ProgressBar
+                style="?android:attr/progressBarStyle"
+                showLoading="@{viewModel.avatarState}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|start"
+                android:layout_margin="@dimen/spacing_smlarge" />
+
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
