@@ -1,14 +1,23 @@
 package com.nyererefy.utilities
 
+import android.content.ContentResolver
+import android.content.Context
+import android.net.Uri
 import android.os.Build
 import android.text.Editable
 import android.text.Html
 import android.text.TextWatcher
+import android.webkit.MimeTypeMap
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.nyererefy.R
+import java.util.*
 
 @Suppress("DEPRECATION")
-fun TextView.htmlText(text: String){
+fun TextView.htmlText(text: String) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         setText(Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY))
     } else {
@@ -29,4 +38,26 @@ fun EditText.afterTextChanged(afterTextChanged: (String) -> Unit) {
 
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
     })
+}
+
+fun Uri.getMimeType(context: Context): String? {
+    return if (this.scheme == ContentResolver.SCHEME_CONTENT) {
+        val cr = context.contentResolver
+        cr.getType(this)
+    } else {
+        val fileExtension = MimeTypeMap.getFileExtensionFromUrl(this.toString())
+        MimeTypeMap.getSingleton().getMimeTypeFromExtension(
+                fileExtension.toLowerCase(Locale.ENGLISH))
+    }
+}
+
+fun ImageView.setImageFromUrl(imageUrl: String?) {
+    if (!imageUrl.isNullOrEmpty()) {
+        Glide.with(this.context)
+                .load(imageUrl)
+                .placeholder(R.drawable.holder)
+                .error(R.drawable.holder)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(this)
+    }
 }

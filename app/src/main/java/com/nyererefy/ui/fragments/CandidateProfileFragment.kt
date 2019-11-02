@@ -6,21 +6,23 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import com.apollographql.apollo.api.FileUpload
 import com.nyererefy.R
 import com.nyererefy.databinding.FragmentCandidateProfileBinding
+import com.nyererefy.graphql.type.CandidateAvatarInput
 import com.nyererefy.graphql.type.CandidateEditInput
 import com.nyererefy.ui.sheets.EditBioBottomSheetFragment
 import com.nyererefy.utilities.BioListener
-import com.nyererefy.utilities.common.BaseFragment
 import com.nyererefy.utilities.common.Constants.NYEREREFY_URL
 import com.nyererefy.utilities.common.NetworkState
+import com.nyererefy.utilities.common.PhotoFragment
+import com.nyererefy.utilities.setImageFromUrl
 import com.nyererefy.viewmodels.CandidateProfileViewModel
 import org.jetbrains.anko.design.indefiniteSnackbar
-import org.jetbrains.anko.support.v4.longToast
 import org.jetbrains.anko.support.v4.share
 import javax.inject.Inject
 
-class CandidateProfileFragment : BaseFragment(), BioListener {
+class CandidateProfileFragment : PhotoFragment(), BioListener {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel: CandidateProfileViewModel by viewModels { viewModelFactory }
@@ -44,7 +46,7 @@ class CandidateProfileFragment : BaseFragment(), BioListener {
 
         viewModel.subscriptionData.observe(viewLifecycleOwner, Observer {
             binding.bio.text = it.candidate().bio()
-            longToast(getString(R.string.bio_updated))
+            binding.avatar.setImageFromUrl(it.candidate().avatar())
         })
 
         setHasOptionsMenu(true)
@@ -94,6 +96,15 @@ class CandidateProfileFragment : BaseFragment(), BioListener {
             R.id.share -> share("$NYEREREFY_URL/candidate/${args.candidateId}")
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onImageReady(fileUpload: FileUpload) {
+        val input = CandidateAvatarInput.builder()
+                .avatar(fileUpload)
+                .id(args.candidateId.toInt())
+                .build()
+
+        viewModel.setCandidateAvatarInput(input)
     }
 
 }

@@ -82,10 +82,7 @@ dependencies {
 
 
     //Cropping Image
-    implementation('com.theartofdev.edmodo:android-image-cropper:2.4.+') {
-        exclude group: 'com.android.support'
-    }
-    implementation 'androidx.exifinterface:exifinterface:1.0.0'
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.0'
     implementation 'androidx.multidex:multidex:2.0.1'
 
     //--------------------------------------------------------------

@@ -2,8 +2,11 @@ package com.nyererefy.binding
 
 import android.view.View
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.nyererefy.App.Companion.appContext
 import com.nyererefy.R
 import com.nyererefy.utilities.common.NetworkState
@@ -106,5 +109,20 @@ fun handleErrorAndRetry(view: View, networkState: NetworkState?, retry: () -> Un
 fun showError(editText: EditText, error: Int?) {
     error?.run {
         editText.error = appContext.getString(error)
+    }
+}
+
+/**
+ * For showing image using Glide.
+ */
+@BindingAdapter("imageFromUrl")
+fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
+    if (!imageUrl.isNullOrEmpty()) {
+        Glide.with(view.context)
+                .load(imageUrl)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
+                .placeholder(R.drawable.holder)
+                .error(R.drawable.holder)
+                .into(view)
     }
 }
