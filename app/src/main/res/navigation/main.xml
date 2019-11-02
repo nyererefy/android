@@ -36,11 +36,6 @@
         android:id="@+id/login"
         android:name="com.nyererefy.ui.LoginActivity"
         android:label="Login" />
-    <activity
-        android:id="@+id/support"
-        android:name="com.nyererefy.ui.fragments.SupportActivityMain"
-        android:label="Support"
-        tools:layout="@layout/activity_support" />
     <fragment
         android:id="@+id/candidateProfile"
         android:name="com.nyererefy.ui.fragments.CandidateProfileFragment"
@@ -54,6 +49,10 @@
             app:uri="https://nyererefy.com/candidate/{candidateId}"
             tools:targetApi="m" />
     </fragment>
+    <fragment
+        android:id="@+id/support"
+        android:name="com.nyererefy.ui.fragments.SupportFragment"
+        android:label="Support" />
     <fragment
         android:id="@+id/subcategoryView"
         android:name="com.nyererefy.ui.fragments.SubcategoryViewFragment"
