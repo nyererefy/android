@@ -9,7 +9,11 @@ import android.text.Html
 import android.text.TextWatcher
 import android.webkit.MimeTypeMap
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.nyererefy.R
 import java.util.*
 
 @Suppress("DEPRECATION")
@@ -44,5 +48,16 @@ fun Uri.getMimeType(context: Context): String? {
         val fileExtension = MimeTypeMap.getFileExtensionFromUrl(this.toString())
         MimeTypeMap.getSingleton().getMimeTypeFromExtension(
                 fileExtension.toLowerCase(Locale.ENGLISH))
+    }
+}
+
+fun ImageView.setImageFromUrl(imageUrl: String?) {
+    if (!imageUrl.isNullOrEmpty()) {
+        Glide.with(this.context)
+                .load(imageUrl)
+                .placeholder(R.drawable.holder)
+                .error(R.drawable.holder)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(this)
     }
 }

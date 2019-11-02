@@ -42,12 +42,14 @@
                     android:orientation="vertical">
 
                     <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/avatar"
+                        imageFromUrl="@{viewModel.data.candidate().avatar()}"
                         android:layout_width="160dp"
                         android:layout_height="160dp"
                         android:layout_marginTop="@dimen/spacing_mlarge"
-                        android:src="@drawable/holder"
                         app:civ_border_color="@color/textColor"
-                        app:civ_border_width="2dp" />
+                        app:civ_border_width="2dp"
+                        tools:src="@drawable/holder" />
 
                     <TextView
                         android:layout_width="wrap_content"

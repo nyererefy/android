@@ -16,11 +16,10 @@ import com.nyererefy.utilities.BioListener
 import com.nyererefy.utilities.common.Constants.NYEREREFY_URL
 import com.nyererefy.utilities.common.NetworkState
 import com.nyererefy.utilities.common.PhotoFragment
+import com.nyererefy.utilities.setImageFromUrl
 import com.nyererefy.viewmodels.CandidateProfileViewModel
 import org.jetbrains.anko.design.indefiniteSnackbar
-import org.jetbrains.anko.support.v4.longToast
 import org.jetbrains.anko.support.v4.share
-import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 class CandidateProfileFragment : PhotoFragment(), BioListener {
@@ -47,7 +46,7 @@ class CandidateProfileFragment : PhotoFragment(), BioListener {
 
         viewModel.subscriptionData.observe(viewLifecycleOwner, Observer {
             binding.bio.text = it.candidate().bio()
-            longToast(getString(R.string.bio_updated))
+            binding.avatar.setImageFromUrl(it.candidate().avatar())
         })
 
         setHasOptionsMenu(true)
