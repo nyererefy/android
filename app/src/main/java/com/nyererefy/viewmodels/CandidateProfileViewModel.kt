@@ -11,6 +11,7 @@ import javax.inject.Inject
 class CandidateProfileViewModel
 @Inject constructor(private val repository: CandidatesRepository) : ViewModel() {
     private val _candidateId = MutableLiveData<String>()
+    private val _subCandidateId = MutableLiveData<String>()
     private val _candidateEditInput = MutableLiveData<CandidateEditInput>()
     private val _candidateAvatarInput = MutableLiveData<CandidateAvatarInput>()
 
@@ -18,7 +19,7 @@ class CandidateProfileViewModel
         repository.fetchCandidate(it)
     }
 
-    private val _subscriptionResource = Transformations.map(_candidateId) {
+    private val _subscriptionResource = Transformations.map(_subCandidateId) {
         repository.subscribeCandidate(it)
     }
 
@@ -34,11 +35,16 @@ class CandidateProfileViewModel
     val networkState = Transformations.switchMap(_queryResource) { it.networkState }
     val candidateEditState = Transformations.switchMap(_inputResource) { it.networkState }
     val subscriptionData = Transformations.switchMap(_subscriptionResource) { it.data }
+    val subState = Transformations.switchMap(_subscriptionResource) { it.subscriptionState }
     val avatarState = Transformations.switchMap(_avatarResource) { it.networkState }
 
     fun setCandidateId(candidateId: String) {
         if (_candidateId.value != candidateId) {
             _candidateId.value = candidateId
+        }
+
+        if (_subCandidateId.value != candidateId) {
+            _subCandidateId.value = candidateId
         }
     }
 
@@ -54,5 +60,14 @@ class CandidateProfileViewModel
 
     fun setCandidateAvatarInput(input: CandidateAvatarInput) {
         _candidateAvatarInput.value = input
+    }
+
+    /**
+     * Sometimes subscription is kinda disconnected so this method helps to reconnect.
+     */
+    fun reconnect() {
+        _subCandidateId.value?.let {
+            _subCandidateId.value = it
+        }
     }
 }
