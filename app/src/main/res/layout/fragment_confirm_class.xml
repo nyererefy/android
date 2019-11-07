@@ -120,7 +120,7 @@
                 showAfterSuccess="@{viewModel.confirmState}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:onClick="@{()->fragment.navigate()}"
+                android:onClick="@{() -> fragment.navigate()}"
                 android:text="@string/continue_" />
 
         </LinearLayout>

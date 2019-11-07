@@ -68,4 +68,12 @@
         android:id="@+id/developers"
         android:name="com.nyererefy.ui.fragments.ContributorsFragment"
         android:label="Developers" />
+    <fragment
+        android:id="@+id/about"
+        android:name="com.nyererefy.ui.fragments.AboutFragment"
+        android:label="About" >
+        <action
+            android:id="@+id/action_about_to_developers"
+            app:destination="@id/developers" />
+    </fragment>
 </navigation>

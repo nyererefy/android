@@ -127,7 +127,7 @@ dependencies {
 apollo {
     customTypeMapping = [
             "Upload": "com.apollographql.apollo.api.FileUpload",
-            "URI": "java.net.URI",
+            "URI"   : "java.net.URI",
     ]
 }
 

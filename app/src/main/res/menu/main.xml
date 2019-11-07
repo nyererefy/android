@@ -12,10 +12,8 @@
         android:id="@+id/support"
         android:icon="@drawable/ic_support"
         android:title="@string/support" />
-
     <item
-        android:id="@+id/developers"
-        android:icon="@drawable/ic_support"
-        android:title="@string/developers" />
-
+        android:id="@+id/about"
+        android:icon="@drawable/ic_info"
+        android:title="@string/about" />
 </menu>

@@ -168,6 +168,7 @@
     <string name="settings">Settings</string>
     <string name="search">Search</string>
     <string name="support">Support</string>
+    <string name="about">About</string>
     <string name="login">Login</string>
     <string name="confirm">Confirm</string>
     <string name="close">Close</string>
@@ -205,5 +206,9 @@
     <string name="login_to_vote">Sign in to vote</string>
 
     <string name="developers">Developers</string>
+
+    <string name="source_code">Source code</string>
+    <string name="version">Version</string>
+    <string name="privacy_policy">Privacy Policy</string>
 
 </resources>

@@ -14,8 +14,10 @@ import com.nyererefy.utilities.Pref
 import com.nyererefy.utilities.common.NetworkState
 import com.nyererefy.utilities.common.SubscriptionState
 import com.nyererefy.utilities.setViewColor
+import org.jetbrains.anko.browse
 import org.jetbrains.anko.design.indefiniteSnackbar
 import org.jetbrains.anko.design.longSnackbar
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 @BindingAdapter("isGone")
 fun bindIsGone(view: View, isGone: Boolean) {
