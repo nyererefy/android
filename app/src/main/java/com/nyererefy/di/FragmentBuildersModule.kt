@@ -28,12 +28,6 @@ abstract class FragmentBuildersModule {
     abstract fun contributeCandidateProfileFragment(): CandidateProfileFragment
 
     @ContributesAndroidInjector
-    abstract fun contributeConfirmClassFragment(): ConfirmClassFragment
-
-    @ContributesAndroidInjector
-    abstract fun contributeSetInfoFragment(): SetInfoFragment
-
-    @ContributesAndroidInjector
     abstract fun contributeCountsFragment(): CountsFragment
 
     @ContributesAndroidInjector
@@ -47,4 +41,10 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeContributorsFragment(): ContributorsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeChangePasswordFragment(): ChangePasswordFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeChangeDetailsFragment(): ChangeDetailsFragment
 }

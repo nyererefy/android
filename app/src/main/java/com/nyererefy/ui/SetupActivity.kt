@@ -26,7 +26,7 @@ class SetupActivity : AppCompatActivity(), HasSupportFragmentInjector {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val binding = DataBindingUtil.setContentView<ActivitySetupBinding>(
+        DataBindingUtil.setContentView<ActivitySetupBinding>(
                 this,
                 R.layout.activity_setup
         )

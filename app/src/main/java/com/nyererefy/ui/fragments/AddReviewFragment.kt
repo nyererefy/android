@@ -13,7 +13,6 @@ import com.nyererefy.utilities.afterTextChanged
 import com.nyererefy.utilities.common.BaseFragment
 import com.nyererefy.viewmodels.AddReviewViewModel
 import com.nyererefy.viewmodels.SubcategoryViewViewModel
-import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 class AddReviewFragment : BaseFragment() {
