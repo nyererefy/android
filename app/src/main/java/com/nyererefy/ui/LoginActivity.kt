@@ -14,6 +14,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.nyererefy.R
 import com.nyererefy.databinding.ActivityLoginBinding
+import com.nyererefy.graphql.LoginMutation
 import com.nyererefy.utilities.Pref
 import com.nyererefy.utilities.common.Constants.ID
 import com.nyererefy.utilities.common.Constants.IS_ACCOUNT_SET
@@ -113,19 +114,23 @@ class LoginActivity : AppCompatActivity() {
             loginViewModel.data.observe(this, Observer {
                 Timber.d("data: $it")
 
-                val editor = pref.sharedPref.edit()
+                val user = it.login() as? LoginMutation.AsUser
 
-                editor.putString(ID, it.login().id())
-                editor.putString(NAME, it.login().name())
-                editor.putString(USERNAME, it.login().username())
-                editor.putBoolean(IS_ACCOUNT_SET, it.login().isAccountSet)
-                editor.apply()
+                user?.let { u ->
+                    val editor = pref.sharedPref.edit()
 
-                when {
-                    !it.login().isDataConfirmed -> {
-                        startActivity<SetupActivity>()
+                    editor.putString(ID, u.id())
+                    editor.putString(NAME, u.name())
+                    editor.putString(USERNAME, u.username())
+                    editor.putBoolean(IS_ACCOUNT_SET, u.isAccountSet)
+                    editor.apply()
+
+                    when {
+                        !u.isDataConfirmed -> {
+                            startActivity<SetupActivity>()
+                        }
+                        else -> startActivity(intentFor<MainActivity>().clearTop())
                     }
-                    else -> startActivity(intentFor<MainActivity>().clearTop())
                 }
             })
         } catch (e: ApiException) {

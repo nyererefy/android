@@ -1,10 +1,12 @@
 mutation login($token: String!) {
     login(input: { token: $token, strategy: GOOGLE }) {
-        id
-        name
-        regNo
-        isDataConfirmed
-        isAccountSet
-        username
+        ... on User {
+            id
+            name
+            regNo
+            isDataConfirmed
+            isAccountSet
+            username
+        }
     }
 }
