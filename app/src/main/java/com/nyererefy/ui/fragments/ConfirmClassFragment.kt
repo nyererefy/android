@@ -23,9 +23,9 @@ class ConfirmClassFragment : BaseFragment() {
             savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentConfirmClassBinding.inflate(inflater, container, false)
+        binding.fragment = this
         binding.viewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
-        binding.fragment = this
 
         return binding.root
     }
