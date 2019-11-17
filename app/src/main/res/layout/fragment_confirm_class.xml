@@ -107,21 +107,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <!--todo hideAfterSuccess don't work here-->
             <Button
-                hideAfterSuccess="@{viewModel.confirmState}"
                 hideWhenLoading="@{viewModel.confirmState}"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="@{()->viewModel.confirm()}"
                 android:text="@string/confirm" />
-
-            <Button
-                showAfterSuccess="@{viewModel.confirmState}"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="@{() -> fragment.navigate()}"
-                android:text="@string/continue_" />
 
         </LinearLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
