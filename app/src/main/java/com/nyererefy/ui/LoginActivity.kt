@@ -117,11 +117,18 @@ class LoginActivity : AppCompatActivity() {
                 val user = it.login() as? LoginMutation.AsUser
 
                 user?.let { u ->
-                    when {
-                        !u.isAccountSet -> startActivity<SetupActivity>()
-                        else -> {
-                            val editor = pref.sharedPref.edit()
+                    val editor = pref.sharedPref.edit()
 
+                    when {
+                        !u.isAccountSet -> {
+                            //Without saving Id user will be seen as not logged in till info setup.
+                            editor.putString(NAME, u.name())
+                            editor.putString(USERNAME, u.username())
+                            editor.apply()
+
+                            startActivity<SetupActivity>()
+                        }
+                        else -> {
                             editor.putString(ID, u.id())
                             editor.putString(NAME, u.name())
                             editor.putString(USERNAME, u.username())
