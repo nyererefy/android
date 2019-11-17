@@ -51,11 +51,13 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
         setupActionBarWithNavController(navController, appBarConfig)
         bind.navView.setupWithNavController(navController)
 
-        pref = Pref(this)
     }
 
     override fun onResume() {
         super.onResume()
+
+        pref = Pref(this)
+
         val header = bind.navView.getHeaderView(0)
 
         if (pref.isLoggedIn) {
@@ -75,6 +77,8 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
             bind.navView.menu.removeItem(R.id.settings)
             bind.navView.menu.removeItem(R.id.profile)
             bind.navView.menu.removeItem(R.id.logout)
+
+            //Todo login btn disappears when log out
         }
     }
 
