@@ -16,7 +16,7 @@ import com.nyererefy.graphql.type.UserSetupInput
 import com.nyererefy.ui.MainActivity
 import com.nyererefy.utilities.afterTextChanged
 import com.nyererefy.utilities.common.BaseFragment
-import com.nyererefy.utilities.common.Constants.IS_ACCOUNT_SET
+import com.nyererefy.utilities.common.Constants.ID
 import com.nyererefy.utilities.common.Constants.NAME
 import com.nyererefy.utilities.common.Constants.USERNAME
 import com.nyererefy.viewmodels.SetInfoViewModel
@@ -107,7 +107,7 @@ class SetInfoFragment : BaseFragment() {
 
                 val editor = pref.sharedPref.edit()
 
-                editor.putBoolean(IS_ACCOUNT_SET, it.setupAccount().isAccountSet)
+                editor.putString(ID, it.setupAccount().id())
                 editor.putString(NAME, it.setupAccount().name())
                 editor.putString(USERNAME, it.setupAccount().username())
 

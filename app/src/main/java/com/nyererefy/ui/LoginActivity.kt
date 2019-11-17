@@ -17,7 +17,6 @@ import com.nyererefy.databinding.ActivityLoginBinding
 import com.nyererefy.graphql.LoginMutation
 import com.nyererefy.utilities.Pref
 import com.nyererefy.utilities.common.Constants.ID
-import com.nyererefy.utilities.common.Constants.IS_ACCOUNT_SET
 import com.nyererefy.utilities.common.Constants.NAME
 import com.nyererefy.utilities.common.Constants.USERNAME
 import com.nyererefy.utilities.common.NetworkState
@@ -28,6 +27,7 @@ import org.jetbrains.anko.clearTop
 import org.jetbrains.anko.design.indefiniteSnackbar
 import org.jetbrains.anko.design.longSnackbar
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.longToast
 import org.jetbrains.anko.startActivity
 import timber.log.Timber
 import javax.inject.Inject
@@ -117,19 +117,20 @@ class LoginActivity : AppCompatActivity() {
                 val user = it.login() as? LoginMutation.AsUser
 
                 user?.let { u ->
-                    val editor = pref.sharedPref.edit()
-
-                    editor.putString(ID, u.id())
-                    editor.putString(NAME, u.name())
-                    editor.putString(USERNAME, u.username())
-                    editor.putBoolean(IS_ACCOUNT_SET, u.isAccountSet)
-                    editor.apply()
-
                     when {
-                        !u.isDataConfirmed -> {
-                            startActivity<SetupActivity>()
+                        !u.isAccountSet -> startActivity<SetupActivity>()
+                        else -> {
+                            val editor = pref.sharedPref.edit()
+
+                            editor.putString(ID, u.id())
+                            editor.putString(NAME, u.name())
+                            editor.putString(USERNAME, u.username())
+                            editor.apply()
+
+                            longToast("${getString(R.string.welcome_to_nyererefy)} ${u.name()}")
+
+                            startActivity(intentFor<MainActivity>().clearTop())
                         }
-                        else -> startActivity(intentFor<MainActivity>().clearTop())
                     }
                 }
             })
