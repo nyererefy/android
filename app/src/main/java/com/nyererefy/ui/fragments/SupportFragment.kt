@@ -53,15 +53,14 @@ class SupportFragment : Fragment() {
     }
 
     fun openInstagram() {
-        val intent = Intent(Intent.ACTION_VIEW)
-
-        if (packageManager.getPackageInfo("com.instagram.android", 0) != null) {
-            // http://stackoverflow.com/questions/21505941/intent-to-open-instagram-user-profile-on-android
-            intent.data = Uri.parse("http://instagram.com/_u/nyererefy")
-            intent.setPackage("com.instagram.android")
-        }
-
         try {
+            val intent = Intent(Intent.ACTION_VIEW)
+
+            if (packageManager.getPackageInfo("com.instagram.android", 0) != null) {
+                // http://stackoverflow.com/questions/21505941/intent-to-open-instagram-user-profile-on-android
+                intent.data = Uri.parse("http://instagram.com/_u/nyererefy")
+                intent.setPackage("com.instagram.android")
+            }
             startActivity(intent)
         } catch (ignored: PackageManager.NameNotFoundException) {
             browse("https://www.instagram.com/nyererefy")
