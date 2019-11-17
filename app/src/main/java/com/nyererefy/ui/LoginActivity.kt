@@ -94,22 +94,6 @@ class LoginActivity : AppCompatActivity() {
 
             idToken?.let { loginViewModel.setToken(it) }
 
-            //Todo find best way to handle this.
-            loginViewModel.networkState.observe(this, Observer {
-                when (it) {
-                    NetworkState.LOADING -> loginViewModel.isLoading.value = true
-                    else -> {
-                        loginViewModel.isLoading.value = false
-                        it.msg?.run {
-                            container.indefiniteSnackbar(
-                                    this,
-                                    getString(R.string.dismiss)
-                            ) {}
-                        }
-                    }
-                }
-            })
-
             //User data
             loginViewModel.data.observe(this, Observer {
                 Timber.d("data: $it")

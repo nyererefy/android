@@ -9,7 +9,6 @@ import javax.inject.Inject
 class LoginViewModel
 @Inject constructor(private val repository: LoginRepository) : ViewModel() {
     private val _token = MutableLiveData<String>()
-    val isLoading = MutableLiveData(false)
 
     private val resource = Transformations.map(_token) {
         repository.submitGoogleToken(it)

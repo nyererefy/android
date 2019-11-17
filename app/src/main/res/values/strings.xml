@@ -163,7 +163,7 @@
     <string name="no_network">No network</string>
     <string name="server_client_id">888907700282-akq10n9hvdrft4e7pnsj3fqrs73ar9f1.apps.googleusercontent.com</string>
     <string name="sign_in_with_google">Login with Google</string>
-    <string name="by_creating_an_account">By login you are agree with</string>
+    <string name="by_creating_an_account">By login you are agree with our</string>
     <string name="logout">Logout</string>
     <string name="settings">Settings</string>
     <string name="search">Search</string>
@@ -211,5 +211,6 @@
     <string name="version">Version</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="welcome_to_nyererefy">Welcome to Nyererefy</string>
+    <string name="terms_of_service">Terms of Service and Privacy Policy</string>
 
 </resources>
