@@ -63,6 +63,9 @@
         <action
             android:id="@+id/action_subcategoryView_to_candidateProfile"
             app:destination="@id/candidateProfile" />
+        <action
+            android:id="@+id/action_subcategoryView_to_login"
+            app:destination="@id/login" />
     </fragment>
     <fragment
         android:id="@+id/developers"

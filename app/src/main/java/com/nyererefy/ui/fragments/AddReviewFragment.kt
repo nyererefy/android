@@ -7,13 +7,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
+import com.nyererefy.R
 import com.nyererefy.databinding.FragmentAddReviewBinding
 import com.nyererefy.graphql.type.ReviewInput
 import com.nyererefy.utilities.afterTextChanged
 import com.nyererefy.utilities.common.BaseFragment
 import com.nyererefy.viewmodels.AddReviewViewModel
 import com.nyererefy.viewmodels.SubcategoryViewViewModel
-import org.jetbrains.anko.support.v4.toast
 import javax.inject.Inject
 
 class AddReviewFragment : BaseFragment() {
@@ -59,6 +60,11 @@ class AddReviewFragment : BaseFragment() {
                 .build()
 
         viewModel.setInput(input)
+    }
+
+
+    fun navigateToLogin() {
+        findNavController().navigate(R.id.login)
     }
 
 }

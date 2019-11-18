@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import com.nyererefy.R
 import com.nyererefy.adapters.CandidatesAdapter
 import com.nyererefy.databinding.FragmentCandidatesBinding
@@ -110,5 +111,9 @@ class CandidatesFragment : BaseFragment(), CandidateCheckListener {
                 }
             }
         })
+    }
+
+    fun navigateToLogin() {
+        findNavController().navigate(R.id.login)
     }
 }
