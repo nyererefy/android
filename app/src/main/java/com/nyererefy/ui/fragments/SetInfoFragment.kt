@@ -96,7 +96,7 @@ class SetInfoFragment : BaseFragment() {
         val input = UserSetupInput.builder()
                 .name(binding.name.text.toString())
                 .username(binding.username.text.toString())
-                .password(binding.password.text.toString())
+                .pin(binding.password.text.toString())
                 .sex(sex)
                 .build()
 

@@ -57,7 +57,7 @@ class SetInfoViewModel
     }
 
     private fun isPasswordValid(password: String): Boolean {
-        return password.length > 5
+        return password.length == 4
     }
 
     private fun arePasswordsMatch(password: String, confPassword: String): Boolean {
