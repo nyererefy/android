@@ -48,7 +48,7 @@ class ConfirmVotingBottomSheetFragment(
 
             val error = when {
                 pass.isEmpty() -> getString(R.string.error_empty_password)
-                pass.length < 6 -> getString(R.string.error_less_password)
+                pass.length != 4 -> getString(R.string.invalid_password)
                 else -> null
             }
 
@@ -66,7 +66,7 @@ class ConfirmVotingBottomSheetFragment(
 
             val input = VoteInput.builder()
                     .uuid(uuid)
-                    .password(pass)
+                    .pin(pass)
                     .build()
 
             listener.onCandidateConfirmed(input)

@@ -9,18 +9,17 @@ import javax.inject.Inject
 class LoginViewModel
 @Inject constructor(private val repository: LoginRepository) : ViewModel() {
     private val _token = MutableLiveData<String>()
-    val isLoading = MutableLiveData(false)
 
     private val resource = Transformations.map(_token) {
-        repository.submitGoogleToken(_token.value!!)
+        repository.submitGoogleToken(it)
     }
 
     fun setToken(token: String) {
         _token.value = token
     }
 
-    val data = Transformations.switchMap(resource) { it.data }
-    val networkState = Transformations.switchMap(resource) { it.networkState }
+    val data = Transformations.switchMap(resource) { it?.data }
+    val networkState = Transformations.switchMap(resource) { it?.networkState }
 
 
 }

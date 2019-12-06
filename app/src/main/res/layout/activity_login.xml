@@ -17,7 +17,7 @@
 
         <ProgressBar
             android:id="@+id/progressBar"
-            isGone="@{!viewModel.isLoading}"
+            showLoading="@{viewModel.networkState}"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             app:layout_constraintBottom_toTopOf="@+id/buttons_container"
@@ -27,7 +27,7 @@
 
         <LinearLayout
             android:id="@+id/buttons_container"
-            isGone="@{viewModel.isLoading}"
+            hideWhenLoading="@{viewModel.networkState}"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginStart="40dp"
@@ -145,7 +145,7 @@
                 android:layout_height="wrap_content"
                 android:clickable="true"
                 android:focusable="true"
-                android:text="string/terms_of_service"
+                android:text="@string/terms_of_service"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 

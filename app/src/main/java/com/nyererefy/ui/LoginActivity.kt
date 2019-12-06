@@ -14,9 +14,9 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.nyererefy.R
 import com.nyererefy.databinding.ActivityLoginBinding
+import com.nyererefy.graphql.LoginMutation
 import com.nyererefy.utilities.Pref
 import com.nyererefy.utilities.common.Constants.ID
-import com.nyererefy.utilities.common.Constants.IS_ACCOUNT_SET
 import com.nyererefy.utilities.common.Constants.NAME
 import com.nyererefy.utilities.common.Constants.USERNAME
 import com.nyererefy.utilities.common.NetworkState
@@ -27,6 +27,7 @@ import org.jetbrains.anko.clearTop
 import org.jetbrains.anko.design.indefiniteSnackbar
 import org.jetbrains.anko.design.longSnackbar
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.longToast
 import org.jetbrains.anko.startActivity
 import timber.log.Timber
 import javax.inject.Inject
@@ -93,39 +94,35 @@ class LoginActivity : AppCompatActivity() {
 
             idToken?.let { loginViewModel.setToken(it) }
 
-            //Todo find best way to handle this.
-            loginViewModel.networkState.observe(this, Observer {
-                when (it) {
-                    NetworkState.LOADING -> loginViewModel.isLoading.value = true
-                    else -> {
-                        loginViewModel.isLoading.value = false
-                        it.msg?.run {
-                            container.indefiniteSnackbar(
-                                    this,
-                                    getString(R.string.dismiss)
-                            ) {}
-                        }
-                    }
-                }
-            })
-
             //User data
             loginViewModel.data.observe(this, Observer {
                 Timber.d("data: $it")
 
-                val editor = pref.sharedPref.edit()
+                val user = it.login() as? LoginMutation.AsUser
 
-                editor.putString(ID, it.login().id())
-                editor.putString(NAME, it.login().name())
-                editor.putString(USERNAME, it.login().username())
-                editor.putBoolean(IS_ACCOUNT_SET, it.login().isAccountSet)
-                editor.apply()
+                user?.let { u ->
+                    val editor = pref.sharedPref.edit()
 
-                when {
-                    !it.login().isDataConfirmed -> {
-                        startActivity<SetupActivity>()
+                    when {
+                        !u.isAccountSet -> {
+                            //Without saving Id user will be seen as not logged in till info setup.
+                            editor.putString(NAME, u.name())
+                            editor.putString(USERNAME, u.username())
+                            editor.apply()
+
+                            startActivity<SetupActivity>()
+                        }
+                        else -> {
+                            editor.putString(ID, u.id())
+                            editor.putString(NAME, u.name())
+                            editor.putString(USERNAME, u.username())
+                            editor.apply()
+
+                            longToast("${getString(R.string.welcome_to_nyererefy)} ${u.name()}")
+
+                            startActivity(intentFor<MainActivity>().clearTop())
+                        }
                     }
-                    else -> startActivity(intentFor<MainActivity>().clearTop())
                 }
             })
         } catch (e: ApiException) {
