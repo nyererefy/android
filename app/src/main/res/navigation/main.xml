@@ -66,6 +66,9 @@
         <action
             android:id="@+id/action_subcategoryView_to_login"
             app:destination="@id/login" />
+        <argument
+            android:name="isLive"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/developers"

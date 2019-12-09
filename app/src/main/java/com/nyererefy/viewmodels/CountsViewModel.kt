@@ -10,6 +10,7 @@ class CountsViewModel
 @Inject constructor(private val repository: CandidatesRepository) : ViewModel() {
     private val _subcategoryId = MutableLiveData<String>()
     private val _subcategoryIdForSub = MutableLiveData<String>()
+    val isLive = MutableLiveData<Boolean>()
 
     private val _queryResource = Transformations.map(_subcategoryId) {
         repository.fetchCandidatesAndVotes(it)

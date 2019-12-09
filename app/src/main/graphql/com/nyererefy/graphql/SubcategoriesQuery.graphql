@@ -3,5 +3,8 @@ query subcategories($electionId: Int!) {
         id
         suffix
         title
+        category {
+            isLive
+        }
     }
 }

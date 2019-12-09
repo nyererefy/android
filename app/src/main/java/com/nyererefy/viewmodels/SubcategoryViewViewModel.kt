@@ -8,8 +8,13 @@ import androidx.lifecycle.ViewModel
  */
 class SubcategoryViewViewModel : ViewModel() {
     val subcategoryId = MutableLiveData<String>()
+    val isLive = MutableLiveData<Boolean>()
 
     fun setSubcategoryId(subcategoryId: String) {
         this.subcategoryId.value = subcategoryId
+    }
+
+    fun setIsLive(isLive: Boolean) {
+        this.isLive.value = isLive
     }
 }

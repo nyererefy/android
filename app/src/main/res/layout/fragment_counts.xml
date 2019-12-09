@@ -18,8 +18,17 @@
         android:orientation="vertical"
         tools:context=".ui.fragments.CountsFragment">
 
+        <TextView
+            isGone="@{viewModel.isLive}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_medium"
+            android:text="@string/live_results_disabled"
+            android:textSize="20sp" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
+            isGone="@{!viewModel.isLive}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"

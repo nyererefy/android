@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.nyererefy.R
 import com.nyererefy.databinding.FragmentSubcategoryViewBinding
@@ -28,6 +27,7 @@ class SubcategoryViewFragment : Fragment() {
         } ?: throw Exception("Invalid Activity")
 
         viewModel.setSubcategoryId(args.subcategoryId)
+        viewModel.setIsLive(args.isLive)
     }
 
     override fun onCreateView(

@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -21,7 +21,7 @@ import javax.inject.Inject
 class CountsFragment : BaseFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel: CountsViewModel by viewModels { viewModelFactory }
+    private val viewModel: CountsViewModel by activityViewModels { viewModelFactory }
     private lateinit var binding: FragmentCountsBinding
     private lateinit var adapter: CountsAdapter
     private lateinit var subcategoryViewViewModel: SubcategoryViewViewModel
@@ -37,6 +37,11 @@ class CountsFragment : BaseFragment() {
         subcategoryViewViewModel.subcategoryId.observe(this, Observer {
             viewModel.setSubcategoryId(it)
         })
+
+        subcategoryViewViewModel.isLive.observe(this, Observer {
+            viewModel.isLive.value = it
+            if (it) subscribeUI()
+        })
     }
 
     override fun onCreateView(
@@ -51,13 +56,12 @@ class CountsFragment : BaseFragment() {
         binding.recyclerView.addItemDecoration(SpacesItemDecoration(8))
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
-        subscribeUI()
 
         return binding.root
     }
 
     private fun subscribeUI() {
-        viewModel.data.observe(viewLifecycleOwner, Observer {
+        viewModel.data.observe(this, Observer {
             adapter.submitList(it.candidatesAndVotesCount().map { c ->
                 CandidateAndVotesCount(
                         id = c.id(),
@@ -68,11 +72,11 @@ class CountsFragment : BaseFragment() {
             })
         })
 
-        viewModel.networkState.observe(viewLifecycleOwner, Observer {
+        viewModel.networkState.observe(this, Observer {
             adapter.setNetworkState(it)
         })
 
-        viewModel.subData.observe(viewLifecycleOwner, Observer {
+        viewModel.subData.observe(this, Observer {
             val c = it.candidateAndVotesCount()
 
             val newCount = CandidateAndVotesCount(

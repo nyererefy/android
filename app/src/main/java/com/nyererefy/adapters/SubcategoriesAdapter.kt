@@ -28,8 +28,10 @@ class SubcategoriesAdapter(retryCallback: () -> Unit)
             subcategory = item
             executePendingBindings()
             clickListener = View.OnClickListener {
-                val direction = SubcategoriesFragmentDirections.actionCategoriesToSubcategoryViewFragment(item.id())
-                it.findNavController().navigate(direction)
+                val dir = SubcategoriesFragmentDirections.actionCategoriesToSubcategoryViewFragment(
+                        item.id(), item.category().isLive
+                )
+                it.findNavController().navigate(dir)
             }
         }
     }
