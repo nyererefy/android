@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -100,6 +101,11 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
             val deviceId = FirebaseInstanceId.getInstance().id
             val input = FirebaseTokenInput.builder().deviceId(deviceId).token(token).build()
             viewModel.setInput(input)
+            viewModel.data.observe(this, Observer { data ->
+                if (data.createFirebaseToken()) {
+                    Timber.d("Token received by the server.")
+                }
+            })
         }
     }
 

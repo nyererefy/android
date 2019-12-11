@@ -16,7 +16,6 @@ class MainActivityViewModel
     }
 
     val data = Transformations.switchMap(results) { it.data }
-    val networkState = Transformations.switchMap(results) { it.networkState }
 
     fun setInput(input: FirebaseTokenInput) {
         _input.value = input
