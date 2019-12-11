@@ -2,10 +2,12 @@ package com.nyererefy.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -14,17 +16,21 @@ import androidx.navigation.ui.setupWithNavController
 import com.franmontiel.persistentcookiejar.PersistentCookieJar
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.iid.FirebaseInstanceId
 import com.nyererefy.R
 import com.nyererefy.databinding.ActivityMainBinding
+import com.nyererefy.graphql.type.FirebaseTokenInput
 import com.nyererefy.utilities.Pref
 import com.nyererefy.utilities.common.Constants.NAME
 import com.nyererefy.utilities.common.Constants.USERNAME
+import com.nyererefy.viewmodels.MainActivityViewModel
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.nav_header.view.*
 import org.jetbrains.anko.clearTop
 import org.jetbrains.anko.intentFor
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -33,7 +39,10 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
     lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
     @Inject
     lateinit var cookieJar: PersistentCookieJar
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
+    private val viewModel: MainActivityViewModel by viewModels { viewModelFactory }
     private val navController by lazy { findNavController(R.id.nav_host_fragment) }
     private lateinit var appBarConfig: AppBarConfiguration
     private lateinit var bind: ActivityMainBinding
@@ -79,6 +88,18 @@ class MainActivity : AppCompatActivity(), HasSupportFragmentInjector {
             bind.navView.menu.removeItem(R.id.logout)
 
             //Todo login btn disappears when log out
+        }
+
+        sendNotification()
+    }
+
+    private fun sendNotification() {
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener(this) {
+            val token = it.token
+            Timber.d("token $token")
+            val deviceId = FirebaseInstanceId.getInstance().id
+            val input = FirebaseTokenInput.builder().deviceId(deviceId).token(token).build()
+            viewModel.setInput(input)
         }
     }
 

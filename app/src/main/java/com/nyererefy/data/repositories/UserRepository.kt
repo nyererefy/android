@@ -1,10 +1,8 @@
 package com.nyererefy.data.repositories
 
 import com.apollographql.apollo.ApolloClient
-import com.nyererefy.graphql.ClassInfoQuery
-import com.nyererefy.graphql.ConfirmDataMutation
-import com.nyererefy.graphql.MeQuery
-import com.nyererefy.graphql.SetupAccountMutation
+import com.nyererefy.graphql.*
+import com.nyererefy.graphql.type.FirebaseTokenInput
 import com.nyererefy.graphql.type.UserSetupInput
 import com.nyererefy.utilities.Resource
 import com.nyererefy.utilities.common.invokeMutation
@@ -38,6 +36,12 @@ class UserRepository
         val query = ClassInfoQuery.builder().build()
 
         return invokeQuery<ClassInfoQuery.Data>(client.query(query))
+    }
+
+    fun sendFirebaseToken(input: FirebaseTokenInput): Resource<CreateFirebaseTokenMutation.Data> {
+        val mutation = CreateFirebaseTokenMutation.builder().input(input).build()
+
+        return invokeMutation<CreateFirebaseTokenMutation.Data>(client.mutate(mutation))
     }
 
 }

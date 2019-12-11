@@ -1,0 +1,3 @@
+mutation createFirebaseToken($input: FirebaseTokenInput!) {
+    createFirebaseToken(input: $input)
+}

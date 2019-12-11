@@ -67,4 +67,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(ContributorsViewModel::class)
     abstract fun bindContributorsViewModel(viewModel: ContributorsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainActivityViewModel::class)
+    abstract fun bindMainActivityViewModel(viewModel: MainActivityViewModel): ViewModel
 }

@@ -217,5 +217,6 @@
     <string name="enter_pin">Enter Pin</string>
     <string name="live_results_disabled">Real-time votes count is currently disabled for this category. All counts will
     be released immediately when election is closed</string>
+    <string name="default_notification_channel_id">Default</string>
 
 </resources>
